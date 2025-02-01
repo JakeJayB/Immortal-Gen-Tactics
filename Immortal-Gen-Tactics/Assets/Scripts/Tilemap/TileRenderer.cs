@@ -11,16 +11,6 @@ public class TileRenderer : MonoBehaviour
     public TerrainType TerrainType;
     public TileDirection Direction;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void Render(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction)
     {
