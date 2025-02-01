@@ -6,7 +6,11 @@ using UnityEngine.UIElements;
 
 public class TileRenderer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Vector3Int CellLocation;
+    public TileType TileType;
+    public TerrainType TerrainType;
+    public TileDirection Direction;
+
     void Start()
     {
         
@@ -20,6 +24,11 @@ public class TileRenderer : MonoBehaviour
 
     public void Render(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction)
     {
+        this.CellLocation = cellLocation;
+        this.TileType = tileType;
+        this.TerrainType = terrainType;
+        this.Direction = direction;
+
         Mesh mesh = new Mesh
         {
             vertices = TileProperties.GetVertices(tileType),
