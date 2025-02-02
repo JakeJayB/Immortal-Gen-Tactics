@@ -35,16 +35,16 @@ public class Tilemap : MonoBehaviour
 
         List<Tile> testTiles = new List<Tile>()
         {
-            new Tile(new Vector3Int(0,0,0), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(0,0,1), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(0,0,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(1,0,0), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(1,0,1), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(1,0,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(-1,0,0), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(-1,0,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(-1,0,1), TileType.Flat, TerrainType.Test, TileDirection.Forward),
-            new Tile(new Vector3Int(1,1,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward)
+            new Tile(new Vector3Int(0,0,0), TileType.Flat, TerrainType.Test, TileDirection.Forward, true),
+            new Tile(new Vector3Int(0,0,1), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(0,0,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(1,0,0), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(1,0,1), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(1,0,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(-1,0,0), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(-1,0,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward, false),
+            new Tile(new Vector3Int(-1,0,1), TileType.Flat, TerrainType.Test, TileDirection.Forward , false),
+            new Tile(new Vector3Int(1,1,-1), TileType.Flat, TerrainType.Test, TileDirection.Forward, false)
         };
         
         CreateTilemap(testTiles);

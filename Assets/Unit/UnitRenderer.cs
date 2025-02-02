@@ -6,17 +6,6 @@ public class UnitRenderer : MonoBehaviour
 {
     private const float HEIGHT_OFFSET = TileProperties.TILE_HEIGHT + 0.05f;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     // TODO: Find a way to work with sprite sheets instead of individual sprite for efficiency
     public void Render(Vector3Int cellLocation)

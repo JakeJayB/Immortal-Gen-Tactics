@@ -11,13 +11,13 @@ public class Tile
 
 
 
-    public Tile(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction)
+    public Tile(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction, bool isStartArea)
     {
-
+        
         GameObj = new GameObject("Tile: " + cellLocation);
 
         TileInfo = GameObj.AddComponent<TileInfo>();
-        TileInfo.Initialize(cellLocation, tileType, terrainType, direction);
+        TileInfo.Initialize(cellLocation, tileType, terrainType, direction, isStartArea);
 
         TileRender = GameObj.AddComponent<TileRenderer>();
         TileRender.Render(cellLocation, tileType, terrainType, direction);
