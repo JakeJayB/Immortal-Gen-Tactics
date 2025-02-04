@@ -8,6 +8,9 @@ public class TilemapCreator : MonoBehaviour
     public string fileName;
     public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
 
+    [SerializeField]
+    private TurnSystem turnSystem; 
+
     void Start()
     {
         TileLocator = new Dictionary<Vector2Int, Tile>();
@@ -48,10 +51,14 @@ public class TilemapCreator : MonoBehaviour
 
     private void LoadUnit(List<UnitData> units)
     {
-        foreach (UnitData unit in units)
+        List<Unit> unitsList = new List<Unit>();
+        foreach (UnitData unitData in units)
         {
-            Unit.Initialize(unit.cellLocation);
+            Unit unit = Unit.Initialize(unitData.cellLocation);
+            unitsList.Add(unit);
         }
+
+        turnSystem.InitializeUnits(unitsList);
     }
 
  
