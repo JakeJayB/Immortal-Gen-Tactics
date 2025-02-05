@@ -6,14 +6,14 @@ public class TilemapCreator : MonoBehaviour
 {
     private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON";
     public string fileName;
-    public static Dictionary<Vector3Int, Tile> TileLocator { get; private set; }
+    public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
 
     [SerializeField]
     private TurnSystem turnSystem; 
 
     void Start()
     {
-        TileLocator = new Dictionary<Vector3Int, Tile>();
+        TileLocator = new Dictionary<Vector2Int, Tile>();
         LoadFromJson();
     }
 
@@ -37,15 +37,39 @@ public class TilemapCreator : MonoBehaviour
      
     private void LoadTileMap(List<TileData> tiles)
     {
-        foreach(TileData tile in tiles)
+        // Group tiles by their (x, z) position to determine the highest tile
+        Dictionary<Vector2Int, TileData> topmostTiles = new Dictionary<Vector2Int, TileData>();
+        
+        foreach (TileData tile in tiles)
         {
-            Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
+            Vector2Int key = new Vector2Int(tile.cellLocation.x, tile.cellLocation.z);
 
-            TileInfo tileInfo = newTile.TileInfo;
-            if (!TileLocator.ContainsKey(new Vector3Int(tileInfo.CellLocation.x, tileInfo.CellLocation.y, tileInfo.CellLocation.z)))
+            // Check if this is the highest tile at this (x, z) position
+            if (!topmostTiles.ContainsKey(key))
             {
-                TileLocator.Add(new Vector3Int(tileInfo.CellLocation.x, tileInfo.CellLocation.y, tileInfo.CellLocation.z), newTile);
+                // First time seeing this (x, z) location, store it
+                topmostTiles.Add(key, tile);
             }
+            else if(tile.cellLocation.y > topmostTiles[key].cellLocation.y)
+            {
+                // Renders the previous tile (bottom tile) before replacing it with a topmost tile
+                TileData bottomTile = topmostTiles[key];
+                new Tile(bottomTile.cellLocation, bottomTile.tileType, bottomTile.terrainType, bottomTile.tileDirection, bottomTile.isStartingArea);
+                topmostTiles[key] = tile;
+            }
+            else
+            {
+                // This is a bottom tile, store it separately
+                new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
+            }
+        }
+
+        // Now, add only the topmost tiles to TileLocator
+        foreach (var entry in topmostTiles)
+        {
+            TileData tile = entry.Value;
+            Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
+            TileLocator.Add(entry.Key, newTile);
         }
     }
 

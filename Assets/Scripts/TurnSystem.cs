@@ -18,13 +18,14 @@ public class TurnSystem : MonoBehaviour
             // TODO: Sort units if any unit's speed changes 
             foreach (Unit unit in units)
             {
-                Debug.Log("TurnSystem: Unit's turn at " + unit.CellLocation);
                 // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
                 mapCursor.ActivateMove(unit.CellLocation);
+                Debug.Log("TurnSystem: Unit's turn at " + unit.CellLocation);
 
                 // Unity stop execution here until continueLoop turn to true. 
                 yield return new WaitUntil(() => continueLoop);
                 continueLoop = false;
+                yield return new WaitForSeconds(2);
             }
         }
     }

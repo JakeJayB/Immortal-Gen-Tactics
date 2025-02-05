@@ -9,7 +9,7 @@ public class MapCursor : MonoBehaviour
 
     [SerializeField]
     private TurnSystem turnSystem;
-    public Vector3Int hoverCell;
+    public Vector2Int hoverCell;
     public bool canMove;
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class MapCursor : MonoBehaviour
             return KeyCode.None; // Default case when no valid key is pressed
         }
 
+
         KeyCode keyPressed = GetPressedKey();
         switch (keyPressed)
         {
@@ -43,29 +44,38 @@ public class MapCursor : MonoBehaviour
                 Debug.Log("MapCursor: Space pressed");
                 DeactivateMove();
                 break;
-            case KeyCode.UpArrow:
-                Debug.Log("MapCursor: Up Arrow pressed");
-                break;
-            case KeyCode.DownArrow:
-                Debug.Log("MapCursor: Down Arrow pressed");
-                break;
             case KeyCode.LeftArrow:
+                MoveCursor(hoverCell + Vector2Int.left);
                 Debug.Log("MapCursor: Left Arrow pressed");
                 break;
             case KeyCode.RightArrow:
+                MoveCursor(hoverCell + Vector2Int.right);
                 Debug.Log("MapCursor: Right Arrow pressed");
+                break;
+            case KeyCode.UpArrow:
+                MoveCursor(hoverCell + Vector2Int.up);
+                Debug.Log("MapCursor: Up Arrow pressed");
+                break;
+            case KeyCode.DownArrow:
+                MoveCursor(hoverCell + Vector2Int.down);
+                Debug.Log("MapCursor: Down Arrow pressed");
                 break;
             default:
                 break;
         }
-        
+
     }
 
+    private void MoveCursor(Vector2Int cell)
+    {
+        if(TilemapCreator.TileLocator.ContainsKey(cell))
+            SetHoverCell(cell);
+    }
 
     public void ActivateMove(Vector3Int cell)
     {
         /* This function is called from TilemapCreator */
-        SetHoverCell(cell);
+        SetHoverCell(new Vector2Int(cell.x, cell.z));
         this.canMove = true;
     }
 
@@ -76,7 +86,7 @@ public class MapCursor : MonoBehaviour
         turnSystem.ContinueLoop();
     }
 
-    private void SetHoverCell(Vector3Int cell)
+    private void SetHoverCell(Vector2Int cell)
     {
         RemoveTileOutline();
         this.hoverCell = cell;
@@ -86,7 +96,7 @@ public class MapCursor : MonoBehaviour
     private void AddTileOutline()
     {
 
-        // adds outline effect on tile when mapcursor is on it.
+        // adds outline effect on tile when mapcursor hovers it.
         GameObject tileObj = TilemapCreator.TileLocator[this.hoverCell].GameObj;
         if (tileObj.GetComponent<Outline>() == null)
         { 
