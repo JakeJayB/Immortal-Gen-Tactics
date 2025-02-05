@@ -51,6 +51,7 @@ MonoBehaviour:
   TileType: 0
   TerrainType: 0
   TileDirection: 0
+  IsStartArea: 0
 --- !u!114 &2705984533422089478
 MonoBehaviour:
   m_ObjectHideFlags: 0

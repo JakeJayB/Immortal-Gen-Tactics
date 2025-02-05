@@ -6,14 +6,14 @@ public class TilemapCreator : MonoBehaviour
 {
     private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON";
     public string fileName;
-    public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
+    public static Dictionary<Vector3Int, Tile> TileLocator { get; private set; }
 
     [SerializeField]
     private TurnSystem turnSystem; 
 
     void Start()
     {
-        TileLocator = new Dictionary<Vector2Int, Tile>();
+        TileLocator = new Dictionary<Vector3Int, Tile>();
         LoadFromJson();
     }
 
@@ -42,9 +42,9 @@ public class TilemapCreator : MonoBehaviour
             Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
 
             TileInfo tileInfo = newTile.TileInfo;
-            if (!TileLocator.ContainsKey(new Vector2Int(tileInfo.CellLocation.x, tileInfo.CellLocation.z)))
+            if (!TileLocator.ContainsKey(new Vector3Int(tileInfo.CellLocation.x, tileInfo.CellLocation.y, tileInfo.CellLocation.z)))
             {
-                TileLocator.Add(new Vector2Int(tileInfo.CellLocation.x, tileInfo.CellLocation.z), newTile);
+                TileLocator.Add(new Vector3Int(tileInfo.CellLocation.x, tileInfo.CellLocation.y, tileInfo.CellLocation.z), newTile);
             }
         }
     }
