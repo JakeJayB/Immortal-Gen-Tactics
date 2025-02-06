@@ -1,0 +1,19 @@
+{
+    "Weapons": [
+        {
+            "ID": 0,
+            "name": "Short Sword",
+            "HP": 0,
+            "MP": 0,
+            "AP": 0,
+            "attack": 5,
+            "magicAttack": 0,
+            "defense": 0,
+            "magicDefense": 0,
+            "move": 0,
+            "speed": 0,
+            "maxDurability": 20,
+            "range": 1
+        }
+    ]
+}

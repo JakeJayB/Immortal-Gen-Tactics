@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Equipment;
 using UnityEngine;
 
 public class UnitEquipment : MonoBehaviour
@@ -38,7 +39,7 @@ public class UnitEquipment : MonoBehaviour
     }
 
     // Equip Functions
-    public void EquipLeftHand(Weapon weapon) { leftHand = weapon; }
+    public void EquipLeftHand(Weapon weapon) { leftHand = weapon; Debug.Log("Left hand successfully equipped."); }
     public void EquipRightHand(Weapon weapon) { rightHand = weapon; }
     public void EquipHead(ArmorHead armor) { head = armor; }
     public void EquipBody(ArmorBody armor) { body = armor; }
