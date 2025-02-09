@@ -7,8 +7,9 @@ using UnityEngine;
 public class MapCursor : MonoBehaviour
 {
 
-    [SerializeField]
-    private TurnSystem turnSystem;
+
+    [SerializeField] private TurnSystem turnSystem;
+    [SerializeField] private CameraRotation cameraRotation;
     public Vector2Int hoverCell;
     public bool canMove;
 
@@ -91,6 +92,7 @@ public class MapCursor : MonoBehaviour
         RemoveTileOutline();
         this.hoverCell = cell;
         AddTileOutline();
+        cameraRotation.SetFocusPoint(TilemapCreator.TileLocator[this.hoverCell].GameObj.transform);
     }
 
     private void AddTileOutline()
