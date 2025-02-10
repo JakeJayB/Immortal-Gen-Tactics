@@ -6,13 +6,28 @@
             "HP": 0,
             "MP": 0,
             "AP": 1,
-            "attack": 5,
+            "attack": 15,
             "magicAttack": 0,
             "defense": 0,
             "magicDefense": 0,
             "move": 0,
             "speed": 0,
             "maxDurability": 20,
+            "range": 1
+        },
+        {
+            "ID": 1,
+            "name": "Iron Shield",
+            "HP": 0,
+            "MP": 0,
+            "AP": 0,
+            "attack": 5,
+            "magicAttack": 0,
+            "defense": 15,
+            "magicDefense": 3,
+            "move": 0,
+            "speed": 0,
+            "maxDurability": 75,
             "range": 1
         }
     ],
@@ -79,16 +94,27 @@
             "ID": 200,
             "name": "Bloodstone",
             "HP": 0,
+            "MP": 15,
+            "AP": 0,
+            "attack": 0,
+            "magicAttack": 8,
+            "defense": 0,
+            "magicDefense": 3,
+            "move": 0,
+            "speed": 0
+        },
+        {
+            "ID": 201,
+            "name": "Quicksilver Ring",
+            "HP": 0,
             "MP": 0,
-            "AP": 1,
-            "attack": 5,
+            "AP": 0,
+            "attack": 0,
             "magicAttack": 0,
             "defense": 0,
             "magicDefense": 0,
-            "move": 0,
-            "speed": 0,
-            "maxDurability": 20,
-            "range": 1
+            "move": 3,
+            "speed": 7
         }
     ]
 }
