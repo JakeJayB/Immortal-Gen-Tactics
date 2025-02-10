@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitInfo
+public class UnitInfo : MonoBehaviour
 {
     // Unit Current Stat Values
     private int currentHP;

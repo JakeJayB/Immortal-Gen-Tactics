@@ -11,7 +11,7 @@ namespace Tests
         public void Setup()
         {
             equipmentLibrary = new EquipmentLibrary();
-            equipmentLibrary.InitializeLibrary();
+            EquipmentLibrary.InitializeLibrary();
         }
     
         [Test]

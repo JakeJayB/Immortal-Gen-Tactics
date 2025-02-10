@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2678905456787885370}
-  - component: {fileID: 6357430790904984352}
+  - component: {fileID: 2419308528442400309}
   m_Layer: 0
-  m_Name: EquipmentLibrary
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6357430790904984352
+--- !u!114 &2419308528442400309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8457521314187101950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 493fa07325dff7b4f8f28bf732804da5, type: 3}
+  m_Script: {fileID: 11500000, guid: 12ef0d274906c4d498d51f83a26fd641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

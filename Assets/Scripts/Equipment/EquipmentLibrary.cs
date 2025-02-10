@@ -38,10 +38,17 @@ public class ArmorData : EquipmentData
 }
 
 [Serializable]
+public class AccessoryData : EquipmentData
+{
+    
+}
+
+[Serializable]
 public class EquipmentList
 {
     public List<WeaponData> Weapons = new List<WeaponData>();
     public List<ArmorData> Armor = new List<ArmorData>();
+    public List<AccessoryData> Accessories = new List<AccessoryData>();
 }
 
 public class EquipmentLibrary
@@ -50,15 +57,17 @@ public class EquipmentLibrary
     public const string FILE_NAME = "EquipmentLibrary.json";
     public static Dictionary<int, Weapon> Weapons { get; private set; }
     public static Dictionary<int, Armor> Armor { get; private set; }
+    public static Dictionary<int, Accessory> Accessories { get; private set; }
 
-    public void InitializeLibrary()
+    public static void InitializeLibrary()
     {
         Weapons = new Dictionary<int, Weapon>();
         Armor = new Dictionary<int, Armor>();
+        Accessories = new Dictionary<int, Accessory>();
         LoadFromJSON();
     }
     
-    private void LoadFromJSON()
+    private static void LoadFromJSON()
     {
         string filePath = DEFAULT_DIRECTORY + FILE_NAME;
 
@@ -73,18 +82,24 @@ public class EquipmentLibrary
         }
     }
 
-    private void UpdateLibrary(EquipmentList equipmentList)
+    private static void UpdateLibrary(EquipmentList equipmentList)
     {
         foreach (var weapon in equipmentList.Weapons)
         {
-            Weapons.Add(weapon.ID, new Weapon(weapon));
+            Weapons.TryAdd(weapon.ID, new Weapon(weapon));
             Debug.Log(weapon.name + " has been added to WeaponLibrary. (ID: " + weapon.ID + ")");
         }
         
         foreach (var armor in equipmentList.Armor)
         {
-            Armor.Add(armor.ID, new Armor(armor));
+            Armor.TryAdd(armor.ID, new Armor(armor));
             Debug.Log(armor.name + " has been added to WeaponLibrary. (ID: " + armor.ID + ")");
+        }
+
+        foreach (var accessory in equipmentList.Accessories)
+        {
+            Accessories.TryAdd(accessory.ID, new Accessory(accessory));
+            Debug.Log(accessory.name + " has been added to WeaponLibrary. (ID: " + accessory.ID + ")");
         }
     }
 }
