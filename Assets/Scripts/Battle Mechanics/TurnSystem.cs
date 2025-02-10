@@ -11,11 +11,12 @@ public class TurnSystem : MonoBehaviour
     private bool continueLoop = false;
     
 
-    IEnumerator StartLoop()
+    IEnumerator TurnLoop()
     {
         while (startLoop)
         {
             // TODO: Sort units if any unit's speed changes 
+            // TODO: Turn List of units into a Queue
             foreach (Unit unit in units)
             {
                 // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
@@ -41,6 +42,6 @@ public class TurnSystem : MonoBehaviour
         
         // TODO: Sort units based on speed
         this.units = units;
-        StartCoroutine(StartLoop());
+        StartCoroutine(TurnLoop());
     }
 }

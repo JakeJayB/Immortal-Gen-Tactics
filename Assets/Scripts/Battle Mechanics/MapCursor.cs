@@ -46,19 +46,19 @@ public class MapCursor : MonoBehaviour
                 DeactivateMove();
                 break;
             case KeyCode.LeftArrow:
-                MoveCursor(hoverCell + Vector2Int.left);
+                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.left));
                 Debug.Log("MapCursor: Left Arrow pressed");
                 break;
             case KeyCode.RightArrow:
-                MoveCursor(hoverCell + Vector2Int.right);
+                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.right));
                 Debug.Log("MapCursor: Right Arrow pressed");
                 break;
             case KeyCode.UpArrow:
-                MoveCursor(hoverCell + Vector2Int.up);
+                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.up));
                 Debug.Log("MapCursor: Up Arrow pressed");
                 break;
             case KeyCode.DownArrow:
-                MoveCursor(hoverCell + Vector2Int.down);
+                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.down));
                 Debug.Log("MapCursor: Down Arrow pressed");
                 break;
             default:
@@ -67,8 +67,34 @@ public class MapCursor : MonoBehaviour
 
     }
 
+    // Adjusts movement direction based on the camera's Y rotation
+    private Vector2Int GetRelativeDirection(Vector2Int inputDirection)
+    {
+        float cameraYRotation = cameraRotation.transform.eulerAngles.y;
+
+        // Get the rotation step interval (8 intervals since camera rotates 45 degrees)
+        int rotationStep = Mathf.RoundToInt(cameraYRotation / 45f) % 8; //
+
+        // Map rotation steps to directional changes
+        Dictionary<int, Vector2Int> directionMap = new Dictionary<int, Vector2Int>
+    {
+        { 0, inputDirection }, // 0 degrees: no change
+        { 1, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 45 degrees
+        { 2, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 90 degrees: rotate 90 degrees clockwise
+        { 3, new Vector2Int(-inputDirection.x, -inputDirection.y) }, // 135 degrees
+        { 4, -inputDirection }, // 180 degrees: invert direction
+        { 5, new Vector2Int(-inputDirection.y, inputDirection.x) }, // 225 degrees
+        { 6, new Vector2Int(-inputDirection.y, inputDirection.x) }, // 270 degrees: rotate 90 degrees counter-clockwise
+        { 7, inputDirection }, // 315 degrees
+    };
+
+        return directionMap[rotationStep];
+    }
+
+
     private void MoveCursor(Vector2Int cell)
     {
+
         if(TilemapCreator.TileLocator.ContainsKey(cell))
             SetHoverCell(cell);
     }
@@ -103,10 +129,10 @@ public class MapCursor : MonoBehaviour
         if (tileObj.GetComponent<Outline>() == null)
         { 
             Outline outline = tileObj.AddComponent<Outline>();
-            outline.enabled = true;
             outline.OutlineMode = Outline.Mode.OutlineAll;
             outline.OutlineColor = Color.yellow;
             outline.OutlineWidth = 10f;
+            outline.enabled = true;
         }
         else
             tileObj.GetComponent<Outline>().enabled = true;
