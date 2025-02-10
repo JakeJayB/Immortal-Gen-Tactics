@@ -23,15 +23,15 @@ public class UnitInfo : MonoBehaviour
     # endregion
     
     // Unit Base Stat Values
-    private int baseHP;
-    private int baseMP;
-    private int baseAP;
-    private int baseAttack;
-    private int baseDefense;
-    private int baseMagicAttack;
-    private int baseMagicDefense;
-    private int baseMove;
-    private int baseSpeed;
+    [SerializeField] private int baseHP;
+    [SerializeField] private int baseMP;
+    [SerializeField] private int baseAP;
+    [SerializeField] private int baseAttack;
+    [SerializeField] private int baseDefense;
+    [SerializeField] private int baseMagicAttack;
+    [SerializeField] private int baseMagicDefense;
+    [SerializeField] private int baseMove;
+    [SerializeField] private int baseSpeed;
     
     // Unit Equipment
     private UnitEquipment equipment;
@@ -39,15 +39,31 @@ public class UnitInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        equipment = gameObject.AddComponent<UnitEquipment>();
+        equipment = new UnitEquipment(this);
         equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
         equipment.EquipArmor(EquipmentLibrary.Armor[100]);
+        equipment.EquipArmor(EquipmentLibrary.Armor[101]);
+        equipment.EquipArmor(EquipmentLibrary.Armor[102]);
+        equipment.EquipArmor(EquipmentLibrary.Armor[103]);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ApplyEquipmentBonuses()
+    {
+        finalHP = baseHP + equipment.bonusHP;
+        finalMP = baseMP + equipment.bonusMP;
+        finalAP = baseAP + equipment.bonusAP;
+        finalAttack = baseAttack + equipment.bonusAttack;
+        finalMagicAttack = baseMagicAttack + equipment.bonusMagicAttack;
+        finalDefense = baseDefense + equipment.bonusDefense;
+        finalMagicDefense = baseMagicDefense + equipment.bonusMagicDefense;
+        finalMove = baseMove + equipment.bonusMove;
+        finalSpeed = baseSpeed + equipment.bonusSpeed;
     }
     
 }

@@ -1,9 +1,9 @@
 public class Weapon : Equipment
 {
     // Weapon Info
-    private int maxDurability;
-    private int durability;
-    private int range;
+    public int maxDurability { get; private set; }
+    public int durability { get; private set; }
+    public int range { get; private set; }
 
     public Weapon(WeaponData data)
     {
@@ -47,18 +47,18 @@ public class Accessory : Equipment { }
 public class Equipment
 {
     // Equipment Info
-    protected string equipName;
+    public string equipName { get; protected set; }
 
     // Equipment Stat Values
-    protected int equipHP;
-    protected int equipMP;
-    protected int equipAP;
-    protected int equipAttack;
-    protected int equipMagicAttack;
-    protected int equipDefense;
-    protected int equipMagicDefense;
-    protected int equipMove;
-    protected int equipSpeed;
+    public int equipHP { get; protected set; }
+    public int equipMP { get; protected set; }
+    public int equipAP { get; protected set; }
+    public int equipAttack { get; protected set; }
+    public int equipMagicAttack { get; protected set; }
+    public int equipDefense { get; protected set; }
+    public int equipMagicDefense { get; protected set; }
+    public int equipMove { get; protected set; }
+    public int equipSpeed { get; protected set; }
 
     // Start is called before the first frame update
     void Start()
