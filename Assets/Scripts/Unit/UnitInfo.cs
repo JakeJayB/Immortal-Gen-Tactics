@@ -11,15 +11,15 @@ public class UnitInfo : MonoBehaviour
     
     // Unit Final Stat Values
     # region Unit Final Stat Values
-    private int finalHP;
-    private int finalMP;
-    private int finalAP;
-    private int finalAttack;
-    private int finalDefense;
-    private int finalMagicAttack;
-    private int finalMagicDefense;
-    private int finalMove;
-    private int finalSpeed;
+    [SerializeField] private int finalHP;
+    [SerializeField] private int finalMP;
+    [SerializeField] private int finalAP;
+    [SerializeField] private int finalAttack;
+    [SerializeField] private int finalDefense;
+    [SerializeField] private int finalMagicAttack;
+    [SerializeField] private int finalMagicDefense;
+    [SerializeField] private int finalMove;
+    [SerializeField] private int finalSpeed;
     # endregion
     
     // Unit Base Stat Values
@@ -34,13 +34,14 @@ public class UnitInfo : MonoBehaviour
     private int baseSpeed;
     
     // Unit Equipment
-    [SerializeField] private UnitEquipment equipment;
+    private UnitEquipment equipment;
     
     // Start is called before the first frame update
     void Start()
     {
         equipment = gameObject.AddComponent<UnitEquipment>();
-        equipment.EquipLeftHand(WeaponLibrary.Library[0]);
+        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
+        equipment.EquipArmor(EquipmentLibrary.Armor[100]);
     }
 
     // Update is called once per frame
