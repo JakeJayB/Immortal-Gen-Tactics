@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitInfo : MonoBehaviour
+public class UnitInfo
 {
     // Unit Current Stat Values
     private int currentHP;
     private int currentMP;
     private int currentAP;
+    private int currentLevel;
+    private int currentEXP;
     
     // Unit Final Stat Values
     # region Unit Final Stat Values

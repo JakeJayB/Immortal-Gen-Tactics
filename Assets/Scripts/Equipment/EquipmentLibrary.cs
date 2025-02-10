@@ -44,35 +44,23 @@ public class EquipmentList
     public List<ArmorData> Armor = new List<ArmorData>();
 }
 
-public class EquipmentLibrary : MonoBehaviour
+public class EquipmentLibrary
 {
-    private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON";
+    public const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/";
     public const string FILE_NAME = "EquipmentLibrary.json";
     public static Dictionary<int, Weapon> Weapons { get; private set; }
     public static Dictionary<int, Armor> Armor { get; private set; }
-    
-    void Awake()
+
+    public void InitializeLibrary()
     {
         Weapons = new Dictionary<int, Weapon>();
         Armor = new Dictionary<int, Armor>();
         LoadFromJSON();
     }
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     private void LoadFromJSON()
     {
-        string filePath = DEFAULT_DIRECTORY + "/" + FILE_NAME;
+        string filePath = DEFAULT_DIRECTORY + FILE_NAME;
 
         if (File.Exists(filePath))
         {
