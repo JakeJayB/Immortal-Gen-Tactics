@@ -82,7 +82,7 @@ public class TilemapCreator : MonoBehaviour
             unitsList.Add(unit);
         }
 
-        //turnSystem.InitializeUnits(unitsList);
+        turnSystem.InitializeUnits(unitsList);
     }
 
  
