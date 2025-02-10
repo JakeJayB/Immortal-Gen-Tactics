@@ -43,10 +43,13 @@ public class UnitInfo : MonoBehaviour
     {
         equipment = new UnitEquipment(this);
         equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
+        equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
         equipment.EquipArmor(EquipmentLibrary.Armor[100]);
         equipment.EquipArmor(EquipmentLibrary.Armor[101]);
         equipment.EquipArmor(EquipmentLibrary.Armor[102]);
         equipment.EquipArmor(EquipmentLibrary.Armor[103]);
+        equipment.EquipAccessoryA(EquipmentLibrary.Accessories[200]);
+        equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);
     }
 
     // Update is called once per frame

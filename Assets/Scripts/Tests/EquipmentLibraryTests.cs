@@ -25,6 +25,7 @@ namespace Tests
         {
             Assert.IsNotNull(EquipmentLibrary.Weapons[0], "Weapons library (ID: 0) should return a Short Sword.");
             Assert.IsNotNull(EquipmentLibrary.Armor[100], "Armor Library (ID: 100) should return a Bronze Helm.");
+            Assert.IsNotNull(EquipmentLibrary.Accessories[200], "Armor Library (ID: 200) should return a Bloodstone.");
         }
 
         [Test]
@@ -32,6 +33,7 @@ namespace Tests
         {
             Assert.IsFalse(EquipmentLibrary.Weapons.ContainsKey(-1), "Weapons library (ID: -1) should not exist.");
             Assert.IsFalse(EquipmentLibrary.Armor.ContainsKey(10000), "Armor Library (ID: 10000) should not exist.");
+            Assert.IsFalse(EquipmentLibrary.Armor.ContainsKey(-3333), "Armor Library (ID: -3333) should not exist.");
         }
     }
 }
