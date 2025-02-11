@@ -7,6 +7,7 @@ public class TilemapCreator : MonoBehaviour
     private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON";
     public string fileName;
     public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
+    public static Dictionary<Vector2Int, Unit> UnitLocator { get; private set; }
 
     [SerializeField]
     private TurnSystem turnSystem; 
@@ -14,6 +15,7 @@ public class TilemapCreator : MonoBehaviour
     void Start()
     {
         TileLocator = new Dictionary<Vector2Int, Tile>();
+        UnitLocator = new Dictionary<Vector2Int, Unit>();
         LoadFromJson();
     }
 
@@ -79,6 +81,7 @@ public class TilemapCreator : MonoBehaviour
         foreach (UnitData unitData in units)
         {
             Unit unit = Unit.Initialize(unitData.cellLocation);
+            UnitLocator.Add(new Vector2Int(unit.CellLocation.x, unit.CellLocation.z), unit);
             unitsList.Add(unit);
         }
 

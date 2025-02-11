@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class MapCursor : MonoBehaviour
 
     [SerializeField] private TurnSystem turnSystem;
     [SerializeField] private CameraRotation cameraRotation;
+    private Vector2Int currentUnit; // Current unit's cell location
     public Vector2Int hoverCell;
     public bool canMove;
 
@@ -42,24 +44,19 @@ public class MapCursor : MonoBehaviour
         switch (keyPressed)
         {
             case KeyCode.Space:
-                Debug.Log("MapCursor: Space pressed");
                 DeactivateMove();
                 break;
             case KeyCode.LeftArrow:
                 MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.left));
-                Debug.Log("MapCursor: Left Arrow pressed");
                 break;
             case KeyCode.RightArrow:
                 MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.right));
-                Debug.Log("MapCursor: Right Arrow pressed");
                 break;
             case KeyCode.UpArrow:
                 MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.up));
-                Debug.Log("MapCursor: Up Arrow pressed");
                 break;
             case KeyCode.DownArrow:
                 MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.down));
-                Debug.Log("MapCursor: Down Arrow pressed");
                 break;
             default:
                 break;
@@ -102,23 +99,33 @@ public class MapCursor : MonoBehaviour
     public void ActivateMove(Vector3Int cell)
     {
         /* This function is called from TilemapCreator */
-        SetHoverCell(new Vector2Int(cell.x, cell.z));
+        Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
+        SetHoverCell(cell2D);
+        currentUnit = cell2D;
         this.canMove = true;
+
+        //send currentUnit unit object to UI Manager
+        //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
     }
 
     private void DeactivateMove()
     {
-        canMove = false;
         RemoveTileOutline();
+        canMove = false;
+        hoverCell = Vector2Int.zero;
+        currentUnit = Vector2Int.zero;
         turnSystem.ContinueLoop();
     }
 
     private void SetHoverCell(Vector2Int cell)
     {
         RemoveTileOutline();
-        this.hoverCell = cell;
+        hoverCell = cell;
         AddTileOutline();
-        cameraRotation.SetFocusPoint(TilemapCreator.TileLocator[this.hoverCell].GameObj.transform);
+        cameraRotation.SetFocusPoint(TilemapCreator.TileLocator[hoverCell].GameObj.transform);
+
+        // send hoverCell unit object to UI Manager
+        //UIManager.SetRightPanel(hoverCell == currentUnit ? null : TilemapCreator.UnitLocator[hoverCell]);
     }
 
     private void AddTileOutline()
@@ -131,7 +138,7 @@ public class MapCursor : MonoBehaviour
             Outline outline = tileObj.AddComponent<Outline>();
             outline.OutlineMode = Outline.Mode.OutlineAll;
             outline.OutlineColor = Color.yellow;
-            outline.OutlineWidth = 10f;
+            outline.OutlineWidth = 5f;
             outline.enabled = true;
         }
         else
