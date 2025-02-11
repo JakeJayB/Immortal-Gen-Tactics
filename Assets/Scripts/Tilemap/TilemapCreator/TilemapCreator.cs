@@ -61,7 +61,7 @@ public class TilemapCreator : MonoBehaviour
             }
             else
             {
-                // This is a bottom tile, store it separately
+                // This is a bottom tile, render it separately
                 new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
             }
         }
@@ -80,8 +80,10 @@ public class TilemapCreator : MonoBehaviour
         List<Unit> unitsList = new List<Unit>();
         foreach (UnitData unitData in units)
         {
-            Unit unit = Unit.Initialize(unitData.cellLocation);
-            UnitLocator.Add(new Vector2Int(unit.CellLocation.x, unit.CellLocation.z), unit);
+
+            Unit unit = new Unit();
+            unit.Initialize(unitData.cellLocation);
+            UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
             unitsList.Add(unit);
         }
 

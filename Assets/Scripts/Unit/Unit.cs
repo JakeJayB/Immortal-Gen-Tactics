@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public static UnitInfo unitInfo { get; private set; }
-    public Vector3Int CellLocation { get; set; }
-    
-    public static Unit Initialize(Vector3Int initLocation)
+
+    public GameObject gameObj { get; private set; }
+
+    public UnitInfo unitInfo { get; set; }
+
+    public UnitEquipment unitEquipment { get; set; }
+
+    public void Initialize(Vector3Int initLocation)
     {
-        GameObject gameObj = new GameObject("Unit");
-        Unit unit = gameObj.AddComponent<Unit>();
+        GameObject gameObj = new GameObject("Unit " + initLocation);
         unitInfo = gameObj.AddComponent<UnitInfo>();
-        unit.CellLocation = initLocation;
-        
+        unitInfo.CellLocation = initLocation;
+
+        unitEquipment = gameObj.AddComponent<UnitEquipment>();
+
         UnitRenderer unitRenderer = gameObj.AddComponent<UnitRenderer>();
-        unitRenderer.Render(unit.CellLocation);
+        unitRenderer.Render(initLocation);
         
-        return unit;
     }
 }

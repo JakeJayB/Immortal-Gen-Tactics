@@ -20,8 +20,8 @@ public class TurnSystem : MonoBehaviour
             foreach (Unit unit in units)
             {
                 // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
-                mapCursor.ActivateMove(unit.CellLocation);
-                Debug.Log("TurnSystem: Unit's turn at " + unit.CellLocation);
+                mapCursor.ActivateMove(unit.unitInfo.CellLocation);
+                Debug.Log("TurnSystem: Unit's turn at " + unit.unitInfo.CellLocation);
 
                 // Unity stop execution here until continueLoop turn to true. 
                 yield return new WaitUntil(() => continueLoop);

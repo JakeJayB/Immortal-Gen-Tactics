@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UnitInfo : MonoBehaviour
 {
+    // Unit Cell Location
+    public Vector3Int CellLocation { get; set; }
+
     // Unit Current Stat Values
     private int currentHP;
     private int currentMP;

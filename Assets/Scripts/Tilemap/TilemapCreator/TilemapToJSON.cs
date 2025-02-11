@@ -46,12 +46,19 @@ public class DataList
 public class TilemapToJSON : MonoBehaviour
 {
     private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON";
-    private const string FILE_NAME = "Tilemap1";
+    public string fileName;
     private DataList data;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        if (String.IsNullOrEmpty(fileName))
+        {
+            Debug.LogError("TilemapToJSON: fileName is NULL. Insert a file name and retry");
+            return;
+        }
+
         data = new DataList();
         ExtractTileData();
         ExtractUnitData();
@@ -83,7 +90,11 @@ public class TilemapToJSON : MonoBehaviour
         GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
         foreach (GameObject unit in units)
         {
-            UnitData unitData = new UnitData(unit.GetComponent<Unit>().CellLocation);
+            Vector3 pos = unit.transform.position;
+            int x = Mathf.RoundToInt(pos.x / .5f);
+            int y = Mathf.RoundToInt(pos.y / .25f);
+            int z = Mathf.RoundToInt(pos.z / .5f);
+            UnitData unitData = new UnitData(new Vector3Int(x, y , z));
             data.units.Add(unitData);
         }
     }
@@ -91,7 +102,7 @@ public class TilemapToJSON : MonoBehaviour
     private void SaveToJson()
     {
         if (!System.IO.Directory.Exists(DEFAULT_DIRECTORY)) { System.IO.Directory.CreateDirectory(DEFAULT_DIRECTORY); }
-        string path = $"{DEFAULT_DIRECTORY}/{FILE_NAME}.json";
+        string path = $"{DEFAULT_DIRECTORY}/{fileName}.json";
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(path, json);

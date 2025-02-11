@@ -50,7 +50,7 @@ public class Tilemap : MonoBehaviour
         CreateTilemap(testTiles);
 
         //Unit unit = Unit.Initialize(new Vector3Int(-4, 1, - 5));
-        Unit unit = Unit.Initialize(new Vector3Int(0, 0, 0));
+        //Unit unit = Unit.Initialize(new Vector3Int(0, 0, 0));
 
     }
 
