@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TilemapCreator : MonoBehaviour
 {
-    private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON";
+    private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/Levels";
     public string fileName;
     public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
     public static Dictionary<Vector2Int, Unit> UnitLocator { get; private set; }
@@ -80,9 +80,7 @@ public class TilemapCreator : MonoBehaviour
         List<Unit> unitsList = new List<Unit>();
         foreach (UnitData unitData in units)
         {
-
-            Unit unit = new Unit();
-            unit.Initialize(unitData.cellLocation);
+            Unit unit = Unit.Initialize(unitData.cellLocation);
             UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
             unitsList.Add(unit);
         }

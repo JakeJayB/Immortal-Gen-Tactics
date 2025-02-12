@@ -4,7 +4,9 @@ using UnityEngine;
 
 public enum TerrainType
 {
-    Test,
-    Grass,
-    Water
+    STANDARD,
+    TRANSPARENT,
+    GRASS,
+    STONE,
+    WATER
 }

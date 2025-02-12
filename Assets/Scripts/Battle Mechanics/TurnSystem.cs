@@ -13,6 +13,12 @@ public class TurnSystem : MonoBehaviour
 
     IEnumerator TurnLoop()
     {
+        if(units.Count == 0)
+        {
+            Debug.LogError("TurnSystem: No units to loop through");
+            yield break;
+        }
+
         while (startLoop)
         {
             // TODO: Sort units if any unit's speed changes 

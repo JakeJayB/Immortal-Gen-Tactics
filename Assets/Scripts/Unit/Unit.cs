@@ -12,16 +12,36 @@ public class Unit : MonoBehaviour
 
     public UnitEquipment unitEquipment { get; set; }
 
-    public void Initialize(Vector3Int initLocation)
+    public UnitRenderer unitRenderer { get; set; }
+
+    public static Unit Initialize(Vector3Int initLocation)
+    {
+        GameObject gameObj = new GameObject("Unit " + initLocation);
+        Unit unit = gameObj.AddComponent<Unit>();
+        unit.gameObj = gameObj;
+
+        unit.unitInfo = gameObj.AddComponent<UnitInfo>();
+        unit.unitInfo.CellLocation = initLocation;
+
+        //unitEquipment = gameObj.AddComponent<UnitEquipment>();
+        unit.unitEquipment = new UnitEquipment(unit.unitInfo);
+
+        unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
+        unit.unitRenderer.Render(initLocation);
+        return unit;
+    }
+
+/*    public void Initialize(Vector3Int initLocation)
     {
         GameObject gameObj = new GameObject("Unit " + initLocation);
         unitInfo = gameObj.AddComponent<UnitInfo>();
         unitInfo.CellLocation = initLocation;
 
-        unitEquipment = gameObj.AddComponent<UnitEquipment>();
+        //unitEquipment = gameObj.AddComponent<UnitEquipment>();
+        unitEquipment = new UnitEquipment(unitInfo);
 
         UnitRenderer unitRenderer = gameObj.AddComponent<UnitRenderer>();
         unitRenderer.Render(initLocation);
         
-    }
+    }*/
 }

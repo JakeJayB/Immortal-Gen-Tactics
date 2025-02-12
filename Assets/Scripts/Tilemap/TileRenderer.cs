@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 public class TileRenderer : MonoBehaviour
 {
 
@@ -36,7 +34,7 @@ public class TileRenderer : MonoBehaviour
         meshFilter.mesh = mesh;
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.materials = Terrain.TestTerrain(mesh.subMeshCount);             // TODO: Figure out how to use TerrainType for assigning materials
+        meshRenderer.materials = Terrain.GetTerrain(terrainType, mesh.subMeshCount);
 
         PositionTile(cellLocation);
         RotateTile(direction);

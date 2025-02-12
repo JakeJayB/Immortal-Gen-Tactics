@@ -11,7 +11,7 @@ public class TilePrefabCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Tile flatTile = new Tile(new Vector3Int(0, 0, 0), TileType.Flat, TerrainType.Test, TileDirection.Forward, false);
+        Tile flatTile = new Tile(new Vector3Int(0, 0, 0), TileType.Flat, TerrainType.STANDARD, TileDirection.Forward, false);
         SaveAsPrefab(flatTile.GameObj);
     }
 
