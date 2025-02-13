@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6401203804189348344}
   m_Layer: 0
   m_Name: Flat
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellLocation: {x: 0, y: 0, z: 0}
   TileType: 0
-  TerrainType: 0
+  TerrainType: 4
   TileDirection: 0
   IsStartArea: 0
 --- !u!114 &2705984533422089478
@@ -92,12 +92,12 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d1c2df5a93e31e4b93016504bb12b82, type: 2}
-  - {fileID: 2100000, guid: 7d1c2df5a93e31e4b93016504bb12b82, type: 2}
-  - {fileID: 2100000, guid: 7d1c2df5a93e31e4b93016504bb12b82, type: 2}
-  - {fileID: 2100000, guid: 7d1c2df5a93e31e4b93016504bb12b82, type: 2}
-  - {fileID: 2100000, guid: 7d1c2df5a93e31e4b93016504bb12b82, type: 2}
-  - {fileID: 2100000, guid: 7d1c2df5a93e31e4b93016504bb12b82, type: 2}
+  - {fileID: 2100000, guid: 0c608dae5f718bd46846275bb5f6c93e, type: 2}
+  - {fileID: 2100000, guid: 0c608dae5f718bd46846275bb5f6c93e, type: 2}
+  - {fileID: 2100000, guid: 609c75a7f5841f0458b43a2b19c249de, type: 2}
+  - {fileID: 2100000, guid: 0c608dae5f718bd46846275bb5f6c93e, type: 2}
+  - {fileID: 2100000, guid: 0c608dae5f718bd46846275bb5f6c93e, type: 2}
+  - {fileID: 2100000, guid: 0c608dae5f718bd46846275bb5f6c93e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

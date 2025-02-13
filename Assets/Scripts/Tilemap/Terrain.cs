@@ -6,55 +6,67 @@ using UnityEngine;
 public static class Terrain
 {
     // Important Note: Resources.Load looks for files in the 'Resources' folder only. So, "Assets/Resources/Materials/.." won't work.
-    private const string MATERIAL_PATH = "Materials/";
-/*
-    public static readonly Dictionary<TerrainType, Material[]> TerrainMaterials = new Dictionary<TerrainType, Material[]>()
-        {
-            { TerrainType.STANDARD , new Material[]
-            {
-                Resources.Load<Material>("Materials/New Material"),
-                Resources.Load<Material>("Materials/New Material"),
-                Resources.Load<Material>("Materials/New Material"),
-                Resources.Load<Material>("Materials/New Material"),
-                Resources.Load<Material>("Materials/New Material"),
-                Resources.Load<Material>("Materials/New Material")
-            } }
-        };*/
+    //private const string MATERIAL_PATH = "Materials/";
+    private const string MATERIAL_PATH = "Prefabs/Tilemap/Tiles/";
 
     // Gets the path of the material based on the terrain type
-    private static string GetPath(TerrainType terrainType)
+    private static string GetPath(TileType tileType, TerrainType terrainType)
     {
-        // Important Note: Resources.Load doesn't expect file extensions. So, "Materials/...mat" won't work.
+        string path;
         switch (terrainType)
         {
             case TerrainType.STANDARD:
-                return MATERIAL_PATH + "Standard";
-            case TerrainType.TRANSPARENT:
-                return MATERIAL_PATH + "Transparent";
+                path = MATERIAL_PATH + "Standard/";
+                break;
             case TerrainType.GRASS:
-                return MATERIAL_PATH + "Grass";
+                path = MATERIAL_PATH + "Grass/";
+                break;
             case TerrainType.STONE:
-                return MATERIAL_PATH + "Stone";
+                path = MATERIAL_PATH + "Stone/";
+                break;
             case TerrainType.WATER:
-                return MATERIAL_PATH + "Water";
+                path = MATERIAL_PATH + "Water/";
+                break;
             default:
                 Debug.LogError("Terrain: TerrainType not found. Default to Standard");
-                return MATERIAL_PATH + "Standard";
+                path = MATERIAL_PATH + "Standard/";
+                break;
         }
+
+        switch(tileType)
+        {
+            case TileType.Flat:
+                path += "Flat";
+                break;
+            case TileType.Slanted:
+                path += "Slanted";
+                break;
+            case TileType.Slanted_Corner:
+                path += "Slanted_Corner";
+                break;
+            case TileType.Stairs:
+                path += "Stairs";
+                break;
+            default:
+                Debug.LogError("Terrain: TileType not found. Default to Flat");
+                path += "Flat";
+                break;
+        }
+
+        return path;
     }
 
     // Returns the material list based on the terrain type
-    public static Material[] GetTerrain(TerrainType terrainType, int subMeshCount)
+    public static Material[] GetTerrain(TileType tileType, TerrainType terrainType, int subMeshCount)
     {
-        Material[] materials = new Material[subMeshCount];
-        string path = GetPath(terrainType);        
+        string path = GetPath(tileType, terrainType);
+        Material[] materials = Resources.Load<GameObject>(path).GetComponent<MeshRenderer>().sharedMaterials;
 
-        for (int i = 0; i < subMeshCount; i++) 
-            materials[i] = Resources.Load<Material>(path);
+      /*  for (int i = 0; i < subMeshCount; i++) 
+            materials[i] = Resources.Load<Material>(path);*/
         
 
         return materials;
 
     }
-
 }

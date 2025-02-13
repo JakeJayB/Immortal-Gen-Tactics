@@ -45,7 +45,7 @@ public class DataList
 
 public class TilemapToJSON : MonoBehaviour
 {
-    private const string DEFAULT_DIRECTORY = "Assets/Resources/Levels/JSON";
+    private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/Levels";
     public string fileName;
     private DataList data;
 

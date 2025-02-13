@@ -34,7 +34,7 @@ public class TileRenderer : MonoBehaviour
         meshFilter.mesh = mesh;
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.materials = Terrain.GetTerrain(terrainType, mesh.subMeshCount);
+        meshRenderer.materials = Terrain.GetTerrain(tileType, terrainType, mesh.subMeshCount);
 
         PositionTile(cellLocation);
         RotateTile(direction);

@@ -2,56 +2,89 @@
   "tiles": [
     {
       "cellLocation": {
-        "x": -3,
-        "y": 0,
-        "z": 6
+        "x": 1,
+        "y": 1,
+        "z": 4
       },
       "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 0,
-        "z": 6
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 0,
-        "z": 6
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 0,
-        "y": 0,
-        "z": 6
-      },
-      "tileType": 0,
-      "terrainType": 2,
+      "terrainType": 3,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
         "x": 1,
-        "y": 0,
-        "z": 6
+        "y": 1,
+        "z": 3
       },
       "tileType": 0,
-      "terrainType": 2,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 1,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 1,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 1,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 1,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 1,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 1,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 3,
       "tileDirection": 0,
       "isStartingArea": false
     },
@@ -68,52 +101,151 @@
     },
     {
       "cellLocation": {
-        "x": -2,
-        "y": 1,
-        "z": 5
+        "x": 1,
+        "y": 0,
+        "z": 6
       },
-      "tileType": 3,
-      "terrainType": 0,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 1,
-        "z": 5
-      },
-      "tileType": 3,
-      "terrainType": 0,
+      "tileType": 0,
+      "terrainType": 2,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
         "x": 0,
-        "y": 1,
-        "z": 5
+        "y": 0,
+        "z": 6
       },
-      "tileType": 3,
-      "terrainType": 0,
+      "tileType": 0,
+      "terrainType": 2,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
-        "x": 1,
-        "y": 1,
-        "z": 5
+        "x": -1,
+        "y": 0,
+        "z": 6
       },
-      "tileType": 3,
-      "terrainType": 0,
+      "tileType": 0,
+      "terrainType": 2,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
         "x": -2,
-        "y": 1,
+        "y": 0,
+        "z": 6
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -3,
+        "y": 0,
+        "z": 6
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 2,
+        "y": 0,
+        "z": 5
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 0,
+        "z": 5
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 0,
+        "z": 5
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 0,
+        "z": 5
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 0,
+        "z": 5
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -3,
+        "y": 0,
+        "z": 5
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 2,
+        "y": 0,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 0,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 0,
         "z": 4
       },
       "tileType": 0,
@@ -124,29 +256,7 @@
     {
       "cellLocation": {
         "x": -1,
-        "y": 1,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 3,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 0,
-        "y": 1,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 3,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 1,
+        "y": 0,
         "z": 4
       },
       "tileType": 0,
@@ -156,19 +266,140 @@
     },
     {
       "cellLocation": {
-        "x": 0,
-        "y": 1,
+        "x": -2,
+        "y": 0,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -3,
+        "y": 0,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 2,
+        "y": 0,
         "z": 3
       },
       "tileType": 0,
-      "terrainType": 3,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 0,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 2,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
         "x": 0,
-        "y": 1,
+        "y": 0,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 0,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 0,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -3,
+        "y": 0,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 2,
+        "y": 0,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 0,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 0,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 0,
+        "z": 2
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 0,
         "z": 2
       },
       "tileType": 0,
@@ -180,7 +411,7 @@
       "cellLocation": {
         "x": -3,
         "y": 0,
-        "z": -1
+        "z": 2
       },
       "tileType": 0,
       "terrainType": 2,
@@ -189,18 +420,7 @@
     },
     {
       "cellLocation": {
-        "x": -3,
-        "y": 0,
-        "z": 0
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -3,
+        "x": 2,
         "y": 0,
         "z": 1
       },
@@ -211,183 +431,7 @@
     },
     {
       "cellLocation": {
-        "x": -3,
-        "y": 0,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -3,
-        "y": 0,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -3,
-        "y": 0,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -3,
-        "y": 0,
-        "z": 5
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 2,
-        "y": 0,
-        "z": 5
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
         "x": 1,
-        "y": 0,
-        "z": 5
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 0,
-        "z": 5
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 0,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 0,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 0,
-        "z": 5
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 0,
-        "y": 0,
-        "z": 5
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 0,
-        "y": 0,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 0,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 2,
-        "y": 0,
-        "z": 4
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 2,
-        "y": 0,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 2,
-        "y": 0,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 2,
         "y": 0,
         "z": 1
       },
@@ -398,108 +442,9 @@
     },
     {
       "cellLocation": {
-        "x": 2,
-        "y": 0,
-        "z": 0
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 2,
-        "y": 0,
-        "z": -1
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 1,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 1,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 1,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 1,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 1,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 3,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 1,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 0,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
         "x": 0,
         "y": 0,
-        "z": 3
+        "z": 1
       },
       "tileType": 0,
       "terrainType": 2,
@@ -510,40 +455,7 @@
       "cellLocation": {
         "x": -1,
         "y": 0,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 0,
-        "z": 3
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 0,
-        "z": -1
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -2,
-        "y": 0,
-        "z": 0
+        "z": 1
       },
       "tileType": 0,
       "terrainType": 2,
@@ -563,47 +475,113 @@
     },
     {
       "cellLocation": {
+        "x": -3,
+        "y": 0,
+        "z": 1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
         "x": -2,
-        "y": 0,
-        "z": 2
+        "y": 1,
+        "z": 5
       },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 0,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 0,
-        "y": 0,
-        "z": 2
-      },
-      "tileType": 0,
-      "terrainType": 2,
+      "tileType": 3,
+      "terrainType": 3,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
         "x": -1,
-        "y": 0,
-        "z": 2
+        "y": 1,
+        "z": 5
+      },
+      "tileType": 3,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 1,
+        "z": 5
+      },
+      "tileType": 3,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 1,
+        "z": 5
+      },
+      "tileType": 3,
+      "terrainType": 3,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 1,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 4,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 1,
+        "z": 3
+      },
+      "tileType": 0,
+      "terrainType": 4,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 1,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 4,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 1,
+        "z": 4
+      },
+      "tileType": 0,
+      "terrainType": 4,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 1,
+        "z": -1
       },
       "tileType": 0,
       "terrainType": 2,
       "tileDirection": 0,
-      "isStartingArea": false
+      "isStartingArea": true
     },
     {
       "cellLocation": {
@@ -612,7 +590,7 @@
         "z": -1
       },
       "tileType": 1,
-      "terrainType": 0,
+      "terrainType": 2,
       "tileDirection": 3,
       "isStartingArea": false
     },
@@ -623,26 +601,15 @@
         "z": 0
       },
       "tileType": 1,
-      "terrainType": 0,
+      "terrainType": 2,
       "tileDirection": 0,
       "isStartingArea": false
     },
     {
       "cellLocation": {
-        "x": 1,
-        "y": 1,
-        "z": -1
-      },
-      "tileType": 0,
-      "terrainType": 0,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
+        "x": -3,
         "y": 0,
-        "z": -1
+        "z": 0
       },
       "tileType": 0,
       "terrainType": 2,
@@ -651,53 +618,9 @@
     },
     {
       "cellLocation": {
-        "x": 0,
+        "x": -2,
         "y": 0,
-        "z": -1
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 0,
-        "z": -1
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 0,
-        "z": 1
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 0,
-        "y": 0,
-        "z": 1
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": -1,
-        "y": 0,
-        "z": 1
+        "z": 0
       },
       "tileType": 0,
       "terrainType": 2,
@@ -713,18 +636,7 @@
       "tileType": 0,
       "terrainType": 2,
       "tileDirection": 0,
-      "isStartingArea": false
-    },
-    {
-      "cellLocation": {
-        "x": 1,
-        "y": 0,
-        "z": 0
-      },
-      "tileType": 0,
-      "terrainType": 2,
-      "tileDirection": 0,
-      "isStartingArea": false
+      "isStartingArea": true
     },
     {
       "cellLocation": {
@@ -736,6 +648,94 @@
       "terrainType": 2,
       "tileDirection": 0,
       "isStartingArea": true
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 2,
+        "y": 0,
+        "z": 0
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 2,
+        "y": 0,
+        "z": -1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 1,
+        "y": 0,
+        "z": -1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -1,
+        "y": 0,
+        "z": -1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": true
+    },
+    {
+      "cellLocation": {
+        "x": -2,
+        "y": 0,
+        "z": -1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
+    },
+    {
+      "cellLocation": {
+        "x": -3,
+        "y": 0,
+        "z": -1
+      },
+      "tileType": 0,
+      "terrainType": 2,
+      "tileDirection": 0,
+      "isStartingArea": false
     }
   ],
   "units": [
