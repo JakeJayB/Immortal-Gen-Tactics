@@ -27,6 +27,12 @@ public static class Terrain
             case TerrainType.WATER:
                 path = MATERIAL_PATH + "Water/";
                 break;
+            case TerrainType.MOVE:
+                path = MATERIAL_PATH + "Move/";
+                break;
+            case TerrainType.ATTACK:
+                path = MATERIAL_PATH + "Attack/";
+                break;
             default:
                 Debug.LogError("Terrain: TerrainType not found. Default to Standard");
                 path = MATERIAL_PATH + "Standard/";
@@ -52,7 +58,6 @@ public static class Terrain
                 path += "Flat";
                 break;
         }
-
         return path;
     }
 
@@ -60,12 +65,8 @@ public static class Terrain
     public static Material[] GetTerrain(TileType tileType, TerrainType terrainType, int subMeshCount)
     {
         string path = GetPath(tileType, terrainType);
+
         Material[] materials = Resources.Load<GameObject>(path).GetComponent<MeshRenderer>().sharedMaterials;
-
-      /*  for (int i = 0; i < subMeshCount; i++) 
-            materials[i] = Resources.Load<Material>(path);*/
-        
-
         return materials;
 
     }

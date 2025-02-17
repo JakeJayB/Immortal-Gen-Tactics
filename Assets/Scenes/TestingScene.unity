@@ -898,79 +898,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 213079711}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &228196128
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 732885368637033245, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3044776666312020343, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: m_Name
-      value: Tilemap To JSON
-      objectReference: {fileID: 0}
-    - target: {fileID: 4112420593169827905, guid: 0f8d1c46052386f4da425f4db69a3574,
-        type: 3}
-      propertyPath: fileName
-      value: Tilemap2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0f8d1c46052386f4da425f4db69a3574, type: 3}
 --- !u!1001 &242033537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5586,12 +5513,12 @@ PrefabInstance:
     - target: {fileID: 5720825038015874198, guid: f5d4389ea0143e942b5215808524a2ee,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
         type: 3}
       propertyPath: fileName
-      value: Tilemap2.json
+      value: Tilemap1.json
       objectReference: {fileID: 0}
     - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
         type: 3}
@@ -7332,7 +7259,7 @@ PrefabInstance:
     - target: {fileID: 7880908677345187852, guid: fab59916b322610429beb193ad97734a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7473,7 +7400,7 @@ PrefabInstance:
     - target: {fileID: 3662782845718441101, guid: e424b66a54fe601439bddad8ba34e70d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5993773810958627370, guid: e424b66a54fe601439bddad8ba34e70d,
         type: 3}
@@ -7497,4 +7424,3 @@ SceneRoots:
   - {fileID: 1554545625}
   - {fileID: 1778846958499065555}
   - {fileID: 8123866168944000534}
-  - {fileID: 228196128}

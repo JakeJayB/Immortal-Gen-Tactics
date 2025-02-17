@@ -8,5 +8,7 @@ public enum TerrainType
     TRANSPARENT,
     GRASS,
     STONE,
-    WATER
+    WATER,
+    MOVE,
+    ATTACK
 }

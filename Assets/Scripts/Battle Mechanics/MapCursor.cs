@@ -143,8 +143,6 @@ public class MapCursor : MonoBehaviour
         }
         else
             tileObj.GetComponent<Outline>().enabled = true;
-        
-        
     }
 
     private void RemoveTileOutline()
@@ -155,7 +153,7 @@ public class MapCursor : MonoBehaviour
         GameObject tileObj = TilemapCreator.TileLocator[this.hoverCell].GameObj;
         if (tileObj.GetComponent<Outline>() != null)
             tileObj.GetComponent<Outline>().enabled = false;
-        
     }
         
+
 }
