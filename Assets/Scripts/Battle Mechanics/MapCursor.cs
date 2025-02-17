@@ -138,11 +138,12 @@ public class MapCursor : MonoBehaviour
             Outline outline = tileObj.AddComponent<Outline>();
             outline.OutlineMode = Outline.Mode.OutlineAll;
             outline.OutlineColor = Color.yellow;
-            outline.OutlineWidth = 5f;
+            outline.OutlineWidth = 2f;
             outline.enabled = true;
         }
         else
             tileObj.GetComponent<Outline>().enabled = true;
+        
         
     }
 
@@ -156,4 +157,5 @@ public class MapCursor : MonoBehaviour
             tileObj.GetComponent<Outline>().enabled = false;
         
     }
+        
 }
