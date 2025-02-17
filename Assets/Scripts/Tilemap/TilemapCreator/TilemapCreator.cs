@@ -45,24 +45,24 @@ public class TilemapCreator : MonoBehaviour
         foreach (TileData tile in tiles)
         {
             Vector2Int key = new Vector2Int(tile.cellLocation.x, tile.cellLocation.z);
+            bool isTraversable = tile.isTraversable;
+
 
             // Check if this is the highest tile at this (x, z) position
-            if (!topmostTiles.ContainsKey(key))
+            if (isTraversable && !topmostTiles.ContainsKey(key)) // First time seeing this (x, z) location, store it
             {
-                // First time seeing this (x, z) location, store it
                 topmostTiles.Add(key, tile);
             }
-            else if(tile.cellLocation.y > topmostTiles[key].cellLocation.y)
+            else if(isTraversable && tile.cellLocation.y > topmostTiles[key].cellLocation.y) // Renders the previous tile (bottom tile) before replacing it with a topmost tile
             {
-                // Renders the previous tile (bottom tile) before replacing it with a topmost tile
                 TileData bottomTile = topmostTiles[key];
-                new Tile(bottomTile.cellLocation, bottomTile.tileType, bottomTile.terrainType, bottomTile.tileDirection, bottomTile.isStartingArea);
+                new Tile(bottomTile.cellLocation, bottomTile.tileType, bottomTile.terrainType, bottomTile.tileDirection, bottomTile.isStartingArea, bottomTile.isTraversable);
                 topmostTiles[key] = tile;
             }
             else
             {
-                // This is a bottom tile, render it separately
-                new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
+                // This is a bottom tile / non-traversable tile, render it separately
+                    new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
             }
         }
 
@@ -70,7 +70,7 @@ public class TilemapCreator : MonoBehaviour
         foreach (var entry in topmostTiles)
         {
             TileData tile = entry.Value;
-            Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea);
+            Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
             TileLocator.Add(entry.Key, newTile);
         }
     }

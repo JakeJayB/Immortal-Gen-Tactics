@@ -52,6 +52,7 @@ MonoBehaviour:
   TerrainType: 2
   TileDirection: 0
   IsStartArea: 0
+  isTraversable: 1
 --- !u!114 &74867896377561237
 MonoBehaviour:
   m_ObjectHideFlags: 0

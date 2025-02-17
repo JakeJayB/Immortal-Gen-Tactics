@@ -11,14 +11,16 @@ public class TileInfo : MonoBehaviour
     public TerrainType TerrainType;
     public TileDirection TileDirection;
     public Boolean IsStartArea;
+    public Boolean isTraversable;
 
-    public void Initialize(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction, bool isStartArea)
+    public void Initialize(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction, bool isStartArea, bool isTraversable)
     {
         CellLocation = cellLocation;
         TileType = tileType;
         TerrainType = terrainType;
         TileDirection = direction;
-        IsStartArea = isStartArea;
+        this.IsStartArea = isStartArea;
+        this.isTraversable = isTraversable;
     }
 
     

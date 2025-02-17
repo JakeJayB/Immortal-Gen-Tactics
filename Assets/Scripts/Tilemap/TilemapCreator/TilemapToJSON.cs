@@ -12,14 +12,16 @@ public class TileData
     public TerrainType terrainType;
     public TileDirection tileDirection;
     public bool isStartingArea;
+    public bool isTraversable;
 
-    public TileData(Vector3Int location, TileType type, TerrainType terrain, TileDirection direction, bool isStartingArea)
+    public TileData(Vector3Int location, TileType type, TerrainType terrain, TileDirection direction, bool isStartingArea, bool isTraversable)
     {
         this.cellLocation = location;
         this.tileType = type;
         this.terrainType = terrain;
         this.tileDirection = direction;
         this.isStartingArea = isStartingArea;
+        this.isTraversable = isTraversable;
     }
 }
 
@@ -92,8 +94,11 @@ public class TilemapToJSON : MonoBehaviour
                 _ => throw new ArgumentOutOfRangeException(nameof(rotation), rotation, "At tile" + new Vector3(pos.x+0.25f , pos.y, pos.z+0.25f)),
             };
 
+            if(tileInfo.TerrainType == TerrainType.WATER)
+                tileInfo.isTraversable = false;
+
             // TileType, TerrainType, and isStartArea are manually inputed
-            TileData tileData = new TileData(cellLocation, tileInfo.TileType, tileInfo.TerrainType, tileDirection, tileInfo.IsStartArea);
+            TileData tileData = new TileData(cellLocation, tileInfo.TileType, tileInfo.TerrainType, tileDirection, tileInfo.IsStartArea, tileInfo.isTraversable);
             data.tiles.Add(tileData);
         }
     }
