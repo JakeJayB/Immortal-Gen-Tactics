@@ -9,13 +9,28 @@ public class TilemapCreator : MonoBehaviour
     public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
     public static Dictionary<Vector2Int, Unit> UnitLocator { get; private set; }
 
-    [SerializeField]
-    private TurnSystem turnSystem; 
+    [SerializeField] private TurnSystem turnSystem;
+
+    [SerializeField] private GameObject OverlayFlatPrefab;
+    [SerializeField] private GameObject OverlaySlantedPrefab;
+    [SerializeField] private GameObject OverlaySlantedCornerPrefab;
+    [SerializeField] private GameObject OverlayStairPrefab;
+
+    private Dictionary<TileType, GameObject> OverlayPrefabs;
 
     void Start()
     {
         TileLocator = new Dictionary<Vector2Int, Tile>();
         UnitLocator = new Dictionary<Vector2Int, Unit>();
+
+        OverlayPrefabs = new Dictionary<TileType, GameObject>()
+        {
+            {TileType.Flat, OverlayFlatPrefab},
+            {TileType.Slanted, OverlaySlantedPrefab},
+            {TileType.Slanted_Corner, OverlaySlantedCornerPrefab},
+            {TileType.Stairs, OverlayStairPrefab},
+        };
+
         LoadFromJson();
     }
 
@@ -57,12 +72,14 @@ public class TilemapCreator : MonoBehaviour
             {
                 TileData bottomTile = topmostTiles[key];
                 new Tile(bottomTile.cellLocation, bottomTile.tileType, bottomTile.terrainType, bottomTile.tileDirection, bottomTile.isStartingArea, bottomTile.isTraversable);
+
                 topmostTiles[key] = tile;
             }
             else
             {
                 // This is a bottom tile / non-traversable tile, render it separately
-                    new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
+                new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
+
             }
         }
 
@@ -70,7 +87,7 @@ public class TilemapCreator : MonoBehaviour
         foreach (var entry in topmostTiles)
         {
             TileData tile = entry.Value;
-            Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
+            Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable, OverlayPrefabs[tile.tileType]);
             TileLocator.Add(entry.Key, newTile);
         }
     }

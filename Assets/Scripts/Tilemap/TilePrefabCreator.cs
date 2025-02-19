@@ -12,7 +12,7 @@ public class TilePrefabCreator : MonoBehaviour
     void Start()
     {
         Tile flatTile = new Tile(new Vector3Int(0, 0, 0), TileType.Flat, TerrainType.STANDARD, TileDirection.Forward, false, true);
-        SaveAsPrefab(flatTile.GameObj);
+        SaveAsPrefab(flatTile.TileObj);
     }
 
     void SaveAsPrefab(GameObject obj)

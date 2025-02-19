@@ -9,6 +9,5 @@ public enum TerrainType
     GRASS,
     STONE,
     WATER,
-    MOVE,
-    ATTACK
+    OVERLAY
 }

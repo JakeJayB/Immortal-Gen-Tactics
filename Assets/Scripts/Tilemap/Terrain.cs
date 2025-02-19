@@ -27,11 +27,8 @@ public static class Terrain
             case TerrainType.WATER:
                 path = MATERIAL_PATH + "Water/";
                 break;
-            case TerrainType.MOVE:
-                path = MATERIAL_PATH + "Move/";
-                break;
-            case TerrainType.ATTACK:
-                path = MATERIAL_PATH + "Attack/";
+            case TerrainType.OVERLAY:
+                path = MATERIAL_PATH + "OVERLAY/";
                 break;
             default:
                 Debug.LogError("Terrain: TerrainType not found. Default to Standard");
