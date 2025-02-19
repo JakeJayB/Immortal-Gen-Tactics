@@ -12,21 +12,21 @@ public class CameraRotation : MonoBehaviour
     {
         //transform.position = focusPoint.position;
         if (Input.GetKeyDown(KeyCode.Q))
-            RotateCamera(-ROTATION_ANGLE);
+            RotateCamera(ROTATION_ANGLE);
         
         if (Input.GetKeyDown(KeyCode.E))
-            RotateCamera(ROTATION_ANGLE);
+            RotateCamera(-ROTATION_ANGLE);
         
     }
 
     void MoveCamera()
     {
-        LeanTween.move(gameObject, focusPoint.position, MOVE_SPEED);
+        LeanTween.move(this.gameObject, focusPoint.position, MOVE_SPEED);
     }
 
     void RotateCamera(float angle)
     {
-        if (!LeanTween.isTweening(gameObject))
+        if (!LeanTween.isTweening(this.gameObject))
             //LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED);
             //LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED).setEaseInOutQuart();
             LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED).setEaseInOutCubic();

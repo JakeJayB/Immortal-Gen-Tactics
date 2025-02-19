@@ -45,7 +45,6 @@ public class OverlayTile
         OverlayMR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
         TileType = OriginalTile.GetComponent<TileInfo>().TileType;
-        Debug.Log(TileType.ToString());
         CurrentMaterial = OverlayMaterial.MOVE;
     }
 
