@@ -5525,6 +5525,30 @@ PrefabInstance:
       propertyPath: turnSystem
       value: 
       objectReference: {fileID: 1246373917}
+    - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
+        type: 3}
+      propertyPath: OverlayFlatPrefab
+      value: 
+      objectReference: {fileID: 881518487769573664, guid: 0fd8e3f1ea719ba4e8501609b32d9b31,
+        type: 3}
+    - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
+        type: 3}
+      propertyPath: OverlayStairPrefab
+      value: 
+      objectReference: {fileID: 7763809280679500986, guid: 20dc45b3dcf438345bad0de8ebab5c39,
+        type: 3}
+    - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
+        type: 3}
+      propertyPath: OverlaySlantedPrefab
+      value: 
+      objectReference: {fileID: 3721846189590364617, guid: 3c4482fedb007b448bd25ee310902ec2,
+        type: 3}
+    - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
+        type: 3}
+      propertyPath: OverlaySlantedCornerPrefab
+      value: 
+      objectReference: {fileID: 304121895965388334, guid: f3e1509f52ec65946bff8e3d049d96e6,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
