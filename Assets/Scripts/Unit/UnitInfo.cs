@@ -41,6 +41,9 @@ public class UnitInfo : MonoBehaviour
     // Unit Equipment
     private UnitEquipment equipment;
     
+    // Unit Action Set
+    public UnitActionSet ActionSet { get; private set; }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +56,9 @@ public class UnitInfo : MonoBehaviour
         equipment.EquipArmor(EquipmentLibrary.Armor[103]);
         equipment.EquipAccessoryA(EquipmentLibrary.Accessories[200]);
         equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);
+
+        ActionSet = new UnitActionSet();
+        ActionSet.AddAction(new Item());
     }
 
     // Update is called once per frame

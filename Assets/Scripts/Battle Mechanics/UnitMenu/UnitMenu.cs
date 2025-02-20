@@ -16,12 +16,20 @@ public class UnitMenu : MonoBehaviour
     private const float SLOT_SCALE = 0.5f;
     private const float SLOT_MARGIN = 48f;
 
+    private List<UnitAction> UnitActions = new List<UnitAction>()
+    {
+        new Move(),
+        new Wait(),
+        new Move(),
+        new Wait()
+    };
+
     private void Awake()
     {
         // Create a new Canvas GameObject
         GameObject canvasObject = new GameObject("Canvas");
         Canvas = canvasObject.AddComponent<Canvas>();
-        slotImage = Resources.Load<Sprite>("UnitMenu/igt_unit_menu_slot");
+        slotImage = Resources.Load<Sprite>("Sprites/UnitMenu/igt_unit_menu_slot");
     
         // Set proper render mode
         Canvas.renderMode = RenderMode.ScreenSpaceOverlay; // Change to Overlay to avoid 3D interference
@@ -72,7 +80,7 @@ public class UnitMenu : MonoBehaviour
         
             // Add Image component instead of SpriteRenderer
             Image image = slot.AddComponent<Image>();
-            image.sprite = slotImage; // Set the sprite as a UI element
+            image.sprite = UnitActions[i].SlotImage(); // Set the sprite as a UI element
 
             // Positioning the UI element
             RectTransform rectTransform = slot.GetComponent<RectTransform>();
