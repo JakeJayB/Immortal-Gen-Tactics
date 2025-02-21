@@ -1,3 +1,4 @@
+using Environment.Instancing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class TileRenderer : MonoBehaviour
 {
 
-    public void Render(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction)
+    public void Render(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction, string path)
     {
 
         Mesh mesh = new Mesh
@@ -34,10 +35,25 @@ public class TileRenderer : MonoBehaviour
         meshFilter.mesh = mesh;
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.materials = Terrain.GetTerrain(tileType, terrainType, mesh.subMeshCount);
+        meshRenderer.materials = Terrain.GetTerrain(path);
+
+        MeshInstancesBehaviour PrefabMeshInstance = Resources.Load<GameObject>(path)?.GetComponent<MeshInstancesBehaviour>();
+        if(PrefabMeshInstance != null)
+        {
+            MeshInstancesBehaviour cloneM = gameObject.AddComponent<MeshInstancesBehaviour>();
+            cloneM.UseSubMesh = true;
+            cloneM.SubMeshIndex = PrefabMeshInstance.SubMeshIndex;
+            cloneM.Density = PrefabMeshInstance.Density;
+            cloneM.InstancingSettings = PrefabMeshInstance.InstancingSettings;
+            gameObject.GetComponent<MeshInstancesBehaviour>().enabled = false;
+            gameObject.GetComponent<MeshInstancesBehaviour>().enabled = true;
+        }
+ 
 
         PositionTile(cellLocation);
         RotateTile(direction);
+
+
     }
 
     private Vector3[] CenterPivots(Vector3[] vertices)

@@ -47,12 +47,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _Brightness: -1
+    - _Cloud_Change: 0.005
     - _Cloud_Cover: 0.6
     - _Cloud_Density: 0.025
     - _Cloud_Strength: 2
+    - _MinimumDarkness: 0.2
     - _Shades: 5
     m_Colors:
     - _Cloud_Movement: {r: -0.25, g: 0.25, b: 0, a: 0}
+    - _Cloud_Step: {r: 13, g: 17, b: 0, a: 0}
     - _DiffuseColor: {r: 0.7924528, g: 0.6389284, b: 0.5121039, a: 0}
     - _ShadowDiffuseColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

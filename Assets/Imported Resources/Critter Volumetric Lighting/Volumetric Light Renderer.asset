@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-25286540349122018
+--- !u!114 &-5168700552362892848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,8 +31,8 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: 5597737040684150796}
-  - {fileID: -25286540349122018}
-  m_RendererFeatureMap: 0c7006302e28af4d1e5ae488062aa6ff
+  - {fileID: -5168700552362892848}
+  m_RendererFeatureMap: 0c7006302e28af4dd0610b8a3b1645b8
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
