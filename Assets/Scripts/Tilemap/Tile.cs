@@ -53,7 +53,7 @@ public class Tile
                 path = PREFAB_PATH + "Water/";
                 break;
             case TerrainType.OVERLAY:
-                path = PREFAB_PATH + "OVERLAY/";
+                path = PREFAB_PATH + "Overlay/";
                 break;
             default:
                 Debug.LogError("Terrain: TerrainType not found. Default to Standard");
