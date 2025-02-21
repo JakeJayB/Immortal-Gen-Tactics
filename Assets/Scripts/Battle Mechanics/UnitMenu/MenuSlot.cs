@@ -5,27 +5,24 @@ using UnityEngine.UI;
 
 public class MenuSlot : MonoBehaviour
 {
+    private const float SLOT_SCALE = 0.5f;
+    private const float SLOT_MARGIN = 48f;
+    
     public string Name { get; private set; }
     public UnitAction Action { get; private set; }
-    
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void DefineSlot(UnitAction unitAction)
     {
-        Name = Action.Name;
+        Name = unitAction.Name;
         Image image = gameObject.AddComponent<Image>();
-        image.sprite = Action.SlotImage();
+        image.sprite = unitAction.SlotImage();
+    }
+
+    public void PositionSlot(int slotNumber)
+    {
+        // Position the UI element
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.localScale = new Vector3(SLOT_SCALE, SLOT_SCALE, SLOT_SCALE);
+        rectTransform.anchoredPosition = new Vector2(slotNumber * SLOT_MARGIN, 0);
     }
 }
