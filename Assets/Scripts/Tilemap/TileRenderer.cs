@@ -37,23 +37,24 @@ public class TileRenderer : MonoBehaviour
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.materials = Terrain.GetTerrain(path);
 
-        MeshInstancesBehaviour PrefabMeshInstance = Resources.Load<GameObject>(path)?.GetComponent<MeshInstancesBehaviour>();
-        if(PrefabMeshInstance != null)
+        //MeshInstancesBehaviour PrefabMeshInstance = Resources.Load<GameObject>(path)?.GetComponent<MeshInstancesBehaviour>();
+        MeshInstancesBehaviour[] PrefabMeshInstances = Resources.Load<GameObject>(path)?.GetComponents<MeshInstancesBehaviour>();
+        if (PrefabMeshInstances != null)
         {
-            MeshInstancesBehaviour cloneM = gameObject.AddComponent<MeshInstancesBehaviour>();
-            cloneM.UseSubMesh = true;
-            cloneM.SubMeshIndex = PrefabMeshInstance.SubMeshIndex;
-            cloneM.Density = PrefabMeshInstance.Density;
-            cloneM.InstancingSettings = PrefabMeshInstance.InstancingSettings;
-            gameObject.GetComponent<MeshInstancesBehaviour>().enabled = false;
-            gameObject.GetComponent<MeshInstancesBehaviour>().enabled = true;
+            for(int i = 0; i < PrefabMeshInstances.Length; i++)
+            {
+                MeshInstancesBehaviour cloneM = gameObject.AddComponent<MeshInstancesBehaviour>();
+                cloneM.UseSubMesh = true;
+                cloneM.SubMeshIndex = PrefabMeshInstances[i].SubMeshIndex;
+                cloneM.Density = PrefabMeshInstances[i].Density;
+                cloneM.InstancingSettings = PrefabMeshInstances[i].InstancingSettings;
+                gameObject.GetComponent<MeshInstancesBehaviour>().enabled = false;
+                gameObject.GetComponent<MeshInstancesBehaviour>().enabled = true;
+            }
         }
  
-
         PositionTile(cellLocation);
         RotateTile(direction);
-
-
     }
 
     private Vector3[] CenterPivots(Vector3[] vertices)
