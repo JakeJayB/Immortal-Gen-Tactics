@@ -33,6 +33,8 @@ public class Tile
         // Creating the Overlay Object
         if(OverlayObjPrefab != null)
             OverlayObj = new OverlayTile(TileObj, OverlayObjPrefab);
+        else
+            Debug.Log("Tile: No Overlay Object provided. Skipping Overlay Object creation.");
     }
 
     private void SetPrefabPath()
@@ -62,7 +64,7 @@ public class Tile
         }
 
         switch (TileInfo.TileType)
-        {
+        { 
             case TileType.Flat:
                 path += "Flat";
                 break;
@@ -82,7 +84,6 @@ public class Tile
         }
 
         TilePrefabPath = path;
-        Debug.Log(TilePrefabPath);
     }
 
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 74867896377561237}
   - component: {fileID: 4674035688517165049}
   - component: {fileID: 2236257548119576040}
+  - component: {fileID: 5057724186036628535}
   m_Layer: 0
   m_Name: Slanted
   m_TagString: Tile
@@ -119,3 +120,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5057724186036628535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3721846189590364617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbf9cbec60ae704f8a1d639d413e8e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseSubMesh: 1
+  SubMeshIndex: 1
+  Density: 0.0006
+  InstancingSettings:
+  - Mesh: {fileID: -4413095505993930501, guid: 1f298817fdd2a184480e8af5b21278bc, type: 3}
+    Material: {fileID: 2100000, guid: a194cb4ce6027c246af528b83b728a15, type: 2}
+    Probability: 100
+    Scale: 0.04
+    NormalOffset: 0.02
+  - Mesh: {fileID: -6327915695457451627, guid: dab2c84bf0b5ced4aaf0cffc4c491d55, type: 3}
+    Material: {fileID: 2100000, guid: d50a40cb47ec86444b898d9121bbe0f7, type: 2}
+    Probability: 5
+    Scale: 0.07
+    NormalOffset: 0.02
