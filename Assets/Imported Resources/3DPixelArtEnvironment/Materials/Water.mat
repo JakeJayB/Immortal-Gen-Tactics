@@ -12,7 +12,8 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _CLOUDSENABLED
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -106,7 +107,7 @@ Material:
     - _Brightness: -1
     - _BumpScale: 1
     - _CHILLFOAM: 0
-    - _CLOUDSENABLED: 0
+    - _CLOUDSENABLED: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cloud_Change: 0.005
@@ -126,9 +127,9 @@ Material:
     - _DstBlendAlpha: 10
     - _EnvironmentReflections: 1
     - _Exposure: 1
-    - _FoamAmount: 1
+    - _FoamAmount: 0.45
     - _FoamScale: 50
-    - _FoamSpeed: 0.01
+    - _FoamSpeed: 0.003
     - _FoamStrength: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -165,7 +166,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Cloud_Movement: {r: -0.25, g: 0.25, b: 0, a: 0}
     - _Cloud_Step: {r: 13, g: 17, b: 0, a: 0}
-    - _Color: {r: 0.2980392, g: 0.8000001, b: 1, a: 0.57254905}
+    - _Color: {r: 0.29803917, g: 0.8000001, b: 1, a: 1}
     - _DistortionDirection: {r: 0.25, g: 0, b: 0, a: 0}
     - _DistortionStrength: {r: 0.05, g: 0.05, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
