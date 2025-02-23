@@ -126,8 +126,8 @@ Material:
     - _OcclusionStrength: 1
     - _Offset: 0
     - _Parallax: 0.005
-    - _PlaneLengthWorldUnits: 9
-    - _PlaneWidthWorldUnits: 8.1589155
+    - _PlaneLengthWorldUnits: 50
+    - _PlaneWidthWorldUnits: 40.798073
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -147,21 +147,21 @@ Material:
     - _clipping: 0
     - _pixelInTextLen: 0.1
     m_Colors:
-    - _AnchorMid: {r: 0.8010633, g: 0.00026249886, b: 1.3038979, a: 0}
+    - _AnchorMid: {r: -2.8135233, g: 2.4145174, b: -12.045848, a: 0}
     - _AnchorOrigo: {r: -4.6521854, g: 8.8916235, b: 1.7332611, a: 0}
     - _AnchorPosition: {r: 13.126203, g: 21.220379, b: -23.203003, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _CameraForward: {r: -0.6653024, g: -0.3387393, b: 0.66530323, a: 0}
     - _CameraForwardXZ: {r: 0, g: 0, b: 0, a: 0}
-    - _CameraPos: {r: -5.6288376, g: 5.2502646, b: -5.1260204, a: 0}
+    - _CameraPos: {r: -21.185438, g: 17.414564, b: -30.416245, a: 0}
     - _CameraRight: {r: 0.70710737, g: -0.0000004917383, b: 0.70710623, a: 0}
     - _CameraRotation: {r: 0, g: 0, b: 0, a: 0}
     - _CameraUp: {r: -0.23952432, g: 0.9408803, b: 0.23952541, a: 0}
     - _CloudMovement: {r: -0.25, g: 0.25, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlaneForward: {r: -0.6123715, g: 0.50000024, b: -0.6123732, a: 0}
-    - _PlaneRight: {r: -0.4198756, g: 0.45062512, b: 0.787808, a: 0}
+    - _PlaneForward: {r: -0.6123972, g: 0.50000155, b: -0.61234653, a: 0}
+    - _PlaneRight: {r: -0.7798947, g: -0.25535694, b: 0.5714518, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SurfaceColor: {r: 0, g: 0, b: 0, a: 0}
     - _offsetVec: {r: 0, g: 0, b: 0, a: 0}
