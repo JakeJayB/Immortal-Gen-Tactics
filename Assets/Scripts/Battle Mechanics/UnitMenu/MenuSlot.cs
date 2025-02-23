@@ -10,10 +10,14 @@ public class MenuSlot : MonoBehaviour
     
     public string Name { get; private set; }
     public UnitAction Action { get; private set; }
+    public RectTransform SlotRectTransform { get; private set; }
 
     public void DefineSlot(UnitAction unitAction)
     {
         Name = unitAction.Name;
+        Action = unitAction;
+        SlotRectTransform = GetComponent<RectTransform>();
+        
         Image image = gameObject.AddComponent<Image>();
         image.sprite = unitAction.SlotImage();
     }
