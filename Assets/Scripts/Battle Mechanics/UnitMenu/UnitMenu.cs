@@ -10,19 +10,10 @@ using Object = UnityEngine.Object;
 public class UnitMenu : MonoBehaviour
 {
     private Canvas Canvas;
-    public GameObject Menu { get; private set; }
-    public List<MenuSlot> MenuSlots { get; private set; }
-    public UnitMenuTextbox Textbox { get; private set; }
-    public UnitMenuCursor Cursor { get; private set; }
-
-    // FOR TESTING DisplayUnitMenu()
-    private List<UnitAction> UnitActions = new List<UnitAction>()
-    {
-        new Move(),
-        new Attack(),
-        new Item(),
-        new Wait()
-    };
+    public static GameObject Menu { get; private set; }
+    public static List<MenuSlot> MenuSlots { get; private set; }
+    public static UnitMenuTextbox Textbox { get; private set; }
+    public static UnitMenuCursor Cursor { get; private set; }
 
     private void Awake()
     {
@@ -40,8 +31,6 @@ public class UnitMenu : MonoBehaviour
         // Create the menu as a UI object
         Menu = new GameObject("UnitMenu", typeof(RectTransform));
         Menu.transform.SetParent(Canvas.transform, false);
-
-        DisplayUnitMenu();
     }
 
     // Start is called before the first frame update
@@ -56,17 +45,17 @@ public class UnitMenu : MonoBehaviour
         
     }
 
-    private void DisplayUnitMenu()
+    public static void DisplayUnitMenu(List<UnitAction> actions)
     {
         MenuSlots = new List<MenuSlot>();
         
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < actions.Count; i++)
         {
-            MenuSlot slot = new GameObject("Slot: " + UnitActions[i].Name, typeof(RectTransform)).AddComponent<MenuSlot>();
+            MenuSlot slot = new GameObject("Slot: " + actions[i].Name, typeof(RectTransform)).AddComponent<MenuSlot>();
             slot.transform.SetParent(Menu.transform, false);
         
             // TODO: Makes sure to get actions from actual unit instead of the testing list of UnitActions
-            slot.DefineSlot(UnitActions[i]);
+            slot.DefineSlot(actions[i]);
             slot.PositionSlot(i);
         
             MenuSlots.Add(slot);

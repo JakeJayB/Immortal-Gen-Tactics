@@ -58,4 +58,9 @@ public class UnitMenuTextbox : MonoBehaviour
     {
         Text.SetText(slotName);
     }
+
+    private void SelectMenuSlot()
+    {
+        
+    }
 }

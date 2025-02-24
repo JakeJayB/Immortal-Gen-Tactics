@@ -34,6 +34,7 @@ public class MapCursor : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow)) return KeyCode.DownArrow;
             if (Input.GetKeyDown(KeyCode.LeftArrow)) return KeyCode.LeftArrow;
             if (Input.GetKeyDown(KeyCode.RightArrow)) return KeyCode.RightArrow;
+            if (Input.GetKeyDown(KeyCode.A)) return KeyCode.A;
             if (Input.GetKeyDown(KeyCode.Space)) return KeyCode.Space;
 
             return KeyCode.None; // Default case when no valid key is pressed
@@ -43,6 +44,12 @@ public class MapCursor : MonoBehaviour
         KeyCode keyPressed = GetPressedKey();
         switch (keyPressed)
         {
+            case KeyCode.A:
+                if (TilemapCreator.UnitLocator[hoverCell])
+                {
+                    UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
+                }
+                break;
             case KeyCode.Space:
                 DeactivateMove();
                 break;
