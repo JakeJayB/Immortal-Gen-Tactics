@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class UnitMenu : MonoBehaviour
     public GameObject Menu { get; private set; }
     public List<MenuSlot> MenuSlots { get; private set; }
     public UnitMenuTextbox Textbox { get; private set; }
+    public UnitMenuCursor Cursor { get; private set; }
 
     // FOR TESTING DisplayUnitMenu()
     private List<UnitAction> UnitActions = new List<UnitAction>()
@@ -38,11 +40,6 @@ public class UnitMenu : MonoBehaviour
         // Create the menu as a UI object
         Menu = new GameObject("UnitMenu", typeof(RectTransform));
         Menu.transform.SetParent(Canvas.transform, false);
-    
-        MenuSlots = new List<MenuSlot>();
-        Textbox = new GameObject("UnitMenuTextbox", typeof(RectTransform)).AddComponent<UnitMenuTextbox>();
-        Textbox.transform.SetParent(Menu.transform, false);
-        Textbox.Text.transform.SetParent(Menu.transform, false);
 
         DisplayUnitMenu();
     }
@@ -56,23 +53,13 @@ public class UnitMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            var vector3 = Menu.transform.localPosition;
-            vector3.y = (Menu.transform.localPosition.y + 1);
-            Menu.transform.localPosition = vector3;
-        }
         
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            var vector3 = Menu.transform.localPosition;
-            vector3.y = (Menu.transform.localPosition.y - 1);
-            Menu.transform.localPosition = vector3;
-        }
     }
 
     private void DisplayUnitMenu()
     {
+        MenuSlots = new List<MenuSlot>();
+        
         for (int i = 0; i < 4; i++)
         {
             MenuSlot slot = new GameObject("Slot: " + UnitActions[i].Name, typeof(RectTransform)).AddComponent<MenuSlot>();
@@ -84,15 +71,12 @@ public class UnitMenu : MonoBehaviour
         
             MenuSlots.Add(slot);
         }
+        
+        Textbox = new GameObject("UnitMenuTextbox", typeof(RectTransform)).AddComponent<UnitMenuTextbox>();
+        Textbox.transform.SetParent(Menu.transform, false);
 
-        Image TextboxImage = Textbox.AddComponent<Image>();
-        TextboxImage.sprite = Textbox.TextboxImage;
-        TextboxImage.SetNativeSize();
-        
-        RectTransform rectTransform = Textbox.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(73, -40);
-        
-        RectTransform textRectTransform = Textbox.Text.GetComponent<RectTransform>();
-        textRectTransform.anchoredPosition = new Vector2(73, -40);
+        Cursor = new GameObject("Cursor", typeof(RectTransform)).AddComponent<UnitMenuCursor>();
+        Cursor.transform.SetParent(Menu.transform, false);
+        Cursor.InstantiateCursor(MenuSlots);
     }
 }
