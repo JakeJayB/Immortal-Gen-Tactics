@@ -1,8 +1,10 @@
 using Environment.Instancing;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class Tile
 {
@@ -84,13 +86,72 @@ public class Tile
         TilePrefabPath = path;
     }
 
+    public static void AddTiles(List<Vector3Int> cellLocation)
+    {
+        TerrainType DetermineTerrainType(Vector3Int cellLocation)
+        {
+            Dictionary<TerrainType, int> terrainCount = new Dictionary<TerrainType, int>();
+            Vector3Int[] directions = new Vector3Int[]{ Vector3Int.left, Vector3Int.right, Vector3Int.forward, Vector3Int.back, Vector3Int.down, };
+
+            foreach (var direction in directions)
+            {
+                Vector3Int neighborLocation = cellLocation + direction;
+
+                if (TilemapCreator.AllTiles.ContainsKey(neighborLocation))
+                {
+                    TerrainType terrain = TilemapCreator.AllTiles[neighborLocation].TileInfo.TerrainType;
+                    if (terrainCount.ContainsKey(terrain))
+                        terrainCount[terrain]++;
+                    else
+                        terrainCount[terrain] = 1;
+                }
+            }
+
+            // Return the most common neighboring terrain type (default to grass if terrainCount == 0)
+            return terrainCount.Count > 0 ? terrainCount.OrderByDescending(t => t.Value).FirstOrDefault().Key : TerrainType.GRASS;
+        }
+
+        foreach (Vector3Int cell in cellLocation)
+        { 
+            Vector2Int cellLocation2D = new Vector2Int(cell.x, cell.z);
+            Vector3Int cellLocation3D = cell;
+            TerrainType terrainType;
+
+            if(TilemapCreator.AllTiles.ContainsKey(cellLocation3D))
+            {
+                Debug.Log("Tile already exists at " + cellLocation3D);
+                continue;
+            }
+
+
+            // Determine terrain type given surrounding tiles
+            terrainType = DetermineTerrainType(cellLocation3D);
+
+            // Create Tile (automatically traversable, flat, and forward)
+            Tile tile = new Tile(cellLocation3D, TileType.Flat, terrainType, TileDirection.Forward, false, true, TilemapCreator.OverlayPrefabs[TileType.Flat]);
+
+            TilemapCreator.AllTiles.Add(cellLocation3D, tile);
+            if (TilemapCreator.TileLocator.ContainsKey(cellLocation2D))
+            {
+                Tile existingTile = TilemapCreator.TileLocator[cellLocation2D];
+                existingTile.TileInfo.isTraversable = false;
+                TilemapCreator.TileLocator.Remove(cellLocation2D);
+
+                MonoBehaviour.Destroy(existingTile.OverlayObj.OverlayObj);
+                TilemapCreator.TileLocator.Add(cellLocation2D, tile);
+            }
+            else
+            {
+                TilemapCreator.TileLocator.Add(cellLocation2D, tile);
+            }
+        }
+    }
 
     public static void DestroyTiles(List<Tile> tiles)
     {
 
         void UpdateTileLocator(Tile tile, Vector2Int cellLocation2D)
         {
-            // set traversable to true
             tile.TileInfo.isTraversable = true;
 
             // add tile to Tilemapcreator.TileLocator
