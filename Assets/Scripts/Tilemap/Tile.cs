@@ -86,8 +86,8 @@ public class Tile
         TilePrefabPath = path;
     }
 
+    public bool IsSelectable() { return OverlayObj.IsSelectable; }
 }
-
 
 
 

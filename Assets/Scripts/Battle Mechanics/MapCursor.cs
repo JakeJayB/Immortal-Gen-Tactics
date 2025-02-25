@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -7,24 +8,31 @@ using UnityEngine;
 
 public class MapCursor : MonoBehaviour
 {
-
-
     [SerializeField] private TurnSystem turnSystem;
     [SerializeField] private CameraRotation cameraRotation;
-    private Vector2Int currentUnit; // Current unit's cell location
+    public static Vector2Int currentUnit; // Current unit's cell location
     public Vector2Int hoverCell;
     public bool canMove;
+
+    private enum ControlState
+    {
+        Active,
+        Action,
+        Inactive
+    }
+
+    private static ControlState CursorControlState;
+
+    private void Awake() { CursorControlState = ControlState.Inactive; }
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
-        {
-            CheckInput();
-        }
+        if (CursorControlState == ControlState.Active) { ActiveControls(); }
+        if (CursorControlState == ControlState.Action) { ActionControls(); }
     }
 
-    private void CheckInput()
+    private void ActiveControls()
     {
         if (!Input.anyKeyDown) return;
 
@@ -47,6 +55,9 @@ public class MapCursor : MonoBehaviour
             case KeyCode.A:
                 if (TilemapCreator.UnitLocator[hoverCell])
                 {
+                    CursorControlState = ControlState.Inactive;
+                    currentUnit = hoverCell;
+                    UnitMenu.ShowMenu();
                     UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
                 }
                 break;
@@ -69,6 +80,53 @@ public class MapCursor : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void ActionControls()
+    {
+        // Movement Controls
+        MoveCursorUp();
+        MoveCursorDown();
+        MoveCursorLeft();
+        MoveCursorRight();
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
+            {
+                Debug.Log("Moving here!");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+            UnitMenu.ShowMenu();
+        }
+    }
+
+    private void MoveCursorUp() {
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.up));
+        }
+    }
+    
+    private void MoveCursorDown() {
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.down));
+        }
+    }
+    
+    private void MoveCursorLeft() {
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.left));
+        }
+    }
+    
+    private void MoveCursorRight() {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.right));
+        }
     }
 
     // Adjusts movement direction based on the camera's Y rotation
@@ -109,7 +167,8 @@ public class MapCursor : MonoBehaviour
         Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
         SetHoverCell(cell2D);
         currentUnit = cell2D;
-        this.canMove = true;
+        // this.canMove = true;
+        CursorControlState = ControlState.Active;
 
         //send currentUnit unit object to UI Manager
         //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
@@ -161,6 +220,8 @@ public class MapCursor : MonoBehaviour
         if (tileObj.GetComponent<Outline>() != null)
             tileObj.GetComponent<Outline>().enabled = false;
     }
-        
 
+    public static void ActiveState() { CursorControlState = ControlState.Active; }
+    public static void ActionState() { CursorControlState = ControlState.Action; }
+    public static void InactiveState() { CursorControlState = ControlState.Inactive; }
 }

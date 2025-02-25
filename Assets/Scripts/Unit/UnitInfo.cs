@@ -16,15 +16,15 @@ public class UnitInfo : MonoBehaviour
     
     // Unit Final Stat Values
     # region Unit Final Stat Values
-    [SerializeField] private int finalHP;
-    [SerializeField] private int finalMP;
-    [SerializeField] private int finalAP;
-    [SerializeField] private int finalAttack;
-    [SerializeField] private int finalDefense;
-    [SerializeField] private int finalMagicAttack;
-    [SerializeField] private int finalMagicDefense;
-    [SerializeField] private int finalMove;
-    [SerializeField] private int finalSpeed;
+    [SerializeField] public int finalHP;
+    [SerializeField] public int finalMP;
+    [SerializeField] public int finalAP;
+    [SerializeField] public int finalAttack;
+    [SerializeField] public int finalDefense;
+    [SerializeField] public int finalMagicAttack;
+    [SerializeField] public int finalMagicDefense;
+    [SerializeField] public int finalMove;
+    [SerializeField] public int finalSpeed;
     # endregion
     
     // Unit Base Stat Values

@@ -24,7 +24,7 @@ public class ChangeMaterialTest : MonoBehaviour
             foreach (var entry in TilemapCreator.TileLocator)
             {
                 Tile tile = entry.Value;
-                tile.OverlayObj.DeactivateOverlyTile();
+                tile.OverlayObj.DeactivateOverlayTile();
             }
             isTileBlue = false;
         }

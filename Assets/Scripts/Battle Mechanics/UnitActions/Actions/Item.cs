@@ -10,4 +10,13 @@ public class Item : UnitAction
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";
     
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
+    public override void ActivateAction(Unit unit)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteAction(Unit unit)
+    {
+        throw new System.NotImplementedException();
+    }
 }

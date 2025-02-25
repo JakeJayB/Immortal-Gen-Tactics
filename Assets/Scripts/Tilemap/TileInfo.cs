@@ -22,6 +22,4 @@ public class TileInfo : MonoBehaviour
         this.IsStartArea = isStartArea;
         this.isTraversable = isTraversable;
     }
-
-    
 }

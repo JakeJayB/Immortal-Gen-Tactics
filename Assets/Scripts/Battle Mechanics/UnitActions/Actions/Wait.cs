@@ -8,4 +8,13 @@ public class Wait : UnitAction
     public override ActionType ActionType { get; protected set; } = ActionType.Wait;
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_wait";
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
+    public override void ActivateAction(Unit unit)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteAction(Unit unit)
+    {
+        throw new System.NotImplementedException();
+    }
 }

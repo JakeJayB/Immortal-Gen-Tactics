@@ -34,6 +34,11 @@ public class UnitMenuCursor : MonoBehaviour
             PositionCursor(MenuSlots[slotIndex]);
             UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            MenuSlots[slotIndex].Action.ActivateAction(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
+        }
     }
 
     public void InstantiateCursor(List<MenuSlot> menuSlots)

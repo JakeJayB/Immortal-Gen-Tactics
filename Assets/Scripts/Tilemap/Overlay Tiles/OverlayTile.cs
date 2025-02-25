@@ -25,6 +25,7 @@ public class OverlayTile
     public GameObject OverlayObj;
     public TileType TileType;
     private OverlayMaterial CurrentMaterial;
+    public bool IsSelectable;
 
 
     public OverlayTile(GameObject OriginalTile, GameObject OverlayTilePrefab)
@@ -72,10 +73,12 @@ public class OverlayTile
         }
 
         OverlayObj.SetActive(true);
+        IsSelectable = true;
     }
 
-    public void DeactivateOverlyTile()
+    public void DeactivateOverlayTile()
     {
         OverlayObj.SetActive(false);
+        IsSelectable = false;
     }
 }

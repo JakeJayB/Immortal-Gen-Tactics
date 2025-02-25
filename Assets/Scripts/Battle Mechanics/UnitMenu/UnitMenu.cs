@@ -42,7 +42,11 @@ public class UnitMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.S) && Menu.gameObject.activeSelf)
+        {
+            HideMenu();
+            MapCursor.ActiveState();
+        }
     }
 
     public static void DisplayUnitMenu(List<UnitAction> actions)
@@ -68,4 +72,7 @@ public class UnitMenu : MonoBehaviour
         Cursor.transform.SetParent(Menu.transform, false);
         Cursor.InstantiateCursor(MenuSlots);
     }
+    
+    public static void ShowMenu() { Menu.SetActive(true); }
+    public static void HideMenu() { Menu.SetActive(false); }
 }
