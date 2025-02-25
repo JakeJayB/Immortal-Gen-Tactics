@@ -6,8 +6,11 @@ public class TilemapCreator : MonoBehaviour
 {
     private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/Levels";
     public string fileName;
-    public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; }
-    public static Dictionary<Vector2Int, Unit> UnitLocator { get; private set; }
+    public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; } // Contains all traversable tiles in game scene
+    public static Dictionary<Vector3Int, Tile> AllTiles { get; private set; } // Contains all tiles in game scene
+    public static Dictionary<TileType, GameObject> OverlayPrefabs; // Contains Overlay prefabs for every TileType
+    public static Dictionary<Vector2Int, Unit> UnitLocator { get; private set; } // Contains all Units in game scene
+    
 
     [SerializeField] private TurnSystem turnSystem;
 
@@ -16,12 +19,12 @@ public class TilemapCreator : MonoBehaviour
     [SerializeField] private GameObject OverlaySlantedCornerPrefab;
     [SerializeField] private GameObject OverlayStairPrefab;
 
-    private Dictionary<TileType, GameObject> OverlayPrefabs;
 
     void Start()
     {
         TileLocator = new Dictionary<Vector2Int, Tile>();
         UnitLocator = new Dictionary<Vector2Int, Unit>();
+        AllTiles = new Dictionary<Vector3Int, Tile>();
 
         OverlayPrefabs = new Dictionary<TileType, GameObject>()
         {
@@ -71,15 +74,16 @@ public class TilemapCreator : MonoBehaviour
             else if(isTraversable && tile.cellLocation.y > topmostTiles[key].cellLocation.y) // Renders the previous tile (bottom tile) before replacing it with a topmost tile
             {
                 TileData bottomTile = topmostTiles[key];
-                new Tile(bottomTile.cellLocation, bottomTile.tileType, bottomTile.terrainType, bottomTile.tileDirection, bottomTile.isStartingArea, bottomTile.isTraversable);
-
+                Tile t = new Tile(bottomTile.cellLocation, bottomTile.tileType, bottomTile.terrainType, bottomTile.tileDirection, bottomTile.isStartingArea, bottomTile.isTraversable);
+                
+                AllTiles.Add(bottomTile.cellLocation, t);
                 topmostTiles[key] = tile;
             }
             else
             {
                 // This is a bottom tile / non-traversable tile, render it separately
-                new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
-
+                Tile t = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable);
+                AllTiles.Add(tile.cellLocation, t);
             }
         }
 
@@ -88,6 +92,7 @@ public class TilemapCreator : MonoBehaviour
         {
             TileData tile = entry.Value;
             Tile newTile = new Tile(tile.cellLocation, tile.tileType, tile.terrainType, tile.tileDirection, tile.isStartingArea, tile.isTraversable, OverlayPrefabs[tile.tileType]);
+            AllTiles.Add(tile.cellLocation, newTile);
             TileLocator.Add(entry.Key, newTile);
         }
     }

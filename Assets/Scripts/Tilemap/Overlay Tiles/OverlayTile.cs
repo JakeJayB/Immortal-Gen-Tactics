@@ -22,11 +22,11 @@ public class OverlayTile
         { TileType.Stairs, new HashSet<int> {0, 4, 8} }
     };
 
-    public GameObject OverlayObj;
-    public TileType TileType;
+    private TileType TileType;
     private OverlayMaterial CurrentMaterial;
     public bool IsSelectable;
 
+    public GameObject OverlayObj;
 
     public OverlayTile(GameObject OriginalTile, GameObject OverlayTilePrefab)
     {
@@ -64,9 +64,7 @@ public class OverlayTile
             for (int i = 0; i < overlayMats.Length; i++)
             {
                 if (tileSides.Contains(i))
-                {
                     overlayMats[i] = newMat;
-                }
             }
             OverlayObj.GetComponent<MeshRenderer>().materials = overlayMats;
 
