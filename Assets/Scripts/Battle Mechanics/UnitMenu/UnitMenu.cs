@@ -33,11 +33,6 @@ public class UnitMenu : MonoBehaviour
         Menu.transform.SetParent(Canvas.transform, false);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -51,6 +46,9 @@ public class UnitMenu : MonoBehaviour
 
     public static void DisplayUnitMenu(List<UnitAction> actions)
     {
+        // if Unit Menu has already been made
+        if (Menu.transform.childCount != 0) return;
+
         MenuSlots = new List<MenuSlot>();
         
         for (int i = 0; i < actions.Count; i++)
