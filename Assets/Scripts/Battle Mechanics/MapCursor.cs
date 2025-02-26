@@ -95,6 +95,7 @@ public class MapCursor : MonoBehaviour
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
                 Debug.Log("Moving here!");
+                TilemapCreator.UnitLocator[currentUnit]git add ..transform.position = TilemapCreator.TileLocator[new Vector2Int(1, 1)].TileInfo.CellLocation;
             }
         }
 

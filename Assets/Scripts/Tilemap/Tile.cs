@@ -134,7 +134,8 @@ public class Tile
 
         
     }
-     
+    
+    public bool IsSelectable() { return OverlayObj.IsSelectable; }
 }
 
 
