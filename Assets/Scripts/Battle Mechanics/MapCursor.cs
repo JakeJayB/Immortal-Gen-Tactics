@@ -94,13 +94,29 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
+                // Movement code for the unit menu
+                // TODO: Figure out how to call function from the move script.
+                // TODO: Find out how to update the UnitLocator after moving the unit.
+                // TODO: Clean the code...
                 Debug.Log("Moving here!");
-                TilemapCreator.UnitLocator[currentUnit]git add ..transform.position = TilemapCreator.TileLocator[new Vector2Int(1, 1)].TileInfo.CellLocation;
+                TilemapCreator.UnitLocator[currentUnit].transform.position = TilemapCreator.TileLocator[hoverCell].TileObj.transform.localPosition + new Vector3(0, 0.3f, 0);
+                TilemapCreator.UnitLocator[currentUnit].unitInfo.CellLocation =
+                    TilemapCreator.TileLocator[hoverCell].TileInfo.CellLocation;
+
+                TilemapCreator.UnitLocator.Remove(currentUnit, out Unit unit);
+                TilemapCreator.UnitLocator.Add(hoverCell, unit);
+
+                currentUnit = hoverCell;
+                
+                ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+                UnitMenu.ShowMenu();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
+            InactiveState();
+            MoveCursor(currentUnit);
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
             UnitMenu.ShowMenu();
         }

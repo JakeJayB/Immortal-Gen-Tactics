@@ -17,6 +17,6 @@ public class Move : UnitAction
 
     public override void ExecuteAction(Unit unit)
     {
-        unit.transform.position = TilemapCreator.TileLocator[new Vector2Int(1, 1)].TileInfo.CellLocation;
+        unit.transform.position = TilemapCreator.TileLocator[new Vector2Int(1, 1)].TileInfo.CellLocation - new Vector3(0.5f, 0.75f, 0.5f);
     }
 }
