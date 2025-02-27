@@ -98,17 +98,10 @@ public class MapCursor : MonoBehaviour
                 // TODO: Figure out how to call function from the move script.
                 // TODO: Find out how to update the UnitLocator after moving the unit.
                 // TODO: Clean the code...
-                Debug.Log("Moving here!");
-                TilemapCreator.UnitLocator[currentUnit].transform.position = TilemapCreator.TileLocator[hoverCell].TileObj.transform.localPosition + new Vector3(0, 0.3f, 0);
-                TilemapCreator.UnitLocator[currentUnit].unitInfo.CellLocation =
-                    TilemapCreator.TileLocator[hoverCell].TileInfo.CellLocation;
-
-                TilemapCreator.UnitLocator.Remove(currentUnit, out Unit unit);
-                TilemapCreator.UnitLocator.Add(hoverCell, unit);
-
-                currentUnit = hoverCell;
                 
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+                ChainSystem.AddAction(hoverCell);
+                ChainSystem.ExecuteNextAction();
                 UnitMenu.ShowMenu();
             }
         }
@@ -117,6 +110,7 @@ public class MapCursor : MonoBehaviour
         {
             InactiveState();
             MoveCursor(currentUnit);
+            ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
             UnitMenu.ShowMenu();
         }

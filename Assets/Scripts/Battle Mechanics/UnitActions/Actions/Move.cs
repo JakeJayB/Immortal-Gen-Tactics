@@ -5,6 +5,7 @@ using UnityEngine;
 public class Move : UnitAction
 {
     public sealed override string Name { get; protected set; } = "Move";
+    public override int Priority { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Move;
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
@@ -12,11 +13,19 @@ public class Move : UnitAction
     {
         UnitMenu.HideMenu();
         ActionUtility.ShowSelectableTilesForAction(unit);
+        ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
 
-    public override void ExecuteAction(Unit unit)
+    public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        unit.transform.position = TilemapCreator.TileLocator[new Vector2Int(1, 1)].TileInfo.CellLocation - new Vector3(0.5f, 0.75f, 0.5f);
+        
+        unit.transform.position = TilemapCreator.TileLocator[selectedCell].TileObj.transform.localPosition + new Vector3(0, 0.3f, 0);
+        unit.unitInfo.CellLocation = TilemapCreator.TileLocator[selectedCell].TileInfo.CellLocation;
+
+        TilemapCreator.UnitLocator.Remove(MapCursor.currentUnit);
+        TilemapCreator.UnitLocator.Add(selectedCell, unit);
+
+        MapCursor.currentUnit = selectedCell;
     }
 }
