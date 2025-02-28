@@ -37,6 +37,7 @@ public class UnitMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if menu  is active and S is pressed, hide the menu and activate the map cursor
         if (Input.GetKeyDown(KeyCode.S) && Menu.gameObject.activeSelf)
         {
             HideMenu();

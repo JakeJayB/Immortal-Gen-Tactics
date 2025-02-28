@@ -13,11 +13,17 @@ public class Attack : UnitAction
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
     public override void ActivateAction(Unit unit)
     {
-        throw new System.NotImplementedException();
+        UnitMenu.HideMenu();
+        ActionUtility.ShowSelectableTilesForAction(unit, Name);
+        ChainSystem.HoldPotentialChain(this, unit);
+        MapCursor.ActionState();
+        //throw new System.NotImplementedException();
+
     }
 
     public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
+        // unit = unit attacking, selectedCell = unit being attacked
         throw new System.NotImplementedException();
     }
 }

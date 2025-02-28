@@ -12,7 +12,7 @@ public class Move : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(unit);
+        ActionUtility.ShowSelectableTilesForAction(unit, Name);
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }

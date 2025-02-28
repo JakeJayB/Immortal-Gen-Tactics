@@ -99,6 +99,7 @@ public class MapCursor : MonoBehaviour
                 // TODO: Find out how to update the UnitLocator after moving the unit.
                 // TODO: Clean the code...
                 
+                InactiveState();
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
                 ChainSystem.AddAction(hoverCell);
                 ChainSystem.ExecuteNextAction();
@@ -178,8 +179,9 @@ public class MapCursor : MonoBehaviour
         Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
         SetHoverCell(cell2D);
         currentUnit = cell2D;
+        ActiveState();
+
         // this.canMove = true;
-        CursorControlState = ControlState.Active;
 
         //send currentUnit unit object to UI Manager
         //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
@@ -188,7 +190,8 @@ public class MapCursor : MonoBehaviour
     private void DeactivateMove()
     {
         RemoveTileOutline();
-        canMove = false;
+        InactiveState();
+        //canMove = false;
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
         turnSystem.ContinueLoop();
