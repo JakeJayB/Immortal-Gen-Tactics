@@ -33,9 +33,9 @@ public class ActionUtility
         switch (actionType)
         {
             case "Move":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove), OverlayMaterial.MOVE);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove, Pattern.Splash), OverlayMaterial.MOVE);
             case "Attack":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalAttack), OverlayMaterial.ATTACK);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalAttack, Pattern.Direct), OverlayMaterial.ATTACK);
             default:
                 throw new ArgumentException("ActionUtility: Invalid action type");
         }

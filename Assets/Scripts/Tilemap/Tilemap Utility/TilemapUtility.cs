@@ -1,22 +1,109 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class TilemapUtility : MonoBehaviour
+
+
+public class TilemapUtility
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public static List<Tile> GetArcTiles(Tile characterTile, int range)
     {
-        
+        return null;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public static List<Tile> GetDirectTile(Tile characterTile, int range)
     {
-        
+        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+        Vector2Int startPos = new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
+        List<Tile> directTiles = new List<Tile>();
+
+        Dictionary<UnitDirection, Vector2Int> directions = new Dictionary<UnitDirection, Vector2Int>
+        {
+            {UnitDirection.Forward, Vector2Int.up},
+            {UnitDirection.Backward, Vector2Int.down},
+            {UnitDirection.Left, Vector2Int.left},
+            {UnitDirection.Right, Vector2Int.right}
+        };
+
+        Vector2Int direction = directions[TilemapCreator.UnitLocator[startPos].unitInfo.UnitDirection];
+        for (int i = 1; i <= range; i++)
+        {
+            Vector2Int checkPos = startPos + direction * i;
+            if (TileLocator.TryGetValue(checkPos, out var tile))
+            {
+                directTiles.Add(tile);
+            }
+        }
+
+        return directTiles.Distinct().ToList();
     }
-    
-    public static List<Tile> GetNeighborTiles(Tile currentTile)
+
+
+
+
+    public static List<Tile> GetLinearTilesInRange(Tile characterTile, int range)
+    {
+        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+        Vector2Int startPos = new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
+        List<Tile> linearTiles = new List<Tile>();
+        
+
+        Vector2Int[] directions =
+        {
+            Vector2Int.right,
+            Vector2Int.left,
+            Vector2Int.up, 
+            Vector2Int.down 
+        };
+
+        foreach (var direction in directions)
+        {
+            for (int i = 1; i <= range; i++)
+            {
+                Vector2Int checkPos = startPos + direction * i;
+                if (TileLocator.TryGetValue(checkPos, out var tile))
+                {
+                    linearTiles.Add(tile);
+                }
+            }
+        }
+
+        return linearTiles.Distinct().ToList();
+    }
+
+
+    public static List<Tile> GetSplashTilesInRange(Tile characterTile, int range)
+    {
+
+        var inRangeTiles = new List<Tile>();
+        int stepCount = 0;
+
+        inRangeTiles.Add(characterTile);
+
+        var tileForPreviousStep = new List<Tile>();
+        tileForPreviousStep.Add(characterTile);
+
+        while (stepCount < range)
+        {
+            var surroundingTiles = new List<Tile>();
+
+            foreach (var tile in tileForPreviousStep)
+            {
+                surroundingTiles.AddRange(GetNeighborTiles(tile));
+            }
+
+            inRangeTiles.AddRange(surroundingTiles);
+            tileForPreviousStep = surroundingTiles.Distinct().ToList();
+            stepCount++;
+        }
+
+        return inRangeTiles.Distinct().ToList();
+    }
+
+    private static List<Tile> GetNeighborTiles(Tile currentTile)
     {
         Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
         List<Tile> neighbors = new List<Tile>();
@@ -63,5 +150,11 @@ public class TilemapUtility : MonoBehaviour
 
         // Return the found neighbors.
         return neighbors;
+    }
+
+
+    public static List<Tile> GetAllTiles()
+    {
+        return new List<Tile>(TilemapCreator.TileLocator.Values);
     }
 }

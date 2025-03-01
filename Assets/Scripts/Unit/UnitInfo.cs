@@ -6,6 +6,7 @@ public class UnitInfo : MonoBehaviour
 {
     // Unit Cell Location
     public Vector3Int CellLocation { get; set; }
+    public UnitDirection UnitDirection { get; set; }
 
     // Unit Current Stat Values
     private int currentHP;
