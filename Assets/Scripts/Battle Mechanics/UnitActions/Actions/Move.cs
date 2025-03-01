@@ -21,7 +21,7 @@ public class Move : UnitAction
     {
         
         unit.transform.position = TilemapCreator.TileLocator[selectedCell].TileObj.transform.localPosition + new Vector3(0, 0.3f, 0);
-        unit.unitInfo.CellLocation = TilemapCreator.TileLocator[selectedCell].TileInfo.CellLocation;
+        unit.unitInfo.CellLocation = TilemapCreator.TileLocator[selectedCell].TileInfo.CellLocation + Vector3Int.up;
 
         TilemapCreator.UnitLocator.Remove(MapCursor.currentUnit);
         TilemapCreator.UnitLocator.Add(selectedCell, unit);

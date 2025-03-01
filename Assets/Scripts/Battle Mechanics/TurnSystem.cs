@@ -39,15 +39,15 @@ public class TurnSystem : MonoBehaviour
 
     public void ContinueLoop()
     {
-        this.continueLoop = true;
+        continueLoop = true;
     }
 
     public void InitializeUnits(List<Unit> units)
     {
-        /* This function is called from TilemapCreator */ 
         
         // TODO: Sort units based on speed
         this.units = units;
+
         StartCoroutine(TurnLoop());
     }
 }
