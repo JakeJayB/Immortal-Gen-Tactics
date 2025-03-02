@@ -10,13 +10,11 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        //transform.position = focusPoint.position;
         if (Input.GetKeyDown(KeyCode.Q))
             RotateCamera(ROTATION_ANGLE);
-        
+
         if (Input.GetKeyDown(KeyCode.E))
             RotateCamera(-ROTATION_ANGLE);
-        
     }
 
     void MoveCamera()

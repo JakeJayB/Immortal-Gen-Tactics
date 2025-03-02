@@ -8,11 +8,10 @@ using UnityEngine;
 
 public class MapCursor : MonoBehaviour
 {
-    [SerializeField] private TurnSystem turnSystem;
     [SerializeField] private CameraMovement cameraMovement;
-    public Vector2Int hoverCell;
+    public static Vector2Int hoverCell;
     public static Vector2Int currentUnit;
-    public static int ActionCount = 0;
+    public static int actionCount = 0;
 
 
     private enum ControlState
@@ -74,19 +73,19 @@ public class MapCursor : MonoBehaviour
                 // TODO: Clean the code...
 
                 InactiveState();
-                ActionCount++;
+                actionCount++;
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
                 ChainSystem.AddAction(hoverCell);
                 ChainSystem.ExecuteNextAction();
 
-                if (ActionCount < 2)
+                if (actionCount < 2)
                 {
                     UnitMenu.ShowMenu();
                     SetHoverCell(currentUnit);
                 }
                 else
                 {
-                    ActionCount = 0;
+                    actionCount = 0;
                     DeactivateMove();
                 }
             }
@@ -168,13 +167,14 @@ public class MapCursor : MonoBehaviour
         //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
     }
 
-    private void DeactivateMove()
+    public static void DeactivateMove()
     {
         RemoveTileOutline();
         InactiveState();
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
-        turnSystem.ContinueLoop();
+        actionCount = 0;
+        TurnSystem.ContinueLoop();
     }
 
     private void SetHoverCell(Vector2Int cell)
@@ -188,11 +188,11 @@ public class MapCursor : MonoBehaviour
         //UIManager.SetRightPanel(hoverCell == currentUnit ? null : TilemapCreator.UnitLocator[hoverCell]);
     }
 
-    private void AddTileOutline()
+    private static void AddTileOutline()
     {
 
         // adds outline effect on tile when mapcursor hovers it.
-        GameObject tileObj = TilemapCreator.TileLocator[this.hoverCell].TileObj;
+        GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
         if (tileObj.GetComponent<Outline>() == null)
         { 
             Outline outline = tileObj.AddComponent<Outline>();
@@ -205,12 +205,12 @@ public class MapCursor : MonoBehaviour
             tileObj.GetComponent<Outline>().enabled = true;
     }
 
-    private void RemoveTileOutline()
+    private static void RemoveTileOutline()
     {
-        if (this.hoverCell == null) return;
+        if (hoverCell == null) return;
         
         // deactivates outline effect on tile
-        GameObject tileObj = TilemapCreator.TileLocator[this.hoverCell].TileObj;
+        GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
         if (tileObj.GetComponent<Outline>() != null)
             tileObj.GetComponent<Outline>().enabled = false;
     }

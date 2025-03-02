@@ -11,11 +11,12 @@ public class Wait : UnitAction
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
     public override void ActivateAction(Unit unit)
     {
-        throw new System.NotImplementedException();
+        UnitMenu.HideMenu();
+        ExecuteAction(null, Vector2Int.zero);
     }
 
     public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        throw new System.NotImplementedException();
+        MapCursor.DeactivateMove();
     }
 }

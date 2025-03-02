@@ -19,15 +19,15 @@ public class Attack : UnitAction
         MapCursor.ActionState();
     }
 
-    public override void ExecuteAction(Unit unit, Vector2Int targetCell)
+    public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
         Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
-        Vector2Int displacement = targetCell - originCell;
+        Vector2Int displacement = selectedCell - originCell;
 
         Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
-        int iterations = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
+        int numOfCells = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
 
-        for (int i = 1; i <= iterations; i++)
+        for (int i = 1; i <= numOfCells; i++)
         {
             Vector2Int nextCell = originCell + direction * i;
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
