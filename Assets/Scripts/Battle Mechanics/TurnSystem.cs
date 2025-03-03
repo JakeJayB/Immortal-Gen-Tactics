@@ -7,8 +7,8 @@ public class TurnSystem : MonoBehaviour
     [SerializeField]
     private MapCursor mapCursor;
     private List<Unit> units = new List<Unit>();
-    private bool startLoop = true;
-    private bool continueLoop = false;
+    private static bool startLoop = false;
+    private static bool continueLoop = false;
     
 
     IEnumerator TurnLoop()
@@ -37,17 +37,21 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    public void ContinueLoop()
+    public static void ContinueLoop()
     {
-        this.continueLoop = true;
+        continueLoop = true;
+    }
+
+    public static void StopLoop()
+    {
+        startLoop = false;
     }
 
     public void InitializeUnits(List<Unit> units)
-    {
-        /* This function is called from TilemapCreator */ 
-        
-        // TODO: Sort units based on speed
+    {         
         this.units = units;
+        this.units.Sort((a, b) => a.unitInfo.finalSpeed.CompareTo(b.unitInfo.finalSpeed));
+        startLoop = true;
         StartCoroutine(TurnLoop());
     }
 }

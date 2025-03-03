@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraRotation : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     private Transform focusPoint; // The point the camera will rotate around
     private const float ROTATION_ANGLE = 45f; // Degrees per key press
@@ -10,13 +10,11 @@ public class CameraRotation : MonoBehaviour
 
     void Update()
     {
-        //transform.position = focusPoint.position;
         if (Input.GetKeyDown(KeyCode.Q))
             RotateCamera(ROTATION_ANGLE);
-        
+
         if (Input.GetKeyDown(KeyCode.E))
             RotateCamera(-ROTATION_ANGLE);
-        
     }
 
     void MoveCamera()
@@ -26,9 +24,7 @@ public class CameraRotation : MonoBehaviour
 
     void RotateCamera(float angle)
     {
-        if (!LeanTween.isTweening(this.gameObject))
-            //LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED);
-            //LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED).setEaseInOutQuart();
+        if (!LeanTween.isTweening(gameObject))
             LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED).setEaseInOutCubic();
 
     }

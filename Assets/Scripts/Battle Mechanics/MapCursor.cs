@@ -94,6 +94,11 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
+                // Movement code for the unit menu
+                // TODO: Figure out how to call function from the move script.
+                // TODO: Find out how to update the UnitLocator after moving the unit.
+                // TODO: Clean the code...
+                
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
                 ChainSystem.AddAction(hoverCell);
                 ChainSystem.ExecuteNextAction();

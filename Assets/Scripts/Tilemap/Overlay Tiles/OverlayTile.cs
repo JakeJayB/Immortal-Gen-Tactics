@@ -54,7 +54,6 @@ public class OverlayTile
 
         if (CurrentMaterial != mat)
         {
-            Debug.Log("OverlayTile: Changing Material");
             CurrentMaterial = mat;
             Material newMat = mat == OverlayMaterial.ATTACK ? AttackRedMat : MoveBlueMat;
             

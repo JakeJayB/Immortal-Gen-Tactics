@@ -13,11 +13,28 @@ public class Attack : UnitAction
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
     public override void ActivateAction(Unit unit)
     {
-        throw new System.NotImplementedException();
+        UnitMenu.HideMenu();
+        ActionUtility.ShowSelectableTilesForAction(unit, Name);
+        ChainSystem.HoldPotentialChain(this, unit);
+        MapCursor.ActionState();
     }
 
     public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        throw new System.NotImplementedException();
+        Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+        Vector2Int displacement = selectedCell - originCell;
+
+        Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
+        int numOfCells = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
+
+        for (int i = 1; i <= numOfCells; i++)
+        {
+            Vector2Int nextCell = originCell + direction * i;
+            if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
+            {
+                targetUnit.unitInfo.finalHP -= unit.unitInfo.finalAttack;
+                Debug.Log("Attack: unit attacked!");
+            }
+        }
     }
 }

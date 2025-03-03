@@ -29,10 +29,12 @@ public class TileData
 public class UnitData
 {
     public Vector3Int cellLocation;
+    public UnitDirection unitDirection;
 
-    public UnitData(Vector3Int cellLocation)
+    public UnitData(Vector3Int cellLocation, UnitDirection unitDirection)
     {
         this.cellLocation = cellLocation;
+        this.unitDirection = unitDirection;
     }
 }
 
@@ -112,7 +114,18 @@ public class TilemapToJSON : MonoBehaviour
             int x = Mathf.RoundToInt(pos.x / .5f);
             int y = Mathf.RoundToInt(pos.y / .25f);
             int z = Mathf.RoundToInt(pos.z / .5f);
-            UnitData unitData = new UnitData(new Vector3Int(x, y , z));
+
+            int rotation = Mathf.RoundToInt(unit.transform.eulerAngles.y);
+            UnitDirection unitDirection = rotation switch
+            {
+                0 => UnitDirection.Forward,
+                180 => UnitDirection.Backward,
+                90 => UnitDirection.Left,
+                270 => UnitDirection.Right,
+                _ => throw new ArgumentOutOfRangeException(nameof(rotation), rotation, "At unit" + new Vector3(pos.x + 0.25f, pos.y, pos.z + 0.25f)),
+            };
+
+            UnitData unitData = new UnitData(new Vector3Int(x, y , z), unitDirection);
             data.units.Add(unitData);
         }
     }

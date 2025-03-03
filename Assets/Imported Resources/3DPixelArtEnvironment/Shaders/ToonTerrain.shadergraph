@@ -742,6 +742,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "f4d12a76d4fa40b89599715f0ff4dfeb"
@@ -3501,7 +3502,7 @@
     },
     "m_Slots": [
         {
-            "m_Id": "d09613ff51a24ad1a3479085d1570f5c"
+            "m_Id": "ee7cd14164be45398591bf253f499a83"
         },
         {
             "m_Id": "fffb96176a5e43d7830ba30bc67c3bc3"
@@ -3543,7 +3544,8 @@
         "261b171a-27cd-40a5-bfe1-36789ad0ec88",
         "46e282f5-018b-4461-9ca9-d202b0809a3c",
         "bafdf563-a5b7-45ad-b729-96d1b7fa3e17",
-        "223861b5-a0e7-4adc-bced-04efb2d6b3aa"
+        "223861b5-a0e7-4adc-bced-04efb2d6b3aa",
+        "b8e3ed0f-4b16-40e0-a252-165cfa86a7b4"
     ],
     "m_PropertyIds": [
         93062631,
@@ -3554,7 +3556,8 @@
         -1771830798,
         1019980370,
         972587988,
-        760478300
+        760478300,
+        280130113
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -3919,27 +3922,6 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.Alpha"
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "d09613ff51a24ad1a3479085d1570f5c",
-    "m_Id": 760478300,
-    "m_DisplayName": "WorldUV",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "_WorldUV",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_Labels": []
 }
 
 {
@@ -4488,6 +4470,29 @@
     "m_StageCapability": 2,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "ee7cd14164be45398591bf253f499a83",
+    "m_Id": 280130113,
+    "m_DisplayName": "Position",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Vector3_B87D7B6B",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
     "m_Labels": []
 }
 
