@@ -28,6 +28,8 @@ public class Unit : MonoBehaviour
 
         unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
         unit.unitRenderer.Render(initLocation);
+
+        unit.gameObj.AddComponent<BillboardEffect>();
         return unit;
     }
 
