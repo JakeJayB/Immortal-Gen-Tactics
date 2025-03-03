@@ -9,7 +9,7 @@ using UnityEngine;
 public class MapCursor : MonoBehaviour
 {
     [SerializeField] private TurnSystem turnSystem;
-    [SerializeField] private CameraRotation cameraRotation;
+    [SerializeField] private CameraMovement cameraRotation;
     public static Vector2Int currentUnit; // Current unit's cell location
     public Vector2Int hoverCell;
     public bool canMove;
@@ -99,6 +99,7 @@ public class MapCursor : MonoBehaviour
                 // TODO: Find out how to update the UnitLocator after moving the unit.
                 // TODO: Clean the code...
                 
+                InactiveState();
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
                 ChainSystem.AddAction(hoverCell);
                 ChainSystem.ExecuteNextAction();
@@ -191,7 +192,7 @@ public class MapCursor : MonoBehaviour
         canMove = false;
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
-        turnSystem.ContinueLoop();
+        //turnSystem.ContinueLoop();
     }
 
     private void SetHoverCell(Vector2Int cell)

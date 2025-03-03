@@ -103,7 +103,7 @@ public class TilemapUtility
         return inRangeTiles.Distinct().ToList();
     }
 
-    private static List<Tile> GetNeighborTiles(Tile currentTile)
+    public static List<Tile> GetNeighborTiles(Tile currentTile)
     {
         Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
         List<Tile> neighbors = new List<Tile>();

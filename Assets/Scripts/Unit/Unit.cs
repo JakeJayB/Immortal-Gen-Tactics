@@ -13,8 +13,9 @@ public class Unit : MonoBehaviour
     public UnitEquipment unitEquipment { get; set; }
 
     public UnitRenderer unitRenderer { get; set; }
+    public UnitMovement unitMovement { get; set; }
 
-    public static Unit Initialize(Vector3Int initLocation)
+    public static Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)
     {
         GameObject gameObj = new GameObject("Unit " + initLocation);
         Unit unit = gameObj.AddComponent<Unit>();
@@ -27,9 +28,10 @@ public class Unit : MonoBehaviour
         unit.unitEquipment = new UnitEquipment(unit.unitInfo);
 
         unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
-        unit.unitRenderer.Render(initLocation);
+        unit.unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();
+        unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();
         return unit;
     }
 
