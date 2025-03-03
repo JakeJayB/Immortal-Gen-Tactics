@@ -17,6 +17,6 @@ public class Wait : UnitAction
 
     public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        //MapCursor.DeactivateMove();
+        MapCursor.DeactivateMove();
     }
 }

@@ -1,19 +1,12 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapCursor : MonoBehaviour
 {
-    [SerializeField] private TurnSystem turnSystem;
     [SerializeField] private CameraMovement cameraRotation;
-    public static Vector2Int currentUnit; // Current unit's cell location
-    public Vector2Int hoverCell;
-    public bool canMove;
-
+    public static Vector2Int currentUnit; 
+    public static Vector2Int hoverCell;
+    public static int ActionCount = 0;
     private enum ControlState
     {
         Active,
@@ -36,54 +29,30 @@ public class MapCursor : MonoBehaviour
     {
         if (!Input.anyKeyDown) return;
 
-        KeyCode GetPressedKey()
+        // Movement Controls
+        MoveCursorUp();
+        MoveCursorDown();
+        MoveCursorLeft();
+        MoveCursorRight();
+
+
+        if(Input.GetKeyDown(KeyCode.A))
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow)) return KeyCode.UpArrow;
-            if (Input.GetKeyDown(KeyCode.DownArrow)) return KeyCode.DownArrow;
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) return KeyCode.LeftArrow;
-            if (Input.GetKeyDown(KeyCode.RightArrow)) return KeyCode.RightArrow;
-            if (Input.GetKeyDown(KeyCode.A)) return KeyCode.A;
-            if (Input.GetKeyDown(KeyCode.Space)) return KeyCode.Space;
-
-            return KeyCode.None; // Default case when no valid key is pressed
+            if (TilemapCreator.UnitLocator[hoverCell])
+            {
+                InactiveState();
+                currentUnit = hoverCell;
+                UnitMenu.ShowMenu();
+                UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
+            }
         }
-
-
-        KeyCode keyPressed = GetPressedKey();
-        switch (keyPressed)
-        {
-            case KeyCode.A:
-                if (TilemapCreator.UnitLocator[hoverCell])
-                {
-                    CursorControlState = ControlState.Inactive;
-                    currentUnit = hoverCell;
-                    UnitMenu.ShowMenu();
-                    UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
-                }
-                break;
-            case KeyCode.Space:
-                DeactivateMove();
-                break;
-            case KeyCode.LeftArrow:
-                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.left));
-                break;
-            case KeyCode.RightArrow:
-                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.right));
-                break;
-            case KeyCode.UpArrow:
-                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.up));
-                break;
-            case KeyCode.DownArrow:
-                MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.down));
-                break;
-            default:
-                break;
-        }
-
     }
 
     private void ActionControls()
     {
+        if (!Input.anyKeyDown) return;
+
+
         // Movement Controls
         MoveCursorUp();
         MoveCursorDown();
@@ -94,20 +63,22 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
-                // Movement code for the unit menu
-                // TODO: Figure out how to call function from the move script.
-                // TODO: Find out how to update the UnitLocator after moving the unit.
-                // TODO: Clean the code...
-                
                 InactiveState();
+                ActionCount++;
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
                 ChainSystem.AddAction(hoverCell);
                 ChainSystem.ExecuteNextAction();
-                UnitMenu.ShowMenu();
+
+                if (ActionCount < 2)
+                {
+                    MoveCursor(currentUnit);
+                    UnitMenu.ShowMenu();
+                }
+                else
+                    DeactivateMove();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             InactiveState();
             MoveCursor(currentUnit);
@@ -151,16 +122,16 @@ public class MapCursor : MonoBehaviour
 
         // Map rotation steps to directional changes
         Dictionary<int, Vector2Int> directionMap = new Dictionary<int, Vector2Int>
-    {
-        { 0, inputDirection }, // 0 degrees: no change
-        { 1, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 45 degrees
-        { 2, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 90 degrees: rotate 90 degrees clockwise
-        { 3, new Vector2Int(-inputDirection.x, -inputDirection.y) }, // 135 degrees
-        { 4, -inputDirection }, // 180 degrees: invert direction
-        { 5, new Vector2Int(-inputDirection.y, inputDirection.x) }, // 225 degrees
-        { 6, new Vector2Int(-inputDirection.y, inputDirection.x) }, // 270 degrees: rotate 90 degrees counter-clockwise
-        { 7, inputDirection }, // 315 degrees
-    };
+        {
+            { 0, inputDirection }, // 0 degrees: no change
+            { 1, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 45 degrees
+            { 2, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 90 degrees: rotate 90 degrees clockwise
+            { 3, new Vector2Int(-inputDirection.x, -inputDirection.y) }, // 135 degrees
+            { 4, -inputDirection }, // 180 degrees: invert direction
+            { 5, new Vector2Int(-inputDirection.y, inputDirection.x) }, // 225 degrees
+            { 6, new Vector2Int(-inputDirection.y, inputDirection.x) }, // 270 degrees: rotate 90 degrees counter-clockwise
+            { 7, inputDirection }, // 315 degrees
+        };
 
         return directionMap[rotationStep];
     }
@@ -168,31 +139,28 @@ public class MapCursor : MonoBehaviour
 
     private void MoveCursor(Vector2Int cell)
     {
-
         if(TilemapCreator.TileLocator.ContainsKey(cell))
             SetHoverCell(cell);
     }
 
     public void ActivateMove(Vector3Int cell)
     {
-        /* This function is called from TilemapCreator */
         Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
         SetHoverCell(cell2D);
         currentUnit = cell2D;
-        // this.canMove = true;
         CursorControlState = ControlState.Active;
 
         //send currentUnit unit object to UI Manager
         //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
     }
 
-    private void DeactivateMove()
+    public static void DeactivateMove()
     {
         RemoveTileOutline();
-        canMove = false;
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
-        //turnSystem.ContinueLoop();
+        ActionCount = 0;
+        TurnSystem.ContinueLoop();
     }
 
     private void SetHoverCell(Vector2Int cell)
@@ -210,7 +178,7 @@ public class MapCursor : MonoBehaviour
     {
 
         // adds outline effect on tile when mapcursor hovers it.
-        GameObject tileObj = TilemapCreator.TileLocator[this.hoverCell].TileObj;
+        GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
         if (tileObj.GetComponent<Outline>() == null)
         { 
             Outline outline = tileObj.AddComponent<Outline>();
@@ -223,12 +191,12 @@ public class MapCursor : MonoBehaviour
             tileObj.GetComponent<Outline>().enabled = true;
     }
 
-    private void RemoveTileOutline()
+    private static void RemoveTileOutline()
     {
-        if (this.hoverCell == null) return;
+        if (hoverCell == null) return;
         
         // deactivates outline effect on tile
-        GameObject tileObj = TilemapCreator.TileLocator[this.hoverCell].TileObj;
+        GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
         if (tileObj.GetComponent<Outline>() != null)
             tileObj.GetComponent<Outline>().enabled = false;
     }
