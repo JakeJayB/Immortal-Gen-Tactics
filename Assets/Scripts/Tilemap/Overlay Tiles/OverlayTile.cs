@@ -6,7 +6,8 @@ using UnityEngine;
 public enum OverlayMaterial
 {
     MOVE,
-    ATTACK
+    ATTACK,
+    START
 }
 
 public class OverlayTile
@@ -14,6 +15,7 @@ public class OverlayTile
 
     private static Material MoveBlueMat = Resources.Load<Material>("Materials/Move Blue");
     private static Material AttackRedMat = Resources.Load<Material>("Materials/Attack Red");
+    private static Material StartBlueMat = Resources.Load<Material>("Materials/Start Blue");
     private static Dictionary<TileType, HashSet<int>> TileSides = new Dictionary<TileType, HashSet<int>>
     {
         { TileType.Flat, new HashSet<int> {2} },
@@ -37,7 +39,6 @@ public class OverlayTile
         OverlayObj.transform.rotation = OriginalTile.transform.rotation;
         OverlayObj.transform.localScale = OverlayTilePrefab.transform.localScale;
 
-        // Overlay Tile is OverlayMaterial.Move (blue) by default
         MeshFilter OverlayMF = OverlayObj.AddComponent<MeshFilter>();
         OverlayMF.mesh = OverlayTilePrefab.GetComponent<MeshFilter>().sharedMesh;
 
@@ -49,14 +50,30 @@ public class OverlayTile
         CurrentMaterial = OverlayMaterial.MOVE;
     }
 
+    private Material GetMaterial(OverlayMaterial mat)
+    {
+        switch(mat)
+        {
+            case OverlayMaterial.MOVE:
+                return MoveBlueMat;
+            case OverlayMaterial.ATTACK:
+                return AttackRedMat;
+            case OverlayMaterial.START:
+                return StartBlueMat;
+            default:
+                Debug.LogError("OverlayTile: Invalid OverlayMaterial. Default to Move Blue");
+                return MoveBlueMat;
+        }
+    }
+
     public void ActivateOverlayTile(OverlayMaterial mat)
     {
 
         if (CurrentMaterial != mat)
         {
             CurrentMaterial = mat;
-            Material newMat = mat == OverlayMaterial.ATTACK ? AttackRedMat : MoveBlueMat;
-            
+            Material newMat = GetMaterial(mat);
+
             HashSet<int> tileSides = TileSides[TileType];
             Material[] overlayMats = OverlayObj.GetComponent<MeshRenderer>().sharedMaterials;
 

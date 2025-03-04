@@ -31,13 +31,14 @@ public class UnitMenu : MonoBehaviour
         // Create the menu as a UI object
         Menu = new GameObject("UnitMenu", typeof(RectTransform));
         Menu.transform.SetParent(Canvas.transform, false);
+        Menu.SetActive(false);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        // if menu  is active and S is pressed, hide the menu and activate the map cursor
+        // if menu is active and S is pressed, hide the menu and activate the map cursor
         if (Input.GetKeyDown(KeyCode.S) && Menu.gameObject.activeSelf)
         {
             HideMenu();

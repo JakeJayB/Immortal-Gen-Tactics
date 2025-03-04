@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class MapCursor : MonoBehaviour
 {
-    [SerializeField] private CameraMovement cameraRotation;
+    private static CameraMovement cameraMovement;
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
     public static int ActionCount = 0;
     private enum ControlState
     {
+        Start,
         Active,
         Action,
         Inactive
@@ -16,14 +17,54 @@ public class MapCursor : MonoBehaviour
 
     private static ControlState CursorControlState;
 
-    private void Awake() { CursorControlState = ControlState.Inactive; }
+    private void Awake() { 
+        CursorControlState = ControlState.Inactive;
+        cameraMovement = Camera.main.transform.parent.GetComponent<CameraMovement>();
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if(CursorControlState == ControlState.Start) { StartControls(); }
         if (CursorControlState == ControlState.Active) { ActiveControls(); }
         if (CursorControlState == ControlState.Action) { ActionControls(); }
     }
+
+    private void StartControls()
+    {
+        if (!Input.anyKeyDown) return;
+
+        // Movement Controls
+        MoveCursorUp();
+        MoveCursorDown();
+        MoveCursorLeft();
+        MoveCursorRight();
+
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (!TilemapCreator.UnitLocator.ContainsKey(hoverCell))
+            {
+                Tile tile = TilemapCreator.TileLocator[hoverCell];
+                Unit unit = Unit.Initialize(tile.TileInfo.CellLocation + Vector3Int.up, UnitDirection.Forward);
+                TilemapCreator.UnitLocator.Add(hoverCell, unit);    
+            }
+
+        }
+        else if(Input.GetKeyDown(KeyCode.Backspace))
+        {
+            if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var unit))
+            {
+                TilemapCreator.UnitLocator.Remove(hoverCell);
+                Destroy(unit.gameObj);
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SelectedStartPositions();
+        }
+    }
+
 
     private void ActiveControls()
     {
@@ -75,7 +116,7 @@ public class MapCursor : MonoBehaviour
                     UnitMenu.ShowMenu();
                 }
                 else
-                    DeactivateMove();
+                    EndMove();
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
@@ -115,7 +156,7 @@ public class MapCursor : MonoBehaviour
     // Adjusts movement direction based on the camera's Y rotation
     private Vector2Int GetRelativeDirection(Vector2Int inputDirection)
     {
-        float cameraYRotation = cameraRotation.transform.eulerAngles.y;
+        float cameraYRotation = cameraMovement.transform.eulerAngles.y;
 
         // Get the rotation step interval (8 intervals since camera rotates 45 degrees)
         int rotationStep = Mathf.RoundToInt(cameraYRotation / 45f) % 8; //
@@ -137,13 +178,15 @@ public class MapCursor : MonoBehaviour
     }
 
 
-    private void MoveCursor(Vector2Int cell)
+    private static void MoveCursor(Vector2Int cell)
     {
-        if(TilemapCreator.TileLocator.ContainsKey(cell))
+        if(CursorControlState != ControlState.Start && TilemapCreator.TileLocator.ContainsKey(cell))
+            SetHoverCell(cell);
+        else if (CursorControlState == ControlState.Start && TilemapCreator.TileLocator.TryGetValue(cell, out var tile) && tile.TileInfo.IsStartArea)
             SetHoverCell(cell);
     }
 
-    public void ActivateMove(Vector3Int cell)
+    public static void StartMove(Vector3Int cell)
     {
         Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
         SetHoverCell(cell2D);
@@ -154,7 +197,7 @@ public class MapCursor : MonoBehaviour
         //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
     }
 
-    public static void DeactivateMove()
+    public static void EndMove()
     {
         RemoveTileOutline();
         hoverCell = Vector2Int.zero;
@@ -163,18 +206,18 @@ public class MapCursor : MonoBehaviour
         TurnSystem.ContinueLoop();
     }
 
-    private void SetHoverCell(Vector2Int cell)
+    private static void SetHoverCell(Vector2Int cell)
     {
         RemoveTileOutline();
         hoverCell = cell;
         AddTileOutline();
-        cameraRotation.SetFocusPoint(TilemapCreator.TileLocator[hoverCell].TileObj.transform);
+        cameraMovement.SetFocusPoint(TilemapCreator.TileLocator[hoverCell].TileObj.transform);
 
         // send hoverCell unit object to UI Manager
         //UIManager.SetRightPanel(hoverCell == currentUnit ? null : TilemapCreator.UnitLocator[hoverCell]);
     }
 
-    private void AddTileOutline()
+    private static void AddTileOutline()
     {
 
         // adds outline effect on tile when mapcursor hovers it.
@@ -188,7 +231,9 @@ public class MapCursor : MonoBehaviour
             outline.enabled = true;
         }
         else
+        {
             tileObj.GetComponent<Outline>().enabled = true;
+        }
     }
 
     private static void RemoveTileOutline()
@@ -201,6 +246,32 @@ public class MapCursor : MonoBehaviour
             tileObj.GetComponent<Outline>().enabled = false;
     }
 
+
+    public static void SelectStartPositions()
+    {
+        Vector2Int startPos = Vector2Int.zero;
+        foreach (Tile tile in TilemapCreator.TileLocator.Values)
+        {
+            if (!tile.TileInfo.IsStartArea) continue;
+            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.START);
+            startPos = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
+        }
+        SetHoverCell(startPos);
+        StartState();
+    }
+
+    private static void SelectedStartPositions()
+    {
+        foreach (Tile tile in TilemapCreator.TileLocator.Values)
+        {
+            if (tile.TileInfo.IsStartArea)
+                tile.OverlayObj.DeactivateOverlayTile();
+        }
+        InactiveState();
+        TurnSystem.StartLoop();
+    }
+
+    public static void StartState() { CursorControlState = ControlState.Start; }
     public static void ActiveState() { CursorControlState = ControlState.Active; }
     public static void ActionState() { CursorControlState = ControlState.Action; }
     public static void InactiveState() { CursorControlState = ControlState.Inactive; }

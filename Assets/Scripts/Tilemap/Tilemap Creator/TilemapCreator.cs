@@ -99,14 +99,12 @@ public class TilemapCreator : MonoBehaviour
 
     private void LoadUnit(List<UnitData> units)
     {
-        List<Unit> unitsList = new List<Unit>();
         foreach (UnitData unitData in units)
         {
             Unit unit = Unit.Initialize(unitData.cellLocation, unitData.unitDirection);
             UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
-            unitsList.Add(unit);
         }
 
-        turnSystem.InitializeUnits(unitsList);
+        StartCoroutine(turnSystem.TurnLoop());
     }
 }
