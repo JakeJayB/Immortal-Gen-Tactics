@@ -112,6 +112,7 @@ public class MapCursor : MonoBehaviour
 
                 if (ActionCount < 2)
                 {
+                    CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
                     MoveCursor(currentUnit);
                     UnitMenu.ShowMenu();
                 }
@@ -122,6 +123,7 @@ public class MapCursor : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S))
         {
             InactiveState();
+            CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             MoveCursor(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
@@ -211,7 +213,7 @@ public class MapCursor : MonoBehaviour
         RemoveTileOutline();
         hoverCell = cell;
         AddTileOutline();
-        cameraMovement.SetFocusPoint(TilemapCreator.TileLocator[hoverCell].TileObj.transform);
+        CameraMovement.CheckAndMove(TilemapCreator.TileLocator[hoverCell].TileObj.transform);
 
         // send hoverCell unit object to UI Manager
         //UIManager.SetRightPanel(hoverCell == currentUnit ? null : TilemapCreator.UnitLocator[hoverCell]);
@@ -249,14 +251,15 @@ public class MapCursor : MonoBehaviour
 
     public static void SelectStartPositions()
     {
-        Vector2Int startPos = Vector2Int.zero;
+        Transform startTransform = null;
         foreach (Tile tile in TilemapCreator.TileLocator.Values)
         {
             if (!tile.TileInfo.IsStartArea) continue;
             tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.START);
-            startPos = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
+            startTransform = tile.TileObj.transform;
         }
-        SetHoverCell(startPos);
+        CameraMovement.SetFocusPoint(startTransform);
+        SetHoverCell(new Vector2Int((int)startTransform.position.x, (int)startTransform.position.z));
         StartState();
     }
 
