@@ -39,7 +39,7 @@ public class TurnSystem : MonoBehaviour
                 // Unity stop execution here until continueLoop turn to true. 
                 yield return new WaitUntil(() => continueLoop);
                 continueLoop = false;
-                yield return new WaitForSeconds(0.5f); 
+                yield return new WaitForSeconds(1f); 
             }
         }
     }

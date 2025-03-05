@@ -43,7 +43,7 @@ public class MapCursor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (!TilemapCreator.UnitLocator.ContainsKey(hoverCell))
+            if (TilemapCreator.TileLocator[hoverCell].IsSelectable() && !TilemapCreator.UnitLocator.ContainsKey(hoverCell))
             {
                 Tile tile = TilemapCreator.TileLocator[hoverCell];
                 Unit unit = Unit.Initialize(tile.TileInfo.CellLocation + Vector3Int.up, UnitDirection.Forward);
@@ -53,7 +53,7 @@ public class MapCursor : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Backspace))
         {
-            if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var unit))
+            if (TilemapCreator.TileLocator[hoverCell].IsSelectable() && TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var unit))
             {
                 TilemapCreator.UnitLocator.Remove(hoverCell);
                 Destroy(unit.gameObj);
@@ -117,7 +117,9 @@ public class MapCursor : MonoBehaviour
                     UnitMenu.ShowMenu();
                 }
                 else
+                { 
                     EndMove();
+                }
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
@@ -182,9 +184,7 @@ public class MapCursor : MonoBehaviour
 
     private static void MoveCursor(Vector2Int cell)
     {
-        if(CursorControlState != ControlState.Start && TilemapCreator.TileLocator.ContainsKey(cell))
-            SetHoverCell(cell);
-        else if (CursorControlState == ControlState.Start && TilemapCreator.TileLocator.TryGetValue(cell, out var tile) && tile.TileInfo.IsStartArea)
+        if (TilemapCreator.TileLocator.ContainsKey(cell))
             SetHoverCell(cell);
     }
 
