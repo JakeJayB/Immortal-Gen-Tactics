@@ -9,11 +9,11 @@ public class UnitInfo : MonoBehaviour
     public UnitDirection UnitDirection;
 
     // Unit Current Stat Values
-    private int currentHP;
-    private int currentMP;
-    private int currentAP;
-    private int currentLevel;
-    private int currentEXP;
+    protected internal int currentHP;
+    protected internal int currentMP;
+    protected internal int currentAP;
+    protected internal int currentLevel;
+    protected int currentEXP;
     
     // Unit Final Stat Values
     # region Unit Final Stat Values
@@ -43,7 +43,7 @@ public class UnitInfo : MonoBehaviour
     private UnitEquipment equipment;
     
     // Unit Action Set
-    public UnitActionSet ActionSet { get; private set; }
+    public UnitActionSet ActionSet { get; protected internal set; }
     
     // Start is called before the first frame update
     void Start()

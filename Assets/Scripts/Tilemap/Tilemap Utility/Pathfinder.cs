@@ -68,6 +68,6 @@ public class Pathfinder
         float dx = start.TileInfo.CellLocation.x - neighbor.TileInfo.CellLocation.x;
         float dz = start.TileInfo.CellLocation.z - neighbor.TileInfo.CellLocation.z;
     
-        return Mathf.Sqrt(dx * dx + dz * dz); // Euclidean Distance
+        return Mathf.Abs(dx) + Mathf.Abs(dz);
     }
 }
