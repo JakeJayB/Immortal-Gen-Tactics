@@ -23,11 +23,11 @@ public class EnemyUnit : Unit
         }
     }
 
-    public void StartTurn() { DecideTurnOption(); }
+    public void StartTurn() { StartCoroutine(DecideTurnOption()); }
 
-    public void DecideTurnOption()
+    public IEnumerator DecideTurnOption()
     {
-        if (unitInfo.currentAP > 0)
+        while (unitInfo.currentAP > 0)
         {
             --unitInfo.currentAP;
             
@@ -38,11 +38,10 @@ public class EnemyUnit : Unit
             var chosenTile = DecideTile(tempPath);
             Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(-1, 1));
             new Move().ExecuteAction(this, new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
+            yield return new WaitForSeconds(3);
         }
-        else
-        {
-            EndTurn();
-        }
+       
+        EndTurn();
     }
     
     private void EndTurn()

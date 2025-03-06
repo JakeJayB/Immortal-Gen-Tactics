@@ -31,11 +31,21 @@ public class TurnSystem : MonoBehaviour
             {
                 // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
 
-                Vector3Int unitLocation = unit.unitInfo.CellLocation;
-                CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)].TileObj.transform);
-                MapCursor.StartMove(unitLocation);
+                if (unit.GetComponent<EnemyUnit>())
+                {
+                    mapCursor.gameObject.SetActive(false);
+                    unit.GetComponent<EnemyUnit>().StartTurn();
+                }
+                else
+                {
+                    mapCursor.gameObject.SetActive(true);
+                    Vector3Int unitLocation = unit.unitInfo.CellLocation;
+                    CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)].TileObj.transform);
+                    MapCursor.StartMove(unitLocation);
+                }
+                
                 Debug.Log("TurnSystem: Unit's turn at " + unit.unitInfo.CellLocation);
-
+                
                 // Unity stop execution here until continueLoop turn to true. 
                 yield return new WaitUntil(() => continueLoop);
                 continueLoop = false;

@@ -23,9 +23,10 @@ public class Move : UnitAction
         unit.unitMovement.Move(unit, selectedCell);
 
         unit.unitInfo.CellLocation = TilemapCreator.TileLocator[selectedCell].TileInfo.CellLocation;
-        TilemapCreator.UnitLocator.Remove(MapCursor.currentUnit);
+        TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
         TilemapCreator.UnitLocator.Add(selectedCell, unit);
 
-        MapCursor.currentUnit = selectedCell;
+        if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
+        
     }
 }
