@@ -9,11 +9,12 @@ using Object = UnityEngine.Object;
 
 public class UnitMenu : MonoBehaviour
 {
-    private Canvas Canvas;
+    private static Canvas Canvas;
     public static GameObject Menu { get; private set; }
     public static List<MenuSlot> MenuSlots { get; private set; }
     public static UnitMenuTextbox Textbox { get; private set; }
     public static UnitMenuCursor Cursor { get; private set; }
+    public static Camera MainCamera;
 
     private void Awake()
     {
@@ -32,6 +33,8 @@ public class UnitMenu : MonoBehaviour
         Menu = new GameObject("UnitMenu", typeof(RectTransform));
         Menu.transform.SetParent(Canvas.transform, false);
         Menu.SetActive(false);
+        
+        MainCamera = Camera.main;
     }
 
 
@@ -72,7 +75,24 @@ public class UnitMenu : MonoBehaviour
         Cursor.transform.SetParent(Menu.transform, false);
         Cursor.InstantiateCursor(MenuSlots);
     }
-    
-    public static void ShowMenu() { Menu.SetActive(true); }
+
+    public static void ShowMenu()
+    {
+        var unit = TilemapCreator.UnitLocator[MapCursor.currentUnit];
+        var canvasRect = Canvas.GetComponent<RectTransform>();
+        
+        // Convert world position to viewport position (0-1 range)
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.transform.position);
+
+        // Convert viewport position to canvas local position
+        Vector2 menuPosition = new Vector2(
+            (viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.565f),
+            (viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f) - 50f // Move down slightly
+        );
+
+        Menu.GetComponent<RectTransform>().anchoredPosition = menuPosition;
+        
+        Menu.SetActive(true);
+    }
     public static void HideMenu() { Menu.SetActive(false); }
 }
