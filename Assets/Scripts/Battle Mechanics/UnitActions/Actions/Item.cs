@@ -16,8 +16,8 @@ public class Item : UnitAction
         throw new System.NotImplementedException();
     }
 
-    public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
+    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 }

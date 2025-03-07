@@ -18,15 +18,14 @@ public class Move : UnitAction
         MapCursor.ActionState();
     }
 
-    public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
+    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        unit.unitMovement.Move(unit, selectedCell);
+        yield return unit.unitMovement.Move(unit, selectedCell);
 
         unit.unitInfo.CellLocation = TilemapCreator.TileLocator[selectedCell].TileInfo.CellLocation;
         TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
         TilemapCreator.UnitLocator.Add(selectedCell, unit);
 
         if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
-        
     }
 }

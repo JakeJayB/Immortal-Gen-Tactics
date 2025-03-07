@@ -19,7 +19,7 @@ public class Attack : UnitAction
         MapCursor.ActionState();
     }
 
-    public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
+    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
         Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
         Vector2Int displacement = selectedCell - originCell;
@@ -36,5 +36,7 @@ public class Attack : UnitAction
                 Debug.Log("Attack: unit attacked!");
             }
         }
+        
+        yield return null;
     }
 }

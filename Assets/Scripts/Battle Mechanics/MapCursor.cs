@@ -108,7 +108,7 @@ public class MapCursor : MonoBehaviour
                 ActionCount++;
                 ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
                 ChainSystem.AddAction(hoverCell);
-                ChainSystem.ExecuteNextAction();
+                StartCoroutine(ChainSystem.ExecuteNextAction());
 
                 if (ActionCount < 2)
                 {
@@ -224,7 +224,7 @@ public class MapCursor : MonoBehaviour
 
         // adds outline effect on tile when mapcursor hovers it.
         GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
-        if (tileObj.GetComponent<Outline>() == null)
+        if (!tileObj.GetComponent<Outline>())
         { 
             Outline outline = tileObj.AddComponent<Outline>();
             outline.OutlineMode = Outline.Mode.OutlineAll;
@@ -244,7 +244,7 @@ public class MapCursor : MonoBehaviour
         
         // deactivates outline effect on tile
         GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
-        if (tileObj.GetComponent<Outline>() != null)
+        if (tileObj.GetComponent<Outline>())
             tileObj.GetComponent<Outline>().enabled = false;
     }
 

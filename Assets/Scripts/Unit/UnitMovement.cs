@@ -7,14 +7,14 @@ public class UnitMovement : MonoBehaviour
     // Controls how fast the unit will travel during movement
     private const float TRAVEL_SPEED = 3f;
     
-    public void Move(Unit unit, Vector2Int destination)
+    public IEnumerator Move(Unit unit, Vector2Int destination)
     {
         var tilemap = TilemapCreator.TileLocator;
         var unitCell = unit.unitInfo.CellLocation;
         
         List<Tile> path = Pathfinder.FindPath(tilemap[new Vector2Int(unitCell.x, unitCell.z)], tilemap[destination]);
 
-        StartCoroutine(MoveUnitToTile(unit, destination, path));
+        yield return StartCoroutine(MoveUnitToTile(unit, destination, path));
     }
 
     private static IEnumerator MoveUnitToTile(Unit unit, Vector2Int destination, List<Tile> path)

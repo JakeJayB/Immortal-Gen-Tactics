@@ -26,7 +26,7 @@ public class ChainSystem
         HeapifyUp(ChainCount - 1);
     }
 
-    public static void ExecuteNextAction()
+    public static IEnumerator ExecuteNextAction()
     {
         if (ChainCount == 0) throw new InvalidOperationException("ChainSystem is empty!");
         
@@ -39,7 +39,7 @@ public class ChainSystem
 
         if (ChainCount > 0) { HeapifyDown(0); }
 
-        action.ExecuteAction(unit, target);
+        yield return action.ExecuteAction(unit, target);
     }
 
     public static UnitAction Peek()

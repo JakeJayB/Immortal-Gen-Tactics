@@ -12,11 +12,16 @@ public class Wait : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ExecuteAction(null, Vector2Int.zero);
+        MapCursor.EndMove();
     }
 
-    public override void ExecuteAction(Unit unit, Vector2Int selectedCell)
+    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
+        // TODO: Have ActivateAction() call a direction selector for the player to choose which
+        // TODO: direction to face the unit. Once selected, it should call this function to
+        // TODO: end the move after instead of ActivateAction().
+        
         MapCursor.EndMove();
+        yield return null;
     }
 }

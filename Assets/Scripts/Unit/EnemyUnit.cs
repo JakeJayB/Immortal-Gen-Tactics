@@ -25,6 +25,8 @@ public class EnemyUnit : Unit
 
     public void StartTurn() { StartCoroutine(DecideTurnOption()); }
 
+    // TODO: Make the executions of UnitActions as coroutines so that no future instructions will
+    // TODO: execute until they finish. This is especially important for EnemyAI Action Calls.
     public IEnumerator DecideTurnOption()
     {
         while (unitInfo.currentAP > 0)
@@ -37,8 +39,7 @@ public class EnemyUnit : Unit
                     TilemapCreator.TileLocator[new Vector2Int(MapCursor.currentUnit.x, MapCursor.currentUnit.y)]);
             var chosenTile = DecideTile(tempPath);
             Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(-1, 1));
-            new Move().ExecuteAction(this, new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
-            yield return new WaitForSeconds(3);
+            yield return new Move().ExecuteAction(this, new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
         }
        
         EndTurn();
@@ -46,7 +47,7 @@ public class EnemyUnit : Unit
     
     private void EndTurn()
     {
-        new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z));
+        StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
     }
 
     private Tile DecideTile(List<Tile> tempPath)
