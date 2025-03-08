@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -104,22 +105,7 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
-                InactiveState();
-                ActionCount++;
-                ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
-                ChainSystem.AddAction(hoverCell);
-                StartCoroutine(ChainSystem.ExecuteNextAction());
-
-                if (ActionCount < 2)
-                {
-                    CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
-                    MoveCursor(currentUnit);
-                    UnitMenu.ShowMenu();
-                }
-                else
-                { 
-                    EndMove();
-                }
+                StartCoroutine(ConfirmAction());
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
@@ -130,6 +116,27 @@ public class MapCursor : MonoBehaviour
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
             UnitMenu.ShowMenu();
+        }
+    }
+
+    private static IEnumerator ConfirmAction()
+    {
+        InactiveState();
+        ActionCount++;
+        ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+        ChainSystem.AddAction(hoverCell);
+        yield return ChainSystem.ExecuteNextAction();
+
+        if (ActionCount < 2)
+        {
+            CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+            MoveCursor(currentUnit);
+            yield return new WaitForSeconds(0.5f); // Wait until camera catches up to unit before showing menu
+            UnitMenu.ShowMenu();
+        }
+        else
+        { 
+            EndMove();
         }
     }
 
