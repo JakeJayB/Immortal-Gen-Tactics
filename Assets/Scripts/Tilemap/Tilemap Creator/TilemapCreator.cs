@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -35,6 +36,17 @@ public class TilemapCreator : MonoBehaviour
         };
 
         LoadFromJson();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            foreach (var unit in UnitLocator)
+            {
+                Debug.Log("Unit " + unit.Value.name + " -- " + unit.Key);
+            }
+        }
     }
 
     private void LoadFromJson()

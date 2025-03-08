@@ -20,11 +20,14 @@ public class Move : UnitAction
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        yield return unit.unitMovement.Move(unit, selectedCell);
-
-        unit.unitInfo.CellLocation = TilemapCreator.TileLocator[selectedCell].TileInfo.CellLocation;
+        // Remove the Location the Unit is currently at in UnitLocator
         TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
-        TilemapCreator.UnitLocator.Add(selectedCell, unit);
+        
+        // Updates the location as the Unit moves
+        yield return unit.unitMovement.Move(unit, selectedCell);
+        
+        // Adds the location of the tile the Unit ended at in UnitLocator
+        TilemapCreator.UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
 
         if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
     }

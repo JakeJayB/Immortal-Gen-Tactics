@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -19,11 +20,14 @@ public class ChainSystem
         PotentialChain = new ValueTuple<UnitAction, Vector2Int, Unit>();
     }
     
-    public static void AddAction(Vector2Int target)
+    // This function might need to be an IEnumerator as well as ReactionPhase() so that
+    // no executions happen during the chaining process.
+    public static IEnumerator AddAction(Vector2Int target)
     {
         Chain.Add((PotentialChain.Item1, target, PotentialChain.Item3));
         ReleasePotentialChain();
         HeapifyUp(ChainCount - 1);
+        yield return ReactionPhase(target);
     }
 
     public static IEnumerator ExecuteNextAction()
@@ -42,6 +46,22 @@ public class ChainSystem
         yield return action.ExecuteAction(unit, target);
     }
 
+    private static IEnumerator ReactionPhase(Vector2Int target)
+    {
+        foreach (var unit in TilemapCreator.UnitLocator.Values)
+        {
+            var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+            var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.finalSense, Pattern.Splash);
+
+            if (Chain.All(chain => chain.Item3 != unit) && unitSense.Contains(TilemapCreator.TileLocator[target]))
+            {
+                Debug.Log("Unit " + unit.name + " should be reacting...");
+            }
+        }
+
+        yield return null;
+    }
+    
     public static UnitAction Peek()
     {
         if (ChainCount == 0) throw new InvalidOperationException("ChainSystem is empty!");

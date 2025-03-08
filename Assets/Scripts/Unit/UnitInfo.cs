@@ -26,6 +26,7 @@ public class UnitInfo : MonoBehaviour
     [SerializeField] public int finalMagicDefense;
     [SerializeField] public int finalMove;
     [SerializeField] public int finalSpeed;
+    [SerializeField] public int finalSense;
     # endregion
     
     // Unit Base Stat Values
@@ -38,6 +39,7 @@ public class UnitInfo : MonoBehaviour
     [SerializeField] private int baseMagicDefense;
     [SerializeField] private int baseMove;
     [SerializeField] private int baseSpeed;
+    [SerializeField] private int baseSense;
     
     // Unit Equipment
     private UnitEquipment equipment;
