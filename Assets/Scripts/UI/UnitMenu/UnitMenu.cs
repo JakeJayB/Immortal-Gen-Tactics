@@ -16,7 +16,7 @@ public class UnitMenu : MonoBehaviour
     public static UnitMenuCursor Cursor { get; private set; }
     public static Camera MainCamera;
 
-    private void Awake()
+/*    private void Awake()
     {
         // Create a new Canvas GameObject
         GameObject canvasObject = new GameObject("Canvas");
@@ -35,19 +35,31 @@ public class UnitMenu : MonoBehaviour
         Menu.SetActive(false);
         
         MainCamera = Camera.main;
-    }
-
+    }*/
 
     // Update is called once per frame
     void Update()
     {
+        if(Menu == null) return;
+
         // if menu is active and S is pressed, hide the menu and activate the map cursor
-        if (Input.GetKeyDown(KeyCode.S) && Menu.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.S) && Menu.activeSelf)
         {
             HideMenu();
             MapCursor.ActiveState();
         }
     }
+    
+
+    public static void Initialize(GameObject canvas)
+    {
+        Canvas = canvas.GetComponent<Canvas>();
+        Menu = new GameObject("UnitMenu", typeof(RectTransform));
+        Menu.AddComponent<UnitMenu>();
+        Menu.transform.SetParent(canvas.transform, false);
+        Menu.SetActive(false);
+    }
+
 
     public static void DisplayUnitMenu(List<UnitAction> actions)
     {
@@ -94,5 +106,6 @@ public class UnitMenu : MonoBehaviour
         
         Menu.SetActive(true);
     }
+
     public static void HideMenu() { Menu.SetActive(false); }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PartyManager : MonoBehaviour
 {
 
-    List<Unit> unitList = new List<Unit>();
+    private static List<Unit> unitList = new List<Unit>();
 
     // Start is called before the first frame update
     void Start()
@@ -18,5 +18,8 @@ public class PartyManager : MonoBehaviour
             unitList.Add(unit);
         }
     }
+
+
+    public static List<Unit> GetUnits() { return unitList; }
 
 }

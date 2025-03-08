@@ -11,7 +11,6 @@ public class UnitMenuTextbox : MonoBehaviour
     public static TMP_Text Text { get; private set; }
     public Sprite TextboxImage;
     
-    // Start is called before the first frame update
     void Awake()
     {
         InstantiateTextbox();
