@@ -22,12 +22,12 @@ public class ChainSystem
     
     // This function might need to be an IEnumerator as well as ReactionPhase() so that
     // no executions happen during the chaining process.
-    public static IEnumerator AddAction(Vector2Int target)
+    public static void AddAction(Vector2Int target)
     {
         Chain.Add((PotentialChain.Item1, target, PotentialChain.Item3));
         ReleasePotentialChain();
         HeapifyUp(ChainCount - 1);
-        yield return ReactionPhase(target);
+        ReactionPhase(target);
     }
 
     public static IEnumerator ExecuteNextAction()
@@ -46,7 +46,7 @@ public class ChainSystem
         yield return action.ExecuteAction(unit, target);
     }
 
-    private static IEnumerator ReactionPhase(Vector2Int target)
+    private static void ReactionPhase(Vector2Int target)
     {
         foreach (var unit in TilemapCreator.UnitLocator.Values)
         {
@@ -59,7 +59,7 @@ public class ChainSystem
             }
         }
 
-        yield return null;
+        //yield return null;
     }
     
     public static UnitAction Peek()

@@ -124,7 +124,7 @@ public class MapCursor : MonoBehaviour
         InactiveState();
         ActionCount++;
         ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
-        yield return ChainSystem.AddAction(hoverCell);
+        ChainSystem.AddAction(hoverCell);
         yield return ChainSystem.ExecuteNextAction();
 
         if (ActionCount < 2)

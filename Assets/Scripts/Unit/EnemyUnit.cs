@@ -11,6 +11,10 @@ public class EnemyUnit : Unit
     {
         unitInfo = GetComponent<UnitInfo>();
         unitMovement = GetComponent<UnitMovement>();
+        
+        // Remove following lines after EnemyUnits are properly
+        // implemented through the json files.
+        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
         unitInfo.currentAP = 3;
     }
 
@@ -33,13 +37,21 @@ public class EnemyUnit : Unit
         {
             --unitInfo.currentAP;
             
-            var tempPath =
-                Pathfinder.FindPath(
-                    TilemapCreator.TileLocator[new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)],
-                    TilemapCreator.TileLocator[new Vector2Int(MapCursor.currentUnit.x, MapCursor.currentUnit.y)]);
-            var chosenTile = DecideTile(tempPath);
-            Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(-1, 1));
-            yield return new Move().ExecuteAction(this, new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
+            if (InRange(TilemapCreator.UnitLocator[MapCursor.currentUnit], 1, Pattern.Linear))
+            {
+                Debug.Log("Enemy Unit Attacking...");
+                StartCoroutine(new Attack().ExecuteAction(this, MapCursor.currentUnit));
+            }
+            else
+            {
+                var tempPath =
+                    Pathfinder.FindPath(
+                        TilemapCreator.TileLocator[new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)],
+                        TilemapCreator.TileLocator[new Vector2Int(MapCursor.currentUnit.x, MapCursor.currentUnit.y)]);
+                var chosenTile = DecideTile(tempPath);
+                Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(-1, 1));
+                yield return new Move().ExecuteAction(this, new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
+            }
         }
        
         EndTurn();
@@ -75,5 +87,13 @@ public class EnemyUnit : Unit
         }
 
         return chosenTile ?? TilemapCreator.TileLocator[new Vector2Int(shortestPath[^1].TileInfo.CellLocation.x, shortestPath[^1].TileInfo.CellLocation.z)];
+    }
+
+    private bool InRange(Unit unit, int range, Pattern pattern)
+    {
+        var neighborTiles =
+            Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()], range, pattern);
+
+        return neighborTiles.Contains(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()]);
     }
 }

@@ -82,5 +82,7 @@ public class UnitInfo : MonoBehaviour
         finalMove = baseMove + equipment.bonusMove;
         finalSpeed = baseSpeed + equipment.bonusSpeed;
     }
+
+    public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
     
 }
