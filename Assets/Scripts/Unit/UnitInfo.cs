@@ -64,11 +64,6 @@ public class UnitInfo : MonoBehaviour
         ActionSet.AddAction(new Item());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ApplyEquipmentBonuses()
     {
@@ -84,5 +79,5 @@ public class UnitInfo : MonoBehaviour
     }
 
     public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
-    
+ 
 }

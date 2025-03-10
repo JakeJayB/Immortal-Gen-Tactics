@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UnitSelector : MonoBehaviour
 {
@@ -20,15 +19,21 @@ public class UnitSelector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             // get the next unit to the right
+            SelectorUnitIcons.NextUnit();
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
             // get the previous unit to the left
+            SelectorUnitIcons.PreviousUnit();
         }
     }
 
     public static void Initialize(GameObject canvas)
     {
+
+        PANEL_WIDTH = Mathf.RoundToInt(Display.main.systemWidth * 0.3f);
+        PANEL_HEIGHT = Mathf.RoundToInt(Display.main.systemHeight * 0.3f);
+
         Canvas = canvas.GetComponent<Canvas>();
         Menu = new GameObject("UnitSelector", typeof(RectTransform));
         Menu.AddComponent<UnitSelector>();
@@ -49,8 +54,34 @@ public class UnitSelector : MonoBehaviour
 
     public static void DisplayUnitSelector()
     {
+        if (Menu.transform.childCount != 0) return;
+
         Menu.SetActive(true);
         var panel = new GameObject("Panel", typeof(RectTransform)).AddComponent<SelectorPanel>();
         panel.transform.SetParent(Menu.transform, false);
+
+        // Initialize Unit Icons
+        // Create SelectorIcons GameObject
+
     }
+
+    public static void PlaceUnit(Vector2Int tileCell)
+    {
+        // if currentIdx from SelectorUnitIcon is in activeIdx
+            // get unit based on currentIdx
+
+            // if another unit is already in tileCell
+                // swap unit locations. update other unit's activeIdx value
+            // else
+                // move unit to tileCell
+        // else
+            // get unitInfo from SelectorUnitIcon
+            // Create unit object based on unitInfo
+            // if another unit is already in tileCell
+                // Find and destroy unit based on tileCell. unshade unit icon
+                // move unit to tileCell
+            // else
+                // move unit to tileCell
+    }
+
 }

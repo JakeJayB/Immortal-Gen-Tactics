@@ -46,6 +46,7 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable() && !TilemapCreator.UnitLocator.ContainsKey(hoverCell))
             {
+                // Unit unit = UnitSelector.PlaceUnit(hoverCell);
                 Tile tile = TilemapCreator.TileLocator[hoverCell];
                 Unit unit = Unit.Initialize(tile.TileInfo.CellLocation + Vector3Int.up, UnitDirection.Forward);
                 TilemapCreator.UnitLocator.Add(hoverCell, unit);    

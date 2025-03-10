@@ -22,6 +22,7 @@ public class Unit : MonoBehaviour
 
         unit.unitInfo = gameObj.AddComponent<UnitInfo>();
         unit.unitInfo.CellLocation = initLocation;
+        unit.unitInfo.UnitDirection = unitDirection;
 
         unit.unitEquipment = new UnitEquipment(unit.unitInfo);
 
