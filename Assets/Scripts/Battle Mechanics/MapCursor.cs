@@ -8,6 +8,7 @@ public class MapCursor : MonoBehaviour
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
     public static int ActionCount = 0;
+    
     private enum ControlState
     {
         Start,
@@ -85,7 +86,7 @@ public class MapCursor : MonoBehaviour
             {
                 InactiveState();
                 currentUnit = hoverCell;
-                UnitMenu.ShowMenu();
+                UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
                 UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
             }
         }
@@ -106,6 +107,11 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
+                if (ChainSystem.UnitIsReacting())
+                {
+                    // Call IEnumerator as a normal function, ignoring 'yield return' instructions
+                    ChainSystem.AddAction(hoverCell);
+                }
                 StartCoroutine(ConfirmAction());
             }
         }
@@ -116,7 +122,7 @@ public class MapCursor : MonoBehaviour
             MoveCursor(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
-            UnitMenu.ShowMenu();
+            UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
         }
     }
 
@@ -125,15 +131,18 @@ public class MapCursor : MonoBehaviour
         InactiveState();
         ActionCount++;
         ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
-        ChainSystem.AddAction(hoverCell);
-        yield return ChainSystem.ExecuteNextAction();
+        yield return ChainSystem.AddAction(hoverCell);
+        yield return ChainSystem.ExecuteChain();
+        
+        // Set 'currentUnit' back to the current unit in the turn system
+        currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
 
         if (ActionCount < 2)
         {
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             MoveCursor(currentUnit);
             yield return new WaitForSeconds(0.5f); // Wait until camera catches up to unit before showing menu
-            UnitMenu.ShowMenu();
+            UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
         }
         else
         { 

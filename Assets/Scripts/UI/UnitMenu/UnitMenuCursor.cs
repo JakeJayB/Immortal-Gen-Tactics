@@ -46,20 +46,30 @@ public class UnitMenuCursor : MonoBehaviour
         Cursor = gameObject.AddComponent<Image>();
         CursorImage = Resources.Load<Sprite>("Sprites/UnitMenu/igt_unit_menu_cursor");
         Cursor.sprite = CursorImage;
-
-        MenuSlots = menuSlots;
-        slotIndex = 0;
-
-        CursorRectTransform = GetComponent<RectTransform>();
         
-        PositionCursor(MenuSlots[slotIndex]);
-        UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
+        ResetCursor(menuSlots);
     }
 
     private void PositionCursor(MenuSlot currentSlot)
     {
         CursorRectTransform.localScale = currentSlot.SlotRectTransform.localScale;
         CursorRectTransform.anchoredPosition = currentSlot.SlotRectTransform.anchoredPosition;
+    }
+
+    public void ResetCursor(List<MenuSlot> menuSlots)
+    {
+        // Get the New Menu Slots and Reset the Index
+        MenuSlots = menuSlots;
+        slotIndex = 0;
+
+        CursorRectTransform = GetComponent<RectTransform>();
+        
+        // Reset Cursor Back to the First Slot and Update the Textbox
+        PositionCursor(MenuSlots[slotIndex]);
+        UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
+        
+        // Set the Cursor to be above all slots
+        transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
     
 }

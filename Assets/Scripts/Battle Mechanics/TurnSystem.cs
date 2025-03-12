@@ -7,6 +7,7 @@ public class TurnSystem : MonoBehaviour
     [SerializeField] private MapCursor mapCursor;
     private static bool startLoop = false;
     private static bool continueLoop = false;
+    public static Unit CurrentUnit;
     
     public IEnumerator TurnLoop()
     {
@@ -30,6 +31,8 @@ public class TurnSystem : MonoBehaviour
             foreach (Unit unit in units)
             {
                 // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
+
+                CurrentUnit = unit;
 
                 if (unit.GetComponent<EnemyUnit>())
                 {

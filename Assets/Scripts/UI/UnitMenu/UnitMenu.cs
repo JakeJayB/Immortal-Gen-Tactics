@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -40,8 +41,9 @@ public class UnitMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Menu == null) return;
+        // if(!Menu) return;
 
+        // TODO: Place this control in the MapCursor so we don't have this option available during Reactions
         // if menu is active and S is pressed, hide the menu and activate the map cursor
         if (Input.GetKeyDown(KeyCode.S) && Menu.activeSelf)
         {
@@ -58,14 +60,19 @@ public class UnitMenu : MonoBehaviour
         Menu.AddComponent<UnitMenu>();
         Menu.transform.SetParent(canvas.transform, false);
         Menu.SetActive(false);
+        
+        Textbox = new GameObject("UnitMenuTextbox", typeof(RectTransform)).AddComponent<UnitMenuTextbox>();
+        Textbox.transform.SetParent(Menu.transform, false);
+
+        Cursor = new GameObject("Cursor", typeof(RectTransform)).AddComponent<UnitMenuCursor>();
+        Cursor.transform.SetParent(Menu.transform, false);
+        Cursor.InstantiateCursor(MenuSlots);
     }
 
 
     public static void DisplayUnitMenu(List<UnitAction> actions)
     {
-        // if Unit Menu has already been made
-        if (Menu.transform.childCount != 0) return;
-
+        ClearUnitSlots();
         MenuSlots = new List<MenuSlot>();
         
         for (int i = 0; i < actions.Count; i++)
@@ -80,17 +87,22 @@ public class UnitMenu : MonoBehaviour
             MenuSlots.Add(slot);
         }
         
-        Textbox = new GameObject("UnitMenuTextbox", typeof(RectTransform)).AddComponent<UnitMenuTextbox>();
-        Textbox.transform.SetParent(Menu.transform, false);
-
-        Cursor = new GameObject("Cursor", typeof(RectTransform)).AddComponent<UnitMenuCursor>();
-        Cursor.transform.SetParent(Menu.transform, false);
-        Cursor.InstantiateCursor(MenuSlots);
+        Cursor.ResetCursor(MenuSlots);
     }
 
-    public static void ShowMenu()
+    private static void ClearUnitSlots()
     {
-        var unit = TilemapCreator.UnitLocator[MapCursor.currentUnit];
+        if (MenuSlots == null) { return; }
+
+        foreach (var slot in MenuSlots.ToList())
+        {
+            MenuSlots.Remove(slot);
+            Destroy(slot.gameObject);
+        }
+    }
+
+    public static void ShowMenu(Unit unit)
+    {
         var canvasRect = Canvas.GetComponent<RectTransform>();
         
         // Convert world position to viewport position (0-1 range)

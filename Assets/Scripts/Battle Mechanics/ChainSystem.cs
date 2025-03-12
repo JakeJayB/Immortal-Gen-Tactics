@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,9 +10,9 @@ public class ChainSystem
 {
     private static List<(UnitAction action, Vector2Int target, Unit unit)> Chain = new List<(UnitAction action, Vector2Int target, Unit unit)>();
     private static int ChainCount => Chain.Count;
-    
     private static (UnitAction, Vector2Int, Unit) PotentialChain;
-
+    private static bool ReactionInProgress = false;
+    
     public static void HoldPotentialChain(UnitAction action, Unit unit) {
         PotentialChain = new ValueTuple<UnitAction, Vector2Int, Unit>(action, new Vector2Int(), unit);
     }
@@ -22,31 +23,34 @@ public class ChainSystem
     
     // This function might need to be an IEnumerator as well as ReactionPhase() so that
     // no executions happen during the chaining process.
-    public static void AddAction(Vector2Int target)
+    public static IEnumerator AddAction(Vector2Int target)
     {
         Chain.Add((PotentialChain.Item1, target, PotentialChain.Item3));
         ReleasePotentialChain();
         HeapifyUp(ChainCount - 1);
-        ReactionPhase(target);
+
+        if (UnitIsReacting()) { ReactionInProgress = false; } // If a Unit is reacting, end the process
+        else { yield return ReactionPhase(target); } // Else, initiate a new reaction phase
     }
 
-    public static IEnumerator ExecuteNextAction()
+    public static IEnumerator ExecuteChain()
     {
-        if (ChainCount == 0) throw new InvalidOperationException("ChainSystem is empty!");
+        while (ChainCount > 0)
+        {
+            UnitAction action = Chain[0].action;
+            Vector2Int target = Chain[0].target;
+            Unit unit = Chain[0].unit;
         
-        UnitAction action = Chain[0].action;
-        Vector2Int target = Chain[0].target;
-        Unit unit = Chain[0].unit;
-        
-        Chain[0] = Chain[^1];
-        Chain.RemoveAt(ChainCount - 1);
+            Chain[0] = Chain[^1];
+            Chain.RemoveAt(ChainCount - 1);
 
-        if (ChainCount > 0) { HeapifyDown(0); }
+            if (ChainCount > 0) { HeapifyDown(0); }
 
-        yield return action.ExecuteAction(unit, target);
+            yield return action.ExecuteAction(unit, target);
+        }
     }
 
-    private static void ReactionPhase(Vector2Int target)
+    private static IEnumerator ReactionPhase(Vector2Int target)
     {
         foreach (var unit in TilemapCreator.UnitLocator.Values)
         {
@@ -55,11 +59,21 @@ public class ChainSystem
 
             if (Chain.All(chain => chain.Item3 != unit) && unitSense.Contains(TilemapCreator.TileLocator[target]))
             {
-                Debug.Log("Unit " + unit.name + " should be reacting...");
+                yield return OfferChainReaction(unit);
             }
         }
 
-        //yield return null;
+        yield return null;
+    }
+
+    private static IEnumerator OfferChainReaction(Unit unit)
+    {
+        Debug.Log("Unit " + unit.name + " should be reacting...");
+        ReactionInProgress = true;
+        MapCursor.currentUnit = unit.unitInfo.Vector2CellLocation();
+        UnitMenu.ShowMenu(unit);
+        yield return new WaitUntil(ReactionHasEnded);
+        Debug.Log("Unit finished using reaction menu...");
     }
     
     public static UnitAction Peek()
@@ -105,4 +119,7 @@ public class ChainSystem
     }
 
     private static void SwapActions(int x, int y) { (Chain[x], Chain[y]) = (Chain[y], Chain[x]); }
+
+    public static bool UnitIsReacting() { return ReactionInProgress; }
+    private static bool ReactionHasEnded() { return !ReactionInProgress; }
 }
