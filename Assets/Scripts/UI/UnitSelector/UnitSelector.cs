@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class UnitSelector : MonoBehaviour
 {
-    public static int PANEL_WIDTH = 250;
-    public static int PANEL_HEIGHT = 150;
+    public static int PANEL_WIDTH;
+    public static int PANEL_HEIGHT;
 
     private static Canvas Canvas;
     public static GameObject Menu { get; private set; }
@@ -16,12 +16,12 @@ public class UnitSelector : MonoBehaviour
     {
         if(Menu == null || !Menu.activeSelf) return;
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             // get the next unit to the right
             SelectorUnitIcons.NextUnit();
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+        else if (Input.GetKeyDown(KeyCode.Z))
         {
             // get the previous unit to the left
             SelectorUnitIcons.PreviousUnit();
@@ -60,13 +60,45 @@ public class UnitSelector : MonoBehaviour
         var panel = new GameObject("Panel", typeof(RectTransform)).AddComponent<SelectorPanel>();
         panel.transform.SetParent(Menu.transform, false);
 
-        // Initialize Unit Icons
-        // Create SelectorIcons GameObject
+        var unitIcon = new GameObject("UnitIcon", typeof(RectTransform)).AddComponent<SelectorUnitIcons>();
+        unitIcon.transform.SetParent(Menu.transform, false);
 
     }
 
     public static void PlaceUnit(Vector2Int tileCell)
     {
+        // New pseudocode
+        // Conditions:
+            // 1. if a unit is on the selected tileCell
+                // a. get unit from tileCell
+                // b. if unitSelected is not null
+                    // i. if unitSelected is the same as the unit on the selected tileCell
+                        // 1. Delete unit from tileCell
+                        // 2. signal to SelectorUnitIcons that the unit is no longer active
+                        // 3. set unitSelected to null
+                    // ii. else
+                        // 1. swap unit locations
+                        // 2. set unitSelected to null
+                // c. else if unitSelected is null
+                    // i. set unitSelected to unit on the selected tileCell
+            // 2. if no unit is on the selected tileCell
+                // a. if unitSelected is not null
+                    // i. place already existing unit on the selected tileCell
+                    // ii. set unitSelected to null
+                // b. else if unitSelected is null
+                    // i. get unit from SelectorUnitIcons based on currentIdx
+                    // ii. place unit on the selected tileCell
+                    // iii. signal to SelectorUnitIcons that the unit is now active
+
+
+
+
+
+
+
+
+
+        // old pseudocode
         // if currentIdx from SelectorUnitIcon is in activeIdx
             // get unit based on currentIdx
 

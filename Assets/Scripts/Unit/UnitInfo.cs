@@ -7,6 +7,7 @@ public class UnitInfo : MonoBehaviour
     // Unit Cell Location
     public Vector3Int CellLocation;
     public UnitDirection UnitDirection;
+    public Sprite sprite;
 
     // Unit Current Stat Values
     protected internal int currentHP;

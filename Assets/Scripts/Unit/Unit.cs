@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
         unit.unitInfo = gameObj.AddComponent<UnitInfo>();
         unit.unitInfo.CellLocation = initLocation;
         unit.unitInfo.UnitDirection = unitDirection;
+        unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
 
         unit.unitEquipment = new UnitEquipment(unit.unitInfo);
 
