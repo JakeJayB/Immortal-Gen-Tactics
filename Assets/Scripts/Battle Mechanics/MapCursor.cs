@@ -7,7 +7,6 @@ public class MapCursor : MonoBehaviour
     private static CameraMovement cameraMovement;
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
-    public static int ActionCount = 0;
     
     private enum ControlState
     {
@@ -129,7 +128,6 @@ public class MapCursor : MonoBehaviour
     private static IEnumerator ConfirmAction()
     {
         InactiveState();
-        ActionCount++;
         ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
         yield return ChainSystem.AddAction(hoverCell);
         yield return ChainSystem.ExecuteChain();
@@ -137,7 +135,7 @@ public class MapCursor : MonoBehaviour
         // Set 'currentUnit' back to the current unit in the turn system
         currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
 
-        if (ActionCount < 2)
+        if (TurnSystem.CurrentUnit.unitInfo.currentAP > 0)
         {
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             MoveCursor(currentUnit);
@@ -221,7 +219,6 @@ public class MapCursor : MonoBehaviour
         RemoveTileOutline();
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
-        ActionCount = 0;
         TurnSystem.ContinueLoop();
     }
 

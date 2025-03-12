@@ -20,6 +20,9 @@ public class Move : UnitAction
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
+        // Spend an Action Point to execute the Action
+        --unit.unitInfo.currentAP;
+        
         // Remove the Location the Unit is currently at in UnitLocator
         TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
         

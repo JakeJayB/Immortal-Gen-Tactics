@@ -32,7 +32,8 @@ public class TurnSystem : MonoBehaviour
             {
                 // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
 
-                CurrentUnit = unit;
+                CurrentUnit = unit; // Set the new unit whose turn is about to start
+                unit.unitInfo.RefreshAP(); // Unit AP refreshes to max amount at start of new turn
 
                 if (unit.GetComponent<EnemyUnit>())
                 {
