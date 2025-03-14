@@ -59,7 +59,8 @@ public class ChainSystem
 
             if (Chain.All(chain => chain.Item3 != unit) && unitSense.Contains(TilemapCreator.TileLocator[target]))
             {
-                yield return OfferChainReaction(unit);
+                if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
+                else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
             }
         }
 
@@ -68,11 +69,14 @@ public class ChainSystem
 
     private static IEnumerator OfferChainReaction(Unit unit)
     {
+        MapCursor.SetGameObjActive();
         Debug.Log("Unit " + unit.name + " should be reacting...");
         ReactionInProgress = true;
         MapCursor.currentUnit = unit.unitInfo.Vector2CellLocation();
         UnitMenu.ShowMenu(unit);
         yield return new WaitUntil(ReactionHasEnded);
+        
+        if (TurnSystem.CurrentUnit.GetComponent<EnemyUnit>()) { MapCursor.SetGameObjInactive(); }
         Debug.Log("Unit finished using reaction menu...");
     }
     

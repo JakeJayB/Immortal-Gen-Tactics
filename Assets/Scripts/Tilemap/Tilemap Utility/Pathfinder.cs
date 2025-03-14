@@ -70,4 +70,12 @@ public class Pathfinder
     
         return Mathf.Abs(dx) + Mathf.Abs(dz);
     }
+
+    public static int DistanceBetweenUnits(Unit a, Unit b)
+    {
+        int dx = a.unitInfo.CellLocation.x - b.unitInfo.CellLocation.x;
+        int dz = a.unitInfo.CellLocation.z - b.unitInfo.CellLocation.z;
+    
+        return Mathf.Abs(dx) + Mathf.Abs(dz);
+    }
 }
