@@ -71,7 +71,8 @@ public class ChainSystem
         Debug.Log("Unit " + unit.name + " should be reacting...");
         ReactionInProgress = true;
         MapCursor.currentUnit = unit.unitInfo.Vector2CellLocation();
-        UnitMenu.ShowMenu(unit);
+
+        yield return UnitMenu.ShowMenu(unit);
         yield return new WaitUntil(ReactionHasEnded);
         Debug.Log("Unit finished using reaction menu...");
     }

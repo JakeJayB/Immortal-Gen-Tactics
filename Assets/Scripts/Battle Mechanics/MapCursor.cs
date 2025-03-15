@@ -30,7 +30,7 @@ public class MapCursor : MonoBehaviour
         if (CursorControlState == ControlState.Active) { ActiveControls(); }
         if (CursorControlState == ControlState.Action) { ActionControls(); }
     }
-
+    
     private void StartControls()
     {
         if (!Input.anyKeyDown) return;
@@ -44,25 +44,16 @@ public class MapCursor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (TilemapCreator.TileLocator[hoverCell].IsSelectable() && !TilemapCreator.UnitLocator.ContainsKey(hoverCell))
-            {
-                // Unit unit = UnitSelector.PlaceUnit(hoverCell);
-                Tile tile = TilemapCreator.TileLocator[hoverCell];
-                Unit unit = Unit.Initialize(tile.TileInfo.CellLocation + Vector3Int.up, UnitDirection.Forward);
-                TilemapCreator.UnitLocator.Add(hoverCell, unit);    
-            }
-
+            if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
+                 UnitSelector.PlaceUnit(hoverCell);
         }
-        else if(Input.GetKeyDown(KeyCode.Backspace))
+        else if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            if (TilemapCreator.TileLocator[hoverCell].IsSelectable() && TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var unit))
-            {
-                TilemapCreator.UnitLocator.Remove(hoverCell);
-                Destroy(unit.gameObj);
-            }
+            UnitSelector.ResetUnitSelected();
         }
-        else if(Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            UnitSelector.DestroyMenu();
             SelectedStartPositions();
         }
     }
@@ -85,7 +76,7 @@ public class MapCursor : MonoBehaviour
             {
                 InactiveState();
                 currentUnit = hoverCell;
-                UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
+                StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
                 UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
             }
         }
@@ -112,6 +103,7 @@ public class MapCursor : MonoBehaviour
                     ChainSystem.AddAction(hoverCell);
                 }
                 StartCoroutine(ConfirmAction());
+
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
@@ -121,7 +113,8 @@ public class MapCursor : MonoBehaviour
             MoveCursor(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
-            UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
+
+            StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
         }
     }
 
@@ -132,6 +125,7 @@ public class MapCursor : MonoBehaviour
         yield return ChainSystem.AddAction(hoverCell);
         yield return ChainSystem.ExecuteChain();
         
+        
         // Set 'currentUnit' back to the current unit in the turn system
         currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
 
@@ -139,8 +133,7 @@ public class MapCursor : MonoBehaviour
         {
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             MoveCursor(currentUnit);
-            yield return new WaitForSeconds(0.5f); // Wait until camera catches up to unit before showing menu
-            UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
+            yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
         }
         else
         { 
@@ -272,7 +265,7 @@ public class MapCursor : MonoBehaviour
             tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.START);
             startTransform = tile.TileObj.transform;
         }
-        CameraMovement.SetFocusPoint(startTransform);
+        //CameraMovement.SetFocusPoint(startTransform);
         SetHoverCell(new Vector2Int((int)startTransform.position.x, (int)startTransform.position.z));
         StartState();
     }

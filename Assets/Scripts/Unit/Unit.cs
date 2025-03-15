@@ -35,17 +35,17 @@ public class Unit : MonoBehaviour
         return unit;
     }
 
-/*    public void Initialize(Vector3Int initLocation)
-    {
-        GameObject gameObj = new GameObject("Unit " + initLocation);
-        unitInfo = gameObj.AddComponent<UnitInfo>();
-        unitInfo.CellLocation = initLocation;
+    /*    public void Initialize(Vector3Int initLocation)
+        {
+            GameObject gameObj = new GameObject("Unit " + initLocation);
+            unitInfo = gameObj.AddComponent<UnitInfo>();
+            unitInfo.CellLocation = initLocation;
 
-        //unitEquipment = gameObj.AddComponent<UnitEquipment>();
-        unitEquipment = new UnitEquipment(unitInfo);
+            //unitEquipment = gameObj.AddComponent<UnitEquipment>();
+            unitEquipment = new UnitEquipment(unitInfo);
 
-        UnitRenderer unitRenderer = gameObj.AddComponent<UnitRenderer>();
-        unitRenderer.Render(initLocation);
-        
-    }*/
+            UnitRenderer unitRenderer = gameObj.AddComponent<UnitRenderer>();
+            unitRenderer.Render(initLocation);
+
+        }*/
 }
