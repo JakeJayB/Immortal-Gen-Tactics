@@ -5,6 +5,7 @@ using UnityEngine;
 public class Move : UnitAction
 {
     public sealed override string Name { get; protected set; } = "Move";
+    public override int APCost { get; protected set; } = 1;
     public override int Priority { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Move;
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";

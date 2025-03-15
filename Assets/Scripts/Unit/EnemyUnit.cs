@@ -15,7 +15,6 @@ public class EnemyUnit : Unit
         // Remove following lines after EnemyUnits are properly
         // implemented through the json files.
         GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
-        unitInfo.currentAP = 3;
     }
 
     // Update is called once per frame
@@ -35,23 +34,29 @@ public class EnemyUnit : Unit
     {
         while (unitInfo.currentAP > 0)
         {
-            --unitInfo.currentAP;
+            var targetUnit = UnitAILogic.PrioritizeUnit(this, FindNearbyUnits());
+            Debug.Log("Enemy Unit Targeting: " + targetUnit.name);
             
-            if (InRange(TilemapCreator.UnitLocator[MapCursor.currentUnit], 1, Pattern.Linear))
+            // TODO: Replace the currentUnit value with units that the enemy can scan for nearby units instead
+            if (InRange(targetUnit, 1, Pattern.Linear))
             {
                 Debug.Log("Enemy Unit Attacking...");
-                StartCoroutine(new Attack().ExecuteAction(this, MapCursor.currentUnit));
+                ChainSystem.HoldPotentialChain(new Attack(), this);
+                yield return ChainSystem.AddAction(new Vector2Int(targetUnit.unitInfo.CellLocation.x, targetUnit.unitInfo.CellLocation.z));
             }
             else
             {
                 var tempPath =
                     Pathfinder.FindPath(
                         TilemapCreator.TileLocator[new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)],
-                        TilemapCreator.TileLocator[new Vector2Int(MapCursor.currentUnit.x, MapCursor.currentUnit.y)]);
-                var chosenTile = DecideTile(tempPath);
-                Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(-1, 1));
-                yield return new Move().ExecuteAction(this, new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
+                        TilemapCreator.TileLocator[new Vector2Int(targetUnit.unitInfo.CellLocation.x, targetUnit.unitInfo.CellLocation.z)]);
+                var chosenTile = DecideTile(targetUnit, tempPath);
+                Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
+                ChainSystem.HoldPotentialChain(new Move(), this);
+                yield return ChainSystem.AddAction(new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
             }
+
+            yield return ChainSystem.ExecuteChain();
         }
        
         EndTurn();
@@ -62,7 +67,28 @@ public class EnemyUnit : Unit
         StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
     }
 
-    private Tile DecideTile(List<Tile> tempPath)
+    private List<Unit> FindNearbyUnits()
+    {
+        List<Unit> nearbyUnits = new List<Unit>();
+        
+        // Check Units based on Unit's Movement Range for now until finalized
+        // It will save an AP for an action once they select and move towards the opponent
+        var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()],
+            unitInfo.finalMove * (unitInfo.currentAP), Pattern.Splash);
+
+        // Don't Count the same tile as the Unit conducting the search
+        surroundings.Remove(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()]);
+
+        foreach (Tile tile in surroundings)
+        {
+            var cell = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
+            if (TilemapCreator.UnitLocator.TryGetValue(cell, out Unit unit)) nearbyUnits.Add(unit);
+        }
+
+        return nearbyUnits;
+    }
+    
+    private Tile DecideTile(Unit targetUnit, List<Tile> tempPath)
     {
         Tile chosenTile = null;
         List<Tile> shortestPath = tempPath;
@@ -76,7 +102,7 @@ public class EnemyUnit : Unit
             if (!TilemapCreator.UnitLocator.ContainsKey(tileCell))
             {
                 List<Tile> foundPath = Pathfinder.FindPath(TilemapCreator.TileLocator[tileCell],
-                    TilemapCreator.TileLocator[new Vector2Int(MapCursor.currentUnit.x, MapCursor.currentUnit.y)]);
+                    TilemapCreator.TileLocator[new Vector2Int(targetUnit.unitInfo.CellLocation.x, targetUnit.unitInfo.CellLocation.z)]);
 
                 if (foundPath.Count < shortestPath.Count)
                 {
@@ -89,7 +115,7 @@ public class EnemyUnit : Unit
         return chosenTile ?? TilemapCreator.TileLocator[new Vector2Int(shortestPath[^1].TileInfo.CellLocation.x, shortestPath[^1].TileInfo.CellLocation.z)];
     }
 
-    private bool InRange(Unit unit, int range, Pattern pattern)
+    public bool InRange(Unit unit, int range, Pattern pattern)
     {
         var neighborTiles =
             Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()], range, pattern);
