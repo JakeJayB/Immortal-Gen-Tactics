@@ -19,7 +19,7 @@ public class UnitRenderer : MonoBehaviour
     }
 
 
-    private void RotateUnit(UnitDirection unitDirection)
+    public void RotateUnit(UnitDirection unitDirection)
     {
         switch (unitDirection)
         {
@@ -38,7 +38,7 @@ public class UnitRenderer : MonoBehaviour
         }
     }
 
-    private void PositionUnit(Vector3Int cellLocation)
+    public void PositionUnit(Vector3Int cellLocation)
     {
         gameObject.transform.position = new Vector3(
             cellLocation.x * TileProperties.TILE_WIDTH,

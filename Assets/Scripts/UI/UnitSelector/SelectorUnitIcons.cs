@@ -98,36 +98,53 @@ public class SelectorUnitIcons : MonoBehaviour
     }
 
 
-
-    public static void isUnitActive()
+    public static Unit GetUnit(Vector2Int tileCell)
     {
-        // if currentIdx is in activeUnits, return true
-        // else return false
+        if (!activeUnits.ContainsKey(currentIdx) && !TilemapCreator.UnitLocator.ContainsKey(tileCell))
+        {
+            return PartyManager.unitList[currentIdx];
+        }
+        return null;
     }
 
 
-
-
-    public static void GetUnit(Vector2Int cellLocation)
+    public static void ActivateCurrentUnit()
     {
-        // if currentIdx is in activeUnits, 
-
-        // get the unit from PartyManager.cs at currentIdx
-        // Add currentIdx to activeUnits, set to value cellLocation
-        // shade unitIcon
-    }
-
-
-    public static void ActivateUnit()
-    {
-        activeUnits.Add(currentIdx, PartyManager.unitList[currentIdx]);
+        Unit unit = PartyManager.unitList[currentIdx];
+        unit.gameObj.SetActive(true);
+        activeUnits.Add(currentIdx, unit);
         ShadeUnitIcon();
     }
 
-    public static void DeactivateUnit()
+    public static void DeactivateUnit(Unit unit)
     {
-        activeUnits.Remove(currentIdx);
-        UnshadeUnitIcon();
+        if (activeUnits.ContainsKey(currentIdx) && activeUnits[currentIdx] == unit)
+        {
+            // resets unit to default position
+            unit.gameObj.SetActive(false);
+            unit.unitInfo.CellLocation = Vector3Int.zero;
+            unit.unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
+
+            activeUnits.Remove(currentIdx);
+            UnshadeUnitIcon();
+
+        }
+        else
+        {
+            foreach (var item in activeUnits)
+            {
+                if (item.Value == unit)
+                {
+                    activeUnits.Remove(item.Key);
+
+                    // resets unit to default position
+                    unit.gameObj.SetActive(false);
+                    unit.unitInfo.CellLocation = Vector3Int.zero;
+                    unit.unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
+                    break;
+                }
+            }
+        }
     }
 
     public static void ShadeUnitIcon()

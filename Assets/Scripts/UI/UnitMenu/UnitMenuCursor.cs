@@ -63,11 +63,14 @@ public class UnitMenuCursor : MonoBehaviour
         slotIndex = 0;
 
         CursorRectTransform = GetComponent<RectTransform>();
-        
+
         // Reset Cursor Back to the First Slot and Update the Textbox
-        PositionCursor(MenuSlots[slotIndex]);
-        UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
-        
+        if(menuSlots != null)
+        {
+            PositionCursor(MenuSlots[slotIndex]);
+            UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
+        }
+
         // Set the Cursor to be above all slots
         transform.SetSiblingIndex(transform.parent.childCount - 1);
     }

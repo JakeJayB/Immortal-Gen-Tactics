@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.CanvasScaler;
 using Object = UnityEngine.Object;
 
 public class UnitMenu : MonoBehaviour
@@ -108,10 +109,13 @@ public class UnitMenu : MonoBehaviour
         }
     }
 
-    public static void ShowMenu(Unit unit)
+    public static IEnumerator ShowMenu(Unit unit)
     {
+        yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
+        Debug.Log("Stopped tweening!!");
+
         var canvasRect = Canvas.GetComponent<RectTransform>();
-        
+
         // Convert world position to viewport position (0-1 range)
         Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.transform.position);
 
@@ -122,7 +126,7 @@ public class UnitMenu : MonoBehaviour
         );
 
         Menu.GetComponent<RectTransform>().anchoredPosition = menuPosition;
-        
+
         Menu.SetActive(true);
     }
 
