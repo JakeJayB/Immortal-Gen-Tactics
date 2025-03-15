@@ -5,6 +5,7 @@ using UnityEngine;
 public class Wait : UnitAction
 {
     public sealed override string Name { get; protected set; } = "Wait";
+    public override int APCost { get; protected set; } = 0;
     public override int Priority { get; protected set; }
     public override ActionType ActionType { get; protected set; } = ActionType.Wait;
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_wait";

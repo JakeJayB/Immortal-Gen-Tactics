@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class UnitAction
 {
     public abstract string Name { get; protected set; }
+    public abstract int APCost { get; protected set; }
     public abstract int Priority { get; protected set; }
     public abstract ActionType ActionType { get; protected set; }
     public abstract string SlotImageAddress { get; protected set; }
@@ -15,4 +16,6 @@ public abstract class UnitAction
 
     public abstract void ActivateAction(Unit unit);
     public abstract IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell);
+
+    protected void PayAPCost(Unit unit) { unit.unitInfo.currentAP -= APCost; }
 }

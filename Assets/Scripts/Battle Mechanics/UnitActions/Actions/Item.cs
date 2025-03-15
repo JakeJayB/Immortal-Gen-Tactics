@@ -6,6 +6,7 @@ public class Item : UnitAction
 {
     // Start is called before the first frame update
     public override string Name { get; protected set; } = "Item";
+    public override int APCost { get; protected set; } = 0;
     public override int Priority { get; protected set; }
     public override ActionType ActionType { get; protected set; } = ActionType.Item;
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";
