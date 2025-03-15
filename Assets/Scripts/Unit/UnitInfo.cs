@@ -80,6 +80,6 @@ public class UnitInfo : MonoBehaviour
     }
     
     public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
-
+    
     public void RefreshAP() { currentAP = finalAP; }
 }

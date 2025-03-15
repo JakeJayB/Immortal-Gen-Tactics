@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public GameObject gameObj { get; private set; }
+    public GameObject gameObj { get; set; }
 
     public UnitInfo unitInfo { get; set; }
 

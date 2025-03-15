@@ -25,6 +25,27 @@ public class EnemyUnit : Unit
             StartTurn();
         }
     }
+    
+    public static Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
+    {
+        GameObject gameObj = new GameObject("Enemy Unit " + initLocation);
+        EnemyUnit unit = gameObj.AddComponent<EnemyUnit>();
+        unit.gameObj = gameObj;
+
+        unit.unitInfo = gameObj.AddComponent<UnitInfo>();
+        unit.unitInfo.CellLocation = initLocation;
+        unit.unitInfo.UnitDirection = unitDirection;
+        unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
+
+        unit.unitEquipment = new UnitEquipment(unit.unitInfo);
+
+        unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
+        unit.unitRenderer.Render(initLocation, unitDirection);
+
+        unit.gameObj.AddComponent<BillboardEffect>();
+        unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();
+        return unit;
+    }
 
     public void StartTurn() { StartCoroutine(DecideTurnOption()); }
 

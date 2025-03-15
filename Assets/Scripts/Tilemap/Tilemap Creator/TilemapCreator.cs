@@ -113,7 +113,7 @@ public class TilemapCreator : MonoBehaviour
     {
         foreach (UnitData unitData in units)
         {
-            Unit unit = Unit.Initialize(unitData.cellLocation, unitData.unitDirection);
+            Unit unit = EnemyUnit.InitializeAI(unitData.cellLocation, unitData.unitDirection);
             UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
         }
 
