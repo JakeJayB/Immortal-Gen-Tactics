@@ -6,6 +6,7 @@ public enum ActionType
 {
     Move,
     Weapon,
+    Accessory,
     Item,
     Wait
 }

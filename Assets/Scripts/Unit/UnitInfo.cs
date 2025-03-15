@@ -62,7 +62,7 @@ public class UnitInfo : MonoBehaviour
         equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);
 
         ActionSet = new UnitActionSet();
-        ActionSet.AddAction(new Item());
+        ActionSet.AddAction(new Pouch());
     }
 
 

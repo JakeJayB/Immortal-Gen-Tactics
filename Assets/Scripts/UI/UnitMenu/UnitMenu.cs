@@ -16,6 +16,7 @@ public class UnitMenu : MonoBehaviour
     public static UnitMenuTextbox Textbox { get; private set; }
     public static UnitMenuCursor Cursor { get; private set; }
     public static Camera MainCamera;
+    public static bool InSubMenu = false;
 
 /*    private void Awake()
     {
@@ -47,8 +48,14 @@ public class UnitMenu : MonoBehaviour
         // if menu is active and S is pressed, hide the menu and activate the map cursor
         if (Input.GetKeyDown(KeyCode.S) && Menu.activeSelf)
         {
-            HideMenu();
-            MapCursor.ActiveState();
+            if (InSubMenu) {
+                InSubMenu = false;
+                DisplayUnitMenu(TilemapCreator.UnitLocator[MapCursor.currentUnit].unitInfo.ActionSet.GetAllActions());
+            }
+            else {
+                HideMenu();
+                MapCursor.ActiveState();
+            }
         }
     }
     
