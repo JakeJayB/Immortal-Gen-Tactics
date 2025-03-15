@@ -57,11 +57,14 @@ public class ChainSystem
             var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
             var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.finalSense, Pattern.Splash);
 
-            if (Chain.All(chain => chain.Item3 != unit) && unitSense.Contains(TilemapCreator.TileLocator[target]))
-            {
-                if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
-                else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
-            }
+            // Unit cannot react if they don't have any available AP
+            // Unit cannot react if they already added an action to the ChainSystem
+            // Unit cannot react if they are too far to sense the initial action
+            if (unit.unitInfo.currentAP <= 0 || Chain.Any(chain => chain.Item3 == unit) ||
+                !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
+            
+            if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
+            else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
         }
 
         yield return null;
