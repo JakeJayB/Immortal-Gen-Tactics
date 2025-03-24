@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
             SoundLibrary = new Dictionary<string, AudioClip>();
             foreach(var sound in soundList)
                 SoundLibrary[sound.soundName] = sound.clip;
-            soundList.Clear();
+            soundList = null;
         }
         else
         {

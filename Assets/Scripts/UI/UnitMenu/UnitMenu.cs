@@ -112,7 +112,6 @@ public class UnitMenu : MonoBehaviour
     public static IEnumerator ShowMenu(Unit unit)
     {
         yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
-        Debug.Log("Stopped tweening!!");
 
         var canvasRect = Canvas.GetComponent<RectTransform>();
 

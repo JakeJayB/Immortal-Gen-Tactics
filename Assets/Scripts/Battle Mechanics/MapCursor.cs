@@ -113,7 +113,7 @@ public class MapCursor : MonoBehaviour
         {
             InactiveState();
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
-            MoveCursor(currentUnit);
+            SetHoverCell(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
 
@@ -196,7 +196,10 @@ public class MapCursor : MonoBehaviour
     private static void MoveCursor(Vector2Int cell)
     {
         if (TilemapCreator.TileLocator.ContainsKey(cell))
+        {
             SetHoverCell(cell);
+            SoundFXManager.PlaySoundFXClip("MapCursor", TilemapCreator.TileLocator[cell].TileInfo.CellLocation, 0.75f);
+        }
     }
 
     public static void StartMove(Vector3Int cell)
@@ -268,7 +271,6 @@ public class MapCursor : MonoBehaviour
             tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.START);
             startTransform = tile.TileObj.transform;
         }
-        //CameraMovement.SetFocusPoint(startTransform);
         SetHoverCell(new Vector2Int((int)startTransform.position.x, (int)startTransform.position.z));
         StartState();
     }
