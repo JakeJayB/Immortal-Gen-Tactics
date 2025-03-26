@@ -27,7 +27,7 @@ public class ActionUtility
         }
     }*/
 
-    private static Tuple<List<Tile>, OverlayMaterial> DetermineParameters(string actionType, Unit unit) 
+    public static Tuple<List<Tile>, OverlayMaterial> DetermineParameters(string actionType, Unit unit) 
     {
         var unitLocation = unit.unitInfo.CellLocation;
         switch (actionType)

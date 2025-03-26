@@ -10,9 +10,9 @@ public class UnitInfo : MonoBehaviour
     public Sprite sprite;
 
     // Unit Current Stat Values
-    protected internal int currentHP;
-    protected internal int currentMP;
-    protected internal int currentAP;
+    public int currentHP { get; protected internal set; }
+    public int currentMP { get; protected internal set; }
+    public int currentAP { get; protected internal set; }
     protected internal int currentLevel;
     protected int currentEXP;
     

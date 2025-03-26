@@ -14,6 +14,8 @@ public abstract class UnitAction
 
     public abstract Sprite SlotImage();
 
+    public abstract float HeuristicScore(EnemyUnit unit, Vector2Int selectedCell);
+
     public abstract void ActivateAction(Unit unit);
     public abstract IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell);
 

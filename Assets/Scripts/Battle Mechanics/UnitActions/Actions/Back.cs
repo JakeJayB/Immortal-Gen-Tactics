@@ -11,6 +11,10 @@ public class Back : UnitAction
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_back";
     
     public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
+    public override float HeuristicScore(EnemyUnit unit, Vector2Int selectedCell)
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override void ActivateAction(Unit unit)
     {

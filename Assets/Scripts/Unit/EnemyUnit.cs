@@ -6,6 +6,14 @@ using UnityEngine;
 // TODO: Create a dynamic behavior that scans tiles for units to target move for.
 public class EnemyUnit : Unit
 {
+    // AI Behavioral Factors
+    public float Aggressive { get; private set; } = 2;      // Values Damage Dealt
+    public float Defensive { get; private set; }            // Values Damage Mitigated
+    public float Accuracy { get; private set; }             // Values Actions with Higher Chances of Hitting
+    public float Active { get; private set; }               // Values AP spent as Turn Actions
+    public float SelfCentered { get; private set; }         // Values Supporting their Self
+    public float Supportive { get; private set; }           // Values Supporting Allies
+    
     // Start is called before the first frame update
     void Start()
     {
