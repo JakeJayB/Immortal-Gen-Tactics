@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,9 +63,23 @@ public class UnitInfo : MonoBehaviour
         equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);
 
         ActionSet = new UnitActionSet();
-        ActionSet.AddAction(new Pouch());
+        //ActionSet.AddAction(new Pouch());
+        ActionSet.AddAction(new Potion());
+        
+        ResetCurrentStatPoints();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L)){ Debug.Log(name + "'s HP: " + currentHP + "/" + finalHP);}
+    }
+
+    public void ResetCurrentStatPoints()
+    {
+        currentHP = finalHP;
+        currentMP = finalMP;
+        currentAP = finalAP;
+    }
 
     public void ApplyEquipmentBonuses()
     {

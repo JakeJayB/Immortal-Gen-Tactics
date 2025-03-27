@@ -78,4 +78,12 @@ public class Pathfinder
     
         return Mathf.Abs(dx) + Mathf.Abs(dz);
     }
+    
+    public static int DistanceBetweenCells(Vector3Int cellA, Vector3Int cellB)
+    {
+        int dx = cellA.x - cellB.x;
+        int dz = cellA.z - cellB.z;
+    
+        return Mathf.Abs(dx) + Mathf.Abs(dz);
+    }
 }

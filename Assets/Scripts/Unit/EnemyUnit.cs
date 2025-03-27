@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 // TODO: Create a dynamic behavior that scans tiles for units to target move for.
 public class EnemyUnit : Unit
 {
+    // AI Behavior Set
+    public List<AIBehavior> AIBehavior;
+    
     // AI Behavioral Factors
     public float Aggressive { get; private set; } = 2;      // Values Damage Dealt
     public float Defensive { get; private set; }            // Values Damage Mitigated
@@ -19,6 +23,21 @@ public class EnemyUnit : Unit
     {
         unitInfo = GetComponent<UnitInfo>();
         unitMovement = GetComponent<UnitMovement>();
+        AIBehavior = new List<AIBehavior>()
+        {
+            new AIBehavior
+            {
+                Priority = 0,
+                Condition = () => RuleBasedAILogic.CurrentHPIsBelowPercent(0.4f, unitInfo) && RuleBasedAILogic.HasItem(new Potion(), unitInfo),
+                Action = new Potion()
+            },
+            new AIBehavior
+            {
+                Priority = 9,
+                Condition = () => RuleBasedAILogic.CurrentAPIsBelow(1, unitInfo),
+                Action = new Wait()
+            },
+        };
         
         // Remove following lines after EnemyUnits are properly
         // implemented through the json files.
@@ -28,10 +47,7 @@ public class EnemyUnit : Unit
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            StartTurn();
-        }
+        
     }
     
     public static Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
@@ -55,12 +71,29 @@ public class EnemyUnit : Unit
         return unit;
     }
 
-    public void StartTurn() { StartCoroutine(DecideTurnOption()); }
+    public void StartTurn() { StartCoroutine(DecideAction()); }
 
     // TODO: Make the executions of UnitActions as coroutines so that no future instructions will
     // TODO: execute until they finish. This is especially important for EnemyAI Action Calls.
-    public IEnumerator DecideTurnOption()
+    private IEnumerator DecideAction()
     {
+        AIBehavior = AIBehavior.OrderBy(a => a.Priority).ToList();
+
+        foreach (var behavior in AIBehavior)
+        {
+            if (!behavior.Condition()) continue;
+            
+            Debug.Log("AIUnit performing " + behavior.Action.Name + "!");
+            ChainSystem.HoldPotentialChain(behavior.Action, this);
+            yield return ChainSystem.AddAction(new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z));
+            yield return ChainSystem.ExecuteChain();
+            break;
+        }
+        
+        Debug.Log(name + " choose no action this turn.");
+        EndTurn();
+        
+        /*
         while (unitInfo.currentAP > 0)
         {
             var targetUnit = UnitAILogic.PrioritizeUnit(this, FindNearbyUnits());
@@ -89,10 +122,12 @@ public class EnemyUnit : Unit
         }
        
         EndTurn();
+        */
     }
     
     private void EndTurn()
     {
+        Debug.Log(name + " is activating potion from its EndTurn()!");
         StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
     }
 

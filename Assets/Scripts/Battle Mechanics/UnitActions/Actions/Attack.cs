@@ -50,8 +50,8 @@ public class Attack : UnitAction
             Vector2Int nextCell = originCell + direction * i;
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
             {
-                targetUnit.unitInfo.finalHP -= unit.unitInfo.finalAttack;
-                Debug.Log("Attack: unit attacked!");
+                DamageCalculator.DealPhysicalDamage(unit.unitInfo, targetUnit.unitInfo);
+                Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.finalHP);
             }
         }
         

@@ -34,6 +34,7 @@ public class Potion : UnitAction
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        throw new System.NotImplementedException();
+        Debug.Log(unit.name + " is using a potion.");
+        yield return null;
     }
 }
