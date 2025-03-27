@@ -10,6 +10,12 @@ public class DamageCalculator
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
     }
 
+    public static void HealFixedAmount(int amount, UnitInfo target)
+    {
+        target.currentHP += amount;
+        target.currentHP = target.currentHP > target.finalHP ? target.finalHP : target.currentHP;
+    }
+
     private static int ApplyDamageRoll(int baseDamage) {
         return (int)(baseDamage + baseDamage * Random.Range(-1.2f, 1.2f));
     }

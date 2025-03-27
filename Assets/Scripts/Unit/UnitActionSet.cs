@@ -48,6 +48,14 @@ public class UnitActionSet
         Debug.Log($"Unit has learned {action.Name}!");
     }
 
+    public void RemoveAction(UnitAction action) {
+        var actionTypeSet = unitActions[action.ActionType];
+        
+        if (UnitActionExistsInSet(actionTypeSet, action)) {
+            actionTypeSet.Remove(actionTypeSet.First(a => a.GetType() == action.GetType()));
+        }
+    }
+
     private bool UnitActionExistsInSet(List<UnitAction> actions, UnitAction action)
     {
         foreach (UnitAction actionInList in actions)

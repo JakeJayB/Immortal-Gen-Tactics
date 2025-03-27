@@ -29,12 +29,23 @@ public class Potion : UnitAction
 
     public override void ActivateAction(Unit unit)
     {
-        throw new System.NotImplementedException();
+        UnitMenu.HideMenu();
+        ActionUtility.ShowSelectableTilesForAction(unit, Name);
+        ChainSystem.HoldPotentialChain(this, unit);
+        MapCursor.ActionState();
     }
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        Debug.Log(unit.name + " is using a potion.");
+        // Spend an Action Point to execute the Action
+        PayAPCost(unit);
+        
+        // Consume Item and Remove it from ActionSet
+        unit.unitInfo.ActionSet.RemoveAction(this);
+        
+        // Heal Unit by Specified Amount
+        DamageCalculator.HealFixedAmount(20, unit.unitInfo);
+        Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
         yield return null;
     }
 }

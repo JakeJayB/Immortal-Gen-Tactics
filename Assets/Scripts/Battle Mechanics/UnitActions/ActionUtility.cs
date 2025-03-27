@@ -36,6 +36,11 @@ public class ActionUtility
                 return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove, Pattern.Splash), OverlayMaterial.MOVE);
             case "Attack":
                 return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalAttack, Pattern.Linear), OverlayMaterial.ATTACK);
+            case "Potion":
+                return new Tuple<List<Tile>, OverlayMaterial>(
+                    Rangefinder.GetTilesInRange(
+                        TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 0, Pattern.Splash),
+                    OverlayMaterial.MOVE);
             default:
                 throw new ArgumentException("ActionUtility: Invalid action type");
         }

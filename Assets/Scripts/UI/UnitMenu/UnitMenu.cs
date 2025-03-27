@@ -113,6 +113,8 @@ public class UnitMenu : MonoBehaviour
     {
         yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
 
+        DisplayUnitMenu(unit.unitInfo.ActionSet.GetAllActions());
+        
         var canvasRect = Canvas.GetComponent<RectTransform>();
 
         // Convert world position to viewport position (0-1 range)
