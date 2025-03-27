@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundFXManager : MonoBehaviour
 {
     private static SoundFXManager instance;
-    private const float TIME_OFFSET = 0.5f; // offset to ensure audio plays before being destroyed
+    private const float TIME_OFFSET = 0.4f; // offset to ensure audio plays before being destroyed
     [SerializeField] private AudioSource soundFXObject;
 
 
@@ -36,11 +36,13 @@ public class SoundFXManager : MonoBehaviour
             return;
         }
 
-        AudioSource audioSource = Instantiate(instance.soundFXObject, spawnTransform.position, Quaternion.identity);
+        // audioSource = Instantiate(instance.soundFXObject, spawnTransform.position, Quaternion.identity);
+        AudioSource audioSource = Instantiate(instance.soundFXObject, Camera.main.transform.position, Quaternion.identity);
 
         audioSource.clip = AudioManager.SoundLibrary[audioClip];
 
         audioSource.volume = volume;
+
 
         audioSource.Play();
 

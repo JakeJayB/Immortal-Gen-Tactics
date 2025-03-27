@@ -198,7 +198,8 @@ public class MapCursor : MonoBehaviour
         if (TilemapCreator.TileLocator.ContainsKey(cell))
         {
             SetHoverCell(cell);
-            SoundFXManager.PlaySoundFXClip("MapCursor", TilemapCreator.TileLocator[cell].TileInfo.CellLocation, 0.75f);
+            SoundFXManager.PlaySoundFXClip("MapCursor", Camera.main.transform, 0.75f);
+
         }
     }
 

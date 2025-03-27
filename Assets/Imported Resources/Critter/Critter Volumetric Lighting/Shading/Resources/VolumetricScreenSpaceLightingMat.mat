@@ -192,15 +192,15 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseStep: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _anchorForward: {r: -0.6123726, g: -0.5000002, b: 0.6123723, a: 0}
-    - _anchorPosition: {r: 3.6049166, g: 3.7003727, b: -3.824903, a: 0}
-    - _anchorUp: {r: -0.49299175, g: 0.84705734, b: 0.19862801, a: 0}
+    - _anchorForward: {r: -0.6123724, g: -0.50000006, b: -0.6123727, a: 0}
+    - _anchorPosition: {r: 3.6788933, g: 3.25399, b: 5.5488043, a: 0}
+    - _anchorUp: {r: -0.006210193, g: 0.77761513, b: -0.62871, a: 0}
     - _cloudDataAnchorPosition: {r: 13.126203, g: 21.220379, b: -23.203003, a: 0}
     - _cloudDataAnchorUp: {r: -0.7905737, g: 0.38144845, b: -0.47905147, a: 0}
     - _cloudDataProjectionOrigo: {r: 13.186621, g: 13.290992, b: -29.616547, a: 0}
     - _cloudDataProjectionUvDirX: {r: -0.9999992, g: 0, b: 0.0011967393, a: 0}
     - _cloudDataProjectionUvDirY: {r: -0.0004574252, g: 0, b: -0.9999999, a: 0}
-    - _planeOrigo: {r: 1.0836957, g: 2.9650087, b: -6.9465475, a: 0}
+    - _planeOrigo: {r: 6.9038897, g: 1.698894, b: 3.5935402, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1457556406269589912
 MonoBehaviour:
