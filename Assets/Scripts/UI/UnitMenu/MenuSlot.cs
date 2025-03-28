@@ -28,6 +28,6 @@ public class MenuSlot : MonoBehaviour
         // Position the UI element
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.localScale = new Vector3(SLOT_SCALE, SLOT_SCALE, SLOT_SCALE);
-        rectTransform.anchoredPosition = new Vector2((slotNumber * SLOT_MARGIN) + (ADJUST_MARGIN * UnitMenu.STANDARD_MENU_SIZE - totalActions), 0);
+        rectTransform.anchoredPosition = new Vector2((slotNumber * SLOT_MARGIN) + (ADJUST_MARGIN * (UnitMenu.STANDARD_MENU_SIZE - totalActions)), 0);
     }
 }
