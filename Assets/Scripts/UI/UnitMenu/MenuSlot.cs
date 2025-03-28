@@ -7,6 +7,7 @@ public class MenuSlot : MonoBehaviour
 {
     private const float SLOT_SCALE = 0.5f;
     private const float SLOT_MARGIN = 48f;
+    private const float ADJUST_MARGIN = SLOT_MARGIN / 2;
     
     public string Name { get; private set; }
     public UnitAction Action { get; private set; }
@@ -22,11 +23,11 @@ public class MenuSlot : MonoBehaviour
         image.sprite = unitAction.SlotImage();
     }
 
-    public void PositionSlot(int slotNumber)
+    public void PositionSlot(int slotNumber, int totalActions)
     {
         // Position the UI element
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.localScale = new Vector3(SLOT_SCALE, SLOT_SCALE, SLOT_SCALE);
-        rectTransform.anchoredPosition = new Vector2(slotNumber * SLOT_MARGIN, 0);
+        rectTransform.anchoredPosition = new Vector2((slotNumber * SLOT_MARGIN) + (ADJUST_MARGIN * UnitMenu.STANDARD_MENU_SIZE - totalActions), 0);
     }
 }

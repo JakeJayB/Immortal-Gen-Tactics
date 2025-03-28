@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.UI.CanvasScaler;
-using Object = UnityEngine.Object;
 
 public class UnitMenu : MonoBehaviour
 {
+    // Size of the UnitMenu that Doesn't Need Slot Positioning Adjustments
+    public const int STANDARD_MENU_SIZE = 4;
+    
     private static Canvas Canvas;
     public static GameObject Menu { get; private set; }
     public static List<MenuSlot> MenuSlots { get; private set; }
@@ -90,7 +87,7 @@ public class UnitMenu : MonoBehaviour
         
             // TODO: Makes sure to get actions from actual unit instead of the testing list of UnitActions
             slot.DefineSlot(actions[i]);
-            slot.PositionSlot(i);
+            slot.PositionSlot(i, actions.Count);
         
             MenuSlots.Add(slot);
         }
