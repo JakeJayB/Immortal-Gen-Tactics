@@ -45,7 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf26e7c6d3494f418016a8f2f5e7972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundList: []
+  soundList:
+  - soundName: UnitMenuCursor
+    clip: {fileID: 8300000, guid: 6085487d1299d4d398d573b48943798d, type: 3}
+  - soundName: MapCursor
+    clip: {fileID: 8300000, guid: b2a88f01559234c4e80da89c069aa97d, type: 3}
+  - soundName: Select
+    clip: {fileID: 8300000, guid: 901afe9480865fe47926ef2180851b81, type: 3}
 --- !u!114 &7200954366362640480
 MonoBehaviour:
   m_ObjectHideFlags: 0

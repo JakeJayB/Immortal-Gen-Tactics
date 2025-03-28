@@ -40,6 +40,7 @@ public class UnitMenuCursor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             MenuSlots[slotIndex].Action.ActivateAction(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
+            SoundFXManager.PlaySoundFXClip("Select", Camera.main.transform, 1f);
         }
     }
 

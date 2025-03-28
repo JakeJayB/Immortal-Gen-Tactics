@@ -81,6 +81,8 @@ public class MapCursor : MonoBehaviour
                 currentUnit = hoverCell;
                 StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
                 UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
+                SoundFXManager.PlaySoundFXClip("Select", Camera.main.transform, 1f);
+
             }
         }
     }
@@ -105,6 +107,7 @@ public class MapCursor : MonoBehaviour
                     // Call IEnumerator as a normal function, ignoring 'yield return' instructions
                     ChainSystem.AddAction(hoverCell);
                 }
+                SoundFXManager.PlaySoundFXClip("Select", Camera.main.transform, 1f);
                 StartCoroutine(ConfirmAction());
 
             }

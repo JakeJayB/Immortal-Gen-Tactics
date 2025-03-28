@@ -43,6 +43,7 @@ public class SoundFXManager : MonoBehaviour
 
         audioSource.volume = volume;
 
+        audioSource.spatialBlend = 0f;
 
         audioSource.Play();
 
