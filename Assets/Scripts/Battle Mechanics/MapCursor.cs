@@ -49,6 +49,8 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
                  UnitSelector.PlaceUnit(hoverCell);
+            else
+                SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
@@ -119,6 +121,8 @@ public class MapCursor : MonoBehaviour
             SetHoverCell(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+            SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
+
 
             StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
         }

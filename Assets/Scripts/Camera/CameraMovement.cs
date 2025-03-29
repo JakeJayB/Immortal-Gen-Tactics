@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 public class CameraMovement : MonoBehaviour
 {
     private const float ROTATION_ANGLE = 90f; // Degrees per key press
-    private const float ROTATION_SPEED =0.7f; // Smoothness of rotation
+    private const float ROTATION_SPEED = 0.7f; // Smoothness of rotation
     private const float STEEPEN_SPEED = 0.4f; // Smoothness of steepening
     private const float MOVE_SPEED = 0.2f; // Smoothness of movement
 
@@ -43,14 +43,14 @@ public class CameraMovement : MonoBehaviour
         if (!LeanTween.isTweening(gameObject))
         {
             int currentAngle = Mathf.RoundToInt(transform.rotation.eulerAngles.x);
-            if(currentAngle >= 30)
+            if(currentAngle > 30)
             {
-                LeanTween.rotateAroundLocal(gameObject, Vector3.right, -10f, STEEPEN_SPEED).setEase(LeanTweenType.easeInOutQuad);
+                LeanTween.rotateAroundLocal(gameObject, Vector3.right, -5f, STEEPEN_SPEED).setEase(LeanTweenType.easeInOutQuad);
 
             }
-            else if(currentAngle < 30)
+            else if(currentAngle <= 30)
             {
-                LeanTween.rotateAroundLocal(gameObject, Vector3.right, 10f, STEEPEN_SPEED).setEase(LeanTweenType.easeInOutQuad);
+                LeanTween.rotateAroundLocal(gameObject, Vector3.right, 5f, STEEPEN_SPEED).setEase(LeanTweenType.easeInOutQuad);
             }
 
         }

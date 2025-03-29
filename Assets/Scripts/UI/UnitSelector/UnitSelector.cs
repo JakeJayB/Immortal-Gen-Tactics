@@ -20,11 +20,13 @@ public class UnitSelector : MonoBehaviour
         {
             // get the next unit to the right
             SelectorUnitIcons.NextUnit();
+            SoundFXManager.PlaySoundFXClip("Next", 0.5f);
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
             // get the previous unit to the left
             SelectorUnitIcons.PreviousUnit();
+            SoundFXManager.PlaySoundFXClip("Next", 0.5f);
         }
     }
 
@@ -70,8 +72,16 @@ public class UnitSelector : MonoBehaviour
         }
     }
 
-    public static void ResetUnitSelected() => unitSelected = null;
-    
+    public static void ResetUnitSelected()
+    {
+        if(unitSelected != null)
+        {
+            unitSelected = null;
+            SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
+        }
+    }
+
+
     public static void PlaceUnit(Vector2Int tileCell)
     {
         // New pseudocode
@@ -107,6 +117,7 @@ public class UnitSelector : MonoBehaviour
                     // Deleting/deactivating unit
                     TilemapCreator.UnitLocator.Remove(tileCell);
                     SelectorUnitIcons.DeactivateUnit(unitSelected);
+                    SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
                     unitSelected = null;
                 }
                 else // if the previously selected unit is different from the unit on tileCell
@@ -177,6 +188,10 @@ public class UnitSelector : MonoBehaviour
                     SelectorUnitIcons.ActivateCurrentUnit();
                     SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
+                }
+                else
+                {
+                    SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
                 }
             }
 

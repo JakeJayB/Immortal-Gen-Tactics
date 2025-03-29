@@ -54,6 +54,7 @@ public class UnitMenu : MonoBehaviour
                 HideMenu();
                 MapCursor.ActiveState();
             }
+            SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
     }
     
