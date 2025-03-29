@@ -131,6 +131,7 @@ public class UnitSelector : MonoBehaviour
                     TilemapCreator.UnitLocator.Add(unitSelected.unitInfo.Vector2CellLocation(), unitSelected);
                     TilemapCreator.UnitLocator.Add(unit.unitInfo.Vector2CellLocation(), unit);
 
+                    SoundFXManager.PlaySoundFXClip("Select", 0.2f);
                     unitSelected = null;
                 }
             }
@@ -138,6 +139,8 @@ public class UnitSelector : MonoBehaviour
             {
                 // set unitSelected to the unit on tileCell
                 unitSelected = unit;
+                SoundFXManager.PlaySoundFXClip("Select", 0.2f);
+
             }
         }
         else // if no unit is on the selected tileCell
@@ -153,6 +156,7 @@ public class UnitSelector : MonoBehaviour
                 unitSelected.unitInfo.CellLocation = newLocation;
                 unitSelected.unitRenderer.PositionUnit(newLocation);
                 TilemapCreator.UnitLocator.Add(unitSelected.unitInfo.Vector2CellLocation(), unitSelected);
+                SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
                 unitSelected = null;
             }
@@ -171,9 +175,11 @@ public class UnitSelector : MonoBehaviour
 
                     // signal to SelectorUnitIcons that the new unit is now active
                     SelectorUnitIcons.ActivateCurrentUnit();
-                }
+                    SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
+                }
             }
+
         }
 
     }

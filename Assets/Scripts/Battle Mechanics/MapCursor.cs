@@ -45,12 +45,12 @@ public class MapCursor : MonoBehaviour
         MoveCursorRight();
 
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
                  UnitSelector.PlaceUnit(hoverCell);
         }
-        else if (Input.GetKeyDown(KeyCode.Backspace))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             UnitSelector.ResetUnitSelected();
         }
@@ -81,7 +81,7 @@ public class MapCursor : MonoBehaviour
                 currentUnit = hoverCell;
                 StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
                 UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
-                SoundFXManager.PlaySoundFXClip("Select", Camera.main.transform, 1f);
+                SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }
         }
@@ -107,7 +107,7 @@ public class MapCursor : MonoBehaviour
                     // Call IEnumerator as a normal function, ignoring 'yield return' instructions
                     ChainSystem.AddAction(hoverCell);
                 }
-                SoundFXManager.PlaySoundFXClip("Select", Camera.main.transform, 1f);
+                SoundFXManager.PlaySoundFXClip("Select", 0.2f);
                 StartCoroutine(ConfirmAction());
 
             }
@@ -201,7 +201,7 @@ public class MapCursor : MonoBehaviour
         if (TilemapCreator.TileLocator.ContainsKey(cell))
         {
             SetHoverCell(cell);
-            SoundFXManager.PlaySoundFXClip("MapCursor", Camera.main.transform, 0.75f);
+            SoundFXManager.PlaySoundFXClip("MapCursor", 0.75f);
 
         }
     }

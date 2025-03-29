@@ -22,7 +22,7 @@ public class SoundFXManager : MonoBehaviour
     }
 
 
-    public static void PlaySoundFXClip(string audioClip, Transform spawnTransform, float volume)
+    public static void PlaySoundFXClip(string audioClip, float volume)
     {
         if (instance == null)
         {
@@ -36,7 +36,6 @@ public class SoundFXManager : MonoBehaviour
             return;
         }
 
-        // audioSource = Instantiate(instance.soundFXObject, spawnTransform.position, Quaternion.identity);
         AudioSource audioSource = Instantiate(instance.soundFXObject, Camera.main.transform.position, Quaternion.identity);
 
         audioSource.clip = AudioManager.SoundLibrary[audioClip];

@@ -12,7 +12,6 @@ public class TilemapCreator : MonoBehaviour
     public static Dictionary<TileType, GameObject> OverlayPrefabs; // Contains Overlay prefabs for every TileType
     public static Dictionary<Vector2Int, Unit> UnitLocator { get; private set; } // Contains all Units in game scene
     
-
     [SerializeField] private TurnSystem turnSystem;
 
     [SerializeField] private GameObject OverlayFlatPrefab;
@@ -21,7 +20,7 @@ public class TilemapCreator : MonoBehaviour
     [SerializeField] private GameObject OverlayStairPrefab;
 
 
-    void Start()
+    private void Awake()
     {
         TileLocator = new Dictionary<Vector2Int, Tile>();
         UnitLocator = new Dictionary<Vector2Int, Unit>();
@@ -34,7 +33,11 @@ public class TilemapCreator : MonoBehaviour
             {TileType.Slanted_Corner, OverlaySlantedCornerPrefab},
             {TileType.Stairs, OverlayStairPrefab},
         };
+    }
 
+
+    void Start()
+    {
         LoadFromJson();
     }
 

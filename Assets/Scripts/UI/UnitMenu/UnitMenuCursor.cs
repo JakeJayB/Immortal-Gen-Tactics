@@ -24,7 +24,7 @@ public class UnitMenuCursor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             slotIndex = slotIndex - 1 < 0 ? MenuSlots.Count - 1 : (slotIndex - 1) % MenuSlots.Count;
-            SoundFXManager.PlaySoundFXClip("UnitMenuCursor", Camera.main.transform, 1f);
+            SoundFXManager.PlaySoundFXClip("UnitMenuCursor", 1f);
             PositionCursor(MenuSlots[slotIndex]);
             UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
         }
@@ -32,7 +32,7 @@ public class UnitMenuCursor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             slotIndex = (slotIndex + 1) % MenuSlots.Count;
-            SoundFXManager.PlaySoundFXClip("UnitMenuCursor", Camera.main.transform, 1f);
+            SoundFXManager.PlaySoundFXClip("UnitMenuCursor", 1f);
             PositionCursor(MenuSlots[slotIndex]);
             UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
         }
@@ -40,7 +40,7 @@ public class UnitMenuCursor : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             MenuSlots[slotIndex].Action.ActivateAction(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
-            SoundFXManager.PlaySoundFXClip("Select", Camera.main.transform, 1f);
+            SoundFXManager.PlaySoundFXClip("Select", 0.2f);
         }
     }
 
