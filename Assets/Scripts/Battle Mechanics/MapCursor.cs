@@ -10,7 +10,7 @@ public class MapCursor : MonoBehaviour
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
     
-    private enum ControlState
+    public enum ControlState
     {
         Start,
         Active,
@@ -294,6 +294,8 @@ public class MapCursor : MonoBehaviour
         TurnSystem.StartLoop();
     }
 
+
+    public static ControlState GetState() { return CursorControlState; }
     public static void StartState() { CursorControlState = ControlState.Start; }
     public static void ActiveState() { CursorControlState = ControlState.Active; }
     public static void ActionState() { CursorControlState = ControlState.Action; }

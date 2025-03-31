@@ -18,6 +18,8 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
+        if (MapCursor.GetState() == MapCursor.ControlState.Inactive) return;
+
         if (Input.GetKeyDown(KeyCode.Q))
             RotateCamera(ROTATION_ANGLE);
         else if (Input.GetKeyDown(KeyCode.E))

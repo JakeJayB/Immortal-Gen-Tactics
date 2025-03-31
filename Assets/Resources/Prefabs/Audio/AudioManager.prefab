@@ -49,9 +49,13 @@ MonoBehaviour:
   - soundName: UnitMenuCursor
     clip: {fileID: 8300000, guid: 6085487d1299d4d398d573b48943798d, type: 3}
   - soundName: MapCursor
-    clip: {fileID: 8300000, guid: b2a88f01559234c4e80da89c069aa97d, type: 3}
+    clip: {fileID: 8300000, guid: 47549387344b14687ba8af1c7d2c00d3, type: 3}
   - soundName: Select
-    clip: {fileID: 8300000, guid: 901afe9480865fe47926ef2180851b81, type: 3}
+    clip: {fileID: 8300000, guid: 5348fa9614f90f948aa657420495f7af, type: 3}
+  - soundName: Deselect
+    clip: {fileID: 8300000, guid: 1330c33a24e7c46cb96135fba1e405bb, type: 3}
+  - soundName: Next
+    clip: {fileID: 8300000, guid: 107ba1da62a61417d804da344c3b1297, type: 3}
 --- !u!114 &7200954366362640480
 MonoBehaviour:
   m_ObjectHideFlags: 0

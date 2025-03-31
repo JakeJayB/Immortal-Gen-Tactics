@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FollowAudioListener : MonoBehaviour
 {
-    void Update()
-    {
-        gameObject.transform.position = Camera.main.transform.position;       
-    }
+    void Update() =>  gameObject.transform.position = Camera.main.transform.position;       
+    
 }
