@@ -44,6 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c80984c3683c5a48b4798d7f914d16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSystem: {fileID: 0}
-  hoverCell: {x: 0, y: 0}
-  canMove: 0
