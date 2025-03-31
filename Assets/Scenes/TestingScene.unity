@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0148e90013af7974ea6ff5c6fdc7f960, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 410087040}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2178,7 +2178,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2563,6 +2563,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484354873}
   m_CullTransparentMesh: 1
+--- !u!84 &505520322
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 640
+  m_Height: 360
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &566572139 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2255326839739188927, guid: e96cffa9d00b6b545adfeb26165952cc,
@@ -3594,44 +3632,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!84 &793205704
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 640
-  m_Height: 360
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &810702282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6951,7 +6951,7 @@ PrefabInstance:
     - target: {fileID: 6298985930916582049, guid: e96cffa9d00b6b545adfeb26165952cc,
         type: 3}
       propertyPath: GameResolution.y
-      value: 269
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 6298985930916582049, guid: e96cffa9d00b6b545adfeb26165952cc,
         type: 3}
@@ -7002,7 +7002,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 793205704}
+      objectReference: {fileID: 505520322}
     - target: {fileID: 9205371885998440386, guid: e96cffa9d00b6b545adfeb26165952cc,
         type: 3}
       propertyPath: orthographic size
@@ -7039,6 +7039,14 @@ PrefabInstance:
       addedObject: {fileID: 566572140}
     - targetCorrespondingSourceObject: {fileID: 4231759119073248400, guid: e96cffa9d00b6b545adfeb26165952cc,
         type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1571257964}
+    - targetCorrespondingSourceObject: {fileID: 4231759119073248400, guid: e96cffa9d00b6b545adfeb26165952cc,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1571257968}
+    - targetCorrespondingSourceObject: {fileID: 4231759119073248400, guid: e96cffa9d00b6b545adfeb26165952cc,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 1571257955}
     - targetCorrespondingSourceObject: {fileID: 4231759119073248400, guid: e96cffa9d00b6b545adfeb26165952cc,
@@ -7049,14 +7057,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1571257960}
-    - targetCorrespondingSourceObject: {fileID: 4231759119073248400, guid: e96cffa9d00b6b545adfeb26165952cc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1571257964}
-    - targetCorrespondingSourceObject: {fileID: 4231759119073248400, guid: e96cffa9d00b6b545adfeb26165952cc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1571257968}
     - targetCorrespondingSourceObject: {fileID: 6842119547268722464, guid: e96cffa9d00b6b545adfeb26165952cc,
         type: 3}
       insertIndex: -1
