@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf26e7c6d3494f418016a8f2f5e7972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundList:
+  soundFXList:
   - soundName: UnitMenuCursor
     clip: {fileID: 8300000, guid: 6085487d1299d4d398d573b48943798d, type: 3}
   - soundName: MapCursor
@@ -56,6 +56,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1330c33a24e7c46cb96135fba1e405bb, type: 3}
   - soundName: Next
     clip: {fileID: 8300000, guid: 107ba1da62a61417d804da344c3b1297, type: 3}
+  backgroundMusicList:
+  - soundName: NormalBattle
+    clip: {fileID: 8300000, guid: e6e4208248741614eae5a7020db5d43e, type: 3}
+  - soundName: BossBattle
+    clip: {fileID: 8300000, guid: e1dd213a86b8a90478b3fea1d99362b8, type: 3}
 --- !u!114 &7200954366362640480
 MonoBehaviour:
   m_ObjectHideFlags: 0
