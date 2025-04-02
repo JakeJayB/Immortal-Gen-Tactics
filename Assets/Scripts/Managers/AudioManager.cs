@@ -13,18 +13,25 @@ public class AudioManager : MonoBehaviour
     }
 
     public List<Sound> soundFXList;
-    public List<Sound> backgroundMusicList;
+    public List<Sound> BGAudioList;
     public static Dictionary<string, AudioClip> SoundFXLibrary;
-    public static Dictionary<string, AudioClip> backgroundMusicLibrary;
+    public static Dictionary<string, AudioClip> BGAudioLibrary;
 
     private void Awake()
     {
         if (SoundFXLibrary == null)
         {
             SoundFXLibrary = new Dictionary<string, AudioClip>();
+            BGAudioLibrary = new Dictionary<string, AudioClip>();
+
             foreach(var sound in soundFXList)
                 SoundFXLibrary[sound.soundName] = sound.clip;
+
+            foreach (var sound in BGAudioList)
+                BGAudioLibrary[sound.soundName] = sound.clip;
+
             soundFXList = null;
+            BGAudioList = null;
         }
         else
         {

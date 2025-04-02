@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7047171142943665864}
   - component: {fileID: 100627551969784306}
   - component: {fileID: 7200954366362640480}
+  - component: {fileID: 6609313530115771612}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -56,9 +57,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1330c33a24e7c46cb96135fba1e405bb, type: 3}
   - soundName: Next
     clip: {fileID: 8300000, guid: 107ba1da62a61417d804da344c3b1297, type: 3}
-  backgroundMusicList:
-  - soundName: NormalBattle
+  BGAudioList:
+  - soundName: NormalBattle1
     clip: {fileID: 8300000, guid: e6e4208248741614eae5a7020db5d43e, type: 3}
+  - soundName: NormalBattle2
+    clip: {fileID: 8300000, guid: b91d2280a000ccd4a8965af9cf76b430, type: 3}
+  - soundName: NormalBattle3
+    clip: {fileID: 8300000, guid: 317c50a71860f9f4982f82e5c79e2665, type: 3}
   - soundName: BossBattle
     clip: {fileID: 8300000, guid: e1dd213a86b8a90478b3fea1d99362b8, type: 3}
 --- !u!114 &7200954366362640480
@@ -75,3 +80,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundFXObject: {fileID: 853545623523576941, guid: 2a439f7d25729e64690c213d57b23549,
     type: 3}
+--- !u!114 &6609313530115771612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8454979328706928900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd89385dfdb8634299d982f2de3a08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusicObject: {fileID: 0}
