@@ -52,6 +52,9 @@ public class ChainSystem
 
     private static IEnumerator ReactionPhase(Vector2Int target)
     {
+        var targetedArea = TilemapUtility.GetTargetedArea(Chain[0].unit, Chain[0].action, Chain[0].target);
+        TilemapUtility.ShowTargetedArea(targetedArea);
+        
         foreach (var unit in TilemapCreator.UnitLocator.Values)
         {
             var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
@@ -67,6 +70,7 @@ public class ChainSystem
             else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
         }
 
+        TilemapUtility.HideTargetedArea(targetedArea);
         yield return null;
     }
 

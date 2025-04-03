@@ -1,28 +1,40 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : UnitAction
+public class SplashSpell : UnitAction
 {
-    public sealed override string Name { get; protected set; } = "Move";
-    public override int MPCost { get; protected set; } = 0;
-    public override int APCost { get; protected set; } = 1;
-    public override int Priority { get; protected set; } = 0;
-    public override DamageType DamageType { get; protected set; } = DamageType.None;
-    public override int BasePower { get; protected set; } = 0;
-    public override ActionType ActionType { get; protected set; } = ActionType.Move;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
-    public override int Range { get; protected set; } = 0;
-    public override AIActionScore ActionScore { get; protected set; }
-    public override int Splash { get; protected set; }
-    public override List<Tile> Area(Unit unit) {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
-            unit.unitInfo.finalMove, Pattern.Splash);
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
-    public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";
-    public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public override string Name { get; protected set; } = "SplashSpell (Test)";
+    public override int MPCost { get; protected set; } = 5;
+    public override int APCost { get; protected set; } = 1;
+    public override int Priority { get; protected set; } = 3;
+    public override DamageType DamageType { get; protected set; } = DamageType.Magic;
+    public override int BasePower { get; protected set; } = 10;
+    public override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override Pattern AttackPattern { get; protected set; } = Pattern.Splash;
+    public override int Range { get; protected set; } = 3;
+    public override AIActionScore ActionScore { get; protected set; }
+    public override int Splash { get; protected set; } = 1;
+    public override List<Tile> Area(Unit unit) {
+        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+            Range, Pattern.Splash);
+    }
+
+    public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
+    public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
+
     public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
@@ -31,8 +43,6 @@ public class Move : UnitAction
 
         foreach (var tile in Area(unit))
         {
-            if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) { continue; }
-            
             AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
                 unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
@@ -56,17 +66,18 @@ public class Move : UnitAction
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
         // Spend an Action Point to execute the Action
-        --unit.unitInfo.currentAP;
-        
-        // Remove the Location the Unit is currently at in UnitLocator
-        TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
-        
-        // Updates the location as the Unit moves
-        yield return unit.unitMovement.Move(unit, selectedCell);
-        
-        // Adds the location of the tile the Unit ended at in UnitLocator
-        TilemapCreator.UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
+        PayAPCost(unit);
 
-        if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
+        foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[selectedCell], Splash,
+                     AttackPattern))
+        {
+            if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit))
+            {
+                DamageCalculator.DealDamage(DamageType, unit.unitInfo, targetUnit.unitInfo);
+                Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.finalHP);
+            }
+        }
+        
+        yield return null;
     }
 }

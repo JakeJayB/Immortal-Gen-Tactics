@@ -15,6 +15,7 @@ public class Potion : UnitAction
     public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
+    public override int Splash { get; protected set; }
     public override List<Tile> Area(Unit unit) {
         return new List<Tile> { TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()] };
     }

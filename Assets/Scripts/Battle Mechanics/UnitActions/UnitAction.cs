@@ -17,6 +17,7 @@ public abstract class UnitAction
     public abstract Pattern AttackPattern { get; protected set; }
     public abstract int Range { get; protected set; }
     public abstract AIActionScore ActionScore { get; protected set; }
+    public abstract int Splash { get; protected set; }
     public abstract List<Tile> Area(Unit unit);
     public abstract string SlotImageAddress { get; protected set; }
 

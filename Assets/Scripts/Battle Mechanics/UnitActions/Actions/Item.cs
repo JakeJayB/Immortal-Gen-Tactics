@@ -16,6 +16,7 @@ public class Item : UnitAction
     public override Pattern AttackPattern { get; protected set; }
     public override int Range { get; protected set; }
     public override AIActionScore ActionScore { get; protected set; }
+    public override int Splash { get; protected set; }
     public override List<Tile> Area(Unit unit)
     {
         throw new NotImplementedException();

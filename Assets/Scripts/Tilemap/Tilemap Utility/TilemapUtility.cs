@@ -193,4 +193,61 @@ public class TilemapUtility
 
         return directionalTiles;
     }
+
+    public static List<Tile> GetTargetedArea(Unit unit, UnitAction action, Vector2Int targetedCell)
+    {
+        List<Tile> targetedArea = new List<Tile>();
+        
+        switch (action.AttackPattern)
+        {
+            case Pattern.Direct:
+                targetedArea.Add(TilemapCreator.TileLocator[targetedCell]);
+                break;
+            
+            case Pattern.Linear:
+                var linearDirections =
+                    TilemapUtility.GetDirectionalLinearTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+                        action.Range);
+
+                foreach (var direction in linearDirections)
+                {
+                    if (direction.Contains(TilemapCreator.TileLocator[targetedCell])) {
+                        targetedArea.AddRange(direction);
+                    }
+                }
+
+                break;
+            
+            case Pattern.Splash:
+                targetedArea.AddRange(Rangefinder.GetTilesInRange
+                    (TilemapCreator.TileLocator[targetedCell],action.Splash, Pattern.Splash));
+
+                break;
+            
+            case Pattern.None:
+                break;
+                
+            default:
+                Debug.LogError("ERROR: AttackPattern not define for " + action.Name + " (TilemapUtility.GetTargetedArea())");
+                break;
+        }
+
+        return targetedArea;
+    }
+
+    public static void ShowTargetedArea(List<Tile> targetedArea)
+    {
+        foreach (var tile in targetedArea)
+        {
+            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.ATTACK);
+        }
+    } 
+    
+    public static void HideTargetedArea(List<Tile> targetedArea)
+    {
+        foreach (var tile in targetedArea)
+        {
+            tile.OverlayObj.DeactivateOverlayTile();
+        }
+    }
 }

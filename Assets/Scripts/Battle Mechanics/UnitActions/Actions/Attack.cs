@@ -17,6 +17,7 @@ public class Attack : UnitAction
     public override Pattern AttackPattern { get; protected set; } = Pattern.Linear;
     public override int Range { get; protected set; } = 1; // FIX!! -- Needs to Reflect Unit's Weapon Range
     public override AIActionScore ActionScore { get; protected set; }
+    public override int Splash { get; protected set; } = 0;
     public override List<Tile> Area(Unit unit)
     {
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range,

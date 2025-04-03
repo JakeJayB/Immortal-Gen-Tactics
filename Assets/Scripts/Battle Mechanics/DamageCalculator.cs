@@ -34,7 +34,7 @@ public class DamageCalculator
                 break;
         }
         
-        return target.currentHP + healingAmount > target.finalHP ? target.finalHP : healingAmount;
+        return target.currentHP + healingAmount > target.finalHP ? target.finalHP - target.currentHP : healingAmount;
     }
     
     public static void DealDamage(DamageType damageType, UnitInfo attacker, UnitInfo target)

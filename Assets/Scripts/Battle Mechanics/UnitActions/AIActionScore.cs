@@ -103,6 +103,18 @@ public class AIActionScore
     // Tactical Awareness Score
     // Completed!!
     // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
+    public int CalcSurvivalScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
+        int score = 0;
+        int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
+        
+        score += distance * Mathf.RoundToInt(unit.TacticalPositioning);
+        Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
+        return score;
+    }
+    
+    // Tactical Awareness Score
+    // Completed!!
+    // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
     public int CalcTacticalPositioningScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
         int score = 0;
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
@@ -195,7 +207,7 @@ public class AIActionScore
     
     // Resource Management Score
     // Completed!!
-    public int CalcResourceManagementScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
+    public int CalcResourceManagementScore(EnemyUnit unit) {
         return -(unit.unitInfo.currentMP - Action.MPCost) / unit.unitInfo.finalMP * Mathf.RoundToInt(unit.ResourceManagement);
     }
 
@@ -235,7 +247,7 @@ public class AIActionScore
         SurvivalScore = 0;
         TacticalPosScore = CalcTacticalPositioningScore(unit, potentialCell, targetCell);
         AllySynergyScore = CalcAllySynergyScore(unit, potentialCell, allyUnits);
-        ResourceManagementScore = CalcResourceManagementScore(unit, potentialCell, targetCell);
+        ResourceManagementScore = CalcResourceManagementScore(unit);
         ReactionAwarenessScore = CalcReactionAwarenessScore(unit, potentialCell, enemyUnits);
         ReactionAllocationScore = CalcReactionAllocationScore(unit);
         
