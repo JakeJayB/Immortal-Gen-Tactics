@@ -10,7 +10,8 @@ public enum Pattern
     Linear,
     Arc,
     Splash,
-    All
+    All,
+    None
 }
 
 public class Rangefinder

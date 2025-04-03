@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ActionType
+public class SoftmaxAILogic
 {
-    Move,
-    Attack,
-    Accessory,
-    Item,
-    Wait
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,12 +12,13 @@ public class EnemyUnit : Unit
     public List<AIBehavior> AIBehavior;
     
     // AI Behavioral Factors
-    public float Aggressive { get; private set; } = 2;      // Values Damage Dealt
-    public float Defensive { get; private set; }            // Values Damage Mitigated
-    public float Accuracy { get; private set; }             // Values Actions with Higher Chances of Hitting
-    public float Active { get; private set; }               // Values AP spent as Turn Actions
-    public float SelfCentered { get; private set; }         // Values Supporting their Self
-    public float Supportive { get; private set; }           // Values Supporting Allies
+    public float Aggression { get; private set; } = 5;             // Values Damage Dealt & Kills
+    public float Survival { get; private set; } = 1;                // Values Avoiding Damage & Death
+    public float TacticalPositioning { get; private set; } = -3;    // Values Advantageous Positioning
+    public float AllySynergy { get; private set; } = 1;             // Values Team-Based Actions
+    public float ResourceManagement { get; private set; }           // Values Optimal Resource Balancing (MP, AP, Items)
+    public float ReactionAwareness { get; private set; } = 1;       // Values Minimal Reaction Opportunities from Opponent
+    public float ReactionAllocation { get; private set; } = 0;      // Values Saving AP for Reactions
     
     // Start is called before the first frame update
     void Start()
@@ -77,28 +79,57 @@ public class EnemyUnit : Unit
     // TODO: execute until they finish. This is especially important for EnemyAI Action Calls.
     private IEnumerator DecideAction()
     {
+        var actionDetermined = false;
+        
         AIBehavior = AIBehavior.OrderBy(a => a.Priority).ToList();
 
         foreach (var behavior in AIBehavior)
         {
             if (!behavior.Condition()) continue;
-            
+
+            actionDetermined = true;
             Debug.Log("AIUnit performing " + behavior.Action.Name + "!");
             ChainSystem.HoldPotentialChain(behavior.Action, this);
             yield return ChainSystem.AddAction(new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z));
-            yield return ChainSystem.ExecuteChain();
             break;
         }
+
+        if (!actionDetermined)
+        {
+            float bestScore = -9999;
+            UnitAction bestAction = new Wait();
+            var nearbyUnit = FindNearbyUnits()[0].unitInfo.Vector2CellLocation();
+            bestAction.CalculateActionScore(this, nearbyUnit);
         
-        Debug.Log(name + " choose no action this turn.");
-        EndTurn();
+            foreach (var action in unitInfo.ActionSet.GetAllActions())
+            {
+                float newScore = action.CalculateActionScore(this, nearbyUnit);
+                if (newScore > bestScore) { 
+                    bestScore = newScore;
+                    bestAction = action;
+                }
+            }
         
+            Debug.Log(name + " choose to " + bestAction.Name + " this turn.");
+            ChainSystem.HoldPotentialChain(bestAction, this);
+            yield return ChainSystem.AddAction(bestAction.ActionScore.Vector2PotentialLocation());
+        }
+        
+        if (ChainSystem.Peek().GetType() == typeof(Wait)) {
+            yield return ChainSystem.ExecuteChain();
+        }
+        else {
+            yield return ChainSystem.ExecuteChain();
+            StartCoroutine(DecideAction());
+        }
+        
+
         /*
         while (unitInfo.currentAP > 0)
         {
             var targetUnit = UnitAILogic.PrioritizeUnit(this, FindNearbyUnits());
             Debug.Log("Enemy Unit Targeting: " + targetUnit.name);
-            
+
             // TODO: Replace the currentUnit value with units that the enemy can scan for nearby units instead
             if (InRange(targetUnit, 1, Pattern.Linear))
             {
@@ -120,7 +151,7 @@ public class EnemyUnit : Unit
 
             yield return ChainSystem.ExecuteChain();
         }
-       
+
         EndTurn();
         */
     }
@@ -131,7 +162,7 @@ public class EnemyUnit : Unit
         StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
     }
 
-    private List<Unit> FindNearbyUnits()
+    public List<Unit> FindNearbyUnits()
     {
         List<Unit> nearbyUnits = new List<Unit>();
         

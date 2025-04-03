@@ -25,7 +25,7 @@ public class UnitActionSet
         unitActions = new Dictionary<ActionType, List<UnitAction>>()
         {
             { ActionType.Move, new List<UnitAction>() { new Move() } },
-            { ActionType.Weapon, new List<UnitAction>() { new Attack() } },
+            { ActionType.Attack, new List<UnitAction>() { new Attack() } },
             { ActionType.Wait, new List<UnitAction>() { new Wait() } },
         };
     }
@@ -78,5 +78,11 @@ public class UnitActionSet
         }
 
         return allActions;
+    }
+
+    public List<UnitAction> GetAllAttackActions() {
+        List<UnitAction> attackActions = new List<UnitAction>();
+        attackActions.AddRange(unitActions[ActionType.Attack]);
+        return attackActions;
     }
 }

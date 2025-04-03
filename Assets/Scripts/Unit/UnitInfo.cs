@@ -9,12 +9,15 @@ public class UnitInfo : MonoBehaviour
     public Vector3Int CellLocation;
     public UnitDirection UnitDirection;
     public Sprite sprite;
+    
+    // Unit Affiliation
+    public UnitAffiliation UnitAffiliation;
 
     // Unit Current Stat Values
     public int currentHP { get; protected internal set; }
     public int currentMP { get; protected internal set; }
     public int currentAP { get; protected internal set; }
-    protected internal int currentLevel;
+    public int currentLevel { get; protected internal set; } = 1;
     protected int currentEXP;
     
     // Unit Final Stat Values
@@ -44,7 +47,7 @@ public class UnitInfo : MonoBehaviour
     [SerializeField] private int baseSense;
     
     // Unit Equipment
-    private UnitEquipment equipment;
+    public UnitEquipment equipment;
     
     // Unit Action Set
     public UnitActionSet ActionSet { get; protected internal set; }

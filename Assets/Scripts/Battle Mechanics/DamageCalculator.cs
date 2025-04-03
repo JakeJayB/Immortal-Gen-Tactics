@@ -4,12 +4,61 @@ using UnityEngine;
 
 public class DamageCalculator
 {
-    public static void DealPhysicalDamage(UnitInfo attacker, UnitInfo target) 
+    public static int ProjectDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
-        int damage = ApplyDamageRoll(attacker.finalAttack - target.finalDefense);
+        switch (action.DamageType)
+        {
+            case DamageType.Physical:
+                return attacker.finalAttack + action.BasePower - target.finalDefense;
+            case DamageType.Magic:
+                return attacker.finalMagicAttack + action.BasePower - target.finalMagicDefense;
+        }
+
+        return 0;
+    }
+    
+    public static int ProjectHealing(UnitAction action, UnitInfo attacker, UnitInfo target)
+    {
+        int healingAmount = 0;
+        
+        switch (action.ActionType)
+        {
+            case ActionType.Attack:
+                healingAmount = attacker.finalMagicAttack + action.BasePower;
+                break;
+            case ActionType.Item:
+                healingAmount = action.BasePower;
+                break;
+            default:
+                Debug.LogError("ERROR: ActionType not specified. (DamageCalculator.ProjectHealing)");
+                break;
+        }
+        
+        return target.currentHP + healingAmount > target.finalHP ? target.finalHP : healingAmount;
+    }
+    
+    public static void DealDamage(DamageType damageType, UnitInfo attacker, UnitInfo target)
+    {
+        int damage = 0;
+        switch (damageType)
+        {
+            case DamageType.Physical:
+                damage = ApplyDamageRoll(attacker.finalAttack - target.finalDefense);
+                break;
+            case DamageType.Magic:
+                damage = ApplyDamageRoll(attacker.finalMagicAttack - target.finalMagicDefense);
+                break;
+        }
+        
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
     }
 
+    public static void DamageFixedAmount(int amount, UnitInfo target)
+    {
+        target.currentHP -= amount;
+        target.currentHP = target.currentHP < 0 ? 0 : target.currentHP;
+    }
+    
     public static void HealFixedAmount(int amount, UnitInfo target)
     {
         target.currentHP += amount;

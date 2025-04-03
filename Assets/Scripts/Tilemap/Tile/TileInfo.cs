@@ -22,4 +22,6 @@ public class TileInfo : MonoBehaviour
         this.IsStartArea = isStartArea;
         this.isTraversable = isTraversable;
     }
+
+    public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
 }

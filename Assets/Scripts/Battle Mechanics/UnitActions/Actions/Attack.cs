@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,23 +8,52 @@ public class Attack : UnitAction
 {
     // Start is called before the first frame update
     public sealed override string Name { get; protected set; } = "Attack";
+    public override int MPCost { get; protected set; } = 0;
     public override int APCost { get; protected set; } = 1;
     public override int Priority { get; protected set; } = 1;
-    public sealed override ActionType ActionType { get; protected set; } = ActionType.Weapon;
+    public override DamageType DamageType { get; protected set; } = DamageType.Physical;
+    public override int BasePower { get; protected set; } = 0;
+    public sealed override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override Pattern AttackPattern { get; protected set; } = Pattern.Linear;
+    public override int Range { get; protected set; } = 1; // FIX!! -- Needs to Reflect Unit's Weapon Range
+    public override AIActionScore ActionScore { get; protected set; }
+    public override List<Tile> Area(Unit unit)
+    {
+        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range,
+            AttackPattern);
+    }
+
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
 
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float HeuristicScore(EnemyUnit unit, Vector2Int selectedCell)
+    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
-        // Check if Target is within the area of the Action
-        if (ActionUtility.DetermineParameters("Attack", unit).Item1.Contains(TilemapCreator.TileLocator[selectedCell])) { return -1; }
-        
-        // Get the TargetUnit
-        var targetUnit = TilemapCreator.UnitLocator[selectedCell];
-        
-        // Return the Heuristic Score
-        // [ Expected Damage Dealt * Aggressive Behavior ]
-        return (unit.unitInfo.finalAttack - targetUnit.unitInfo.finalDefense) * unit.Aggressive;
+        ActionScore = new AIActionScore();
+        Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
+        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
+
+        foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
+                     TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+                     Range))
+        {
+            foreach (var tile in direction)
+            {
+                if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
+                {
+                    AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                        foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+                    Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                    if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+
+                    break;
+                }
+            }
+        }
+
+        Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
+        Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
+        return ActionScore.TotalScore();
     }
 
     public override void ActivateAction(Unit unit)
@@ -50,7 +80,7 @@ public class Attack : UnitAction
             Vector2Int nextCell = originCell + direction * i;
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
             {
-                DamageCalculator.DealPhysicalDamage(unit.unitInfo, targetUnit.unitInfo);
+                DamageCalculator.DealDamage(DamageType, unit.unitInfo, targetUnit.unitInfo);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.finalHP);
             }
         }

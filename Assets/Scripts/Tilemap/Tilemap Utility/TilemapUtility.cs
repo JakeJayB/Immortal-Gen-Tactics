@@ -157,4 +157,40 @@ public class TilemapUtility
     {
         return new List<Tile>(TilemapCreator.TileLocator.Values);
     }
+    
+    // Segment By Direction ------------------------------------------------------------------------------------------
+    public static List<List<Tile>> GetDirectionalLinearTilesInRange(Tile characterTile, int range)
+    {
+        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+        Vector2Int startPos =
+            new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
+        List<List<Tile>> directionalTiles = new List<List<Tile>>();
+
+
+        Vector2Int[] directions =
+        {
+            Vector2Int.right,
+            Vector2Int.left,
+            Vector2Int.up,
+            Vector2Int.down
+        };
+
+        foreach (var direction in directions)
+        {
+            List<Tile> tilesInDirection = new List<Tile>();
+
+            for (int i = 1; i <= range; i++)
+            {
+                Vector2Int checkPos = startPos + direction * i;
+                if (TileLocator.TryGetValue(checkPos, out var tile))
+                {
+                    tilesInDirection.Add(tile);
+                }
+            }
+
+            directionalTiles.Add(tilesInDirection);
+        }
+
+        return directionalTiles;
+    }
 }
