@@ -30,7 +30,15 @@ public class Wait : UnitAction
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
         ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
-            unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            unit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+        
+        foreach (var nearbyUnit in unit.FindNearbyUnits())
+        {
+            var newScore = new AIActionScore().EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
+                nearbyUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+            if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+        }
         
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);

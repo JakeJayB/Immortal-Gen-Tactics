@@ -43,11 +43,19 @@ public class SplashSpell : UnitAction
 
         foreach (var tile in Area(unit))
         {
-            AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            foreach (var targetedTile in TilemapUtility.GetSplashTilesInRange(tile, Splash))
+            {
+                if (TilemapCreator.UnitLocator.TryGetValue(targetedTile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
+                {
+                    AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                        foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
-            Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
-            if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+                    Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                    if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+
+                    break;
+                }
+            }
         }
 
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());

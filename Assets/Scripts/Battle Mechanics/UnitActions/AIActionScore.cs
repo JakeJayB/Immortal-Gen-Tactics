@@ -22,24 +22,30 @@ public class AIActionScore
     public int CalcAggressionScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
         int score = 0;
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
+        Unit unitOnTile;
         
         // Add to score if Potential Cell is within Unit's Striking Range
         int projectedFutureDamage = 0;
         foreach (var action in unit.unitInfo.ActionSet.GetAllAttackActions())
         {
+            unitOnTile = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
             int futureDamage = 0; 
-            if (distance <= action.Range) { projectedFutureDamage = (action.BasePower + 10) * Mathf.RoundToInt(unit.Aggression); }
+            
+            if (distance <= action.Range && unit.unitInfo.UnitAffiliation != unitOnTile.unitInfo.UnitAffiliation) { 
+                futureDamage = DamageCalculator.ProjectDamage(action,
+                    unit.unitInfo, unitOnTile.unitInfo) * Mathf.RoundToInt(unit.Aggression); }
+            
             if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
         }
         
         // Add highest potential damage to score
         int projectedDamage = 0;
-        Unit unitOnTile;
         
         switch (Action.AttackPattern)
         {
             case Pattern.Direct:
                 if (!TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(PotentialCell.x, PotentialCell.z), out unitOnTile)) { break; }
+                if (unitOnTile == unit) { break; }
                 
                 projectedDamage = DamageCalculator.ProjectDamage(Action, unit.unitInfo, unitOnTile.unitInfo);
                 

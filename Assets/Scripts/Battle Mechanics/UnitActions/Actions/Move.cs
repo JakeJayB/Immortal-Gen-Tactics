@@ -12,7 +12,7 @@ public class Move : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override int BasePower { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Move;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
+    public override Pattern AttackPattern { get; protected set; } = Pattern.None;
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
@@ -32,12 +32,15 @@ public class Move : UnitAction
         foreach (var tile in Area(unit))
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) { continue; }
+
+            foreach (var nearbyUnit in unit.FindNearbyUnits())
+            {
+                AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                    nearbyUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
-            AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
-            
-            Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
-            if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+                Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+            }
         }
 
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());

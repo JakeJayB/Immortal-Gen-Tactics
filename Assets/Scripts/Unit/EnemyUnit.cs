@@ -98,16 +98,24 @@ public class EnemyUnit : Unit
         {
             float bestScore = -9999;
             UnitAction bestAction = new Wait();
-            var nearbyUnit = FindNearbyUnits()[0].unitInfo.Vector2CellLocation();
-            bestAction.CalculateActionScore(this, nearbyUnit);
-        
-            foreach (var action in unitInfo.ActionSet.GetAllActions())
+            if (FindNearbyUnits().Count > 0)
             {
-                float newScore = action.CalculateActionScore(this, nearbyUnit);
-                if (newScore > bestScore) { 
-                    bestScore = newScore;
-                    bestAction = action;
+                var nearbyUnit = FindNearbyUnits()[0].unitInfo.Vector2CellLocation();
+                
+                bestAction.CalculateActionScore(this, nearbyUnit);
+        
+                foreach (var action in unitInfo.ActionSet.GetAllActions())
+                {
+                    float newScore = action.CalculateActionScore(this, nearbyUnit);
+                    if (newScore > bestScore) { 
+                        bestScore = newScore;
+                        bestAction = action;
+                    }
                 }
+            }
+            else
+            {
+                bestAction.CalculateActionScore(this, unitInfo.Vector2CellLocation());
             }
         
             Debug.Log(name + " choose to " + bestAction.Name + " this turn.");
