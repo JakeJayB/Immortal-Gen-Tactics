@@ -58,6 +58,14 @@ public class Move : UnitAction
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
+        // Have AI Units show their range of movement before moving
+        if (unit.GetComponent<EnemyUnit>())
+        {
+            ActionUtility.ShowSelectableTilesForAction(unit, Name);
+            yield return new WaitForSeconds(2.0f);
+            ActionUtility.HideSelectableTilesForAction(unit);
+        }
+        
         // Spend an Action Point to execute the Action
         --unit.unitInfo.currentAP;
         
