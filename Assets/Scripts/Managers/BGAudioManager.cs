@@ -27,7 +27,7 @@ public class BGAudioManager : MonoBehaviour
         System.Random rand = new System.Random();
 
         string audioClip = AudioManager.BGAudioLibrary.ElementAt(rand.Next(0, AudioManager.BGAudioLibrary.Count)).Key;
-        PlayBGSoundClip(audioClip, 1f);
+        PlayBGSoundClip(audioClip, 0.3f);
 
     }
 
