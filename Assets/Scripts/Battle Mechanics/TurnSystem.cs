@@ -16,6 +16,7 @@ public class TurnSystem : MonoBehaviour
 
         List<Unit> units = new List<Unit>(TilemapCreator.UnitLocator.Values);
         units.Sort((a, b) => a.unitInfo.finalSpeed.CompareTo(b.unitInfo.finalSpeed));
+        TurnCycle.CycleUnits(units);
 
         if (units.Count == 0)
         {

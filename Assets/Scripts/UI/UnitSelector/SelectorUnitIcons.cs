@@ -10,8 +10,6 @@ public class SelectorUnitIcons : MonoBehaviour
     private static int BACKGROUND_HEIGHT = Mathf.RoundToInt(UnitSelector.PANEL_HEIGHT * 0.7f);
     private static Image unitImage;
 
-
-    //private static Dictionary<int, Vector2Int> activeUnits = new Dictionary<int, Vector2Int>();
     private static Dictionary<int, Unit> activeUnits;
     private static int currentIdx;
 

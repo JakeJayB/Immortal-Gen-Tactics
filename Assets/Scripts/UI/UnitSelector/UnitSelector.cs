@@ -32,9 +32,8 @@ public class UnitSelector : MonoBehaviour
 
     public static void Initialize(GameObject canvas)
     {
-
-        PANEL_WIDTH = Mathf.RoundToInt(Display.main.systemWidth * 0.3f);
-        PANEL_HEIGHT = Mathf.RoundToInt(Display.main.systemHeight * 0.3f);
+        PANEL_WIDTH = 250;
+        PANEL_HEIGHT = 140; 
 
         Menu = new GameObject("UnitSelector", typeof(RectTransform));
         Menu.AddComponent<UnitSelector>();

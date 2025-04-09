@@ -9,5 +9,6 @@ public class CanvasUI : MonoBehaviour
     {
         UnitMenu.Initialize(this.gameObject);
         UnitSelector.Initialize(this.gameObject);      
+        TurnCycle.Initialize(this.gameObject);
     }
 }
