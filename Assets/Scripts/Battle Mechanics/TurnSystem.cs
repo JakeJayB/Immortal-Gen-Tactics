@@ -16,7 +16,9 @@ public class TurnSystem : MonoBehaviour
 
         List<Unit> units = new List<Unit>(TilemapCreator.UnitLocator.Values);
         units.Sort((a, b) => a.unitInfo.finalSpeed.CompareTo(b.unitInfo.finalSpeed));
-        TurnCycle.CycleUnits(units);
+
+        TurnCycle.InitializeCycle(units);
+        
 
         if (units.Count == 0)
         {
@@ -54,7 +56,8 @@ public class TurnSystem : MonoBehaviour
                 // Unity stop execution here until continueLoop turn to true. 
                 yield return new WaitUntil(() => continueLoop);
                 continueLoop = false;
-                yield return new WaitForSeconds(1f); 
+                yield return new WaitForSeconds(1f);
+                TurnCycle.CycleUnits(units);
             }
         }
     }
