@@ -130,38 +130,6 @@ public class EnemyUnit : Unit
             yield return ChainSystem.ExecuteChain();
             StartCoroutine(DecideAction());
         }
-        
-
-        /*
-        while (unitInfo.currentAP > 0)
-        {
-            var targetUnit = UnitAILogic.PrioritizeUnit(this, FindNearbyUnits());
-            Debug.Log("Enemy Unit Targeting: " + targetUnit.name);
-
-            // TODO: Replace the currentUnit value with units that the enemy can scan for nearby units instead
-            if (InRange(targetUnit, 1, Pattern.Linear))
-            {
-                Debug.Log("Enemy Unit Attacking...");
-                ChainSystem.HoldPotentialChain(new Attack(), this);
-                yield return ChainSystem.AddAction(new Vector2Int(targetUnit.unitInfo.CellLocation.x, targetUnit.unitInfo.CellLocation.z));
-            }
-            else
-            {
-                var tempPath =
-                    Pathfinder.FindPath(
-                        TilemapCreator.TileLocator[new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)],
-                        TilemapCreator.TileLocator[new Vector2Int(targetUnit.unitInfo.CellLocation.x, targetUnit.unitInfo.CellLocation.z)]);
-                var chosenTile = DecideTile(targetUnit, tempPath);
-                Debug.Log("Moving to tile: " + chosenTile.TileInfo.CellLocation + "(Towards: " + new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
-                ChainSystem.HoldPotentialChain(new Move(), this);
-                yield return ChainSystem.AddAction(new Vector2Int(chosenTile.TileInfo.CellLocation.x, chosenTile.TileInfo.CellLocation.z));
-            }
-
-            yield return ChainSystem.ExecuteChain();
-        }
-
-        EndTurn();
-        */
     }
     
     private void EndTurn()

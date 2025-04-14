@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MapCursor : MonoBehaviour
 {
@@ -154,24 +155,29 @@ public class MapCursor : MonoBehaviour
     private void MoveCursorUp() {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.up));
+            ShowUnitInfoFromTile();
         }
     }
     
     private void MoveCursorDown() {
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
             MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.down));
+            ShowUnitInfoFromTile();
         }
     }
     
     private void MoveCursorLeft() {
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.left));
+            ShowUnitInfoFromTile();
         }
     }
     
     private void MoveCursorRight() {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             MoveCursor(hoverCell + GetRelativeDirection(Vector2Int.right));
+            ShowUnitInfoFromTile();
         }
     }
 
@@ -292,6 +298,47 @@ public class MapCursor : MonoBehaviour
         }
         InactiveState();
         TurnSystem.StartLoop();
+    }
+
+    public void ShowUnitInfoFromTile()
+    {
+        if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var foundUnit)) {
+                
+            switch (CursorControlState)
+            {
+                case ControlState.Start:
+                case ControlState.Active:
+                {
+                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player) {
+                        CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo); 
+                    } else {
+                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
+                    }
+                        
+                    break;
+                }
+                case ControlState.Action:
+                {
+                    if (foundUnit != TurnSystem.CurrentUnit) { CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); } 
+                    break;
+                }
+                default:
+                    Debug.LogError("Control State no Valid...");
+                    break;
+            }
+        }
+        else
+        {
+            if (CursorControlState == ControlState.Action)
+            {
+                CanvasUI.HideTargetUnitInfoDisplay();
+            } 
+            else
+            {
+                CanvasUI.HideTurnUnitInfoDisplay();
+                CanvasUI.HideTargetUnitInfoDisplay();
+            }
+        }
     }
 
 
