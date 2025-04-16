@@ -18,14 +18,18 @@ public class CanvasUI : MonoBehaviour
         UnitDisplay = new GameObject("UnitDisplay", typeof(RectTransform)).AddComponent<UnitInfoDisplay>();
         UnitDisplay.transform.SetParent(transform, false);
         UnitDisplay.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
-        UnitDisplay.GetComponent<RectTransform>().anchoredPosition = new Vector2(-200, -150);
+        UnitDisplay.GetComponent<RectTransform>().anchoredPosition = new Vector2(200, 75);
+        UnitDisplay.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+        UnitDisplay.GetComponent<RectTransform>().anchorMax = new Vector2(0, 0);
         UnitDisplay.Initialize();
         HideTurnUnitInfoDisplay();
         
         TargetUnitDisplay = new GameObject("TargetUnitDisplay", typeof(RectTransform)).AddComponent<UnitInfoDisplay>();
         TargetUnitDisplay.transform.SetParent(transform, false);
         TargetUnitDisplay.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
-        TargetUnitDisplay.GetComponent<RectTransform>().anchoredPosition = new Vector2(200, -150);
+        TargetUnitDisplay.GetComponent<RectTransform>().anchoredPosition = new Vector2(-200, 75);
+        TargetUnitDisplay.GetComponent<RectTransform>().anchorMin = new Vector2(1, 0);
+        TargetUnitDisplay.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
         TargetUnitDisplay.InitializeTarget();
         HideTargetUnitInfoDisplay();
     }

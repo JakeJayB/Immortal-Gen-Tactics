@@ -300,7 +300,7 @@ public class MapCursor : MonoBehaviour
         TurnSystem.StartLoop();
     }
 
-    public void ShowUnitInfoFromTile()
+    public static void ShowUnitInfoFromTile()
     {
         if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var foundUnit)) {
                 

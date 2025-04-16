@@ -73,8 +73,11 @@ public class SplashSpell : UnitAction
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        // Spend an Action Point to execute the Action
+        // Spend the Action Points to execute the Action
         PayAPCost(unit);
+        
+        // Spend the Magic Points needed to execute the Action
+        PayMPCost(unit);
 
         foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[selectedCell], Splash,
                      AttackPattern))
