@@ -310,11 +310,11 @@ public class UnitInfoDisplay : MonoBehaviour
 
         for (int i = 0; i < ActionPoints.Length; i++)
         {
-            if (i <= unitInfo.currentAP) {
+            if (i + 1 <= unitInfo.currentAP) {
                 ActionPoints[i].gameObject.SetActive(true);
                 ActionPoints[i].sprite = Resources.Load<Sprite>("Sprites/UnitInfo/ActionPoint");
             }
-            else if (i <= unitInfo.finalAP) {
+            else if (i + 1 <= unitInfo.finalAP) {
                 ActionPoints[i].gameObject.SetActive(true);
                 ActionPoints[i].sprite = Resources.Load<Sprite>("Sprites/UnitInfo/UsedActionPoint");
             }

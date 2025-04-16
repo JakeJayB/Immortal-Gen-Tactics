@@ -111,7 +111,7 @@ public class TurnSystem : MonoBehaviour
         while (startLoop && unitQueue.Count > 0)
         {
             CurrentUnit = unitQueue.Dequeue(); // Set the new unit whose turn is about to start
-            CurrentUnit.unitInfo.RefreshAP();// Unit AP refreshes to max amount at start of new turn
+            CurrentUnit.unitInfo.RefreshAP();  // Unit AP refreshes to max amount at start of new turn
 
             if (CurrentUnit.GetComponent<EnemyUnit>())
             {

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class CanvasUI : MonoBehaviour
 {
+    private static Image InfoBar;
     private static UnitInfoDisplay UnitDisplay;
     private static UnitInfoDisplay TargetUnitDisplay;
     
@@ -32,6 +34,14 @@ public class CanvasUI : MonoBehaviour
         TargetUnitDisplay.GetComponent<RectTransform>().anchorMax = new Vector2(1, 0);
         TargetUnitDisplay.InitializeTarget();
         HideTargetUnitInfoDisplay();
+
+        InfoBar = new GameObject("InfoBar", typeof(RectTransform)).AddComponent<Image>();
+        InfoBar.transform.SetParent(transform, false);
+        InfoBar.sprite = Resources.Load<Sprite>("Sprites/InfoBar/InfoBar");
+        InfoBar.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 1);
+        InfoBar.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
+        InfoBar.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 30);
+        InfoBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -25);
     }
 
     public static void ShowTurnUnitInfoDisplay(UnitInfo unitInfo) {

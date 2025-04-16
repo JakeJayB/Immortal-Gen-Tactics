@@ -75,10 +75,10 @@ public class UnitInfo : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L)){ Debug.Log(name + "'s HP: " + currentHP + "/" + finalHP);}
+        
     }
 
-    public void ResetCurrentStatPoints()
+    private void ResetCurrentStatPoints()
     {
         currentHP = finalHP;
         currentMP = finalMP;

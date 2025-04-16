@@ -136,20 +136,11 @@ public class MapCursor : MonoBehaviour
         yield return ChainSystem.AddAction(hoverCell);
         yield return ChainSystem.ExecuteChain();
         
-        
         // Set 'currentUnit' back to the current unit in the turn system
         currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
-
-        if (TurnSystem.CurrentUnit.unitInfo.currentAP > 0)
-        {
-            CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
-            MoveCursor(currentUnit);
-            yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
-        }
-        else
-        { 
-            EndMove();
-        }
+        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+        MoveCursor(currentUnit);
+        yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
     }
 
     private void MoveCursorUp() {
