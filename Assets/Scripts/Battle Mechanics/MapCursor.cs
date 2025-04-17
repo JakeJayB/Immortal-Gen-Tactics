@@ -78,7 +78,7 @@ public class MapCursor : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.A))
         {
-            if (TilemapCreator.UnitLocator[hoverCell])
+            if (TilemapCreator.UnitLocator[hoverCell] == TurnSystem.CurrentUnit)
             {
                 InactiveState();
                 currentUnit = hoverCell;

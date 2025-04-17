@@ -61,6 +61,7 @@ public class EnemyUnit : Unit
         unit.unitInfo = gameObj.AddComponent<UnitInfo>();
         unit.unitInfo.CellLocation = initLocation;
         unit.unitInfo.UnitDirection = unitDirection;
+        unit.unitInfo.UnitAffiliation = UnitAffiliation.Enemy;
         unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
 
         unit.unitEquipment = new UnitEquipment(unit.unitInfo);
