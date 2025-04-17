@@ -53,8 +53,13 @@ public class CycleUnitIcons : MonoBehaviour
 
     public static void RearrangeUnits(List<Unit> units)
     {
-        float posOffset = TurnCycle.PANEL_WIDTH / (units.Count + 1);
+        if(iconDict.Count == 0)
+        {
+            InitializeUnits(units);
+            return;
+        }
 
+        float posOffset = TurnCycle.PANEL_WIDTH / (units.Count + 1);
         for (int i = 0; i < units.Count; i++)
         {
             Unit currUnit = units[i];

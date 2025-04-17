@@ -11,21 +11,30 @@ public class UnitPriorityQueue
 
     public void Enqueue(Unit unit)
     {
+        unit.unitInfo.currentCT = 0;
         heap.Add(unit);
         HeapifyUp(heap.Count - 1);
-        PrintSpeeds();
     }
 
     public Unit Dequeue()
     {
         if (heap.Count == 0) return null;
 
+        ExecuteTick();
+        TurnCycle.CycleUnits(ToSortedList());
+        PrintUnits();
+
         Unit root = heap[0];
         heap[0] = heap[heap.Count - 1];
         heap.RemoveAt(heap.Count - 1);
         HeapifyDown(0);
-
         return root;
+    }
+
+    public int PeekCT()
+    {
+        if (heap.Count == 0) return -1;
+        return heap[0].unitInfo.currentCT;
     }
 
     private void HeapifyUp(int index)
@@ -33,7 +42,7 @@ public class UnitPriorityQueue
         while (index > 0)
         {
             int parent = (index - 1) / 2;
-            if (heap[index].unitInfo.currentAP <= heap[parent].unitInfo.currentAP)
+            if (heap[index].unitInfo.currentCT <= heap[parent].unitInfo.currentCT)
                 break;
 
             Swap(index, parent);
@@ -50,10 +59,10 @@ public class UnitPriorityQueue
             int right = index * 2 + 2;
             int largest = index;
 
-            if (left <= lastIndex && heap[left].unitInfo.currentAP > heap[largest].unitInfo.currentAP)
+            if (left <= lastIndex && heap[left].unitInfo.currentCT > heap[largest].unitInfo.currentCT)
                 largest = left;
 
-            if (right <= lastIndex && heap[right].unitInfo.currentAP > heap[largest].unitInfo.currentAP)
+            if (right <= lastIndex && heap[right].unitInfo.currentCT > heap[largest].unitInfo.currentCT)
                 largest = right;
 
             if (largest == index) break;
@@ -70,21 +79,39 @@ public class UnitPriorityQueue
         heap[b] = temp;
     }
 
+    private void Heapify()
+    {
+        for (int i = (heap.Count / 2) - 1; i >= 0; i--)
+            HeapifyDown(i);
+    }
+
+    public void ExecuteTick()
+    {
+        do
+        {
+            foreach(Unit unit in heap)
+            {
+                unit.unitInfo.currentCT = Mathf.Clamp(unit.unitInfo.currentCT + unit.unitInfo.finalSpeed, 0, 100);
+            }
+            Heapify();
+        } while (PeekCT() != 100);
+    }
+
     public List<Unit> ToSortedList()
     {
         List<Unit> sortedList = new List<Unit>(heap);
-        sortedList.Sort((a, b) => b.unitInfo.currentAP.CompareTo(a.unitInfo.currentAP));
+        sortedList.Sort((a, b) => b.unitInfo.currentCT.CompareTo(a.unitInfo.currentCT));
         return sortedList;
     }
 
-
-    public void PrintSpeeds()
+    public void PrintUnits()
     {
-        var unitList = ToSortedList();
-        for (int i = 0; i < unitList.Count; i++)
+        Debug.Log("-------------------------------------------");
+        foreach(Unit unit in heap)
         {
-            Debug.Log(unitList[i].name + " AP: " + unitList[i].unitInfo.currentAP);
+            Debug.Log($"{unit.name}'s CT: {unit.unitInfo.currentCT}");
         }
+        Debug.Log("-------------------------------------------");
     }
 }
 
@@ -106,6 +133,7 @@ public class TurnSystem : MonoBehaviour
         foreach (Unit unit in new List<Unit>(TilemapCreator.UnitLocator.Values))
             unitQueue.Enqueue(unit);
 
+        unitQueue.ExecuteTick();
         TurnCycle.InitializeCycle(unitQueue.ToSortedList());
 
         while (startLoop && unitQueue.Count > 0)
@@ -130,7 +158,7 @@ public class TurnSystem : MonoBehaviour
             yield return new WaitUntil(() => continueLoop);
             continueLoop = false;
             unitQueue.Enqueue(CurrentUnit);
-            TurnCycle.CycleUnits(unitQueue.ToSortedList());
+            unitQueue.PrintUnits();
             yield return new WaitForSeconds(1f);
         }
     }

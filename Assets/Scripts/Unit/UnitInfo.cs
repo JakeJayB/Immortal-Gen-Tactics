@@ -17,7 +17,9 @@ public class UnitInfo : MonoBehaviour
     public int currentHP { get; protected internal set; }
     public int currentMP { get; protected internal set; }
     public int currentAP { get; protected internal set; }
+    public int currentCT { get; protected internal set; }
     public int currentLevel { get; protected internal set; } = 1;
+    
     protected int currentEXP;
     
     // Unit Final Stat Values
@@ -51,10 +53,11 @@ public class UnitInfo : MonoBehaviour
     
     // Unit Action Set
     public UnitActionSet ActionSet { get; protected internal set; }
-    
+
     // Start is called before the first frame update
     void Start()
     {
+        //SetBaseStats();
         equipment = new UnitEquipment(this);
         equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
         equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
@@ -83,6 +86,24 @@ public class UnitInfo : MonoBehaviour
         currentHP = finalHP;
         currentMP = finalMP;
         currentAP = finalAP;
+        currentCT = 0;
+    }
+
+
+    private void SetBaseStats()
+    {
+        float statMultipler = 1 + (currentLevel - 1) * 0.2f;
+
+        baseHP = Mathf.RoundToInt(30 * statMultipler);
+        baseMP = Mathf.RoundToInt(15 * statMultipler);
+        baseAP = 2;
+        baseAttack = Mathf.RoundToInt(5 * statMultipler);
+        baseDefense = Mathf.RoundToInt(2 * statMultipler); ;
+        baseMagicAttack = Mathf.RoundToInt(7 * statMultipler); ;
+        baseMagicDefense = Mathf.RoundToInt(4 * statMultipler);
+        baseMove = 3;
+        baseSpeed = Mathf.RoundToInt(5 * statMultipler); ;
+        baseSense = 2;
     }
 
     public void ApplyEquipmentBonuses()

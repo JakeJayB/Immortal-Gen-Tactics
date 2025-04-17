@@ -48,7 +48,11 @@ public class TurnCycle : MonoBehaviour
         CycleUnitIcons.InitializeUnits(unitList);
     }
 
-    public static void CycleUnits(List<Unit> unitList) => CycleUnitIcons.RearrangeUnits(unitList);
+    public static void CycleUnits(List<Unit> unitList)
+    {
+        if (Menu.transform.childCount <= 0) DisplayTurnCycle();
+        CycleUnitIcons.RearrangeUnits(unitList);
+    }
     
     public static void RemoveUnit(Unit unit) => CycleUnitIcons.RemoveUnit(unit);
 }
