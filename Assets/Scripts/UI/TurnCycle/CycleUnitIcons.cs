@@ -44,8 +44,8 @@ public class CycleUnitIcons : MonoBehaviour
             image.rectTransform.anchorMax = new Vector2(0, 0.5f);
             image.rectTransform.anchoredPosition = new Vector2((i + 1) * posOffset, 0);
 
-            image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 40);
-            image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 40);
+            image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 30);
+            image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 30);
             iconDict[currUnit] = image;
         }
         

@@ -74,16 +74,4 @@ public class Equipment
     public int equipMagicDefense { get; protected set; }
     public int equipMove { get; protected set; }
     public int equipSpeed { get; protected set; }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    
-    }
 }

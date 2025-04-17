@@ -57,28 +57,25 @@ public class UnitInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SetBaseStats();
+        SetBaseStats();
         equipment = new UnitEquipment(this);
-        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
+/*        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
         equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
         equipment.EquipArmor(EquipmentLibrary.Armor[100]);
         equipment.EquipArmor(EquipmentLibrary.Armor[101]);
         equipment.EquipArmor(EquipmentLibrary.Armor[102]);
         equipment.EquipArmor(EquipmentLibrary.Armor[103]);
         equipment.EquipAccessoryA(EquipmentLibrary.Accessories[200]);
-        equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);
+        equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);*/
+
 
         ActionSet = new UnitActionSet();
         ActionSet.AddAction(new SplashSpell());
         ActionSet.AddAction(new Pouch());
         ActionSet.AddAction(new Potion());
         
+        ApplyEquipmentBonuses();
         ResetCurrentStatPoints();
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void ResetCurrentStatPoints()
@@ -97,12 +94,12 @@ public class UnitInfo : MonoBehaviour
         baseHP = Mathf.RoundToInt(30 * statMultipler);
         baseMP = Mathf.RoundToInt(15 * statMultipler);
         baseAP = 2;
-        baseAttack = Mathf.RoundToInt(5 * statMultipler);
-        baseDefense = Mathf.RoundToInt(2 * statMultipler); ;
-        baseMagicAttack = Mathf.RoundToInt(7 * statMultipler); ;
-        baseMagicDefense = Mathf.RoundToInt(4 * statMultipler);
+        baseAttack = Mathf.RoundToInt(2 * statMultipler);
+        baseDefense = Mathf.RoundToInt(1 * statMultipler); 
+        baseMagicAttack = Mathf.RoundToInt(3 * statMultipler);
+        baseMagicDefense = Mathf.RoundToInt(2 * statMultipler);
         baseMove = 3;
-        baseSpeed = Mathf.RoundToInt(5 * statMultipler); ;
+        baseSpeed = Mathf.RoundToInt(5 * statMultipler);
         baseSense = 2;
     }
 
@@ -117,6 +114,7 @@ public class UnitInfo : MonoBehaviour
         finalMagicDefense = baseMagicDefense + equipment.bonusMagicDefense;
         finalMove = baseMove + equipment.bonusMove;
         finalSpeed = baseSpeed + equipment.bonusSpeed;
+        finalSense = baseSense;
     }
     
     public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }

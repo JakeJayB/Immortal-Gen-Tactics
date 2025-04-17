@@ -30,7 +30,7 @@ public class MapCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CursorControlState == ControlState.Start) { StartControls(); }
+        if (CursorControlState == ControlState.Start) { StartControls(); }
         if (CursorControlState == ControlState.Active) { ActiveControls(); }
         if (CursorControlState == ControlState.Action) { ActionControls(); }
     }
@@ -61,6 +61,7 @@ public class MapCursor : MonoBehaviour
         {
             UnitSelector.DestroyMenu();
             SelectedStartPositions();
+            RemoveTileOutline();
         }
     }
 
@@ -76,9 +77,9 @@ public class MapCursor : MonoBehaviour
         MoveCursorRight();
 
 
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            if (TilemapCreator.UnitLocator[hoverCell] == TurnSystem.CurrentUnit)
+            if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out Unit unit) && unit == TurnSystem.CurrentUnit)
             {
                 InactiveState();
                 currentUnit = hoverCell;
@@ -87,6 +88,21 @@ public class MapCursor : MonoBehaviour
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }
+            else
+            {
+                SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.S)) 
+        {
+            Unit unit = TilemapCreator.UnitLocator[currentUnit];
+
+            InactiveState();
+            SetHoverCell(currentUnit);
+            CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+            CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+            StartCoroutine(UnitMenu.ShowMenu(unit));
+            SoundFXManager.PlaySoundFXClip("Deselect", 0.2f);
         }
     }
 
@@ -294,27 +310,25 @@ public class MapCursor : MonoBehaviour
     public static void ShowUnitInfoFromTile()
     {
         if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out var foundUnit)) {
-                
             switch (CursorControlState)
             {
                 case ControlState.Start:
-                case ControlState.Active:
-                {
-                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player) {
-                        CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo); 
-                    } else {
+                    if(foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy)
                         CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
-                    }
-                        
                     break;
-                }
+                case ControlState.Active:
+                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+                        CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo);
+                    else
+                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
+
+                    break;
                 case ControlState.Action:
-                {
-                    if (foundUnit != TurnSystem.CurrentUnit) { CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); } 
+                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy) 
+                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); 
                     break;
-                }
                 default:
-                    Debug.LogError("Control State no Valid...");
+                    Debug.LogError("Control State not valid...");
                     break;
             }
         }

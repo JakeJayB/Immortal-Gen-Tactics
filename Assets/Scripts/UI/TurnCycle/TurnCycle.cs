@@ -16,7 +16,7 @@ public class TurnCycle : MonoBehaviour
     public static void Initialize(GameObject canvas)
     {
         PANEL_WIDTH = 800;
-        PANEL_HEIGHT = 80;
+        PANEL_HEIGHT = 50;
 
         Menu = new GameObject("TurnCycle", typeof(RectTransform));
         Menu.AddComponent<TurnCycle>();
@@ -27,7 +27,7 @@ public class TurnCycle : MonoBehaviour
         rectTransform.anchorMax = new Vector2(0.5f, 0);
         rectTransform.pivot = new Vector2(0.5f, 0.5f);
 
-        rectTransform.anchoredPosition = new Vector2(0, 40);
+        rectTransform.anchoredPosition = new Vector2(0, 25);
 
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, PANEL_WIDTH);
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_HEIGHT);
