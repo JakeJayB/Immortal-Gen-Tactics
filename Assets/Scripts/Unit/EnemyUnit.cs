@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 // TODO: Create a dynamic behavior that scans tiles for units to target move for.
@@ -107,6 +108,8 @@ public class EnemyUnit : Unit
         
                 foreach (var action in unitInfo.ActionSet.GetAllActions())
                 {
+                    if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
+                    
                     float newScore = action.CalculateActionScore(this, nearbyUnit);
                     if (newScore > bestScore) { 
                         bestScore = newScore;
