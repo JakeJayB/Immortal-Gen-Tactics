@@ -6,15 +6,18 @@ public class DamageCalculator
 {
     public static int ProjectDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
+        int projected = 0;
         switch (action.DamageType)
         {
             case DamageType.Physical:
-                return attacker.finalAttack + action.BasePower - target.finalDefense;
+                projected = attacker.finalAttack + action.BasePower - target.finalDefense;
+                break;
             case DamageType.Magic:
-                return attacker.finalMagicAttack + action.BasePower - target.finalMagicDefense;
+                projected = attacker.finalMagicAttack + action.BasePower - target.finalMagicDefense;
+                break;
         }
 
-        return 0;
+        return projected > 0 ? projected : 1;
     }
     
     public static int ProjectHealing(UnitAction action, UnitInfo attacker, UnitInfo target)
@@ -37,19 +40,20 @@ public class DamageCalculator
         return target.currentHP + healingAmount > target.finalHP ? target.finalHP - target.currentHP : healingAmount;
     }
     
-    public static void DealDamage(DamageType damageType, UnitInfo attacker, UnitInfo target)
+    public static void DealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
         int damage = 0;
-        switch (damageType)
+        switch (action.DamageType)
         {
             case DamageType.Physical:
-                damage = ApplyDamageRoll(attacker.finalAttack - target.finalDefense);
+                damage = attacker.finalAttack + action.BasePower - target.finalDefense;
                 break;
             case DamageType.Magic:
-                damage = ApplyDamageRoll(attacker.finalMagicAttack - target.finalMagicDefense);
+                damage = attacker.finalMagicAttack + action.BasePower - target.finalMagicDefense;
                 break;
         }
         
+        damage = ApplyDamageRoll(damage > 0 ? damage : 1);
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
     }
 
@@ -66,6 +70,6 @@ public class DamageCalculator
     }
 
     private static int ApplyDamageRoll(int baseDamage) {
-        return (int)(baseDamage + baseDamage * Random.Range(-1.2f, 1.2f));
+        return (int)(baseDamage + baseDamage * Random.Range(-0.2f, 0.2f));
     }
 }

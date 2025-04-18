@@ -49,7 +49,7 @@ public class UnitMenu : MonoBehaviour
         {
             if (InSubMenu) {
                 InSubMenu = false;
-                DisplayUnitMenu(TilemapCreator.UnitLocator[MapCursor.currentUnit].unitInfo.ActionSet.GetAllActions());
+                DisplayUnitMenu(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
             }
             else {
                 HideMenu();
@@ -86,7 +86,28 @@ public class UnitMenu : MonoBehaviour
     }
 
 
-    public static void DisplayUnitMenu(List<UnitAction> actions)
+    public static void DisplayUnitMenu(Unit unit)
+    {
+        ClearUnitSlots();
+        MenuSlots = new List<MenuSlot>();
+        var actions = unit.unitInfo.ActionSet.GetAllActions();
+        
+        for (int i = 0; i < actions.Count; i++)
+        {
+            MenuSlot slot = new GameObject("Slot: " + actions[i].Name, typeof(RectTransform)).AddComponent<MenuSlot>();
+            slot.transform.SetParent(Menu.transform, false);
+        
+            // TODO: Makes sure to get actions from actual unit instead of the testing list of UnitActions
+            slot.DefineSlot(actions[i], unit.unitInfo);
+            slot.PositionSlot(i, actions.Count);
+        
+            MenuSlots.Add(slot);
+        }
+        
+        Cursor.ResetCursor(MenuSlots);
+    }
+    
+    public static void DisplayUnitSubMenu(Unit unit, List<UnitAction> actions)
     {
         ClearUnitSlots();
         MenuSlots = new List<MenuSlot>();
@@ -97,7 +118,7 @@ public class UnitMenu : MonoBehaviour
             slot.transform.SetParent(Menu.transform, false);
         
             // TODO: Makes sure to get actions from actual unit instead of the testing list of UnitActions
-            slot.DefineSlot(actions[i]);
+            slot.DefineSlot(actions[i], unit.unitInfo);
             slot.PositionSlot(i, actions.Count);
         
             MenuSlots.Add(slot);
@@ -121,7 +142,7 @@ public class UnitMenu : MonoBehaviour
     {
         yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
 
-        DisplayUnitMenu(unit.unitInfo.ActionSet.GetAllActions());
+        DisplayUnitMenu(unit);
         
         var canvasRect = Canvas.GetComponent<RectTransform>();
 

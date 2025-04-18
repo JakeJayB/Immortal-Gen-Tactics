@@ -33,7 +33,7 @@ public class Back : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.InSubMenu = false;
-        UnitMenu.DisplayUnitMenu(unit.unitInfo.ActionSet.GetAllActions());
+        UnitMenu.DisplayUnitMenu(unit);
     }
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)

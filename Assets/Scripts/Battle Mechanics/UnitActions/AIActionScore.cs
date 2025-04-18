@@ -142,6 +142,9 @@ public class AIActionScore
             if (nearbyUnit.unitInfo.UnitAffiliation == unit.unitInfo.UnitAffiliation || distance > nearbyUnit.unitInfo.finalSense) continue;
             synergy += 10 * Mathf.RoundToInt(unit.AllySynergy);
         }
+
+        // Return Synergy only if the Action does not heal
+        if (Action.DamageType != DamageType.Healing) { return synergy; }
         
         // Add highest potential recovery to score
         int projectedHealing = 0;

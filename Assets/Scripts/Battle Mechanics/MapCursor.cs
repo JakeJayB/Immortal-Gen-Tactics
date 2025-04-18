@@ -84,7 +84,7 @@ public class MapCursor : MonoBehaviour
                 InactiveState();
                 currentUnit = hoverCell;
                 StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
-                UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell].unitInfo.ActionSet.GetAllActions());
+                UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell]);
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }

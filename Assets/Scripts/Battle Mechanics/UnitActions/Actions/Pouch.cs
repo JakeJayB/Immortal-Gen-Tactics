@@ -33,7 +33,7 @@ public class Pouch : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.InSubMenu = true;
-        UnitMenu.DisplayUnitMenu(new List<UnitAction> { new Potion(), new Potion(), new Potion(), new Back() });
+        UnitMenu.DisplayUnitSubMenu(unit, new List<UnitAction> { new Potion(), new Potion(), new Potion(), new Back() });
     }
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)

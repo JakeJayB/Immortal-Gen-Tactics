@@ -38,7 +38,7 @@ public class Move : UnitAction
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
                     nearbyUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
-                Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
             }
         }

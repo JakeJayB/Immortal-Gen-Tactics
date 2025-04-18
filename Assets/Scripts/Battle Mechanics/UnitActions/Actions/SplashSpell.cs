@@ -50,7 +50,7 @@ public class SplashSpell : UnitAction
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
                         foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
-                    Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                    // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                     if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
 
                     break;
@@ -84,7 +84,7 @@ public class SplashSpell : UnitAction
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit))
             {
-                DamageCalculator.DealDamage(DamageType, unit.unitInfo, targetUnit.unitInfo);
+                DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.finalHP);
             }
         }

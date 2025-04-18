@@ -37,7 +37,7 @@ public class UnitMenuCursor : MonoBehaviour
             UnitMenuTextbox.UpdateText(MenuSlots[slotIndex].Name);
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && MenuSlots[slotIndex].Selectable)
         {
             MenuSlots[slotIndex].Action.ActivateAction(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
             SoundFXManager.PlaySoundFXClip("Select", 0.2f);

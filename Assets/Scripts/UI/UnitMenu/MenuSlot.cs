@@ -11,9 +11,10 @@ public class MenuSlot : MonoBehaviour
     
     public string Name { get; private set; }
     public UnitAction Action { get; private set; }
+    public bool Selectable { get; private set; }
     public RectTransform SlotRectTransform { get; private set; }
 
-    public void DefineSlot(UnitAction unitAction)
+    public void DefineSlot(UnitAction unitAction, UnitInfo unitInfo)
     {
         Name = unitAction.Name;
         Action = unitAction;
@@ -21,6 +22,13 @@ public class MenuSlot : MonoBehaviour
         
         Image image = gameObject.AddComponent<Image>();
         image.sprite = unitAction.SlotImage();
+
+        if (unitInfo.currentAP < unitAction.APCost || unitInfo.currentMP < unitAction.MPCost) {
+            image.color = new Color(.2f, .2f, .2f, 1);
+            Selectable = false;
+        } else {
+            Selectable = true;
+        }
     }
 
     public void PositionSlot(int slotNumber, int totalActions)
