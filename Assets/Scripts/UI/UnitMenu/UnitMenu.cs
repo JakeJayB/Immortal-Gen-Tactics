@@ -61,7 +61,7 @@ public class UnitMenu : MonoBehaviour
                 else
                 {
                     MapCursor.ActiveState();
-                }git add .
+                }
                     
             }
             SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
