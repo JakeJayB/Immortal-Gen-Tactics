@@ -15,6 +15,7 @@ public class UnitMenu : MonoBehaviour
     public static UnitMenuCursor Cursor { get; private set; }
     public static Camera MainCamera;
     public static bool InSubMenu = false;
+    public static bool InReactionMode = false;
 
 /*    private void Awake()
     {
@@ -52,7 +53,16 @@ public class UnitMenu : MonoBehaviour
             }
             else {
                 HideMenu();
-                MapCursor.ActiveState();
+                if (ChainSystem.ReactionInProgress)
+                {
+                    MapCursor.InactiveState();
+                    ChainSystem.ReactionInProgress = false;
+                }
+                else
+                {
+                    MapCursor.ActiveState();
+                }git add .
+                    
             }
             SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }

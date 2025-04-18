@@ -11,7 +11,7 @@ public class ChainSystem
     private static List<(UnitAction action, Vector2Int target, Unit unit)> Chain = new List<(UnitAction action, Vector2Int target, Unit unit)>();
     private static int ChainCount => Chain.Count;
     private static (UnitAction, Vector2Int, Unit) PotentialChain;
-    private static bool ReactionInProgress = false;
+    public static bool ReactionInProgress = false;
     
     public static void HoldPotentialChain(UnitAction action, Unit unit) {
         PotentialChain = new ValueTuple<UnitAction, Vector2Int, Unit>(action, new Vector2Int(), unit);
