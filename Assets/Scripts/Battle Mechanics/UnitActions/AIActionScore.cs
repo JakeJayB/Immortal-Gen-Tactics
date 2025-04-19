@@ -28,6 +28,8 @@ public class AIActionScore
         int projectedFutureDamage = 0;
         foreach (var action in unit.unitInfo.ActionSet.GetAllAttackActions())
         {
+            if (unit.unitInfo.currentAP < action.APCost || unit.unitInfo.currentMP < action.MPCost) { continue; }
+            
             unitOnTile = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
             int futureDamage = 0; 
             

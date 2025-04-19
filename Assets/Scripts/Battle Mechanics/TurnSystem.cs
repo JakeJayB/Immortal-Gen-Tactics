@@ -5,36 +5,36 @@ using UnityEngine;
 
 public class UnitPriorityQueue
 {
-    private List<Unit> heap = new List<Unit>();
+    public static List<Unit> Heap { get; private set; } = new List<Unit>();
 
-    public int Count => heap.Count;
+    public int Count => Heap.Count;
 
     public void Enqueue(Unit unit)
     {
         unit.unitInfo.currentCT = 0;
-        heap.Add(unit);
-        HeapifyUp(heap.Count - 1);
+        Heap.Add(unit);
+        HeapifyUp(Heap.Count - 1);
     }
 
     public Unit Dequeue()
     {
-        if (heap.Count == 0) return null;
+        if (Heap.Count == 0) return null;
 
         ExecuteTick();
         TurnCycle.CycleUnits(ToSortedList());
         PrintUnits();
 
-        Unit root = heap[0];
-        heap[0] = heap[heap.Count - 1];
-        heap.RemoveAt(heap.Count - 1);
+        Unit root = Heap[0];
+        Heap[0] = Heap[Heap.Count - 1];
+        Heap.RemoveAt(Heap.Count - 1);
         HeapifyDown(0);
         return root;
     }
 
     public int PeekCT()
     {
-        if (heap.Count == 0) return -1;
-        return heap[0].unitInfo.currentCT;
+        if (Heap.Count == 0) return -1;
+        return Heap[0].unitInfo.currentCT;
     }
 
     private void HeapifyUp(int index)
@@ -42,7 +42,7 @@ public class UnitPriorityQueue
         while (index > 0)
         {
             int parent = (index - 1) / 2;
-            if (heap[index].unitInfo.currentCT <= heap[parent].unitInfo.currentCT)
+            if (Heap[index].unitInfo.currentCT <= Heap[parent].unitInfo.currentCT)
                 break;
 
             Swap(index, parent);
@@ -52,17 +52,17 @@ public class UnitPriorityQueue
 
     private void HeapifyDown(int index)
     {
-        int lastIndex = heap.Count - 1;
-        while (index < heap.Count)
+        int lastIndex = Heap.Count - 1;
+        while (index < Heap.Count)
         {
             int left = index * 2 + 1;
             int right = index * 2 + 2;
             int largest = index;
 
-            if (left <= lastIndex && heap[left].unitInfo.currentCT > heap[largest].unitInfo.currentCT)
+            if (left <= lastIndex && Heap[left].unitInfo.currentCT > Heap[largest].unitInfo.currentCT)
                 largest = left;
 
-            if (right <= lastIndex && heap[right].unitInfo.currentCT > heap[largest].unitInfo.currentCT)
+            if (right <= lastIndex && Heap[right].unitInfo.currentCT > Heap[largest].unitInfo.currentCT)
                 largest = right;
 
             if (largest == index) break;
@@ -74,14 +74,14 @@ public class UnitPriorityQueue
 
     private void Swap(int a, int b)
     {
-        Unit temp = heap[a];
-        heap[a] = heap[b];
-        heap[b] = temp;
+        Unit temp = Heap[a];
+        Heap[a] = Heap[b];
+        Heap[b] = temp;
     }
 
     private void Heapify()
     {
-        for (int i = (heap.Count / 2) - 1; i >= 0; i--)
+        for (int i = (Heap.Count / 2) - 1; i >= 0; i--)
             HeapifyDown(i);
     }
 
@@ -89,7 +89,7 @@ public class UnitPriorityQueue
     {
         do
         {
-            foreach(Unit unit in heap)
+            foreach(Unit unit in Heap)
             {
                 unit.unitInfo.currentCT = Mathf.Clamp(unit.unitInfo.currentCT + unit.unitInfo.finalSpeed, 0, 100);
             }
@@ -99,15 +99,15 @@ public class UnitPriorityQueue
 
     public List<Unit> ToSortedList()
     {
-        List<Unit> sortedList = new List<Unit>(heap);
+        List<Unit> sortedList = new List<Unit>(Heap);
         sortedList.Sort((a, b) => b.unitInfo.currentCT.CompareTo(a.unitInfo.currentCT));
         return sortedList;
     }
-
+    
     public void PrintUnits()
     {
         Debug.Log("-------------------------------------------");
-        foreach(Unit unit in heap)
+        foreach(Unit unit in Heap)
         {
             Debug.Log($"{unit.name}'s CT: {unit.unitInfo.currentCT}");
         }

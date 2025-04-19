@@ -59,7 +59,8 @@ public class UnitInfo : MonoBehaviour
     {
         SetBaseStats();
         equipment = new UnitEquipment(this);
-/*        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
+        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
+        /*
         equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
         equipment.EquipArmor(EquipmentLibrary.Armor[100]);
         equipment.EquipArmor(EquipmentLibrary.Armor[101]);
@@ -120,4 +121,10 @@ public class UnitInfo : MonoBehaviour
     public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
     
     public void RefreshAP() { currentAP = finalAP; }
+
+    public void Die()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+        UnitPriorityQueue.Heap.Remove(gameObject.GetComponent<Unit>());
+    }
 }
