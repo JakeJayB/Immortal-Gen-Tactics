@@ -17,8 +17,8 @@ public class Move : UnitAction
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
     public override List<Tile> Area(Unit unit) {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
-            unit.unitInfo.finalMove, Pattern.Splash);
+        return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+            unit.unitInfo.finalMove);
     }
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";
@@ -51,7 +51,7 @@ public class Move : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(unit, Name);
+        ActionUtility.ShowSelectableTilesForMove(Area(unit));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
@@ -61,9 +61,9 @@ public class Move : UnitAction
         // Have AI Units show their range of movement before moving
         if (unit.GetComponent<EnemyUnit>())
         {
-            ActionUtility.ShowSelectableTilesForAction(unit, Name);
+            ActionUtility.ShowSelectableTilesForMove(Area(unit));
             yield return new WaitForSeconds(2.0f);
-            ActionUtility.HideSelectableTilesForAction(unit);
+            ActionUtility.HideSelectableTilesForMove(Area(unit));
         }
         
         // Spend an Action Point to execute the Action

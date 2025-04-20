@@ -137,7 +137,7 @@ public class MapCursor : MonoBehaviour
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             SetHoverCell(currentUnit);
             ChainSystem.ReleasePotentialChain();
-            ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+            ActionUtility.HideAllSelectableTiles();
             SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
 
 
@@ -148,7 +148,7 @@ public class MapCursor : MonoBehaviour
     private static IEnumerator ConfirmAction()
     {
         InactiveState();
-        ActionUtility.HideSelectableTilesForAction(TilemapCreator.UnitLocator[currentUnit]);
+        ActionUtility.HideAllSelectableTiles();
         yield return ChainSystem.AddAction(hoverCell);
         yield return ChainSystem.ExecuteChain();
         

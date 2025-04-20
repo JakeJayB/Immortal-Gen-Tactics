@@ -67,6 +67,13 @@ public class ActionUtility
             tile.OverlayObj.ActivateOverlayTile(overlayMaterial);
         }
     }
+    
+    public static void ShowSelectableTilesForMove(List<Tile> area) 
+    {
+        foreach (var tile in area) {
+            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
+        }
+    }
 
     public static void HideSelectableTilesForAction(Unit unit)
     {
@@ -86,5 +93,20 @@ public class ActionUtility
         }
         
         ActionUtility.action = null;
+    }
+    
+    public static void HideSelectableTilesForMove(List<Tile> area)
+    {
+        foreach (var tile in area) {
+            tile.OverlayObj.DeactivateOverlayTile();
+        }
+    }
+
+    public static void HideAllSelectableTiles() {
+        foreach (var tile in TilemapCreator.TileLocator.Values) {
+            tile.OverlayObj.DeactivateOverlayTile();
+        }
+        
+        action = null;
     }
 }

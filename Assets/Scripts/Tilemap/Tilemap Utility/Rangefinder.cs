@@ -37,32 +37,42 @@ public class Rangefinder
 
         }
     }
-}
+    
+    public static List<Tile> GetMoveTilesInRange(Tile characterTile, int range)
+    {
+        var inRangeTiles = new List<Tile>();
+        int stepCount = 0;
 
+        inRangeTiles.Add(characterTile);
 
-    /*    public static List<Tile> GetTilesInRange(Tile characterTile, int range)
+        var tileForPreviousStep = new List<Tile>();
+        tileForPreviousStep.Add(characterTile);
+
+        while (stepCount < range)
         {
-            var inRangeTiles = new List<Tile>();
-            int stepCount = 0;
-
-            inRangeTiles.Add(characterTile);
-
-            var tileForPreviousStep = new List<Tile>();
-            tileForPreviousStep.Add(characterTile);
-
-            while (stepCount < range)
+            var surroundingTiles = new List<Tile>();
+            
+            foreach (var tile in tileForPreviousStep)
             {
-                var surroundingTiles = new List<Tile>();
-
-                foreach (var tile in tileForPreviousStep)
+                if (stepCount != 0 && (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var foundUnit)))
                 {
-                    surroundingTiles.AddRange(TilemapUtility.GetNeighborTiles(tile));
+                    continue;
                 }
+                
+                surroundingTiles.AddRange(TilemapUtility.GetNeighborTiles(tile));
 
-                inRangeTiles.AddRange(surroundingTiles);
-                tileForPreviousStep = surroundingTiles.Distinct().ToList();
-                stepCount++;
+                foreach (var possibleTile in surroundingTiles.ToList()) {
+                    if (TilemapCreator.UnitLocator.TryGetValue(possibleTile.TileInfo.Vector2CellLocation(), out foundUnit)) {
+                        surroundingTiles.Remove(possibleTile);
+                    }
+                }
             }
 
-            return inRangeTiles.Distinct().ToList();
-        }*/
+            inRangeTiles.AddRange(surroundingTiles);
+            tileForPreviousStep = surroundingTiles.Distinct().ToList();
+            stepCount++;
+        }
+
+        return inRangeTiles.Distinct().ToList();
+    }
+}
