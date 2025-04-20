@@ -134,4 +134,8 @@ public class ChainSystem
 
     public static bool UnitIsReacting() { return ReactionInProgress; }
     private static bool ReactionHasEnded() { return !ReactionInProgress; }
+
+    public static (UnitAction action, Vector2Int target, Unit unit) GetInitialChain() {
+        return Chain.FirstOrDefault(c => c.unit == TurnSystem.CurrentUnit);
+    }
 }

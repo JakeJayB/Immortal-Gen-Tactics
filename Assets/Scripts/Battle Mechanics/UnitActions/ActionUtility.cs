@@ -106,6 +106,9 @@ public class ActionUtility
         foreach (var tile in TilemapCreator.TileLocator.Values) {
             tile.OverlayObj.DeactivateOverlayTile();
         }
+
+        var initialChain = ChainSystem.GetInitialChain();
+        if (ChainSystem.UnitIsReacting()) { TilemapUtility.ShowTargetedArea(TilemapUtility.GetTargetedArea(initialChain.unit, initialChain.action, initialChain.target)); }
         
         action = null;
     }
