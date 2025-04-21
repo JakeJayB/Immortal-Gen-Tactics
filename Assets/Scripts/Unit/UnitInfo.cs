@@ -125,6 +125,6 @@ public class UnitInfo : MonoBehaviour
     public void Die()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-        UnitPriorityQueue.Heap.Remove(gameObject.GetComponent<Unit>());
+        TurnSystem.RemoveUnit(gameObject.GetComponent<Unit>());
     }
 }

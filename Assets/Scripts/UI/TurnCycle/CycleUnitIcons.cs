@@ -60,6 +60,7 @@ public class CycleUnitIcons : MonoBehaviour
         }
 
         float posOffset = TurnCycle.PANEL_WIDTH / (units.Count + 1);
+
         for (int i = 0; i < units.Count; i++)
         {
             Unit currUnit = units[i];
@@ -70,6 +71,14 @@ public class CycleUnitIcons : MonoBehaviour
 
     public static void RemoveUnit(Unit unit)
     {
+        if (!iconDict.ContainsKey(unit))
+        {
+            Debug.LogError("CycleUnitIcons: Unit not found in icon dictionary");
+            return;
+        }
+
+        Image image = iconDict[unit];
+        Destroy(image.gameObject);
         iconDict.Remove(unit);
     }
 }

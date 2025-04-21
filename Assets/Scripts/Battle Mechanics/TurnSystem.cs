@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UnitPriorityQueue
 {
-    public static List<Unit> Heap { get; private set; } = new List<Unit>();
+    private static List<Unit> Heap = new List<Unit>();
 
     public int Count => Heap.Count;
 
@@ -22,7 +22,6 @@ public class UnitPriorityQueue
 
         ExecuteTick();
         TurnCycle.CycleUnits(ToSortedList());
-        PrintUnits();
 
         Unit root = Heap[0];
         Heap[0] = Heap[Heap.Count - 1];
@@ -37,18 +36,26 @@ public class UnitPriorityQueue
         return Heap[0].unitInfo.currentCT;
     }
 
-    private void HeapifyUp(int index)
+    private bool IsHigherPriority(Unit a, Unit b)
     {
-        while (index > 0)
-        {
-            int parent = (index - 1) / 2;
-            if (Heap[index].unitInfo.currentCT <= Heap[parent].unitInfo.currentCT)
-                break;
-
-            Swap(index, parent);
-            index = parent;
-        }
+        if (a.unitInfo.currentCT > b.unitInfo.currentCT) return true;
+        if (a.unitInfo.currentCT < b.unitInfo.currentCT) return false;
+        return a.unitInfo.finalSpeed > b.unitInfo.finalSpeed;
     }
+
+
+private void HeapifyUp(int index)
+{
+    while (index > 0)
+    {
+        int parent = (index - 1) / 2;
+        if (!IsHigherPriority(Heap[index], Heap[parent]))
+            break;
+
+        Swap(index, parent);
+        index = parent;
+    }
+}
 
     private void HeapifyDown(int index)
     {
@@ -59,10 +66,10 @@ public class UnitPriorityQueue
             int right = index * 2 + 2;
             int largest = index;
 
-            if (left <= lastIndex && Heap[left].unitInfo.currentCT > Heap[largest].unitInfo.currentCT)
+            if (left <= lastIndex && IsHigherPriority(Heap[left], Heap[largest]))
                 largest = left;
 
-            if (right <= lastIndex && Heap[right].unitInfo.currentCT > Heap[largest].unitInfo.currentCT)
+            if (right <= lastIndex && IsHigherPriority(Heap[right], Heap[largest]))
                 largest = right;
 
             if (largest == index) break;
@@ -79,10 +86,18 @@ public class UnitPriorityQueue
         Heap[b] = temp;
     }
 
-    private void Heapify()
+    public void Heapify()
     {
         for (int i = (Heap.Count / 2) - 1; i >= 0; i--)
             HeapifyDown(i);
+    }
+
+    public void Remove(Unit unit)
+    {
+        Debug.Log($"Unit {unit.name} removed from queue");
+        Heap.Remove(unit);
+        Heapify();
+        TurnCycle.CycleUnits(ToSortedList(true));
     }
 
     public void ExecuteTick()
@@ -97,10 +112,18 @@ public class UnitPriorityQueue
         } while (PeekCT() != 100);
     }
 
-    public List<Unit> ToSortedList()
+    public List<Unit> ToSortedList(bool includeCurrentUnit = false)
     {
         List<Unit> sortedList = new List<Unit>(Heap);
-        sortedList.Sort((a, b) => b.unitInfo.currentCT.CompareTo(a.unitInfo.currentCT));
+        if(includeCurrentUnit && TurnSystem.CurrentUnit != null)
+            sortedList.Add(TurnSystem.CurrentUnit);
+       
+        sortedList.Sort((a, b) => {
+            int ctComparison = b.unitInfo.currentCT.CompareTo(a.unitInfo.currentCT);
+            if (ctComparison == 0)
+                return b.unitInfo.finalSpeed.CompareTo(a.unitInfo.finalSpeed); // Tie-breaker
+            return ctComparison;
+        });
         return sortedList;
     }
     
@@ -123,13 +146,14 @@ public class TurnSystem : MonoBehaviour
     private static bool startLoop = false;
     private static bool continueLoop = false;
     public static Unit CurrentUnit;
+    private static UnitPriorityQueue unitQueue;
 
     public IEnumerator TurnLoop()
     {
         MapCursor.SelectStartPositions();
         yield return new WaitUntil(() => startLoop);
 
-        UnitPriorityQueue unitQueue = new UnitPriorityQueue();
+        unitQueue = new UnitPriorityQueue();
         foreach (Unit unit in new List<Unit>(TilemapCreator.UnitLocator.Values))
             unitQueue.Enqueue(unit);
 
@@ -160,13 +184,35 @@ public class TurnSystem : MonoBehaviour
             yield return new WaitUntil(() => continueLoop);
             continueLoop = false;
             unitQueue.Enqueue(CurrentUnit);
-            unitQueue.PrintUnits();
+            CurrentUnit = null;
             yield return new WaitForSeconds(1f);
         }
     }
 
 
 
+
+
+    public static void RemoveUnit(Unit unit)
+    {
+
+        Debug.Log($"Check 1: is unit null? {unit == null}");
+        Debug.Log($"Check 2: is unit null? {unit == null}");
+        Debug.Log($"Check 3: is unitQueue null? {unitQueue == null}");
+        if (CurrentUnit == unit)
+            CurrentUnit = null;
+
+        TurnCycle.RemoveUnit(unit);
+        unitQueue.Remove(unit);
+    }
+
+    public static void ContinueLoop() => continueLoop = true;
+
+    public static void StartLoop() => startLoop = true;
+
+    public static void StopLoop() => startLoop = false;
+
+}
 
     /*    public IEnumerator TurnLoop()
         {
@@ -220,11 +266,3 @@ public class TurnSystem : MonoBehaviour
                 }
             }
         }*/
-
-    public static void ContinueLoop() => continueLoop = true;
-
-    public static void StartLoop() => startLoop = true;
-
-    public static void StopLoop() => startLoop = false;
-
-}

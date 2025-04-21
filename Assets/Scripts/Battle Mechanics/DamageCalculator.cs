@@ -56,7 +56,7 @@ public class DamageCalculator
         damage = ApplyDamageRoll(damage > 0 ? damage : 1);
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
         
-        if (target.currentHP == 0) { target.Die(); }
+        if (target.currentHP <= 0) { target.Die(); }
     }
 
     public static void DamageFixedAmount(int amount, UnitInfo target)
