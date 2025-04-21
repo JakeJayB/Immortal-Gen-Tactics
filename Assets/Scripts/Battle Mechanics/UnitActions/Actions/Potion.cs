@@ -53,7 +53,7 @@ public class Potion : UnitAction
         unit.unitInfo.ActionSet.RemoveAction(this);
         
         // Heal Unit by Specified Amount
-        DamageCalculator.HealFixedAmount(BasePower, unit.unitInfo);
+        yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, DamageCalculator.HealFixedAmount(BasePower, unit.unitInfo));
         Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
         yield return null;
     }

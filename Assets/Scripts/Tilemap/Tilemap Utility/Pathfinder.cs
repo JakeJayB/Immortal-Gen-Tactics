@@ -22,6 +22,20 @@ public class Pathfinder
 
             if (currentTile == end)
             {
+                if (TilemapCreator.UnitLocator.TryGetValue(currentTile.TileInfo.Vector2CellLocation(),
+                        out var foundUnit))
+                {
+                    currentTile = cameFrom.Last().Value;
+                    end = currentTile;
+                }
+                
+                while (TilemapCreator.UnitLocator.TryGetValue(currentTile.TileInfo.Vector2CellLocation(),
+                        out foundUnit) && currentTile != start)
+                {
+                    end = currentTile;
+                    currentTile = cameFrom[currentTile];
+                }
+                
                 return GetPath(cameFrom, start, end);
             }
 
@@ -43,8 +57,8 @@ public class Pathfinder
             }
         }
 
-        // No valid path found
-        return new List<Tile>();
+        // Return path if unable to reach the end tile
+        return cameFrom.Count > 0 ? GetPath(cameFrom, start, cameFrom.Last().Key) : new List<Tile>();
     }
 
     private static List<Tile> GetPath(Dictionary<Tile, Tile> cameFrom, Tile start, Tile end)
