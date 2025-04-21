@@ -39,6 +39,7 @@ public class UnitMenuCursor : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A) && MenuSlots[slotIndex].Selectable)
         {
+            if (ChainSystem.ReactionInProgress) { }
             MenuSlots[slotIndex].Action.ActivateAction(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
             SoundFXManager.PlaySoundFXClip("Select", 0.2f);
         }

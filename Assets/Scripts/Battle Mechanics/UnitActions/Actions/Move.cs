@@ -63,7 +63,7 @@ public class Move : UnitAction
         {
             ActionUtility.ShowSelectableTilesForMove(Area(unit));
             yield return new WaitForSeconds(2.0f);
-            ActionUtility.HideSelectableTilesForMove(Area(unit));
+            ActionUtility.HideSelectableTilesForAction(Area(unit));
         }
         
         // Spend an Action Point to execute the Action
