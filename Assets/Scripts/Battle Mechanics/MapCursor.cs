@@ -101,6 +101,7 @@ public class MapCursor : MonoBehaviour
             SetHoverCell(currentUnit);
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+            CanvasUI.HideTargetUnitInfoDisplay();
             StartCoroutine(UnitMenu.ShowMenu(unit));
             SoundFXManager.PlaySoundFXClip("Deselect", 0.2f);
         }
@@ -134,6 +135,7 @@ public class MapCursor : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S))
         {
             InactiveState();
+            CanvasUI.HideTargetUnitInfoDisplay();
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             SetHoverCell(currentUnit);
             ChainSystem.ReleasePotentialChain();
@@ -228,6 +230,7 @@ public class MapCursor : MonoBehaviour
         Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
         SetHoverCell(cell2D);
         currentUnit = cell2D;
+        CanvasUI.ShowTurnUnitInfoDisplay(TilemapCreator.UnitLocator[cell2D].unitInfo);
         CursorControlState = ControlState.Active;
 
         //send currentUnit unit object to UI Manager
@@ -237,6 +240,8 @@ public class MapCursor : MonoBehaviour
     public static void EndMove()
     {
         RemoveTileOutline();
+        CanvasUI.HideTurnUnitInfoDisplay();
+        CanvasUI.HideTargetUnitInfoDisplay();
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
         TurnSystem.ContinueLoop();
