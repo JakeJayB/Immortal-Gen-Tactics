@@ -128,6 +128,7 @@ public class EnemyUnit : Unit
         }
         
         if (ChainSystem.Peek().GetType() == typeof(Wait)) {
+            yield return new WaitForSeconds(2f);
             yield return ChainSystem.ExecuteChain();
         }
         else {

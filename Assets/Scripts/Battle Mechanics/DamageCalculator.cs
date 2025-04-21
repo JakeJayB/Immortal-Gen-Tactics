@@ -56,10 +56,22 @@ public class DamageCalculator : MonoBehaviour
         
         damage = ApplyDamageRoll(damage > 0 ? damage : 1);
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
-        
-        if (target.currentHP == 0) { target.Die(); }
 
+
+        if(attacker.UnitAffiliation == UnitAffiliation.Player)
+        {
+            CanvasUI.ShowTurnUnitInfoDisplay(attacker);
+            CanvasUI.ShowTargetUnitInfoDisplay(target);
+        }
+        else
+        {
+            CanvasUI.ShowTurnUnitInfoDisplay(target);
+            CanvasUI.ShowTargetUnitInfoDisplay(attacker);
+        }
+
+        if (target.currentHP <= 0) { target.Die(); }
         return damage;
+
     }
 
     public static void DamageFixedAmount(int amount, UnitInfo target)

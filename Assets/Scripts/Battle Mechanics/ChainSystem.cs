@@ -79,7 +79,11 @@ public class ChainSystem
         MapCursor.SetGameObjActive();
         Debug.Log("Unit " + unit.name + " should be reacting...");
         ReactionInProgress = true;
-        MapCursor.currentUnit = unit.unitInfo.Vector2CellLocation();
+        Vector2Int unitCell = unit.unitInfo.Vector2CellLocation();
+        MapCursor.currentUnit = unitCell;
+
+        CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unitCell].TileObj.transform);
 
         yield return UnitMenu.ShowMenu(unit);
         yield return new WaitUntil(ReactionHasEnded);

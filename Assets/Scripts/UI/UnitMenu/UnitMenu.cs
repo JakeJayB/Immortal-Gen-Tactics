@@ -140,6 +140,7 @@ public class UnitMenu : MonoBehaviour
 
     public static IEnumerator ShowMenu(Unit unit)
     {
+        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileObj.transform);
         yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
 
         DisplayUnitMenu(unit);
