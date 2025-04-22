@@ -91,7 +91,7 @@ public class UnitMenu : MonoBehaviour
     {
         ClearUnitSlots();
         MenuSlots = new List<MenuSlot>();
-        var actions = unit.unitInfo.ActionSet.GetAllActions();
+        var actions = ChainSystem.ReactionInProgress ? unit.unitInfo.ActionSet.GetAllReactions() : unit.unitInfo.ActionSet.GetAllTurnActions();
         
         for (int i = 0; i < actions.Count; i++)
         {

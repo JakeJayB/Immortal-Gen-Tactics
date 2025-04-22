@@ -12,7 +12,6 @@ public class CanvasUI : MonoBehaviour
     private static Image InfoBar;
     private static UnitInfoDisplay UnitDisplay;
     private static UnitInfoDisplay TargetUnitDisplay;
-    public static DamageDisplay DamageDisplay;
     
     private void Start()
     {
@@ -47,8 +46,6 @@ public class CanvasUI : MonoBehaviour
         InfoBar.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 1);
         InfoBar.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 30);
         InfoBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -25);
-
-        DamageDisplay = new DamageDisplay();
     }
 
     public static void ShowTurnUnitInfoDisplay(UnitInfo unitInfo) {
@@ -60,23 +57,9 @@ public class CanvasUI : MonoBehaviour
         TargetUnitDisplay.gameObject.SetActive(true);
         TargetUnitDisplay.DisplayUnitInfo(unitInfo);
     }
-
-    public IEnumerator DisplayUnitDamage(UnitInfo unitInfo, int damage)
-    {
-        TMP_Text displayText =  new GameObject("Display Text", typeof(RectTransform)).AddComponent<TextMeshProUGUI>();
-        displayText.transform.SetParent(transform);
-        displayText.GetComponent<RectTransform>().anchoredPosition = unitInfo.Vector2CellLocation();
-        displayText.text = damage.ToString();
-        displayText.fontSize = 48;
-
-        yield return new WaitForSeconds(1.0f);
-    }
     
     public static void HideTurnUnitInfoDisplay() { UnitDisplay.gameObject.SetActive(false); }
     public static void HideTargetUnitInfoDisplay() { TargetUnitDisplay.gameObject.SetActive(false); }
 
-    public static Transform ReferenceCanvas()
-    {
-        return Canvas;
-    }
+    public static Transform ReferenceCanvas() { return Canvas; }
 }

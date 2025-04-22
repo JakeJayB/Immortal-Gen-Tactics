@@ -32,6 +32,7 @@ public class UnitInfo : MonoBehaviour
     [SerializeField] public int finalMagicAttack;
     [SerializeField] public int finalMagicDefense;
     [SerializeField] public int finalMove;
+    [SerializeField] public int finalEvade;
     [SerializeField] public int finalSpeed;
     [SerializeField] public int finalSense;
     # endregion
@@ -45,6 +46,7 @@ public class UnitInfo : MonoBehaviour
     [SerializeField] private int baseMagicAttack;
     [SerializeField] private int baseMagicDefense;
     [SerializeField] private int baseMove;
+    [SerializeField] private int baseEvade;
     [SerializeField] private int baseSpeed;
     [SerializeField] private int baseSense;
     
@@ -100,6 +102,7 @@ public class UnitInfo : MonoBehaviour
         baseMagicAttack = Mathf.RoundToInt(3 * statMultipler);
         baseMagicDefense = Mathf.RoundToInt(2 * statMultipler);
         baseMove = 3;
+        baseEvade = 1;
         baseSpeed = Mathf.RoundToInt(5 * statMultipler);
         baseSense = 2;
     }
@@ -114,6 +117,7 @@ public class UnitInfo : MonoBehaviour
         finalDefense = baseDefense + equipment.bonusDefense;
         finalMagicDefense = baseMagicDefense + equipment.bonusMagicDefense;
         finalMove = baseMove + equipment.bonusMove;
+        finalEvade = baseEvade + equipment.bonusEvade;
         finalSpeed = baseSpeed + equipment.bonusSpeed;
         finalSense = baseSense;
     }

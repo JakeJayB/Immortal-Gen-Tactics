@@ -31,6 +31,7 @@ public class UnitEquipment
     public int bonusDefense { get; private set; }
     public int bonusMagicDefense { get; private set; }
     public int bonusMove { get; private set; }
+    public int bonusEvade { get; private set; }
     public int bonusSpeed { get; private set; }
 
     public UnitEquipment(UnitInfo unitInfo)
@@ -132,6 +133,7 @@ public class UnitEquipment
         bonusDefense = 0;
         bonusMagicDefense = 0;
         bonusMove = 0;
+        bonusEvade = 0;
         bonusSpeed = 0;
     }
     
@@ -145,6 +147,7 @@ public class UnitEquipment
         bonusDefense += equipment.equipDefense;
         bonusMagicDefense += equipment.equipMagicDefense;
         bonusMove += equipment.equipMove;
+        bonusEvade += equipment.equipEvade;
         bonusSpeed += equipment.equipSpeed;
         
         unitInfo.ApplyEquipmentBonuses();
