@@ -76,6 +76,7 @@ public class UnitMenu : MonoBehaviour
         Menu.AddComponent<UnitMenu>();
         Menu.transform.SetParent(canvas.transform, false);
         Menu.SetActive(false);
+        Menu.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         
         Textbox = new GameObject("UnitMenuTextbox", typeof(RectTransform)).AddComponent<UnitMenuTextbox>();
         Textbox.transform.SetParent(Menu.transform, false);
@@ -153,7 +154,7 @@ public class UnitMenu : MonoBehaviour
         // Convert viewport position to canvas local position
         Vector2 menuPosition = new Vector2(
             (viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.565f),
-            (viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f) - 50f // Move down slightly
+            (viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f) - 40f // Move down slightly
         );
 
         Menu.GetComponent<RectTransform>().anchoredPosition = menuPosition;

@@ -34,7 +34,7 @@ public class UnitMenuTextbox : MonoBehaviour
         Textbox.SetNativeSize();
         
         RectTransform rectTransform = Textbox.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(73, -40);
+        rectTransform.anchoredPosition = new Vector2(50, -30);
     }
     
     public void DefineText()
@@ -44,11 +44,12 @@ public class UnitMenuTextbox : MonoBehaviour
         Text.transform.SetParent(transform, false);
         
         RectTransform textRectTransform = Text.GetComponent<RectTransform>();
-        textRectTransform.anchoredPosition = new Vector2(73, -40);
+        textRectTransform.anchoredPosition = new Vector2(50, -30);
+        //textRectTransform.anchoredPosition = new Vector2(73, -40);
 
         // Configure text properties
         Text.SetText("Move");
-        Text.fontSize = 14;
+        Text.fontSize = 12;
         Text.alignment = TextAlignmentOptions.Center;
         Text.color = Color.white;
     }
