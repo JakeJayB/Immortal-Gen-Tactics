@@ -24,10 +24,8 @@ public class UnitActionSet
     {
         unitActions = new Dictionary<ActionType, List<UnitAction>>()
         {
-            { ActionType.Move, new List<UnitAction>() { new Move() } },
-            { ActionType.React, new List<UnitAction>() {  } },
             { ActionType.Attack, new List<UnitAction>() { new Attack() } },
-            { ActionType.Wait, new List<UnitAction>() { new Wait() } },
+            { ActionType.React, new List<UnitAction>() {  } },
         };
     }
 
@@ -67,9 +65,11 @@ public class UnitActionSet
     {
         List<UnitAction> allActions = new List<UnitAction>();
         
-        foreach (var actionList in unitActions.Values) {
-            allActions.AddRange(actionList);
-        }
+        // Add all Turn-Based Actions
+        allActions.Add(new Move());
+        foreach (var actionList in unitActions.Values) { allActions.AddRange(actionList); }
+        allActions.Add(new Wait());
+        
         return allActions;
     }
     
@@ -77,11 +77,9 @@ public class UnitActionSet
     {
         List<UnitAction> allReactions = new List<UnitAction>();
         
-        foreach (var actionList in unitActions) {
-            if (actionList.Key != ActionType.Move && actionList.Key != ActionType.Wait) {
-                allReactions.AddRange(actionList.Value);
-            }
-        }
+        // Add all Reaction-Based Actions
+        allReactions.Add(new Evade());
+        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList); }
         return allReactions;
     }
     
