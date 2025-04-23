@@ -10,7 +10,7 @@ public class UnitMenuCursor : MonoBehaviour
     private RectTransform CursorRectTransform;
 
     private List<MenuSlot> MenuSlots;
-    public int slotIndex;
+    public static int slotIndex;
     
     // Start is called before the first frame update
     void Start()

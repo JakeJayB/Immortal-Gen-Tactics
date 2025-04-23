@@ -41,6 +41,8 @@ public class Attack : UnitAction
             {
                 if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
                 {
+                    if (foundUnit.unitInfo.IsDead()) { continue; }
+                    
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
                         foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             

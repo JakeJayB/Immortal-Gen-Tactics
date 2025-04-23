@@ -50,7 +50,11 @@ public class Potion : UnitAction
         PayAPCost(unit);
         
         // Consume Item and Remove it from ActionSet
-        unit.unitInfo.ActionSet.RemoveAction(this);
+        if (UnitMenu.InSubMenu) {
+            yield return UnitMenu.SubMenu.ExecuteAction(unit, selectedCell);
+        } else {
+            unit.unitInfo.ActionSet.RemoveAction(this);
+        }
         
         // Heal Unit by Specified Amount
         yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, DamageCalculator.HealFixedAmount(BasePower, unit.unitInfo));

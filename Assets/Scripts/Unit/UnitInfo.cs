@@ -21,6 +21,7 @@ public class UnitInfo : MonoBehaviour
     public int currentLevel { get; protected internal set; } = 1;
     
     protected int currentEXP;
+    public bool Dead = false;
     
     // Unit Final Stat Values
     # region Unit Final Stat Values
@@ -128,7 +129,10 @@ public class UnitInfo : MonoBehaviour
 
     public void Die()
     {
+        Dead = true;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
         TurnSystem.RemoveUnit(gameObject.GetComponent<Unit>());
     }
+
+    public bool IsDead() { return Dead; }
 }

@@ -14,6 +14,7 @@ public class UnitMenu : MonoBehaviour
     public static UnitMenuTextbox Textbox { get; private set; }
     public static UnitMenuCursor Cursor { get; private set; }
     public static Camera MainCamera;
+    public static UnitAction SubMenu;
     public static bool InSubMenu = false;
     public static bool InReactionMode = false;
 
