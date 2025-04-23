@@ -158,7 +158,9 @@ public class EnemyUnit : Unit
         foreach (Tile tile in surroundings)
         {
             var cell = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
-            if (TilemapCreator.UnitLocator.TryGetValue(cell, out Unit unit)) nearbyUnits.Add(unit);
+            if (TilemapCreator.UnitLocator.TryGetValue(cell, out Unit unit)) {
+                if (!unit.unitInfo.IsDead()) { nearbyUnits.Add(unit); }
+            }
         }
 
         return nearbyUnits;

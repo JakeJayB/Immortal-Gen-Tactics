@@ -47,6 +47,8 @@ public class SplashSpell : UnitAction
             {
                 if (TilemapCreator.UnitLocator.TryGetValue(targetedTile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
                 {
+                    if (foundUnit.unitInfo.IsDead()) { continue; }
+                    
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
                         foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             

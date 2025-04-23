@@ -142,4 +142,8 @@ public class ChainSystem
     public static (UnitAction action, Vector2Int target, Unit unit) GetInitialChain() {
         return Chain.FirstOrDefault(c => c.unit == TurnSystem.CurrentUnit);
     }
+    
+    public static (UnitAction action, Vector2Int target, Unit unit) GetUnitChain(Unit unit) {
+        return Chain.FirstOrDefault(c => c.unit == unit);
+    }
 }
