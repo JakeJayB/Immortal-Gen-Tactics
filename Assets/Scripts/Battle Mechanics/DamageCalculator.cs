@@ -89,6 +89,16 @@ public class DamageCalculator : MonoBehaviour
 
         return target.currentHP == target.finalHP ? target.finalHP - initialHP : amount;
     }
+    
+    public static int HealFixedAmountMP(int amount, UnitInfo target)
+    {
+        int initialMP = target.currentMP;
+        
+        target.currentMP += amount;
+        target.currentMP = target.currentMP > target.finalMP ? target.finalMP : target.currentMP;
+
+        return target.currentMP == target.finalMP ? target.finalMP - initialMP : amount;
+    }
 
     private static int ApplyDamageRoll(int baseDamage) {
         return (int)(baseDamage + baseDamage * Random.Range(-0.2f, 0.2f));

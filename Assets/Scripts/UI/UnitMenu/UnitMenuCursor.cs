@@ -78,6 +78,4 @@ public class UnitMenuCursor : MonoBehaviour
         // Set the Cursor to be above all slots
         transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
-
-    public static UnitAction GetSelectedAction() { return MenuSlots[slotIndex].Action; }
 }

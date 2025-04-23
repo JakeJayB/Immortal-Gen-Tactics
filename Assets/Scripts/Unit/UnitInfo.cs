@@ -76,7 +76,7 @@ public class UnitInfo : MonoBehaviour
         ActionSet = new UnitActionSet();
         ActionSet.AddAction(new SplashSpell());
         ActionSet.AddAction(new Pouch());
-        ActionSet.AddAction(new Potion());
+        ActionSet.AddAction(new Ether());
         
         ApplyEquipmentBonuses();
         ResetCurrentStatPoints();
