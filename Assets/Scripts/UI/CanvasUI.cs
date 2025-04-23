@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,12 +8,15 @@ using UnityEngine.UI;
 
 public class CanvasUI : MonoBehaviour
 {
+    private static Transform Canvas;
     private static Image InfoBar;
     private static UnitInfoDisplay UnitDisplay;
     private static UnitInfoDisplay TargetUnitDisplay;
     
     private void Start()
     {
+        Canvas = transform;
+        
         UnitMenu.Initialize(this.gameObject);
         UnitSelector.Initialize(this.gameObject);      
         TurnCycle.Initialize(this.gameObject);
@@ -53,7 +57,9 @@ public class CanvasUI : MonoBehaviour
         TargetUnitDisplay.gameObject.SetActive(true);
         TargetUnitDisplay.DisplayUnitInfo(unitInfo);
     }
-
+    
     public static void HideTurnUnitInfoDisplay() { UnitDisplay.gameObject.SetActive(false); }
     public static void HideTargetUnitInfoDisplay() { TargetUnitDisplay.gameObject.SetActive(false); }
+
+    public static Transform ReferenceCanvas() { return Canvas; }
 }

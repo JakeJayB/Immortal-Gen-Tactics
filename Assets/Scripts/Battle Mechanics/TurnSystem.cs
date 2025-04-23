@@ -168,15 +168,15 @@ public class TurnSystem : MonoBehaviour
             if (CurrentUnit.GetComponent<EnemyUnit>())
             {
                 mapCursor.gameObject.SetActive(false);
-                Vector3Int unitLocation = CurrentUnit.unitInfo.CellLocation;
-                CameraMovement.CheckAndMove(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)].TileObj.transform);
+                Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
+                CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
                 CurrentUnit.GetComponent<EnemyUnit>().StartTurn();
             }
             else
             {
                 mapCursor.gameObject.SetActive(true);
-                Vector3Int unitLocation = CurrentUnit.unitInfo.CellLocation;
-                CameraMovement.CheckAndMove(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)].TileObj.transform);
+                Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
+                CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
                 MapCursor.StartMove(unitLocation);
             }
 

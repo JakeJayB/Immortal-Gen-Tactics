@@ -106,7 +106,7 @@ public class EnemyUnit : Unit
                 
                 bestAction.CalculateActionScore(this, nearbyUnit);
         
-                foreach (var action in unitInfo.ActionSet.GetAllActions())
+                foreach (var action in unitInfo.ActionSet.GetAllTurnActions())
                 {
                     if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
                     
@@ -128,6 +128,7 @@ public class EnemyUnit : Unit
         }
         
         if (ChainSystem.Peek().GetType() == typeof(Wait)) {
+            yield return new WaitForSeconds(2f);
             yield return ChainSystem.ExecuteChain();
         }
         else {

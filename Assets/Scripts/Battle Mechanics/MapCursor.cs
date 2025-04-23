@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class MapCursor : MonoBehaviour
 {
@@ -82,9 +80,10 @@ public class MapCursor : MonoBehaviour
             if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out Unit unit) && unit == TurnSystem.CurrentUnit)
             {
                 InactiveState();
+                //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileObj.transform);
                 currentUnit = hoverCell;
-                StartCoroutine(UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]));
-                UnitMenu.DisplayUnitMenu(TilemapCreator.UnitLocator[hoverCell]);
+                StartCoroutine(UnitMenu.ShowMenu(unit));
+                UnitMenu.DisplayUnitMenu(unit);
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }
@@ -136,7 +135,7 @@ public class MapCursor : MonoBehaviour
         {
             InactiveState();
             CanvasUI.HideTargetUnitInfoDisplay();
-            CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+            //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
             SetHoverCell(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideAllSelectableTiles();
@@ -156,7 +155,7 @@ public class MapCursor : MonoBehaviour
         
         // Set 'currentUnit' back to the current unit in the turn system
         currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
-        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+        //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
         MoveCursor(currentUnit);
         yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
     }
@@ -225,16 +224,12 @@ public class MapCursor : MonoBehaviour
         }
     }
 
-    public static void StartMove(Vector3Int cell)
+    public static void StartMove(Vector2Int cell2D)
     {
-        Vector2Int cell2D = new Vector2Int(cell.x, cell.z);
         SetHoverCell(cell2D);
         currentUnit = cell2D;
         CanvasUI.ShowTurnUnitInfoDisplay(TilemapCreator.UnitLocator[cell2D].unitInfo);
         CursorControlState = ControlState.Active;
-
-        //send currentUnit unit object to UI Manager
-        //UIManager.SetLeftPanel(TilemapCreator.UnitLocator[currentUnit]);
     }
 
     public static void EndMove()
@@ -323,7 +318,10 @@ public class MapCursor : MonoBehaviour
                     break;
                 case ControlState.Active:
                     if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+                    {
                         CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo);
+                        CanvasUI.HideTargetUnitInfoDisplay();
+                    }
                     else
                         CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
 

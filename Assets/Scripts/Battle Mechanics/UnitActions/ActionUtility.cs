@@ -56,6 +56,8 @@ public class ActionUtility
             Debug.LogError("ActionUtility: ActionUtility.action must be null. Returning without showing tiles");
             return;
         }
+        
+        HideSelectableTiles();
 
         ActionUtility.action = action;
         var parameters = DetermineParameters(ActionUtility.action, unit);
@@ -70,6 +72,8 @@ public class ActionUtility
     
     public static void ShowSelectableTilesForMove(List<Tile> area) 
     {
+        if (ChainSystem.UnitIsReacting()) { HideAllSelectableTiles(); }
+        
         foreach (var tile in area) {
             tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
         }
@@ -95,9 +99,16 @@ public class ActionUtility
         ActionUtility.action = null;
     }
     
-    public static void HideSelectableTilesForMove(List<Tile> area)
+    public static void HideSelectableTilesForAction(List<Tile> area)
     {
         foreach (var tile in area) {
+            tile.OverlayObj.DeactivateOverlayTile();
+        }
+    }
+    
+    public static void HideSelectableTiles()
+    {
+        foreach (var tile in TilemapCreator.TileLocator.Values) {
             tile.OverlayObj.DeactivateOverlayTile();
         }
     }

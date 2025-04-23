@@ -73,5 +73,6 @@ public class Equipment
     public int equipDefense { get; protected set; }
     public int equipMagicDefense { get; protected set; }
     public int equipMove { get; protected set; }
+    public int equipEvade { get; protected set; }
     public int equipSpeed { get; protected set; }
 }

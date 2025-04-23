@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class MenuSlot : MonoBehaviour
 {
-    private const float SLOT_SCALE = 0.5f;
-    private const float SLOT_MARGIN = 48f;
+    //private const float SLOT_SCALE = 0.5f;
+    private const float SLOT_SCALE = 0.35f;
+
+   // private const float SLOT_MARGIN = 48f;
+    private const float SLOT_MARGIN = 33.6f;
     private const float ADJUST_MARGIN = SLOT_MARGIN / 2;
     
     public string Name { get; private set; }

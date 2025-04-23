@@ -19,6 +19,6 @@ public class RuleBasedAILogic
     
     // Item-Based Rules
     public static bool HasItem(UnitAction item, UnitInfo unitInfo) {
-        return unitInfo.ActionSet.GetAllActions().Any(action => action.GetType() == item.GetType());
+        return unitInfo.ActionSet.GetAllTurnActions().Any(action => action.GetType() == item.GetType());
     }
 }

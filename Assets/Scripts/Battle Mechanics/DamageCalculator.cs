@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class DamageCalculator
+public class DamageCalculator : MonoBehaviour
 {
     public static int ProjectDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
@@ -40,7 +41,7 @@ public class DamageCalculator
         return target.currentHP + healingAmount > target.finalHP ? target.finalHP - target.currentHP : healingAmount;
     }
     
-    public static void DealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
+    public static int DealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
         int damage = 0;
         switch (action.DamageType)
@@ -55,8 +56,22 @@ public class DamageCalculator
         
         damage = ApplyDamageRoll(damage > 0 ? damage : 1);
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
-        
+
+
+        if(attacker.UnitAffiliation == UnitAffiliation.Player)
+        {
+            CanvasUI.ShowTurnUnitInfoDisplay(attacker);
+            CanvasUI.ShowTargetUnitInfoDisplay(target);
+        }
+        else
+        {
+            CanvasUI.ShowTurnUnitInfoDisplay(target);
+            CanvasUI.ShowTargetUnitInfoDisplay(attacker);
+        }
+
         if (target.currentHP <= 0) { target.Die(); }
+        return damage;
+
     }
 
     public static void DamageFixedAmount(int amount, UnitInfo target)
@@ -65,10 +80,14 @@ public class DamageCalculator
         target.currentHP = target.currentHP < 0 ? 0 : target.currentHP;
     }
     
-    public static void HealFixedAmount(int amount, UnitInfo target)
+    public static int HealFixedAmount(int amount, UnitInfo target)
     {
+        int initialHP = target.currentHP;
+        
         target.currentHP += amount;
         target.currentHP = target.currentHP > target.finalHP ? target.finalHP : target.currentHP;
+
+        return target.currentHP == target.finalHP ? target.finalHP - initialHP : amount;
     }
 
     private static int ApplyDamageRoll(int baseDamage) {

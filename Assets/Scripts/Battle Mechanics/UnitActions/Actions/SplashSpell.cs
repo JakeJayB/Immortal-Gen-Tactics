@@ -84,7 +84,7 @@ public class SplashSpell : UnitAction
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit))
             {
-                DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo));
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.finalHP);
             }
         }
