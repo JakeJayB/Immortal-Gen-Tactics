@@ -182,7 +182,7 @@ Material:
     - _pixelSizeInWorldUnits: 0.078125
     - _pixelUvLen: 0.0014285714
     - _planeHeightWorldUnits: 12
-    - _planeWidthWorldUnits: 8.1589155
+    - _planeWidthWorldUnits: 7.3272376
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Beam_Color: {r: 0, g: 0, b: 0, a: 0}
@@ -192,15 +192,15 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseStep: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _anchorForward: {r: 0.61237246, g: -0.5000002, b: -0.61237276, a: 0}
-    - _anchorPosition: {r: -3.7898679, g: 3.7551596, b: 5.2826514, a: 0}
-    - _anchorUp: {r: 0.30967206, g: 0.8644061, b: -0.39611286, a: 0}
+    - _anchorForward: {r: 0.61237264, g: -0.5000002, b: 0.6123722, a: 0}
+    - _anchorPosition: {r: -4.283672, g: 3.497602, b: -4.2836704, a: 0}
+    - _anchorUp: {r: 0.6698547, g: 0.7395519, b: -0.06601298, a: 0}
     - _cloudDataAnchorPosition: {r: 13.126203, g: 21.220379, b: -23.203003, a: 0}
     - _cloudDataAnchorUp: {r: -0.7905737, g: 0.38144845, b: -0.47905147, a: 0}
     - _cloudDataProjectionOrigo: {r: 13.186621, g: 13.290992, b: -29.616547, a: 0}
     - _cloudDataProjectionUvDirX: {r: -0.9999992, g: 0, b: 0.0011967393, a: 0}
     - _cloudDataProjectionUvDirY: {r: -0.0004574252, g: 0, b: -0.9999999, a: 0}
-    - _planeOrigo: {r: -0.82248974, g: 3.9711013, b: 8.073713, a: 0}
+    - _planeOrigo: {r: -5.8219323, g: 5.1485205, b: -1.3974395, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1457556406269589912
 MonoBehaviour:
