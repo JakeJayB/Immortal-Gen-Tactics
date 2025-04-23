@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pouch : UnitAction
@@ -30,22 +31,26 @@ public class Pouch : UnitAction
     {
         return -9999;
     }
-
-    private UnitAction[] Storage = new UnitAction[3] {
+    
+    private int Capacity = 3;
+    private List<UnitAction> Storage = new List<UnitAction>() {
         new Potion(),
         new Potion(),
         new Potion()
     };
 
-    public void StoreItem(UnitAction newItem) {
-        for (int i = 0; i < Storage.Length; i++) {
+    public void StoreItem(UnitAction newItem)
+    {
+        if (Storage.Count > Capacity) { return; }
+        
+        for (int i = 0; i < Storage.Count; i++) {
             if (Storage[i] == null) { Storage[i] = newItem; return; }
         }
         
         Debug.LogError("ERROR: Storage for 'Pouch' accessory is full.");
     }
 
-    public void UseItem(int pocket) { Storage[pocket] = null; }
+    public void UseItem(UnitAction item) { Storage.Remove(item); }
     
     public override void ActivateAction(Unit unit)
     {
@@ -66,7 +71,7 @@ public class Pouch : UnitAction
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        UseItem(UnitMenuCursor.slotIndex);
+        UseItem(ChainSystem.CurrentChain.Item1);
         yield return null;
     }
 }

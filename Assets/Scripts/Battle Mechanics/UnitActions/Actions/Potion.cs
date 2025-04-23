@@ -35,9 +35,13 @@ public class Potion : UnitAction
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
         return ActionScore.TotalScore();
     }
-
+    
+    private UnitAction Storage = null;
+    public void Store(UnitAction storage) { Storage = storage; }
+    
     public override void ActivateAction(Unit unit)
     {
+        Store(UnitMenu.SubMenu);
         UnitMenu.HideMenu();
         ActionUtility.ShowSelectableTilesForAction(unit, Name);
         ChainSystem.HoldPotentialChain(this, unit);
@@ -50,8 +54,8 @@ public class Potion : UnitAction
         PayAPCost(unit);
         
         // Consume Item and Remove it from ActionSet
-        if (UnitMenu.InSubMenu) {
-            yield return UnitMenu.SubMenu.ExecuteAction(unit, selectedCell);
+        if (Storage != null) {
+            yield return Storage.ExecuteAction(unit, selectedCell);
         } else {
             unit.unitInfo.ActionSet.RemoveAction(this);
         }

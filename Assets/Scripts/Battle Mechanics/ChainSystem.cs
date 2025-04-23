@@ -10,6 +10,7 @@ public class ChainSystem
 {
     private static List<(UnitAction action, Vector2Int target, Unit unit)> Chain = new List<(UnitAction action, Vector2Int target, Unit unit)>();
     private static int ChainCount => Chain.Count;
+    public static (UnitAction, Vector2Int, Unit) CurrentChain;
     private static (UnitAction, Vector2Int, Unit) PotentialChain;
     public static bool ReactionInProgress = false;
     
@@ -40,7 +41,8 @@ public class ChainSystem
             UnitAction action = Chain[0].action;
             Vector2Int target = Chain[0].target;
             Unit unit = Chain[0].unit;
-        
+
+            CurrentChain = Chain[0];
             Chain[0] = Chain[^1];
             Chain.RemoveAt(ChainCount - 1);
 
