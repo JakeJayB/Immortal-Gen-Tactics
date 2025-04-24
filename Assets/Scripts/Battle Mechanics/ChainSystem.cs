@@ -59,13 +59,15 @@ public class ChainSystem
         
         foreach (var unit in TilemapCreator.UnitLocator.Values)
         {
-            var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+            //var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+            var unitCell = unit.unitInfo.Vector2CellLocation();
             var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.finalSense, Pattern.Splash);
 
             // Unit cannot react if they don't have any available AP
+            // Unit cannot react if they are dead
             // Unit cannot react if they already added an action to the ChainSystem
             // Unit cannot react if they are too far to sense the initial action
-            if (unit.unitInfo.currentAP <= 0 || Chain.Any(chain => chain.Item3 == unit) ||
+            if (unit.unitInfo.currentAP <= 0 || !unit.unitInfo.IsAlive() || Chain.Any(chain => chain.Item3 == unit) ||
                 !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
             
             if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
@@ -78,14 +80,12 @@ public class ChainSystem
 
     private static IEnumerator OfferChainReaction(Unit unit)
     {
-        MapCursor.SetGameObjActive();
         Debug.Log("Unit " + unit.name + " should be reacting...");
         ReactionInProgress = true;
         Vector2Int unitCell = unit.unitInfo.Vector2CellLocation();
         MapCursor.currentUnit = unitCell;
-
-        CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
-        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unitCell].TileObj.transform);
+        MapCursor.SetHoverCell(unitCell);
+        CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
 
         yield return UnitMenu.ShowMenu(unit);
         yield return new WaitUntil(ReactionHasEnded);

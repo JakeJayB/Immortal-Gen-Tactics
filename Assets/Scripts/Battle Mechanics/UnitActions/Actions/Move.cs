@@ -78,11 +78,18 @@ public class Move : UnitAction
         // Adds the location of the tile the Unit ended at in UnitLocator
         TilemapCreator.UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
 
-        if(unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+/*        if(unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+        {
             CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+            CanvasUI.HideTargetUnitInfoDisplay();
+        }
         else
+        {
+            CanvasUI.HideTurnUnitInfoDisplay();
             CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
-        
+        }*/
+        CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+        CanvasUI.HideTargetUnitInfoDisplay();
 
         if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
     }

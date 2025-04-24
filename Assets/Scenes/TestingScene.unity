@@ -1908,7 +1908,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 4
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4577,6 +4577,44 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1200781494}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1236668918
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 640
+  m_Height: 360
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!114 &1246373917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5993773810958627370, guid: e424b66a54fe601439bddad8ba34e70d,
@@ -4914,11 +4952,6 @@ PrefabInstance:
     - target: {fileID: 6609313530115771612, guid: 03fd856b9376b8b43b2e6739569fabe1,
         type: 3}
       propertyPath: BGAudioObject
-      value: 
-      objectReference: {fileID: 1571257968}
-    - target: {fileID: 6609313530115771612, guid: 03fd856b9376b8b43b2e6739569fabe1,
-        type: 3}
-      propertyPath: backgroundMusicObject
       value: 
       objectReference: {fileID: 1571257968}
     - target: {fileID: 7047171142943665864, guid: 03fd856b9376b8b43b2e6739569fabe1,
@@ -6093,11 +6126,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
         type: 3}
-      propertyPath: fileName
-      value: Tilemap2.json
-      objectReference: {fileID: 0}
-    - target: {fileID: 5995269893792741552, guid: f5d4389ea0143e942b5215808524a2ee,
-        type: 3}
       propertyPath: turnSystem
       value: 
       objectReference: {fileID: 1246373917}
@@ -6288,7 +6316,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1619519019}
+      objectReference: {fileID: 1236668918}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6368,44 +6396,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1598562004}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1619519019
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 640
-  m_Height: 360
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!4 &1666221896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6668371359934730270, guid: 20a6c004591f3274f896c0e97a0eec4a,
@@ -8338,8 +8328,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1016196680}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8397522348376557811, guid: e424b66a54fe601439bddad8ba34e70d, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e424b66a54fe601439bddad8ba34e70d, type: 3}

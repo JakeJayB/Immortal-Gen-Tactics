@@ -8,6 +8,7 @@ public class DamageDisplay : MonoBehaviour
 {
     public static IEnumerator DisplayUnitDamage(UnitInfo unitInfo, int damage)
     {
+        yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
         TMP_Text displayText =  new GameObject("Display Text", typeof(RectTransform)).AddComponent<TextMeshProUGUI>();
         displayText.transform.SetParent(CanvasUI.ReferenceCanvas());
 

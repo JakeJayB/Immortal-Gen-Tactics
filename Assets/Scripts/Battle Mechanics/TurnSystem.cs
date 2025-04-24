@@ -195,10 +195,6 @@ public class TurnSystem : MonoBehaviour
 
     public static void RemoveUnit(Unit unit)
     {
-
-        Debug.Log($"Check 1: is unit null? {unit == null}");
-        Debug.Log($"Check 2: is unit null? {unit == null}");
-        Debug.Log($"Check 3: is unitQueue null? {unitQueue == null}");
         if (CurrentUnit == unit)
             CurrentUnit = null;
 

@@ -58,7 +58,7 @@ public class DamageCalculator : MonoBehaviour
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
 
 
-        if(attacker.UnitAffiliation == UnitAffiliation.Player)
+/*        if(attacker.UnitAffiliation == UnitAffiliation.Player)
         {
             CanvasUI.ShowTurnUnitInfoDisplay(attacker);
             CanvasUI.ShowTargetUnitInfoDisplay(target);
@@ -67,7 +67,9 @@ public class DamageCalculator : MonoBehaviour
         {
             CanvasUI.ShowTurnUnitInfoDisplay(target);
             CanvasUI.ShowTargetUnitInfoDisplay(attacker);
-        }
+        }*/
+        CanvasUI.ShowTurnUnitInfoDisplay(attacker);
+        CanvasUI.ShowTargetUnitInfoDisplay(target);
 
         if (target.currentHP <= 0) { target.Die(); }
         return damage;
