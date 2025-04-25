@@ -88,6 +88,7 @@ public class DamageCalculator : MonoBehaviour
         
         target.currentHP += amount;
         target.currentHP = target.currentHP > target.finalHP ? target.finalHP : target.currentHP;
+        CanvasUI.ShowTurnUnitInfoDisplay(target);
 
         return target.currentHP == target.finalHP ? target.finalHP - initialHP : amount;
     }

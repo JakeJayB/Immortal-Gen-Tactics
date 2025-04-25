@@ -13,7 +13,8 @@ public class ChainSystem
     public static (UnitAction, Vector2Int, Unit) CurrentChain;
     private static (UnitAction, Vector2Int, Unit) PotentialChain;
     public static bool ReactionInProgress = false;
-    
+    public static Unit ReactingUnit = null;
+
     public static void HoldPotentialChain(UnitAction action, Unit unit) {
         PotentialChain = new ValueTuple<UnitAction, Vector2Int, Unit>(action, new Vector2Int(), unit);
     }
@@ -82,6 +83,7 @@ public class ChainSystem
     {
         Debug.Log("Unit " + unit.name + " should be reacting...");
         ReactionInProgress = true;
+        ReactingUnit = unit;
         Vector2Int unitCell = unit.unitInfo.Vector2CellLocation();
         MapCursor.currentUnit = unitCell;
         MapCursor.SetHoverCell(unitCell);
@@ -90,7 +92,8 @@ public class ChainSystem
 
         yield return UnitMenu.ShowMenu(unit);
         yield return new WaitUntil(ReactionHasEnded);
-        
+
+        ReactingUnit = null;
         if (TurnSystem.CurrentUnit.GetComponent<EnemyUnit>()) { MapCursor.SetGameObjInactive(); }
         Debug.Log("Unit finished using reaction menu...");
     }

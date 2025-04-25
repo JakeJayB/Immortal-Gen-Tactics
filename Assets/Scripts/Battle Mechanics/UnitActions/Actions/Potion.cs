@@ -65,7 +65,6 @@ public class Potion : UnitAction
         SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
         yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, heal);
 
-        CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
 
         Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
         yield return null;
