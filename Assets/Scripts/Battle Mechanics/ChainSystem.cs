@@ -85,6 +85,7 @@ public class ChainSystem
         Vector2Int unitCell = unit.unitInfo.Vector2CellLocation();
         MapCursor.currentUnit = unitCell;
         MapCursor.SetHoverCell(unitCell);
+        MapCursor.SetGameObjActive();
         CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
 
         yield return UnitMenu.ShowMenu(unit);

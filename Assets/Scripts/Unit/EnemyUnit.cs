@@ -75,7 +75,11 @@ public class EnemyUnit : Unit
         return unit;
     }
 
-    public void StartTurn() { StartCoroutine(DecideAction()); }
+    public void StartTurn() 
+    {
+        CanvasUI.ShowTurnUnitInfoDisplay(unitInfo);
+        StartCoroutine(DecideAction()); 
+    }
 
     // TODO: Make the executions of UnitActions as coroutines so that no future instructions will
     // TODO: execute until they finish. This is especially important for EnemyAI Action Calls.

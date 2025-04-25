@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapCursor : MonoBehaviour
 {
+    private static GameObject gameObj;
     private static CameraMovement cameraMovement;
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
@@ -355,5 +356,6 @@ public class MapCursor : MonoBehaviour
     public static void ActiveState() { CursorControlState = ControlState.Active; }
     public static void ActionState() { CursorControlState = ControlState.Action; }
     public static void InactiveState() { CursorControlState = ControlState.Inactive; }    
-    public static void SetGameObjInactive() { RemoveTileOutline(); }
+    public static void SetGameObjActive() { gameObj.SetActive(true); }
+    public static void SetGameObjInactive() { RemoveTileOutline();  gameObj.SetActive(false); }
 }

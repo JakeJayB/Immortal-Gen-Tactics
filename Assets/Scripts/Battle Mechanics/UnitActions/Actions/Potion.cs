@@ -59,14 +59,13 @@ public class Potion : UnitAction
         } else {
             unit.unitInfo.ActionSet.RemoveAction(this);
         }
-        
-        // Heal Unit by Specified Amount
-        yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, DamageCalculator.HealFixedAmount(BasePower, unit.unitInfo));
 
-        if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
-            CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
-        else
-            CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
+        // Heal Unit by Specified Amount
+        int heal = DamageCalculator.HealFixedAmount(BasePower, unit.unitInfo);
+        SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
+        yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, heal);
+
+        CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
 
         Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
         yield return null;
