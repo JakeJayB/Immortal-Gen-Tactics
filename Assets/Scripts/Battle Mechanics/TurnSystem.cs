@@ -167,14 +167,14 @@ public class TurnSystem : MonoBehaviour
 
             if (CurrentUnit.GetComponent<EnemyUnit>())
             {
-                mapCursor.gameObject.SetActive(false);
+                MapCursor.SetGameObjInactive();
                 Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
                 CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
                 CurrentUnit.GetComponent<EnemyUnit>().StartTurn();
             }
             else
             {
-                mapCursor.gameObject.SetActive(true);
+                MapCursor.SetGameObjActive();
                 Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
                 CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
                 MapCursor.StartMove(unitLocation);
@@ -182,6 +182,7 @@ public class TurnSystem : MonoBehaviour
 
             // Unity stops execution here until continueLoop turn to true. 
             yield return new WaitUntil(() => continueLoop);
+
             continueLoop = false;
             unitQueue.Enqueue(CurrentUnit);
             CurrentUnit = null;
@@ -195,10 +196,6 @@ public class TurnSystem : MonoBehaviour
 
     public static void RemoveUnit(Unit unit)
     {
-
-        Debug.Log($"Check 1: is unit null? {unit == null}");
-        Debug.Log($"Check 2: is unit null? {unit == null}");
-        Debug.Log($"Check 3: is unitQueue null? {unitQueue == null}");
         if (CurrentUnit == unit)
             CurrentUnit = null;
 

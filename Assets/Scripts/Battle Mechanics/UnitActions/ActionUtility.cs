@@ -72,11 +72,18 @@ public class ActionUtility
     
     public static void ShowSelectableTilesForMove(List<Tile> area) 
     {
-        if (ChainSystem.UnitIsReacting()) { HideAllSelectableTiles(); }
-        
-        foreach (var tile in area) {
-            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
+        //if (ChainSystem.UnitIsReacting()) { HideAllSelectableTiles(); }
+        if (ChainSystem.UnitIsReacting())
+        {
+            foreach (var tile in TilemapCreator.TileLocator.Values)
+            {
+                tile.OverlayObj.DeactivateOverlayTile();
+            }
         }
+
+            foreach (var tile in area) {
+            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
+        } 
     }
 
     public static void HideSelectableTilesForAction(Unit unit)

@@ -22,7 +22,7 @@ public class SoundFXManager : MonoBehaviour
     }
 
 
-    public static void PlaySoundFXClip(string audioClip, float volume)
+    public static void PlaySoundFXClip(string audioClip, float volume = 0.35f)
     {
         if (instance == null)
         {

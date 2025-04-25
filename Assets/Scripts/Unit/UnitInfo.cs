@@ -14,7 +14,7 @@ public class UnitInfo : MonoBehaviour
     public UnitAffiliation UnitAffiliation;
 
     // Unit Current Stat Values
-    public int currentHP { get; protected internal set; }
+    public int currentHP; //{ get; protected internal set; }
     public int currentMP { get; protected internal set; }
     public int currentAP { get; protected internal set; }
     public int currentCT { get; protected internal set; }
@@ -76,7 +76,7 @@ public class UnitInfo : MonoBehaviour
         ActionSet = new UnitActionSet();
         ActionSet.AddAction(new SplashSpell());
         ActionSet.AddAction(new Pouch());
-        ActionSet.AddAction(new Potion());
+        ActionSet.AddAction(new Ether());
         
         ApplyEquipmentBonuses();
         ResetCurrentStatPoints();
@@ -126,6 +126,8 @@ public class UnitInfo : MonoBehaviour
     public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
     
     public void RefreshAP() { currentAP = finalAP; }
+
+    public bool IsAlive() { return currentHP > 0; }
 
     public void Die()
     {

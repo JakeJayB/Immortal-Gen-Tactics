@@ -50,6 +50,7 @@ public class UnitMenu : MonoBehaviour
         {
             if (InSubMenu) {
                 InSubMenu = false;
+                SubMenu = null;
                 DisplayUnitMenu(TilemapCreator.UnitLocator[MapCursor.currentUnit]);
             }
             else {
@@ -160,6 +161,8 @@ public class UnitMenu : MonoBehaviour
 
         Menu.GetComponent<RectTransform>().anchoredPosition = menuPosition;
 
+        SubMenu = null;
+        InSubMenu = false;
         Menu.SetActive(true);
     }
 

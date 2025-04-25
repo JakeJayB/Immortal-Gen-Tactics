@@ -9,7 +9,7 @@ public class UnitMenuCursor : MonoBehaviour
     private Sprite CursorImage;
     private RectTransform CursorRectTransform;
 
-    private List<MenuSlot> MenuSlots;
+    private static List<MenuSlot> MenuSlots;
     public static int slotIndex;
     
     // Start is called before the first frame update
@@ -78,5 +78,4 @@ public class UnitMenuCursor : MonoBehaviour
         // Set the Cursor to be above all slots
         transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
-    
 }

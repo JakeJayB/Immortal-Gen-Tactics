@@ -102,7 +102,7 @@ public class MapCursor : MonoBehaviour
             CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
             CanvasUI.HideTargetUnitInfoDisplay();
             StartCoroutine(UnitMenu.ShowMenu(unit));
-            SoundFXManager.PlaySoundFXClip("Deselect", 0.2f);
+            SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
     }
 
@@ -157,6 +157,7 @@ public class MapCursor : MonoBehaviour
         currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
         //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
         MoveCursor(currentUnit);
+        CanvasUI.HideTargetUnitInfoDisplay();
         yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
     }
 
@@ -242,7 +243,7 @@ public class MapCursor : MonoBehaviour
         TurnSystem.ContinueLoop();
     }
 
-    private static void SetHoverCell(Vector2Int cell)
+    public static void SetHoverCell(Vector2Int cell)
     {
         RemoveTileOutline();
         hoverCell = cell;
@@ -354,8 +355,7 @@ public class MapCursor : MonoBehaviour
     public static void StartState() { CursorControlState = ControlState.Start; }
     public static void ActiveState() { CursorControlState = ControlState.Active; }
     public static void ActionState() { CursorControlState = ControlState.Action; }
-    public static void InactiveState() { CursorControlState = ControlState.Inactive; }
-    
+    public static void InactiveState() { CursorControlState = ControlState.Inactive; }    
     public static void SetGameObjActive() { gameObj.SetActive(true); }
-    public static void SetGameObjInactive() { gameObj.SetActive(false); }
+    public static void SetGameObjInactive() { RemoveTileOutline();  gameObj.SetActive(false); }
 }
