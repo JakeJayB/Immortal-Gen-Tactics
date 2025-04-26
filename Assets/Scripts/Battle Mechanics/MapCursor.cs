@@ -325,7 +325,7 @@ public class MapCursor : MonoBehaviour
                         CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
                     break;
                 case ControlState.Active:
-                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+                    if (foundUnit == TurnSystem.CurrentUnit)
                     {
                         CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo);
                         CanvasUI.HideTargetUnitInfoDisplay();
@@ -335,7 +335,6 @@ public class MapCursor : MonoBehaviour
 
                     break;
                 case ControlState.Action:
-                    //if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy) 
                     CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); 
                     break;
                 default:
