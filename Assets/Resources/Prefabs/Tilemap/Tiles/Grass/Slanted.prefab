@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UseSubMesh: 1
   SubMeshIndex: 1
-  Density: 0.006
+  Density: 0.01
   InstancingSettings:
   - Mesh: {fileID: -4413095505993930501, guid: 1f298817fdd2a184480e8af5b21278bc, type: 3}
     Material: {fileID: 2100000, guid: a194cb4ce6027c246af528b83b728a15, type: 2}

@@ -62,8 +62,8 @@ public class UnitInfo : MonoBehaviour
     {
         SetBaseStats();
         equipment = new UnitEquipment(this);
-        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
         /*
+        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
         equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
         equipment.EquipArmor(EquipmentLibrary.Armor[100]);
         equipment.EquipArmor(EquipmentLibrary.Armor[101]);
@@ -98,11 +98,11 @@ public class UnitInfo : MonoBehaviour
         baseHP = Mathf.RoundToInt(30 * statMultipler);
         baseMP = Mathf.RoundToInt(15 * statMultipler);
         baseAP = 2;
-        baseAttack = Mathf.RoundToInt(2 * statMultipler);
+        baseAttack = Mathf.RoundToInt(3 * statMultipler);
         baseDefense = Mathf.RoundToInt(1 * statMultipler); 
-        baseMagicAttack = Mathf.RoundToInt(3 * statMultipler);
+        baseMagicAttack = Mathf.RoundToInt(4 * statMultipler);
         baseMagicDefense = Mathf.RoundToInt(2 * statMultipler);
-        baseMove = 3;
+        baseMove = 4;
         baseEvade = 1;
         baseSpeed = Mathf.RoundToInt(5 * statMultipler);
         baseSense = 2;
@@ -131,9 +131,10 @@ public class UnitInfo : MonoBehaviour
 
     public void Die()
     {
-        Dead = true;
+        if(Dead) return; 
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
         TurnSystem.RemoveUnit(gameObject.GetComponent<Unit>());
+        Dead = true;
     }
 
     public bool IsDead() { return Dead; }
