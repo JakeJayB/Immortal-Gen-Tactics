@@ -130,12 +130,19 @@ public class MapCursor : MonoBehaviour
                 StartCoroutine(ConfirmAction());
 
             }
+            else
+            {
+                SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             InactiveState();
-            CanvasUI.HideTargetUnitInfoDisplay();
-            //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+            if (ChainSystem.UnitIsReacting())
+                CanvasUI.ShowTargetUnitInfoDisplay(ChainSystem.ReactingUnit.unitInfo);
+            else
+                CanvasUI.HideTargetUnitInfoDisplay();
+
             SetHoverCell(currentUnit);
             ChainSystem.ReleasePotentialChain();
             ActionUtility.HideAllSelectableTiles();
@@ -318,7 +325,7 @@ public class MapCursor : MonoBehaviour
                         CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
                     break;
                 case ControlState.Active:
-                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+                    if (foundUnit == TurnSystem.CurrentUnit)
                     {
                         CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo);
                         CanvasUI.HideTargetUnitInfoDisplay();
@@ -328,8 +335,7 @@ public class MapCursor : MonoBehaviour
 
                     break;
                 case ControlState.Action:
-                    if (foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy) 
-                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); 
+                    CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); 
                     break;
                 default:
                     Debug.LogError("Control State not valid...");

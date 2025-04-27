@@ -37,9 +37,8 @@ public class TileRenderer : MonoBehaviour
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.materials = Terrain.GetTerrain(path);
 
-        //MeshInstancesBehaviour PrefabMeshInstance = Resources.Load<GameObject>(path)?.GetComponent<MeshInstancesBehaviour>();
         MeshInstancesBehaviour[] PrefabMeshInstances = Resources.Load<GameObject>(path)?.GetComponents<MeshInstancesBehaviour>();
-        if (PrefabMeshInstances != null)
+        if (false && PrefabMeshInstances != null && gameObject.GetComponent<TileInfo>().isTraversable)
         {
             for(int i = 0; i < PrefabMeshInstances.Length; i++)
             {
@@ -56,6 +55,8 @@ public class TileRenderer : MonoBehaviour
         PositionTile(cellLocation);
         RotateTile(direction);
     }
+
+    
 
     private Vector3[] CenterPivots(Vector3[] vertices)
     {

@@ -11,6 +11,13 @@ public class UnitPriorityQueue
 
     public void Enqueue(Unit unit)
     {
+        if(unit == null)
+        {
+            Debug.LogError("TurnSystem: Attempted to add a null unit to the queue. is Unit dead?");
+            Heapify();
+            return;
+        }
+
         unit.unitInfo.currentCT = 0;
         Heap.Add(unit);
         HeapifyUp(Heap.Count - 1);
@@ -94,7 +101,7 @@ private void HeapifyUp(int index)
 
     public void Remove(Unit unit)
     {
-        Debug.Log($"Unit {unit.name} removed from queue");
+        Debug.Log($"TurnSystem: Unit {unit.name} removed from queue");
         Heap.Remove(unit);
         Heapify();
         TurnCycle.CycleUnits(ToSortedList(true));
