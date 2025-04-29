@@ -2167,7 +2167,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -2625,44 +2625,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 52312687}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &52590623
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 640
-  m_Height: 360
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1001 &53187365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3907,7 +3869,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -12021,7 +11983,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -13507,7 +13469,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -14023,7 +13985,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -15950,7 +15912,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -18537,7 +18499,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -19582,7 +19544,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -19661,7 +19623,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -21468,7 +21430,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -22100,7 +22062,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -23819,7 +23781,7 @@ PrefabInstance:
     - target: {fileID: 4112420593169827905, guid: 0f8d1c46052386f4da425f4db69a3574,
         type: 3}
       propertyPath: fileName
-      value: TIlemap4
+      value: Level2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24242,7 +24204,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -25022,7 +24984,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -25259,7 +25221,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -26093,7 +26055,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -30909,7 +30871,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -33585,7 +33547,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -34758,7 +34720,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -35622,7 +35584,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -38940,7 +38902,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -39177,7 +39139,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -42100,7 +42062,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -44633,7 +44595,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -44791,7 +44753,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -45023,7 +44985,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -47161,7 +47123,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -48504,7 +48466,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -50992,7 +50954,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 52590623}
+      objectReference: {fileID: 2016952163}
     - target: {fileID: 9205371885998440386, guid: e96cffa9d00b6b545adfeb26165952cc,
         type: 3}
       propertyPath: orthographic size
@@ -55519,7 +55481,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -62273,7 +62235,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -64559,7 +64521,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -67226,7 +67188,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -68450,7 +68412,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -73096,7 +73058,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -74378,6 +74340,44 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2015227846}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &2016952163
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 640
+  m_Height: 360
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1001 &2019652078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75095,7 +75095,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -76433,7 +76433,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -76591,7 +76591,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -77766,7 +77766,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
@@ -79161,7 +79161,7 @@ PrefabInstance:
     - target: {fileID: 3156517441709421795, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}
       propertyPath: isTraversable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668371359934730270, guid: 48ee47dcd035b0d4383417060c2ff4f3,
         type: 3}

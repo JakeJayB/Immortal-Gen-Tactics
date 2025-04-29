@@ -2,249 +2,9 @@
     "tiles": [
         {
             "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
                 "x": 7,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
                 "y": 1,
                 "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 7
             },
             "tileType": 0,
             "terrainType": 3,
@@ -256,66 +16,6 @@
             "cellLocation": {
                 "x": 4,
                 "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
                 "z": 7
             },
             "tileType": 0,
@@ -326,36 +26,12 @@
         },
         {
             "cellLocation": {
-                "x": -4,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
                 "x": 0,
-                "y": 1,
-                "z": 1
+                "y": 0,
+                "z": 4
             },
             "tileType": 0,
-            "terrainType": 3,
+            "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -363,22 +39,22 @@
         {
             "cellLocation": {
                 "x": -5,
-                "y": 0,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
                 "z": 13
             },
             "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
             "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
@@ -386,7 +62,7 @@
         },
         {
             "cellLocation": {
-                "x": -2,
+                "x": 4,
                 "y": 1,
                 "z": 1
             },
@@ -398,321 +74,21 @@
         },
         {
             "cellLocation": {
-                "x": -4,
+                "x": 9,
+                "y": 2,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
                 "y": 0,
                 "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 1
             },
             "tileType": 0,
             "terrainType": 3,
@@ -724,751 +100,7 @@
             "cellLocation": {
                 "x": -1,
                 "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
                 "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 1,
-                "z": 9
-            },
-            "tileType": 3,
-            "terrainType": 3,
-            "tileDirection": 3,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 3,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 6
             },
             "tileType": 0,
             "terrainType": 3,
@@ -1480,102 +112,6 @@
             "cellLocation": {
                 "x": 8,
                 "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
                 "z": 13
             },
             "tileType": 0,
@@ -1586,21 +122,21 @@
         },
         {
             "cellLocation": {
-                "x": 4,
+                "x": 10,
                 "y": 0,
-                "z": 14
+                "z": 2
             },
             "tileType": 0,
             "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
-            "isTraversable": true
+            "isTraversable": false
         },
         {
             "cellLocation": {
-                "x": -3,
-                "y": 0,
-                "z": 12
+                "x": 6,
+                "y": 2,
+                "z": 14
             },
             "tileType": 0,
             "terrainType": 3,
@@ -1610,7 +146,7 @@
         },
         {
             "cellLocation": {
-                "x": 2,
+                "x": 10,
                 "y": 0,
                 "z": 8
             },
@@ -1618,191 +154,11 @@
             "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 3,
-            "terrainType": 3,
-            "tileDirection": 3,
-            "isStartingArea": false,
-            "isTraversable": true
+            "isTraversable": false
         },
         {
             "cellLocation": {
                 "x": -4,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
                 "y": 1,
                 "z": 0
             },
@@ -1826,7 +182,19 @@
         },
         {
             "cellLocation": {
-                "x": -1,
+                "x": 7,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
                 "y": 0,
                 "z": -1
             },
@@ -1838,33 +206,9 @@
         },
         {
             "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 2,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
+                "x": -2,
                 "y": 0,
-                "z": 11
+                "z": 10
             },
             "tileType": 0,
             "terrainType": 2,
@@ -1874,19 +218,7 @@
         },
         {
             "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
+                "x": 3,
                 "y": 1,
                 "z": 10
             },
@@ -1898,259 +230,7 @@
         },
         {
             "cellLocation": {
-                "x": -3,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 4,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
                 "x": 5,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 3,
-            "terrainType": 3,
-            "tileDirection": 3,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
                 "y": 1,
                 "z": 1
             },
@@ -2162,9 +242,9 @@
         },
         {
             "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 11
+                "x": 9,
+                "y": 1,
+                "z": 6
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2174,9 +254,81 @@
         },
         {
             "cellLocation": {
-                "x": 8,
+                "x": 1,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
                 "y": 1,
-                "z": 11
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 2,
+                "z": 0
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2198,6 +350,1170 @@
         },
         {
             "cellLocation": {
+                "x": 4,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 1,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 1,
+                "z": 9
+            },
+            "tileType": 3,
+            "terrainType": 3,
+            "tileDirection": 3,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 3,
+            "terrainType": 3,
+            "tileDirection": 3,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
                 "x": 9,
                 "y": 0,
                 "z": 14
@@ -2210,9 +1526,141 @@
         },
         {
             "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
                 "x": 8,
                 "y": 1,
-                "z": 2
+                "z": 1
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2222,12 +1670,324 @@
         },
         {
             "cellLocation": {
-                "x": 3,
+                "x": 4,
                 "y": 0,
-                "z": 7
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 0,
+                "z": 14
             },
             "tileType": 0,
             "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 2,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -2246,31 +2006,7 @@
         },
         {
             "cellLocation": {
-                "x": -3,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
+                "x": 6,
                 "y": 2,
                 "z": 0
             },
@@ -2282,12 +2018,36 @@
         },
         {
             "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": 6
+                "x": -3,
+                "y": 1,
+                "z": 7
             },
             "tileType": 0,
-            "terrainType": 2,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -2295,68 +2055,8 @@
         {
             "cellLocation": {
                 "x": 4,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
+                "y": 2,
                 "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 8
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2368,103 +2068,7 @@
             "cellLocation": {
                 "x": 5,
                 "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 14
+                "z": 11
             },
             "tileType": 0,
             "terrainType": 2,
@@ -2486,20 +2090,56 @@
         },
         {
             "cellLocation": {
-                "x": -3,
-                "y": 0,
-                "z": -1
+                "x": -1,
+                "y": 1,
+                "z": 2
             },
             "tileType": 0,
-            "terrainType": 2,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
-            "isTraversable": false
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
         },
         {
             "cellLocation": {
                 "x": 0,
                 "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
                 "z": 7
             },
             "tileType": 0,
@@ -2510,7 +2150,103 @@
         },
         {
             "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
                 "x": 9,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
                 "y": 2,
                 "z": 0
             },
@@ -2522,7 +2258,103 @@
         },
         {
             "cellLocation": {
-                "x": -1,
+                "x": 5,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 1,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -2,
                 "y": 2,
                 "z": 0
             },
@@ -2540,54 +2372,6 @@
             },
             "tileType": 0,
             "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 1,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -2606,9 +2390,9 @@
         },
         {
             "cellLocation": {
-                "x": 9,
+                "x": 8,
                 "y": 1,
-                "z": 13
+                "z": 11
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2618,7 +2402,55 @@
         },
         {
             "cellLocation": {
-                "x": 6,
+                "x": 0,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 3,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
                 "y": 1,
                 "z": 0
             },
@@ -2630,7 +2462,43 @@
         },
         {
             "cellLocation": {
-                "x": -3,
+                "x": 0,
+                "y": 0,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
                 "y": 0,
                 "z": 13
             },
@@ -2642,9 +2510,21 @@
         },
         {
             "cellLocation": {
-                "x": -5,
+                "x": 5,
+                "y": 0,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
                 "y": 1,
-                "z": 2
+                "z": 10
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2654,7 +2534,19 @@
         },
         {
             "cellLocation": {
-                "x": 5,
+                "x": 1,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
                 "y": 1,
                 "z": 7
             },
@@ -2666,9 +2558,9 @@
         },
         {
             "cellLocation": {
-                "x": -3,
-                "y": 1,
-                "z": 2
+                "x": -1,
+                "y": 0,
+                "z": 10
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2678,9 +2570,93 @@
         },
         {
             "cellLocation": {
-                "x": 6,
-                "y": 1,
+                "x": -2,
+                "y": 2,
                 "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 14
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 14
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2702,7 +2678,127 @@
         },
         {
             "cellLocation": {
-                "x": 8,
+                "x": 5,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
                 "y": 1,
                 "z": 13
             },
@@ -2726,67 +2822,7 @@
         },
         {
             "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 11
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 8
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
+                "x": 1,
                 "y": 0,
                 "z": -1
             },
@@ -2798,12 +2834,36 @@
         },
         {
             "cellLocation": {
-                "x": 5,
+                "x": -2,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
                 "y": 0,
-                "z": 13
+                "z": 6
             },
             "tileType": 0,
             "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -2822,8 +2882,8 @@
         },
         {
             "cellLocation": {
-                "x": 6,
-                "y": 1,
+                "x": 2,
+                "y": 0,
                 "z": 7
             },
             "tileType": 0,
@@ -2834,43 +2894,19 @@
         },
         {
             "cellLocation": {
+                "x": 9,
+                "y": 2,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
                 "x": 6,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
                 "y": 1,
                 "z": 2
             },
@@ -2882,19 +2918,19 @@
         },
         {
             "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": -1
+                "x": 8,
+                "y": 1,
+                "z": 5
             },
             "tileType": 0,
-            "terrainType": 2,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
-            "isTraversable": false
+            "isTraversable": true
         },
         {
             "cellLocation": {
-                "x": -1,
+                "x": 7,
                 "y": 1,
                 "z": 6
             },
@@ -2906,9 +2942,9 @@
         },
         {
             "cellLocation": {
-                "x": -1,
+                "x": 5,
                 "y": 0,
-                "z": 14
+                "z": 13
             },
             "tileType": 0,
             "terrainType": 2,
@@ -2918,33 +2954,9 @@
         },
         {
             "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 5
+                "x": 5,
+                "y": 1,
+                "z": 0
             },
             "tileType": 0,
             "terrainType": 3,
@@ -2955,32 +2967,8 @@
         {
             "cellLocation": {
                 "x": -1,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
                 "y": 2,
-                "z": 1
+                "z": 0
             },
             "tileType": 0,
             "terrainType": 3,
@@ -3002,12 +2990,372 @@
         },
         {
             "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
                 "x": -1,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 4,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 1,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
                 "y": 0,
                 "z": 11
             },
             "tileType": 0,
             "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": 9
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -2,
+                "y": 0,
+                "z": 4
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 1,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 2,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 0,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -3026,252 +3374,24 @@
         },
         {
             "cellLocation": {
-                "x": 2,
+                "x": 10,
                 "y": 0,
-                "z": 14
+                "z": 10
             },
             "tileType": 0,
             "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 1,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 1,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 1,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
+            "isTraversable": false
         },
         {
             "cellLocation": {
                 "x": -5,
                 "y": 0,
-                "z": 1
+                "z": 11
             },
             "tileType": 0,
             "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 12
-            },
-            "tileType": 0,
-            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -3280,210 +3400,6 @@
             "cellLocation": {
                 "x": 0,
                 "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 1,
-                "z": 1
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 2,
-                "z": 6
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 2,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 2,
-                "z": 0
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 6,
-                "y": 1,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -1,
-                "y": 0,
                 "z": 9
             },
             "tileType": 0,
@@ -3495,131 +3411,11 @@
         {
             "cellLocation": {
                 "x": 6,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 4,
-                "y": 0,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 7,
-                "y": 1,
-                "z": 3
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 9,
                 "y": 2,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -3,
-                "y": 1,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
                 "z": 4
             },
             "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -4,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
             "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 5
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -3627,42 +3423,6 @@
         {
             "cellLocation": {
                 "x": -3,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 10,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 9,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
                 "y": 1,
                 "z": 2
             },
@@ -3674,9 +3434,9 @@
         },
         {
             "cellLocation": {
-                "x": 8,
-                "y": 1,
-                "z": 7
+                "x": 2,
+                "y": 0,
+                "z": 11
             },
             "tileType": 0,
             "terrainType": 3,
@@ -3686,7 +3446,7 @@
         },
         {
             "cellLocation": {
-                "x": 6,
+                "x": 2,
                 "y": 1,
                 "z": 12
             },
@@ -3698,7 +3458,391 @@
         },
         {
             "cellLocation": {
+                "x": 5,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 1,
+                "z": 7
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 10,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 13
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 2,
+                "y": 0,
+                "z": 6
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
                 "x": -5,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 7,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 4,
+                "y": 0,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 3,
+                "y": 1,
+                "z": 1
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 2,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 1,
+                "z": 3
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 5,
+                "y": 1,
+                "z": 10
+            },
+            "tileType": 3,
+            "terrainType": 3,
+            "tileDirection": 3,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 0,
+                "z": 11
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 6,
+                "y": 1,
+                "z": 10
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 1,
+                "y": 0,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -5,
+                "y": 0,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 0,
+                "y": 2,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 0,
+                "z": 12
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 8,
+                "y": 1,
+                "z": 2
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": true,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -4,
+                "y": 0,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -3,
+                "y": 1,
+                "z": 8
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 1,
+                "z": 5
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": -1,
+                "y": 1,
+                "z": 0
+            },
+            "tileType": 0,
+            "terrainType": 3,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": true
+        },
+        {
+            "cellLocation": {
+                "x": 9,
+                "y": 0,
+                "z": -1
+            },
+            "tileType": 0,
+            "terrainType": 2,
+            "tileDirection": 0,
+            "isStartingArea": false,
+            "isTraversable": false
+        },
+        {
+            "cellLocation": {
+                "x": 2,
                 "y": 0,
                 "z": 8
             },
@@ -3710,9 +3854,9 @@
         },
         {
             "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": 9
+                "x": 9,
+                "y": 2,
+                "z": 5
             },
             "tileType": 0,
             "terrainType": 3,
@@ -3722,144 +3866,12 @@
         },
         {
             "cellLocation": {
-                "x": 5,
+                "x": 8,
                 "y": 1,
-                "z": 0
+                "z": 12
             },
             "tileType": 0,
             "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 5,
-                "y": 0,
-                "z": 4
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -2,
-                "y": 0,
-                "z": 7
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 9
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 0,
-                "y": 1,
-                "z": 2
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": true,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 1,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": -1
-            },
-            "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": 3,
-                "y": 0,
-                "z": 13
-            },
-            "tileType": 0,
-            "terrainType": 3,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": true
-        },
-        {
-            "cellLocation": {
-                "x": 1,
-                "y": 0,
-                "z": 14
-            },
-            "tileType": 0,
-            "terrainType": 2,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -3867,23 +3879,11 @@
         {
             "cellLocation": {
                 "x": 9,
-                "y": 0,
-                "z": -1
+                "y": 2,
+                "z": 8
             },
             "tileType": 0,
-            "terrainType": 2,
-            "tileDirection": 0,
-            "isStartingArea": false,
-            "isTraversable": false
-        },
-        {
-            "cellLocation": {
-                "x": -5,
-                "y": 0,
-                "z": 10
-            },
-            "tileType": 0,
-            "terrainType": 2,
+            "terrainType": 3,
             "tileDirection": 0,
             "isStartingArea": false,
             "isTraversable": true
@@ -3900,6 +3900,14 @@
         },
         {
             "cellLocation": {
+                "x": 2,
+                "y": 2,
+                "z": 12
+            },
+            "unitDirection": 0
+        },
+        {
+            "cellLocation": {
                 "x": -2,
                 "y": 1,
                 "z": 11
@@ -3911,14 +3919,6 @@
                 "x": -4,
                 "y": 1,
                 "z": 13
-            },
-            "unitDirection": 0
-        },
-        {
-            "cellLocation": {
-                "x": 2,
-                "y": 2,
-                "z": 12
             },
             "unitDirection": 0
         }

@@ -183,7 +183,6 @@ namespace CritterVolumetricLighting
 			mainLightTrans = VolumetricLightResources.FindMainLightTrans();
 			
 			planeWidthWorldUnits = VolumetricLightResources.GetCameraDiagonalWorldUnits();
-			Debug.Log($"planWidthWOrldUnits: {planeWidthWorldUnits}");
 			planeHeightWorldUnits = VolumetricLightResources.GetPlaneHeightWorldUnits();
 			screenHeightWorldUnits = mainCamera.orthographicSize * 2;
 			screenWidthWorldUnits =  screenHeightWorldUnits * mainCamera.aspect;

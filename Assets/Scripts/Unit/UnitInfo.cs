@@ -62,8 +62,8 @@ public class UnitInfo : MonoBehaviour
     {
         SetBaseStats();
         equipment = new UnitEquipment(this);
-        /*
         equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
+        /*
         equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
         equipment.EquipArmor(EquipmentLibrary.Armor[100]);
         equipment.EquipArmor(EquipmentLibrary.Armor[101]);
