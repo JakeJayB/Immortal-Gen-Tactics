@@ -136,6 +136,14 @@ public class UnitInfo : MonoBehaviour
         TurnSystem.RemoveUnit(gameObject.GetComponent<Unit>());
         Dead = true;
     }
+    
+    public void Revive()
+    {
+        if(!Dead) return; 
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        TurnSystem.unitQueue.Enqueue(gameObject.GetComponent<Unit>());
+        Dead = false;
+    }
 
     public bool IsDead() { return Dead; }
 }

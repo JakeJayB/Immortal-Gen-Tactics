@@ -24,12 +24,12 @@ public class Ether : UnitAction
     public override int BasePower { get; protected set; } = 10;
     public override ActionType ActionType { get; protected set; } = ActionType.Item;
     public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
-    public override int Range { get; protected set; } = 0;
+    public override int Range { get; protected set; } = 1;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
     
     public override List<Tile> Area(Unit unit) {
-        return new List<Tile> { TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()] };
+        return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";

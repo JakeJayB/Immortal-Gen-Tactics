@@ -153,7 +153,7 @@ public class TurnSystem : MonoBehaviour
     private static bool startLoop = false;
     private static bool continueLoop = false;
     public static Unit CurrentUnit;
-    private static UnitPriorityQueue unitQueue;
+    public static UnitPriorityQueue unitQueue { get; private set; }
 
     public IEnumerator TurnLoop()
     {
