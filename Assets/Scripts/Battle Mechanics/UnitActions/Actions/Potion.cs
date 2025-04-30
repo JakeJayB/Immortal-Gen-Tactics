@@ -60,11 +60,13 @@ public class Potion : UnitAction
             unit.unitInfo.ActionSet.RemoveAction(this);
         }
 
-        // Heal Unit by Specified Amount
-        int heal = DamageCalculator.HealFixedAmount(BasePower, unit.unitInfo);
-        SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-        yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, heal);
-
+        if (TilemapCreator.UnitLocator.TryGetValue(selectedCell, out var foundUnit))
+        {
+            // Heal Unit by Specified Amount
+            int heal = DamageCalculator.HealFixedAmount(BasePower, foundUnit.unitInfo);
+            SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
+            yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, heal);
+        }
 
         Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
         yield return null;

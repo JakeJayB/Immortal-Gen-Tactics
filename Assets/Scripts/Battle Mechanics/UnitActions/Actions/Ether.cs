@@ -74,13 +74,17 @@ public class Ether : UnitAction
             unit.unitInfo.ActionSet.RemoveAction(this);
         }
         
-        // Heal Unit by Specified Amount
-        yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, DamageCalculator.HealFixedAmountMP(BasePower, unit.unitInfo));
+        if (TilemapCreator.UnitLocator.TryGetValue(selectedCell, out var foundUnit))
+        {
+            // Heal Unit by Specified Amount
+            SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
+            yield return DamageDisplay.DisplayUnitDamage(foundUnit.unitInfo, DamageCalculator.HealFixedAmountMP(BasePower, foundUnit.unitInfo));
 
-        if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
-            CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
-        else
-            CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
+            if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+                CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+            else
+                CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
+        }
 
         Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
         yield return null;

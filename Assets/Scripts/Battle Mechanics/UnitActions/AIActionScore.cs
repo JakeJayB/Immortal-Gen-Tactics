@@ -87,11 +87,11 @@ public class AIActionScore
                              TilemapCreator.TileLocator[new Vector2Int(PotentialCell.x, PotentialCell.z)],
                              Action.Range))
                 {
-                    if (!TilemapCreator.UnitLocator.TryGetValue(splashTile.TileInfo.Vector2CellLocation(), out unitOnTile)) { break; }
+                    if (!TilemapCreator.UnitLocator.TryGetValue(splashTile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
                     
                     int calcDamage = DamageCalculator.ProjectDamage(Action, unit.unitInfo, unitOnTile.unitInfo);
                     
-                    projectedDamage = unitOnTile.unitInfo.UnitAffiliation != unit.unitInfo.UnitAffiliation ? 
+                    projectedDamage += unitOnTile.unitInfo.UnitAffiliation != unit.unitInfo.UnitAffiliation ? 
                         calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.Aggression);
                         //calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.AllySynergy);
                 }
