@@ -16,7 +16,7 @@ public class EnemyUnit : Unit
     public float Aggression { get; private set; } = 5;             // Values Damage Dealt & Kills
     public float Survival { get; private set; } = 1;                // Values Avoiding Damage & Death
     public float TacticalPositioning { get; private set; } = 1;    // Values Advantageous Positioning
-    public float AllySynergy { get; private set; } = 1;             // Values Team-Based Actions
+    public float AllySynergy { get; private set; } = 0;             // Values Team-Based Actions
     public float ResourceManagement { get; private set; }           // Values Optimal Resource Balancing (MP, AP, Items)
     public float ReactionAwareness { get; private set; } = 1;       // Values Minimal Reaction Opportunities from Opponent
     public float ReactionAllocation { get; private set; } = 0;      // Values Saving AP for Reactions
@@ -147,6 +147,8 @@ public class EnemyUnit : Unit
         StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
     }
 
+    // TODO: AI doesn't perform any organic decision-making if it doesn't recognize an enemy.
+    // TODO: Switch the value of 20 back to the unit's finalMove.
     public List<Unit> FindNearbyUnits()
     {
         List<Unit> nearbyUnits = new List<Unit>();
@@ -154,7 +156,7 @@ public class EnemyUnit : Unit
         // Check Units based on Unit's Movement Range for now until finalized
         // It will save an AP for an action once they select and move towards the opponent
         var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()],
-            unitInfo.finalMove * (unitInfo.currentAP), Pattern.Splash);
+            20 * (unitInfo.currentAP), Pattern.Splash);
 
         // Don't Count the same tile as the Unit conducting the search
         surroundings.Remove(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()]);

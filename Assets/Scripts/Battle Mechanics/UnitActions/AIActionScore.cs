@@ -66,12 +66,14 @@ public class AIActionScore
                     {
                         foreach (var tile in direction)
                         {
-                            if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
+                            if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { break; }
                         
                             int calcDamage = DamageCalculator.ProjectDamage(Action, unit.unitInfo, unitOnTile.unitInfo);
                         
                             projectedDamage += unitOnTile.unitInfo.UnitAffiliation != unit.unitInfo.UnitAffiliation ? 
-                                calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.AllySynergy);
+                                calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.Aggression);
+                                //calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.AllySynergy);
+                            
                         }
 
                         break;
@@ -90,7 +92,8 @@ public class AIActionScore
                     int calcDamage = DamageCalculator.ProjectDamage(Action, unit.unitInfo, unitOnTile.unitInfo);
                     
                     projectedDamage = unitOnTile.unitInfo.UnitAffiliation != unit.unitInfo.UnitAffiliation ? 
-                        calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.AllySynergy);
+                        calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.Aggression);
+                        //calcDamage * Mathf.RoundToInt(unit.Aggression) : -calcDamage * Mathf.RoundToInt(unit.AllySynergy);
                 }
 
                 break;
@@ -125,9 +128,32 @@ public class AIActionScore
     // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
     public int CalcTacticalPositioningScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
         int score = 0;
+        int currentDistance = Pathfinder.DistanceBetweenCells(unit.unitInfo.CellLocation, targetCell);
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
+
+        if (TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(targetCell.x, targetCell.z), out var unitOnTile))
+        {
+            // Add to score if Potential Cell is within Unit's Striking Range
+            int projectedFutureDamage = 0;
+            foreach (var action in unit.unitInfo.ActionSet.GetAllAttackActions())
+            {
+                if (action.Range < distance) { continue; }
+                if (unit.unitInfo.currentAP < action.APCost || unit.unitInfo.currentMP < action.MPCost) { continue; }
+            
+                unitOnTile = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
+                int futureDamage = 0; 
+            
+                if (distance <= action.Range && unit.unitInfo.UnitAffiliation != unitOnTile.unitInfo.UnitAffiliation) { 
+                    futureDamage = DamageCalculator.ProjectDamage(action,
+                        unit.unitInfo, unitOnTile.unitInfo) * Mathf.RoundToInt(unit.Aggression); }
+            
+                if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
+            }
+
+            score += projectedFutureDamage;
+        }
         
-        score += distance * Mathf.RoundToInt(unit.TacticalPositioning);
+        score += (currentDistance - distance) * Mathf.RoundToInt(unit.TacticalPositioning);
         Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
         return score;
     }
