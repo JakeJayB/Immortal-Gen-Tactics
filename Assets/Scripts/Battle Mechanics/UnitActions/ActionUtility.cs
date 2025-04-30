@@ -70,6 +70,22 @@ public class ActionUtility
         }
     }
     
+    public static void ShowSelectableTilesForAction(List<Tile> area) 
+    {
+        //if (ChainSystem.UnitIsReacting()) { HideAllSelectableTiles(); }
+        if (ChainSystem.UnitIsReacting())
+        {
+            foreach (var tile in TilemapCreator.TileLocator.Values)
+            {
+                tile.OverlayObj.DeactivateOverlayTile();
+            }
+        }
+
+        foreach (var tile in area) {
+            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.ATTACK);
+        } 
+    }
+    
     public static void ShowSelectableTilesForMove(List<Tile> area) 
     {
         //if (ChainSystem.UnitIsReacting()) { HideAllSelectableTiles(); }

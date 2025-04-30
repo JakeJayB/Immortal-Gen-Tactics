@@ -62,7 +62,7 @@ public class Attack : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(unit, Name);
+        ActionUtility.ShowSelectableTilesForAction(Area(unit));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
