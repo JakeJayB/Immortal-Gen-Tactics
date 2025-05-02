@@ -104,7 +104,8 @@ public class UnitInfo : MonoBehaviour
         baseMagicDefense = Mathf.RoundToInt(2 * statMultipler);
         baseMove = 4;
         baseEvade = 1;
-        baseSpeed = Mathf.RoundToInt(5 * statMultipler);
+        baseSpeed = UnityEngine.Random.Range(8, 13);
+        //baseSpeed = Mathf.RoundToInt(5 * statMultipler);
         baseSense = 2;
     }
 
@@ -132,17 +133,17 @@ public class UnitInfo : MonoBehaviour
     public void Die()
     {
         if(Dead) return; 
+        Dead = true;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
         TurnSystem.RemoveUnit(gameObject.GetComponent<Unit>());
-        Dead = true;
     }
     
     public void Revive()
     {
         if(!Dead) return; 
+        Dead = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         TurnSystem.unitQueue.Enqueue(gameObject.GetComponent<Unit>());
-        Dead = false;
     }
 
     public bool IsDead() { return Dead; }

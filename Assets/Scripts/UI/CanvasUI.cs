@@ -20,6 +20,7 @@ public class CanvasUI : MonoBehaviour
         UnitMenu.Initialize(this.gameObject);
         UnitSelector.Initialize(this.gameObject);      
         TurnCycle.Initialize(this.gameObject);
+        PauseMenu.Initialize(this.gameObject);
 
         UnitDisplay = new GameObject("UnitDisplay", typeof(RectTransform)).AddComponent<UnitInfoDisplay>();
         UnitDisplay.transform.SetParent(transform, false);

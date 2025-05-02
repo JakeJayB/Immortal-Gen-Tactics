@@ -793,7 +793,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1531156218}
+      objectReference: {fileID: 1354321697}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -805,7 +805,7 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 1118603817}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1531156218
+--- !u!84 &1354321697
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1122,6 +1122,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8367893796264436217, guid: 104c26ce5d4cfad40b53e9f011ff5317, type: 3}
+    - {fileID: 3871587432508713641, guid: 104c26ce5d4cfad40b53e9f011ff5317, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 104c26ce5d4cfad40b53e9f011ff5317, type: 3}

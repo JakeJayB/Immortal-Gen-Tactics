@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UnitPriorityQueue
 {
@@ -119,6 +119,12 @@ private void HeapifyUp(int index)
         } while (PeekCT() != 100);
     }
 
+
+    public List<Unit> ToList()
+    {
+        return new List<Unit>(Heap);
+    }
+
     public List<Unit> ToSortedList(bool includeCurrentUnit = false)
     {
         List<Unit> sortedList = new List<Unit>(Heap);
@@ -197,9 +203,37 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
+    private static void IsGameOver()
+    {
+        bool enemyAlive = false;
+        bool allyAlive = false;
 
+        foreach (Unit unit in TilemapCreator.UnitLocator.Values)
+        {
+            if (unit.unitInfo.IsDead())
+                continue;
 
+            if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy)
+                enemyAlive = true;
+            else if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+                allyAlive = true;
 
+            // If both sides have at least one living unit, we can stop early
+            if (enemyAlive && allyAlive)
+                break;
+        }
+
+        if (!enemyAlive)
+        {
+            Debug.Log("TurnSystem: Player wins!");
+            SceneManager.LoadScene(0);
+        }
+        if (!allyAlive)
+        {
+            Debug.Log("TurnSystem: Enemy wins!");
+            SceneManager.LoadScene(0);
+        }
+    }
 
     public static void RemoveUnit(Unit unit)
     {
@@ -208,6 +242,8 @@ public class TurnSystem : MonoBehaviour
 
         TurnCycle.RemoveUnit(unit);
         unitQueue.Remove(unit);
+
+        IsGameOver();
     }
 
     public static void ContinueLoop() => continueLoop = true;
