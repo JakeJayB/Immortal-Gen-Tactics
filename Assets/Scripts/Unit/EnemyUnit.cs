@@ -21,6 +21,7 @@ public class EnemyUnit : Unit
     public float ReactionAwareness { get; private set; } = 1;       // Values Minimal Reaction Opportunities from Opponent
     public float ReactionAllocation { get; private set; } = 0;      // Values Saving AP for Reactions
     
+
     // Start is called before the first frame update
     void Start()
     {

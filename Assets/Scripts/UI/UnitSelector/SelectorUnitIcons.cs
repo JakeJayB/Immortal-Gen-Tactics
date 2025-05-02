@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class SelectorUnitIcons : MonoBehaviour
 {
-    private static int BACKGROUND_WIDTH = Mathf.RoundToInt(UnitSelector.PANEL_WIDTH * 0.3f);
-    private static int BACKGROUND_HEIGHT = Mathf.RoundToInt(UnitSelector.PANEL_HEIGHT * 0.7f);
+    private static int BACKGROUND_WIDTH;
+    private static int BACKGROUND_HEIGHT;
     private static Image unitImage;
 
     private static Dictionary<int, Unit> activeUnits;
@@ -18,8 +18,22 @@ public class SelectorUnitIcons : MonoBehaviour
         InstantiateUnitPanel();
     }
 
+    public static void Clear()
+    {
+        activeUnits = null;
+        unitImage = null;
+        currentIdx = 0;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+    }
+
     private void InstantiateUnitPanel()
     {
+        BACKGROUND_WIDTH = Mathf.RoundToInt(UnitSelector.PANEL_WIDTH * 0.3f);
+        BACKGROUND_HEIGHT = Mathf.RoundToInt(UnitSelector.PANEL_HEIGHT * 0.7f);
         activeUnits = new Dictionary<int, Unit>();
         currentIdx = 0;
 
@@ -114,6 +128,7 @@ public class SelectorUnitIcons : MonoBehaviour
         ShadeUnitIcon();
     }
 
+
     public static void DeactivateUnit(Unit unit)
     {
         if (activeUnits.ContainsKey(currentIdx) && activeUnits[currentIdx] == unit)
@@ -143,6 +158,12 @@ public class SelectorUnitIcons : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    public static bool IsThereActiveUnit()
+    {
+        return activeUnits.Count > 0;
     }
 
     public static void ShadeUnitIcon()

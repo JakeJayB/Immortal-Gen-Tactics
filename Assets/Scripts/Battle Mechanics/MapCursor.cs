@@ -32,7 +32,21 @@ public class MapCursor : MonoBehaviour
         if (CursorControlState == ControlState.Active) { ActiveControls(); }
         if (CursorControlState == ControlState.Action) { ActionControls(); }
     }
-    
+
+
+    public static void Clear()
+    {
+        gameObj = null;
+        cameraMovement = null;
+        hoverCell = Vector2Int.zero;
+        currentUnit = Vector2Int.zero;
+        CursorControlState = ControlState.Inactive;
+    }
+
+    public static void RegisterCleanup() =>
+    MemoryManager.AddListeners(Clear);
+
+
     private void StartControls()
     {
         if (!Input.anyKeyDown) return;
@@ -55,7 +69,7 @@ public class MapCursor : MonoBehaviour
         {
             UnitSelector.ResetUnitSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Escape) && UnitSelector.IsThereActiveUnit())
         {
             UnitSelector.DestroyMenu();
             SelectedStartPositions();

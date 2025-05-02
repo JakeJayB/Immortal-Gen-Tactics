@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,8 @@ public class UnitMenuCursor : MonoBehaviour
     private Sprite CursorImage;
     private RectTransform CursorRectTransform;
 
-    private static List<MenuSlot> MenuSlots;
-    public static int slotIndex;
+    private List<MenuSlot> MenuSlots;
+    public int slotIndex;
     
     // Start is called before the first frame update
     void Start()

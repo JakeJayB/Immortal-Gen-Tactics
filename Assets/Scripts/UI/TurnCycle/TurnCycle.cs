@@ -12,9 +12,23 @@ public class TurnCycle : MonoBehaviour
     private static GameObject Menu;
     private static CycleUnitIcons unitIcons;
 
+    public static void Clear()
+    {
+        Menu = null;
+        unitIcons = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+        CycleUnitIcons.RegisterCleanup();
+        CyclePanel.RegisterCleanup();
+    }
 
     public static void Initialize(GameObject canvas)
     {
+        if (Menu != null) return;
+
         PANEL_WIDTH = 800;
         PANEL_HEIGHT = 50;
 
@@ -32,6 +46,8 @@ public class TurnCycle : MonoBehaviour
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, PANEL_WIDTH);
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_HEIGHT);
     }
+
+
 
     private static void DisplayTurnCycle()
     {

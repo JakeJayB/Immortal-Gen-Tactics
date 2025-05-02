@@ -8,7 +8,7 @@ using UnityEngine.Scripting;
 
 public class Tile
 {
-    private static string PREFAB_PATH = "Prefabs/Tilemap/Tiles/";
+    private const string PREFAB_PATH = "Prefabs/Tilemap/Tiles/";
     public TileRenderer TileRender { get; set; }
     public TileInfo TileInfo { get; set; }
     public GameObject TileObj { get; private set; }

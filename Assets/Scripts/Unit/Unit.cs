@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
     public UnitRenderer unitRenderer { get; set; }
     public UnitMovement unitMovement { get; set; }
 
+
     public static Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)
     {
         GameObject gameObj = new GameObject("Unit " + initLocation);

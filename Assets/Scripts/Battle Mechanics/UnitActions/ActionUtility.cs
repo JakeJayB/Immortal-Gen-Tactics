@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
 
@@ -9,23 +10,33 @@ public class ActionUtility
 {
     private static string action = null;
 
-/*    public static void ShowSelectableTilesForAction(Unit unit)
-    {
-        var unitLocation = unit.unitInfo.CellLocation;
-        foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove))
+    /*    public static void ShowSelectableTilesForAction(Unit unit)
         {
-            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
+            var unitLocation = unit.unitInfo.CellLocation;
+            foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove))
+            {
+                tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
+            }
         }
+
+        public static void HideSelectableTilesForAction(Unit unit)
+        {
+            var unitLocation = unit.unitInfo.CellLocation;
+            foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove))
+            {
+                tile.OverlayObj.DeactivateOverlayTile();
+            }
+        }*/
+
+    public static void Clear()
+    {
+        action = null;
     }
 
-    public static void HideSelectableTilesForAction(Unit unit)
+    public static void RegisterCleanup()
     {
-        var unitLocation = unit.unitInfo.CellLocation;
-        foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove))
-        {
-            tile.OverlayObj.DeactivateOverlayTile();
-        }
-    }*/
+        MemoryManager.AddListeners(Clear);
+    }
 
     public static Tuple<List<Tile>, OverlayMaterial> DetermineParameters(string actionType, Unit unit) 
     {

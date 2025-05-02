@@ -1,4 +1,5 @@
 using PixelCamera;
+using UnityEditor;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -26,6 +27,16 @@ public class CameraMovement : MonoBehaviour
             RotateCamera(-ROTATION_ANGLE);
         else if(Input.GetKeyDown(KeyCode.W))
             ToggleZoom();
+    }
+
+    public static void Clear()
+    {
+        MainCamera = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
     }
 
 

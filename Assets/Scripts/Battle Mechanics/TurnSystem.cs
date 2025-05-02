@@ -5,9 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class UnitPriorityQueue
 {
-    private static List<Unit> Heap = new List<Unit>();
+    private static List<Unit> Heap;
 
     public int Count => Heap.Count;
+
+
+    public UnitPriorityQueue()
+    {
+        Heap = new List<Unit>();
+    }
+
+
+    public static void Clear()
+    {
+        Heap = null;
+    }
 
     public void Enqueue(Unit unit)
     {
@@ -119,12 +131,6 @@ private void HeapifyUp(int index)
         } while (PeekCT() != 100);
     }
 
-
-    public List<Unit> ToList()
-    {
-        return new List<Unit>(Heap);
-    }
-
     public List<Unit> ToSortedList(bool includeCurrentUnit = false)
     {
         List<Unit> sortedList = new List<Unit>(Heap);
@@ -160,6 +166,21 @@ public class TurnSystem : MonoBehaviour
     private static bool continueLoop = false;
     public static Unit CurrentUnit;
     public static UnitPriorityQueue unitQueue { get; private set; }
+
+    public static void Clear()
+    {
+        unitQueue = null;
+        CurrentUnit = null;
+        startLoop = false;
+        continueLoop = false;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+        MemoryManager.AddListeners(UnitPriorityQueue.Clear);
+    }
+
 
     public IEnumerator TurnLoop()
     {
@@ -226,12 +247,13 @@ public class TurnSystem : MonoBehaviour
         if (!enemyAlive)
         {
             Debug.Log("TurnSystem: Player wins!");
-            SceneManager.LoadScene(0);
+            GameOver.ShowMenu(GameResult.Win);
+
         }
         if (!allyAlive)
         {
             Debug.Log("TurnSystem: Enemy wins!");
-            SceneManager.LoadScene(0);
+            GameOver.ShowMenu(GameResult.Lose);
         }
     }
 
@@ -254,55 +276,3 @@ public class TurnSystem : MonoBehaviour
 
 }
 
-    /*    public IEnumerator TurnLoop()
-        {
-            MapCursor.SelectStartPositions();
-            yield return new WaitUntil(() => startLoop);
-
-            List<Unit> units = new List<Unit>(TilemapCreator.UnitLocator.Values);
-            units.Sort((a, b) => a.unitInfo.finalSpeed.CompareTo(b.unitInfo.finalSpeed));
-
-            TurnCycle.InitializeCycle(units);
-
-
-            if (units.Count == 0)
-            {
-                Debug.LogError("TurnSystem: No units to loop through");
-                yield break;
-            }
-
-            while (startLoop)
-            {
-
-                // TODO: Sort units if any unit's speed changes 
-                // TODO: Turn List of units into a Queue
-                foreach (Unit unit in units)
-                {
-                    // TODO: If unit is not dead or enemy and Ally is not AI-controlled, send signal to MapCursor
-
-                    CurrentUnit = unit; // Set the new unit whose turn is about to start
-                    unit.unitInfo.RefreshAP(); // Unit AP refreshes to max amount at start of new turn
-
-                    if (unit.GetComponent<EnemyUnit>())
-                    {
-                        mapCursor.gameObject.SetActive(false);
-                        unit.GetComponent<EnemyUnit>().StartTurn();
-                    }
-                    else
-                    {
-                        mapCursor.gameObject.SetActive(true);
-                        Vector3Int unitLocation = unit.unitInfo.CellLocation;
-                        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)].TileObj.transform);
-                        MapCursor.StartMove(unitLocation);
-                    }
-
-                    Debug.Log("TurnSystem: Unit's turn at " + unit.unitInfo.CellLocation);
-
-                    // Unity stop execution here until continueLoop turn to true. 
-                    yield return new WaitUntil(() => continueLoop);
-                    continueLoop = false;
-                    yield return new WaitForSeconds(1f);
-                    TurnCycle.CycleUnits(units);
-                }
-            }
-        }*/

@@ -13,7 +13,6 @@ public class MainMenu : MonoBehaviour
         int level = UnityEngine.Random.Range(1, 4);
         Debug.Log("Start Button Pressed");
         Debug.Log($"Loading Level {level}");
-        //SceneManager.LoadScene("BattleScene");
         SceneManager.LoadScene(level);
         
     }

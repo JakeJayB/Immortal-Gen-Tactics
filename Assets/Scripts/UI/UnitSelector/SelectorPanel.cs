@@ -12,6 +12,16 @@ public class SelectorPanel : MonoBehaviour
         InstantiatePanel();
     }
 
+    public static void Clear()
+    {
+        Panel = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+    }
+
     private void InstantiatePanel()
     {
         Panel = this.gameObject.AddComponent<Image>();

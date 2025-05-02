@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class BGAudioManager : MonoBehaviour
@@ -31,6 +32,15 @@ public class BGAudioManager : MonoBehaviour
 
     }
 
+    public static void Clear()
+    {
+        instance = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+    }
 
     public static void PlayBGSoundClip(string audioClip, float volume)
     {

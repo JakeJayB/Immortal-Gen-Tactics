@@ -2,26 +2,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+    public enum GameResult
+    {
+        Win,
+        Lose
+    }
 
-public class PauseMenu : MonoBehaviour
+
+public class GameOver : MonoBehaviour
 {
+
     private static int PANEL_WIDTH;
     private static int PANEL_HEIGHT;
 
     public static GameObject Menu { get; private set; }
 
-    private void Update()
+    public static void Initialize(GameObject canvas)
     {
-         
-        if(Menu == null || !Menu.activeSelf) return;
+        if(Menu != null) return;
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (Menu.transform.childCount == 0)
-                ShowPauseMenu();
-            else
-                HidePauseMenu();
-        }
+        PANEL_WIDTH = 400;
+        PANEL_HEIGHT = 200;
+
+        Menu = new GameObject("GameOver", typeof(RectTransform), typeof(GameOver));
+        Menu.transform.SetParent(canvas.transform, false);
+        RectTransform rectTransform = Menu.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, PANEL_WIDTH);
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_HEIGHT);
     }
 
     public static void Clear()
@@ -34,66 +43,49 @@ public class PauseMenu : MonoBehaviour
         MemoryManager.AddListeners(Clear);
     }
 
-    public static void Initialize(GameObject canvas)
+    public static async void ShowMenu(GameResult result)
     {
-        if (Menu != null) return;
-
-        PANEL_WIDTH = 400;
-        PANEL_HEIGHT = 200;
-
-        Menu = new GameObject("PauseMenu", typeof(RectTransform));
-        Menu.transform.SetParent(canvas.transform, false);
-        RectTransform rectTransform = Menu.GetComponent<RectTransform>();
-        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, PANEL_WIDTH);
-        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_HEIGHT);
-        Menu.AddComponent<PauseMenu>();
-    }
-
-
-    private static void ShowPauseMenu()
-    {
-        if(Menu.transform.childCount != 0) return;
-
         // 1) pause everything
         Time.timeScale = 0f;
 
         // 2) full-screen dark panel
         var panel = new GameObject("Panel", typeof(RectTransform), typeof(Image));
         panel.transform.SetParent(Menu.transform, false);
-        var rect = panel.GetComponent<RectTransform>();
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, PANEL_WIDTH);
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_HEIGHT);
-        rect.offsetMin = rect.offsetMax = Vector2.zero;
+        var panelRect = panel.GetComponent<RectTransform>();
+        panelRect.anchorMin = Vector2.zero;
+        panelRect.anchorMax = Vector2.one;
+        panelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, PANEL_WIDTH);
+        panelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_HEIGHT);
+        panelRect.offsetMin = panelRect.offsetMax = Vector2.zero;
         var img = panel.GetComponent<Image>();
         img.color = new Color(0f, 0f, 0f, 0.7f);
 
-        // 3) gPausedh title
-        var title = CreateText("Title", panel.transform, "PAUSED");
-        title.rectTransform.anchorMin = title.rectTransform.anchorMax = new Vector2(0.5f, 1f);
-        title.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 140);
-        title.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 35);
-        title.rectTransform.anchoredPosition = new Vector2(0, -30f);
+        // 3) gYou Won/You Losth title
+        var title = new GameObject("ResultText", typeof(RectTransform), typeof(TextMeshProUGUI));
+        title.transform.SetParent(panel.transform, false);
 
-        // 4) PLAY button
-        CreateButton(
-            "PlayButton",
-            panel.transform,
-            "PLAY",
-            new Vector2(0, -90f),
-            new Vector2(0.5f, 1f),
-            () => HidePauseMenu()
-        );
+        var titleRect = title.GetComponent<RectTransform>();
+        titleRect.anchorMin = titleRect.anchorMax = new Vector2(0.5f, 1f);
+        titleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 140);
+        titleRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 35);
+        titleRect.anchoredPosition = new Vector2(0, -30f);
 
-        // 5) MAIN MENU button
+
+        var titleTxt = title.GetComponent<TMP_Text>();
+        titleTxt.text = result == GameResult.Win ? "You Won!" : "You Lost..";
+        titleTxt.font = Resources.Load<TMP_FontAsset>("Fonts & Materials/Oswald Bold SDF");
+        titleTxt.alignment = TextAlignmentOptions.Center;
+        titleTxt.color = Color.white;
+        titleTxt.enableAutoSizing = true;
+        titleTxt.fontSizeMin = 18;
+        titleTxt.fontSizeMax = 72;
+
+        // 4) MAIN MENU button
         CreateButton(
             "MainMenuButton",
             panel.transform,
             "MAIN MENU",
-            new Vector2(0, -140f),
+            new Vector2(0, -90f),
             new Vector2(0.5f, 1f),
             () => {
                 Time.timeScale = 1f;
@@ -101,17 +93,6 @@ public class PauseMenu : MonoBehaviour
                 SceneManager.LoadScene(0);
             }
         );
-
-    }
-
-    private static void HidePauseMenu()
-    {
-        if (Menu.transform.childCount == 0) return;
-
-        foreach (Transform child in Menu.transform)
-            Destroy(child.gameObject);
-        
-        Time.timeScale = 1f;
     }
 
     // helper to make a Button+Image+Text
@@ -151,21 +132,5 @@ public class PauseMenu : MonoBehaviour
         txt.enableAutoSizing = true;
         txt.fontSizeMin = 18;
         txt.fontSizeMax = 72;
-    }
-
-    // helper to make a single Text element
-    private static TMP_Text CreateText(string name, Transform parent, string content)
-    {
-        var gameObj = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI));
-        gameObj.transform.SetParent(parent, false);
-        TMP_Text text = gameObj.GetComponent<TextMeshProUGUI>();
-        text.text = content;
-        text.font = Resources.Load<TMP_FontAsset>("Fonts & Materials/Oswald Bold SDF");
-        text.alignment = TextAlignmentOptions.Center;
-        text.color = Color.white;
-        text.enableAutoSizing = true;
-        text.fontSizeMin = 18;
-        text.fontSizeMax = 72;
-        return text;
     }
 }

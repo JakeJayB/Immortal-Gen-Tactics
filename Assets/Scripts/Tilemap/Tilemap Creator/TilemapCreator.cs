@@ -19,9 +19,20 @@ public class TilemapCreator : MonoBehaviour
     [SerializeField] private GameObject OverlaySlantedCornerPrefab;
     [SerializeField] private GameObject OverlayStairPrefab;
 
+    public static void Clear()
+    {
+        TileLocator = null;
+        UnitLocator = null;
+        AllTiles = null;
+        OverlayPrefabs = null;
+    }
+
+    public static void RegisterCleanup() =>
+    MemoryManager.AddListeners(Clear);
 
     private void Awake()
     {
+        Debug.Log($"Tilelocator is null? {TileLocator == null}");
         TileLocator = new Dictionary<Vector2Int, Tile>();
         UnitLocator = new Dictionary<Vector2Int, Unit>();
         AllTiles = new Dictionary<Vector3Int, Tile>();

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +18,14 @@ public class UnitMenuTextbox : MonoBehaviour
         DefineText();
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void Clear()
     {
-        
+        Text = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
     }
 
     public void InstantiateTextbox()

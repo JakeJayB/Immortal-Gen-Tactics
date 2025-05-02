@@ -15,6 +15,20 @@ public class ChainSystem
     public static bool ReactionInProgress = false;
     public static Unit ReactingUnit = null;
 
+
+    public static void Clear()
+    {
+        Chain.Clear();
+        ReactionInProgress = false;
+        ReactingUnit = null;
+        PotentialChain = new ValueTuple<UnitAction, Vector2Int, Unit>();
+        CurrentChain = new ValueTuple<UnitAction, Vector2Int, Unit>();
+    }
+
+    public static void RegisterCleanup() =>
+        MemoryManager.AddListeners(Clear);
+    
+
     public static void HoldPotentialChain(UnitAction action, Unit unit) {
         PotentialChain = new ValueTuple<UnitAction, Vector2Int, Unit>(action, new Vector2Int(), unit);
     }

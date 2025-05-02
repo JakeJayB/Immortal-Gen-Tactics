@@ -7,17 +7,6 @@ using UnityEngine;
 
 public class UnitAILogic : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // This is test based on EnemyUnit's Move stat
     // The less AP that are needed to reach a unit, the more it will prioritize them

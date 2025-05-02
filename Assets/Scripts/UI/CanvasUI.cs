@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class CanvasUI : MonoBehaviour
@@ -12,6 +11,25 @@ public class CanvasUI : MonoBehaviour
     private static Image InfoBar;
     private static UnitInfoDisplay UnitDisplay;
     private static UnitInfoDisplay TargetUnitDisplay;
+
+    public static void Clear()
+    {
+        Canvas = null;
+        InfoBar = null;
+        UnitDisplay = null;
+        TargetUnitDisplay = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+        UnitMenu.RegisterCleanup();
+        UnitSelector.RegisterCleanup();
+        TurnCycle.RegisterCleanup();
+        PauseMenu.RegisterCleanup();
+        GameOver.RegisterCleanup();
+    }
+
     
     private void Start()
     {
@@ -21,6 +39,7 @@ public class CanvasUI : MonoBehaviour
         UnitSelector.Initialize(this.gameObject);      
         TurnCycle.Initialize(this.gameObject);
         PauseMenu.Initialize(this.gameObject);
+        GameOver.Initialize(this.gameObject);
 
         UnitDisplay = new GameObject("UnitDisplay", typeof(RectTransform)).AddComponent<UnitInfoDisplay>();
         UnitDisplay.transform.SetParent(transform, false);
@@ -48,6 +67,7 @@ public class CanvasUI : MonoBehaviour
         InfoBar.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 30);
         InfoBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -25);*/
     }
+
 
     public static void ShowTurnUnitInfoDisplay(UnitInfo unitInfo) {
         UnitDisplay.gameObject.SetActive(true);

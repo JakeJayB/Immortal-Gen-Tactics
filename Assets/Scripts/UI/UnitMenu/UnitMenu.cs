@@ -18,26 +18,7 @@ public class UnitMenu : MonoBehaviour
     public static bool InSubMenu = false;
     public static bool InReactionMode = false;
 
-/*    private void Awake()
-    {
-        // Create a new Canvas GameObject
-        GameObject canvasObject = new GameObject("Canvas");
-        Canvas = canvasObject.AddComponent<Canvas>();
-    
-        // Set proper render mode
-        Canvas.renderMode = RenderMode.ScreenSpaceOverlay; // Change to Overlay to avoid 3D interference
 
-        // Add essential UI components
-        canvasObject.AddComponent<CanvasScaler>();
-        canvasObject.AddComponent<GraphicRaycaster>();
-
-        // Create the menu as a UI object
-        Menu = new GameObject("UnitMenu", typeof(RectTransform));
-        Menu.transform.SetParent(Canvas.transform, false);
-        Menu.SetActive(false);
-        
-        MainCamera = Camera.main;
-    }*/
 
     // Update is called once per frame
     void Update()
@@ -69,10 +50,31 @@ public class UnitMenu : MonoBehaviour
             SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
     }
+
+    public static void Clear()
+    {
+        Menu = null;
+        MenuSlots = null;
+        Textbox = null;
+        Cursor = null;
+        MainCamera = null;
+        Canvas = null;
+        SubMenu = null;
+        InSubMenu = false;
+        InReactionMode = false;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+        UnitMenuTextbox.RegisterCleanup();
+    }
     
 
     public static void Initialize(GameObject canvas)
     {
+        if (Menu != null) return;
+
         Canvas = canvas.GetComponent<Canvas>();
         Menu = new GameObject("UnitMenu", typeof(RectTransform));
         Menu.AddComponent<UnitMenu>();

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class UnitSelector : MonoBehaviour
 {
-    public static int PANEL_WIDTH;
-    public static int PANEL_HEIGHT;
+    public const int PANEL_WIDTH = 250;
+    public const int PANEL_HEIGHT = 140;
 
     public static GameObject Menu { get; private set; }
     private static Unit unitSelected;
@@ -30,10 +30,22 @@ public class UnitSelector : MonoBehaviour
         }
     }
 
+    public static void Clear()
+    {
+        Menu = null;
+        unitSelected = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+        SelectorPanel.RegisterCleanup();
+        SelectorUnitIcons.RegisterCleanup();
+    }
+
     public static void Initialize(GameObject canvas)
     {
-        PANEL_WIDTH = 250;
-        PANEL_HEIGHT = 140; 
+        if (Menu != null) return;
 
         Menu = new GameObject("UnitSelector", typeof(RectTransform));
         Menu.AddComponent<UnitSelector>();
@@ -78,6 +90,17 @@ public class UnitSelector : MonoBehaviour
             unitSelected = null;
             SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
+    }
+
+    public static bool IsThereActiveUnit()
+    {
+        bool result =  SelectorUnitIcons.IsThereActiveUnit();
+
+        if (result)
+            SoundFXManager.PlaySoundFXClip("Select", 0.2f);
+        else
+            SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
+        return result;
     }
 
 

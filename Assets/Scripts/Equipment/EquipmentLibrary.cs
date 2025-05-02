@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 [Serializable]
 public class EquipmentData
@@ -51,13 +52,22 @@ public class EquipmentList
     public List<AccessoryData> Accessories = new List<AccessoryData>();
 }
 
-public class EquipmentLibrary
+public class EquipmentLibrary : MonoBehaviour
 {
     public const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/";
     public const string FILE_NAME = "EquipmentLibrary.json";
     public static Dictionary<int, Weapon> Weapons { get; private set; }
     public static Dictionary<int, Armor> Armor { get; private set; }
     public static Dictionary<int, Accessory> Accessories { get; private set; }
+
+
+    public static void Clear()
+    {
+        Weapons = null;
+        Armor = null;
+        Accessories = null;
+    }
+
 
     public static void InitializeLibrary()
     {

@@ -29,6 +29,18 @@ public class CycleUnitIcons : MonoBehaviour
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, TurnCycle.PANEL_HEIGHT);
     }
 
+    public static void Clear()
+    {
+        iconDict = null;
+        instance = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+    }
+
+
     public static void InitializeUnits(List<Unit> units)
     {
         float posOffset = TurnCycle.PANEL_WIDTH / (units.Count + 1);

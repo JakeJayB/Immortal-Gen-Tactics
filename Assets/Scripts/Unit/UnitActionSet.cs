@@ -7,18 +7,6 @@ using UnityEngine;
 public class UnitActionSet
 {
     private Dictionary<ActionType, List<UnitAction>> unitActions;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public UnitActionSet()
     {

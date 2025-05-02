@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -38,6 +39,17 @@ public class AudioManager : MonoBehaviour
             Destroy(this);
         }
 
+    }
+
+    public static void Clear()
+    {
+        SoundFXLibrary = null;
+        BGAudioLibrary = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
     }
 
 }

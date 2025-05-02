@@ -21,6 +21,16 @@ public class SoundFXManager : MonoBehaviour
         }
     }
 
+    public static void Clear()
+    {
+        instance = null;
+    }
+
+    public static void RegisterCleanup()
+    {
+        MemoryManager.AddListeners(Clear);
+    }
+
 
     public static void PlaySoundFXClip(string audioClip, float volume = 0.35f)
     {
