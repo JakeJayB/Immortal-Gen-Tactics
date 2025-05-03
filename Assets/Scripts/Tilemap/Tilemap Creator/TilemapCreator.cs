@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TilemapCreator : MonoBehaviour
 {
-    private const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/Levels";
+    private const string DEFAULT_DIRECTORY = "Assets/StreamingAssets";
     public string fileName;
     public static Dictionary<Vector2Int, Tile> TileLocator { get; private set; } // Contains all traversable tiles in game scene
     public static Dictionary<Vector3Int, Tile> AllTiles { get; private set; } // Contains all tiles in game scene
@@ -65,7 +65,7 @@ public class TilemapCreator : MonoBehaviour
 
     private void LoadFromJson()
     {
-        string filePath = DEFAULT_DIRECTORY + "/" + fileName; 
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         DataList data;
 
         if(File.Exists(filePath))

@@ -23,7 +23,7 @@ public class TilePrefabCreator : MonoBehaviour
         var path = $"{DEFAULT_DIRECTORY}/{meshName}{PREFAB_EXTENSION}";
 
         if (!System.IO.Directory.Exists(DEFAULT_DIRECTORY)) { System.IO.Directory.CreateDirectory(DEFAULT_DIRECTORY); }
-        AssetDatabase.CreateAsset(mesh, path);
+        //AssetDatabase.CreateAsset(mesh, path);
 
         Destroy(obj);
     }

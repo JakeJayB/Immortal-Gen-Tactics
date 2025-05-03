@@ -283,10 +283,10 @@ public class AIActionScore
         AggressionScore = CalcAggressionScore(unit, potentialCell, targetCell);
         SurvivalScore = 0;
         TacticalPosScore = CalcTacticalPositioningScore(unit, potentialCell, targetCell);
-        AllySynergyScore = CalcAllySynergyScore(unit, potentialCell, allyUnits);
-        ResourceManagementScore = CalcResourceManagementScore(unit);
-        ReactionAwarenessScore = CalcReactionAwarenessScore(unit, potentialCell, enemyUnits);
-        ReactionAllocationScore = CalcReactionAllocationScore(unit);
+        AllySynergyScore = CalcAllySynergyScore(unit, potentialCell, enemyUnits);
+        ResourceManagementScore = 0;
+        ReactionAwarenessScore = 0;
+        ReactionAllocationScore = 0;
         
         return this;
     }
