@@ -18,9 +18,10 @@ public class EnemyUnit : Unit
     public float TacticalPositioning { get; private set; } = 1;    // Values Advantageous Positioning
     public float AllySynergy { get; private set; } = 0;             // Values Team-Based Actions
     public float ResourceManagement { get; private set; }           // Values Optimal Resource Balancing (MP, AP, Items)
-    public float ReactionAwareness { get; private set; } = 1;       // Values Minimal Reaction Opportunities from Opponent
+    public float ReactionAwareness { get; private set; } = 0;       // Values Minimal Reaction Opportunities from Opponent
     public float ReactionAllocation { get; private set; } = 0;      // Values Saving AP for Reactions
-    
+
+    public Unit targetedUnit = null;
 
     // Start is called before the first frame update
     void Start()
@@ -107,7 +108,10 @@ public class EnemyUnit : Unit
             UnitAction bestAction = new Wait();
             if (FindNearbyUnits().Count > 0)
             {
-                var nearbyUnit = FindNearbyUnits()[0].unitInfo.Vector2CellLocation();
+
+                targetedUnit = !targetedUnit ? GetNearbyUnit() : targetedUnit;
+                Debug.Log($"!!!!!!!!!!!!{targetedUnit.unitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
+                var nearbyUnit = targetedUnit.unitInfo.Vector2CellLocation();
                 
                 bestAction.CalculateActionScore(this, nearbyUnit);
         
@@ -135,9 +139,11 @@ public class EnemyUnit : Unit
         if (ChainSystem.Peek().GetType() == typeof(Wait)) {
             yield return new WaitForSeconds(2f);
             yield return ChainSystem.ExecuteChain();
+            targetedUnit = null;
         }
         else {
             yield return ChainSystem.ExecuteChain();
+            if (targetedUnit.unitInfo.IsDead()) { targetedUnit = null; }
             StartCoroutine(DecideAction());
         }
     }
@@ -146,6 +152,22 @@ public class EnemyUnit : Unit
     {
         Debug.Log(name + " is activating potion from its EndTurn()!");
         StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
+    }
+
+    public Unit GetNearbyUnit()
+    {
+        Unit closest = null;
+
+        foreach (var unit in FindNearbyUnits())
+        {
+            if (!closest) closest = unit;
+            if (Pathfinder.DistanceBetweenUnits(unit, this) < Pathfinder.DistanceBetweenUnits(closest, this))
+            {
+                closest = unit;
+            }
+        }
+
+        return closest;
     }
 
     // TODO: AI doesn't perform any organic decision-making if it doesn't recognize an enemy.
@@ -157,7 +179,7 @@ public class EnemyUnit : Unit
         // Check Units based on Unit's Movement Range for now until finalized
         // It will save an AP for an action once they select and move towards the opponent
         var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()],
-            20 * (unitInfo.currentAP), Pattern.Splash);
+            30 * (unitInfo.currentAP), Pattern.Splash);
 
         // Don't Count the same tile as the Unit conducting the search
         surroundings.Remove(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()]);
@@ -166,7 +188,7 @@ public class EnemyUnit : Unit
         {
             var cell = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
             if (TilemapCreator.UnitLocator.TryGetValue(cell, out Unit unit)) {
-                if (!unit.unitInfo.IsDead()) { nearbyUnits.Add(unit); }
+                if (!unit.unitInfo.IsDead() && unit.unitInfo.UnitAffiliation != unitInfo.UnitAffiliation) { nearbyUnits.Add(unit); }
             }
         }
 

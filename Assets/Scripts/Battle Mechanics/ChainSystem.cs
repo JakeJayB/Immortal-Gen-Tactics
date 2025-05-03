@@ -82,8 +82,9 @@ public class ChainSystem
             // Unit cannot react if they are dead
             // Unit cannot react if they already added an action to the ChainSystem
             // Unit cannot react if they are too far to sense the initial action
+            // TODO: Fix this rule!!! Unit cannot react if the action is not an attack type
             if (unit.unitInfo.currentAP <= 0 || !unit.unitInfo.IsAlive() || Chain.Any(chain => chain.Item3 == unit) ||
-                !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
+                !unitSense.Contains(TilemapCreator.TileLocator[target]) || Chain[0].action.ActionType != (ActionType.Attack)) continue;
             
             if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
             else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react

@@ -107,7 +107,7 @@ public class AIActionScore
         }
 
         score += projectedDamage + projectedFutureDamage;
-        Debug.Log("Unit " + potentialCell + " Aggression Score: " + score);
+        //Debug.Log("Unit " + potentialCell + " Aggression Score: " + score);
         return score;
     }
 
@@ -119,7 +119,7 @@ public class AIActionScore
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
         
         score += distance * Mathf.RoundToInt(unit.TacticalPositioning);
-        Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
+        //Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
         return score;
     }
     
@@ -154,7 +154,7 @@ public class AIActionScore
         }
         
         score += (currentDistance - distance) * Mathf.RoundToInt(unit.TacticalPositioning);
-        Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
+        //Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
         return score;
     }
     
@@ -238,7 +238,7 @@ public class AIActionScore
         }
 
         synergy += projectedHealing;
-        Debug.Log("Unit " + potentialCell + " Ally Synergy Score: " + synergy);
+        //Debug.Log("Unit " + potentialCell + " Ally Synergy Score: " + synergy);
         return synergy;
     }
     
@@ -264,7 +264,7 @@ public class AIActionScore
 
         score += threatLevel;
         score *= Mathf.RoundToInt(unit.ReactionAwareness);
-        Debug.Log("Unit " + potentialCell + " Reaction Awareness Score: " + score);
+        //Debug.Log("Unit " + potentialCell + " Reaction Awareness Score: " + score);
         return score;
     }
     

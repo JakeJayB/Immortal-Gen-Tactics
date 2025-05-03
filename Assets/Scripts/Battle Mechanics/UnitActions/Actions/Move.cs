@@ -26,25 +26,33 @@ public class Move : UnitAction
     public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
-        Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
-        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
+        //Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
+        //Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
 
         foreach (var tile in Area(unit))
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) { continue; }
 
-            foreach (var nearbyUnit in unit.FindNearbyUnits())
+            AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+            // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+            if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+            
+            /*foreach (var nearbyUnit in unit.FindNearbyUnits())
             {
+                if (nearbyUnit.unitInfo.UnitAffiliation == unit.unitInfo.UnitAffiliation) { continue; }
+                
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    nearbyUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
-            }
+            }*/
         }
 
-        Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
-        Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
+        //Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
+        //Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
         return ActionScore.TotalScore();
     }
 
