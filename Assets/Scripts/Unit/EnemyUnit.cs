@@ -17,8 +17,8 @@ public class EnemyUnit : Unit
     public float Survival { get; private set; } = 1;                // Values Avoiding Damage & Death
     public float TacticalPositioning { get; private set; } = 1;    // Values Advantageous Positioning
     public float AllySynergy { get; private set; } = 0;             // Values Team-Based Actions
-    public float ResourceManagement { get; private set; }           // Values Optimal Resource Balancing (MP, AP, Items)
-    public float ReactionAwareness { get; private set; } = 0;       // Values Minimal Reaction Opportunities from Opponent
+    public float ResourceManagement { get; private set; } = 0;          // Values Optimal Resource Balancing (MP, AP, Items)
+    public float ReactionAwareness { get; private set; } = 1;       // Values Minimal Reaction Opportunities from Opponent
     public float ReactionAllocation { get; private set; } = 0;      // Values Saving AP for Reactions
 
     public Unit targetedUnit = null;

@@ -285,7 +285,7 @@ public class AIActionScore
         TacticalPosScore = CalcTacticalPositioningScore(unit, potentialCell, targetCell);
         AllySynergyScore = CalcAllySynergyScore(unit, potentialCell, enemyUnits);
         ResourceManagementScore = 0;
-        ReactionAwarenessScore = 0;
+        ReactionAwarenessScore = CalcReactionAwarenessScore(unit, potentialCell, enemyUnits);
         ReactionAllocationScore = 0;
         
         return this;

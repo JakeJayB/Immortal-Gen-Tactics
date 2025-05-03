@@ -73,6 +73,7 @@ public class Rangefinder
             stepCount++;
         }
 
+        inRangeTiles.Remove(characterTile);
         return inRangeTiles.Distinct().ToList();
     }
 }

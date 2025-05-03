@@ -16,7 +16,7 @@ public class SplashSpell : UnitAction
         
     }
 
-    public override string Name { get; protected set; } = "SplashSpell (Test)";
+    public override string Name { get; protected set; } = "SplashSpell";
     public override int MPCost { get; protected set; } = 5;
     public override int APCost { get; protected set; } = 1;
     public override int Priority { get; protected set; } = 3;
@@ -68,7 +68,7 @@ public class SplashSpell : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(unit, Name);
+        ActionUtility.ShowSelectableTilesForAction(Area(unit));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
