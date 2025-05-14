@@ -52,17 +52,6 @@ public class TilemapCreator : MonoBehaviour
         LoadFromJson();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            foreach (var unit in UnitLocator)
-            {
-                Debug.Log("Unit " + unit.Value.name + " -- " + unit.Key);
-            }
-        }
-    }
-
     private void LoadFromJson()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);

@@ -60,7 +60,7 @@ public class GameOver : MonoBehaviour
         var img = panel.GetComponent<Image>();
         img.color = new Color(0f, 0f, 0f, 0.7f);
 
-        // 3) gYou Won/You Losth title
+        // 3) ÂgYou Won/You LostÂh title
         var title = new GameObject("ResultText", typeof(RectTransform), typeof(TextMeshProUGUI));
         title.transform.SetParent(panel.transform, false);
 

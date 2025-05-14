@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class SplashSpell : UnitAction
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override string Name { get; protected set; } = "SplashSpell";
     public override int MPCost { get; protected set; } = 5;
     public override int APCost { get; protected set; } = 1;
@@ -31,7 +19,6 @@ public class SplashSpell : UnitAction
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
             Range, Pattern.Splash);
     }
-
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
     public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
 
@@ -89,7 +76,6 @@ public class SplashSpell : UnitAction
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("MagicHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
-                Debug.Log("SplashSpell: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.finalHP);
             }
         }
         

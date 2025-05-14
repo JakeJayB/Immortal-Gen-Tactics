@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
-// TODO: Create a dynamic behavior that scans tiles for units to target move for.
 public class EnemyUnit : Unit
 {
     // AI Behavior Set
-    public List<AIBehavior> AIBehavior;
+    private List<AIBehavior> AIBehavior;
     
     // AI Behavioral Factors
-    public float Aggression { get; private set; } = 5;             // Values Damage Dealt & Kills
-    public float Survival { get; private set; } = 1;                // Values Avoiding Damage & Death
-    public float TacticalPositioning { get; private set; } = 1;    // Values Advantageous Positioning
-    public float AllySynergy { get; private set; } = 0;             // Values Team-Based Actions
+    public float Aggression { get; private set; } = 5;                  // Values Damage Dealt & Kills
+    public float Survival { get; private set; } = 1;                    // Values Avoiding Damage & Death
+    public float TacticalPositioning { get; private set; } = 1;         // Values Advantageous Positioning
+    public float AllySynergy { get; private set; } = 0;                 // Values Team-Based Actions
     public float ResourceManagement { get; private set; } = 0;          // Values Optimal Resource Balancing (MP, AP, Items)
-    public float ReactionAwareness { get; private set; } = 1;       // Values Minimal Reaction Opportunities from Opponent
-    public float ReactionAllocation { get; private set; } = 0;      // Values Saving AP for Reactions
+    public float ReactionAwareness { get; private set; } = 0;           // Values Minimal Reaction Opportunities from Opponent
+    public float ReactionAllocation { get; private set; } = 0;          // Values Saving AP for Reactions
 
     public Unit targetedUnit = null;
 
@@ -82,9 +78,7 @@ public class EnemyUnit : Unit
         CanvasUI.ShowTurnUnitInfoDisplay(unitInfo);
         StartCoroutine(DecideAction()); 
     }
-
-    // TODO: Make the executions of UnitActions as coroutines so that no future instructions will
-    // TODO: execute until they finish. This is especially important for EnemyAI Action Calls.
+    
     private IEnumerator DecideAction()
     {
         var actionDetermined = false;
@@ -146,12 +140,6 @@ public class EnemyUnit : Unit
             if (targetedUnit.unitInfo.IsDead()) { targetedUnit = null; }
             StartCoroutine(DecideAction());
         }
-    }
-    
-    private void EndTurn()
-    {
-        Debug.Log(name + " is activating potion from its EndTurn()!");
-        StartCoroutine(new Wait().ExecuteAction(this, new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)));
     }
 
     public Unit GetNearbyUnit()
