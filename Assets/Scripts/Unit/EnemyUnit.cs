@@ -101,15 +101,14 @@ public class EnemyUnit : Unit
 
         if (!actionDetermined)
         {
-            UnitAction bestAction = new Wait();
-            
             Debug.Log($"!!!!!!!!!!!!{targetedUnit.unitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
             var nearbyUnit = targetedUnit.unitInfo.Vector2CellLocation();
             
-            float bestScore = bestAction.CalculateActionScore(this, nearbyUnit);
-            // bestAction.CalculateActionScore(this, nearbyUnit);
-    
-            foreach (var action in unitInfo.ActionSet.GetAllTurnActions())
+            // Softmax Implementation
+            List<UnitAction> turnActions = unitInfo.ActionSet.GetAITurnActions();
+            List<UnitAction> potentialActions = new();
+            List<float> actionScores = new List<float>();
+            foreach (var action in turnActions)
             {
                 if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
 
@@ -118,21 +117,19 @@ public class EnemyUnit : Unit
                     (targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player &&
                      action.DamageType == DamageType.Healing))
                     continue;
-
-
-                float newScore = action.CalculateActionScore(this, nearbyUnit);
-                if (newScore > bestScore) { 
-                    bestScore = newScore;
-                    bestAction = action;
-                }
+                
+                potentialActions.Add(action);
+                actionScores.Add(action.CalculateActionScore(this, nearbyUnit) / 2); // TODO: Fix Score Balancing to Prevent Softmax Overflow
             }
+
+            UnitAction chosenAction = SoftmaxAILogic.DetermineAction(potentialActions, actionScores);
         
-            Debug.Log(name + " choose to " + bestAction.Name + " this turn.");
-            ChainSystem.HoldPotentialChain(bestAction, this);
-            yield return ChainSystem.AddAction(bestAction.ActionScore.Vector2PotentialLocation());
+            Debug.Log(name + " choose to " + chosenAction.Name + " this turn.");
+            ChainSystem.HoldPotentialChain(chosenAction, this);
+            yield return ChainSystem.AddAction(chosenAction.ActionScore.Vector2PotentialLocation());
             
             // If AI Unit selects an action that impacts the target unit, de-prioritize them
-            if (bestAction.ActionType != ActionType.Move) { targetedUnit = null; }
+            if (chosenAction.ActionType != ActionType.Move) { targetedUnit = null; }
         }
         
         if (ChainSystem.Peek().GetType() == typeof(Wait)) {

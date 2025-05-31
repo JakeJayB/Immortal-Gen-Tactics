@@ -93,7 +93,7 @@ public class UnitActionSet
         // Setting Move after Unique Actions to prevent bad movement
         foreach (var actionList in unitActions.Values) { allActions.AddRange(actionList); }
         allActions.Add(new Move());
-        //allActions.Add(new Wait());
+        allActions.Add(new Wait());
         
         return allActions;
     }
