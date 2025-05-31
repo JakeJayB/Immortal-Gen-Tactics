@@ -15,7 +15,7 @@ public class Potion : UnitAction
     public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
     public override int Range { get; protected set; } = 1;
     public override AIActionScore ActionScore { get; protected set; }
-    public override int Splash { get; protected set; }
+    public override int Splash { get; protected set; } = 0;
     public override List<Tile> Area(Unit unit) {
         return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range);
     }
@@ -28,8 +28,19 @@ public class Potion : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
-        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
-            unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+        foreach (var tile in Area(unit))
+        {
+            if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
+            {
+                if (foundUnit.unitInfo.IsDead()) { continue; }
+                
+                AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                    foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+                // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+            }
+        }
         
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
@@ -65,7 +76,7 @@ public class Potion : UnitAction
             // Heal Unit by Specified Amount
             int heal = DamageCalculator.HealFixedAmount(BasePower, foundUnit.unitInfo);
             SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-            yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, heal);
+            yield return DamageDisplay.DisplayUnitDamage(foundUnit.unitInfo, heal);
         }
 
         Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);

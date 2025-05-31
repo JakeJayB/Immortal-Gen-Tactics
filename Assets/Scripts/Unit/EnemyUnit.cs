@@ -11,13 +11,13 @@ public class EnemyUnit : Unit
     // AI Behavioral Factors
     public float Aggression { get; private set; } = 5;                  // Values Damage Dealt & Kills
     public float Survival { get; private set; } = 1;                    // Values Avoiding Damage & Death
-    public float TacticalPositioning { get; private set; } = 1;         // Values Advantageous Positioning
-    public float AllySynergy { get; private set; } = 0;                 // Values Team-Based Actions
+    public float TacticalPositioning { get; private set; } = 3;         // Values Advantageous Positioning
+    public float AllySynergy { get; private set; } = 5;                 // Values Team-Based Actions
     public float ResourceManagement { get; private set; } = 0;          // Values Optimal Resource Balancing (MP, AP, Items)
     public float ReactionAwareness { get; private set; } = 0;           // Values Minimal Reaction Opportunities from Opponent
     public float ReactionAllocation { get; private set; } = 0;          // Values Saving AP for Reactions
 
-    public Unit targetedUnit = null;
+    public Unit targetedUnit;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +84,9 @@ public class EnemyUnit : Unit
         var actionDetermined = false;
         
         AIBehavior = AIBehavior.OrderBy(a => a.Priority).ToList();
+        
+        // Decide Target
+        targetedUnit = !targetedUnit ? new UnitAITargeting().EvaluateScore(this).TargetUnit : targetedUnit;
 
         foreach (var behavior in AIBehavior)
         {
@@ -98,36 +101,38 @@ public class EnemyUnit : Unit
 
         if (!actionDetermined)
         {
-            float bestScore = -9999;
             UnitAction bestAction = new Wait();
-            if (FindNearbyUnits().Count > 0)
+            
+            Debug.Log($"!!!!!!!!!!!!{targetedUnit.unitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
+            var nearbyUnit = targetedUnit.unitInfo.Vector2CellLocation();
+            
+            float bestScore = bestAction.CalculateActionScore(this, nearbyUnit);
+            // bestAction.CalculateActionScore(this, nearbyUnit);
+    
+            foreach (var action in unitInfo.ActionSet.GetAllTurnActions())
             {
+                if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
 
-                targetedUnit = !targetedUnit ? GetNearbyUnit() : targetedUnit;
-                Debug.Log($"!!!!!!!!!!!!{targetedUnit.unitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
-                var nearbyUnit = targetedUnit.unitInfo.Vector2CellLocation();
-                
-                bestAction.CalculateActionScore(this, nearbyUnit);
-        
-                foreach (var action in unitInfo.ActionSet.GetAllTurnActions())
-                {
-                    if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
-                    
-                    float newScore = action.CalculateActionScore(this, nearbyUnit);
-                    if (newScore > bestScore) { 
-                        bestScore = newScore;
-                        bestAction = action;
-                    }
+                if ((targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy &&
+                     action.DamageType is DamageType.Physical or DamageType.Magic) ||
+                    (targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player &&
+                     action.DamageType == DamageType.Healing))
+                    continue;
+
+
+                float newScore = action.CalculateActionScore(this, nearbyUnit);
+                if (newScore > bestScore) { 
+                    bestScore = newScore;
+                    bestAction = action;
                 }
-            }
-            else
-            {
-                bestAction.CalculateActionScore(this, unitInfo.Vector2CellLocation());
             }
         
             Debug.Log(name + " choose to " + bestAction.Name + " this turn.");
             ChainSystem.HoldPotentialChain(bestAction, this);
             yield return ChainSystem.AddAction(bestAction.ActionScore.Vector2PotentialLocation());
+            
+            // If AI Unit selects an action that impacts the target unit, de-prioritize them
+            if (bestAction.ActionType != ActionType.Move) { targetedUnit = null; }
         }
         
         if (ChainSystem.Peek().GetType() == typeof(Wait)) {
@@ -137,7 +142,7 @@ public class EnemyUnit : Unit
         }
         else {
             yield return ChainSystem.ExecuteChain();
-            if (targetedUnit.unitInfo.IsDead()) { targetedUnit = null; }
+            if (targetedUnit && targetedUnit.unitInfo.IsDead()) { targetedUnit = null; }
             StartCoroutine(DecideAction());
         }
     }

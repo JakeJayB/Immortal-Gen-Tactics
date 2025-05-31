@@ -26,8 +26,8 @@ public class Move : UnitAction
     public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
-        //Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
-        //Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
+        Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
+        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
 
         foreach (var tile in Area(unit))
         {
@@ -51,7 +51,7 @@ public class Move : UnitAction
             }*/
         }
 
-        //Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
+        Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
         //Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
         return ActionScore.TotalScore();
     }

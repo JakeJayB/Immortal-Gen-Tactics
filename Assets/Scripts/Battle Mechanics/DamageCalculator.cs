@@ -18,23 +18,27 @@ public class DamageCalculator : MonoBehaviour
                 break;
         }
 
+        if (action.DamageType == DamageType.Healing) { projected *= -1; }
         return projected > 0 ? projected : 1;
     }
     
     public static int ProjectHealing(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
+        // Dead units cannot be healed, they must be revived first
+        if (target.IsDead() && action.DamageType == DamageType.Healing) { return 0; }
         int healingAmount = 0;
         
         switch (action.ActionType)
         {
             case ActionType.Attack:
                 healingAmount = attacker.finalMagicAttack + action.BasePower;
+                if (action.DamageType != DamageType.Healing) { healingAmount *= -1; }
                 break;
             case ActionType.Item:
                 healingAmount = action.BasePower;
                 break;
             default:
-                Debug.LogError("ERROR: ActionType not specified. (DamageCalculator.ProjectHealing)");
+                //Debug.LogError("ERROR: ActionType not specified. (DamageCalculator.ProjectHealing)");
                 break;
         }
         
