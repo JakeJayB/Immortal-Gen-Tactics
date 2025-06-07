@@ -9,10 +9,10 @@ public class EnemyUnit : Unit
     private List<AIBehavior> AIBehavior;
     
     // AI Behavioral Factors
-    public float Aggression { get; private set; } = 5;                  // Values Damage Dealt & Kills
-    public float Survival { get; private set; } = 1;                    // Values Avoiding Damage & Death
-    public float TacticalPositioning { get; private set; } = 3;         // Values Advantageous Positioning
-    public float AllySynergy { get; private set; } = 5;                 // Values Team-Based Actions
+    public float Aggression { get; private set; } = 2.5f;                  // Values Damage Dealt & Kills
+    public float Survival { get; private set; } = 0.5f;                    // Values Avoiding Damage & Death
+    public float TacticalPositioning { get; private set; } = 1.5f;         // Values Advantageous Positioning
+    public float AllySynergy { get; private set; } = 2.5f;                 // Values Team-Based Actions
     public float ResourceManagement { get; private set; } = 0;          // Values Optimal Resource Balancing (MP, AP, Items)
     public float ReactionAwareness { get; private set; } = 0;           // Values Minimal Reaction Opportunities from Opponent
     public float ReactionAllocation { get; private set; } = 0;          // Values Saving AP for Reactions

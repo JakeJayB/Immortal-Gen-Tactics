@@ -235,6 +235,7 @@ public class UnitAITargeting
         return 20 * (unit.unitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.ReactionAllocation);
     }
 
+    // TODO: Implement Softmax to organically choose a unit to target (Most AI will target the same unit)
     public UnitAITargeting EvaluateScore(EnemyUnit unitAI)
     {
         var score = 0;

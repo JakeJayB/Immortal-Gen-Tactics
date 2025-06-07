@@ -162,6 +162,7 @@ public class AIActionScore
                     futureDamage += unitOnTile.unitInfo.IsDead() && Action.DamageType == DamageType.Revival ? 
                         unitOnTile.unitInfo.finalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
                         projectedDamage * (int)unitAI.AllySynergy;  // Else, score the original healing amount
+                    
                 }
             
                 // The closer the AI unit is to its target, the higher the score
@@ -197,7 +198,7 @@ public class AIActionScore
         resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ResourceManagement;
         
         if (Action.ActionType == ActionType.Wait) {
-            resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ReactionAllocation; 
+            resourceScore += (unitAI.unitInfo.currentAP - Action.APCost) * (int)Mathf.Pow(unitAI.ReactionAllocation, 1); 
         }
 
         return resourceScore;

@@ -18,7 +18,7 @@ public class DamageCalculator : MonoBehaviour
                 break;
         }
 
-        if (action.DamageType == DamageType.Healing) { projected *= -1; }
+        if (action.DamageType == DamageType.Healing) { return projected * -1; }
         return projected > 0 ? projected : 1;
     }
     
@@ -47,6 +47,8 @@ public class DamageCalculator : MonoBehaviour
     
     public static int DealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
     {
+        if (target.IsDead()) { return 0; }
+        
         int damage = 0;
         switch (action.DamageType)
         {
@@ -76,6 +78,22 @@ public class DamageCalculator : MonoBehaviour
         CanvasUI.ShowTargetUnitInfoDisplay(target);
 
         if (target.currentHP <= 0) { target.Die(); }
+        return damage;
+
+    }
+    
+    public static int HealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
+    {
+        if (target.IsDead()) { return 0; }
+        if (target.currentHP == target.finalHP) { return 0; }
+        
+        int damage = action.BasePower;
+        damage = ApplyDamageRoll(damage > 0 ? damage : 1);
+        target.currentHP += target.currentHP + damage > target.finalHP ? target.finalHP - target.currentHP : damage;
+        
+        CanvasUI.ShowTurnUnitInfoDisplay(attacker);
+        CanvasUI.ShowTargetUnitInfoDisplay(target);
+        
         return damage;
 
     }
