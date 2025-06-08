@@ -50,7 +50,8 @@ public class UnitAITargeting
 
         // Score Factor 2: Distance Away
         if (unitAI != potentialUnit) {
-            score += Mathf.RoundToInt(unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP / (float)distance);
+            // score += Mathf.RoundToInt(unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP / (float)distance);
+            score += unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP - distance;
         }
         
         // Score Factor 3: Action Impact

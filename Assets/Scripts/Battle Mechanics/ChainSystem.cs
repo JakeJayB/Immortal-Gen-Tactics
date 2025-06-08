@@ -71,25 +71,31 @@ public class ChainSystem
     {
         var targetedArea = TilemapUtility.GetTargetedArea(Chain[0].unit, Chain[0].action, Chain[0].target);
         TilemapUtility.ShowTargetedArea(targetedArea);
-        
-        foreach (var unit in TilemapCreator.UnitLocator.Values)
+
+        if (Chain[0].action.ActionType == ActionType.Attack)
         {
-            //var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
-            var unitCell = unit.unitInfo.Vector2CellLocation();
-            var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.finalSense, Pattern.Splash);
+            foreach (var unit in TilemapCreator.UnitLocator.Values)
+            {
+                //var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+                var unitCell = unit.unitInfo.Vector2CellLocation();
+                var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.finalSense, Pattern.Splash);
 
-            // Unit cannot react if they don't have any available AP
-            // Unit cannot react if they are dead
-            // Unit cannot react if they already added an action to the ChainSystem
-            // Unit cannot react if they are too far to sense the initial action
-            // TODO: Fix this rule!!! Unit cannot react if the action is not an attack type
-            if (unit.unitInfo.currentAP <= 0 || !unit.unitInfo.IsAlive() || Chain.Any(chain => chain.Item3 == unit) ||
-                !unitSense.Contains(TilemapCreator.TileLocator[target]) || Chain[0].action.ActionType != (ActionType.Attack)) continue;
+                // Unit cannot react if they don't have any available AP
+                // Unit cannot react if they are dead
+                // Unit cannot react if they already added an action to the ChainSystem
+                // Unit cannot react if they are too far to sense the initial action
+                // TODO: Fix this rule!!! Unit cannot react if the action is not an attack type
+                if (unit.unitInfo.currentAP <= 0 || unit.unitInfo.IsDead() || Chain.Any(chain => chain.Item3 == unit) ||
+                    !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
             
-            if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
-            else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
+                Debug.Log($"Unit {unit.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
+                Debug.Log($"Unit {unit.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
+            
+                if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
+                else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
+            }
         }
-
+        
         TilemapUtility.HideTargetedArea(targetedArea);
         yield return null;
     }
