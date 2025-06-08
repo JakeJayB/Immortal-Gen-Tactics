@@ -145,7 +145,7 @@ public class UnitInfo : MonoBehaviour
         if(!Dead) return; 
         Dead = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        TurnSystem.unitQueue.Enqueue(gameObject.GetComponent<Unit>());
+        TurnSystem.AddUnit(gameObject.GetComponent<Unit>());
     }
 
     public bool IsDead() { return Dead; }

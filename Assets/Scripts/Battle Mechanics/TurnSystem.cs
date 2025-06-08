@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -55,7 +56,7 @@ public class UnitPriorityQueue
         return Heap[0].unitInfo.currentCT;
     }
 
-    private bool IsHigherPriority(Unit a, Unit b)
+    private static bool IsHigherPriority(Unit a, Unit b)
     {
         if (a.unitInfo.currentCT > b.unitInfo.currentCT) return true;
         if (a.unitInfo.currentCT < b.unitInfo.currentCT) return false;
@@ -76,7 +77,7 @@ private void HeapifyUp(int index)
     }
 }
 
-    private void HeapifyDown(int index)
+    private static void HeapifyDown(int index)
     {
         int lastIndex = Heap.Count - 1;
         while (index < Heap.Count)
@@ -98,19 +99,27 @@ private void HeapifyUp(int index)
         }
     }
 
-    private void Swap(int a, int b)
+    private static void Swap(int a, int b)
     {
         Unit temp = Heap[a];
         Heap[a] = Heap[b];
         Heap[b] = temp;
     }
 
-    public void Heapify()
+    public static void Heapify()
     {
         for (int i = (Heap.Count / 2) - 1; i >= 0; i--)
             HeapifyDown(i);
     }
 
+    public static void Add(Unit unit)
+    {
+        Debug.Log($"TurnSystem: Unit {unit.name} added to queue");
+        Heap.Add(unit);
+        Heapify();
+        TurnCycle.CycleUnits(ToSortedList(true));
+    }
+    
     public void Remove(Unit unit)
     {
         Debug.Log($"TurnSystem: Unit {unit.name} removed from queue");
@@ -131,7 +140,7 @@ private void HeapifyUp(int index)
         } while (PeekCT() != 100);
     }
 
-    public List<Unit> ToSortedList(bool includeCurrentUnit = false)
+    public static List<Unit> ToSortedList(bool includeCurrentUnit = false)
     {
         List<Unit> sortedList = new List<Unit>(Heap);
         if(includeCurrentUnit && TurnSystem.CurrentUnit != null)
@@ -192,7 +201,7 @@ public class TurnSystem : MonoBehaviour
             unitQueue.Enqueue(unit);
 
         unitQueue.ExecuteTick();
-        TurnCycle.InitializeCycle(unitQueue.ToSortedList());
+        TurnCycle.InitializeCycle(UnitPriorityQueue.ToSortedList());
 
         while (startLoop && unitQueue.Count > 0)
         {
@@ -257,6 +266,13 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
+    public static void AddUnit(Unit unit)
+    {
+        unit.unitInfo.currentCT = 0;
+        CycleUnitIcons.AddUnit(unit);
+        UnitPriorityQueue.Add(unit);
+    }
+    
     public static void RemoveUnit(Unit unit)
     {
         if (CurrentUnit == unit)

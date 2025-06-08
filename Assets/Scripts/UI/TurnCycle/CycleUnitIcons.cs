@@ -81,6 +81,30 @@ public class CycleUnitIcons : MonoBehaviour
         }
     }
 
+    public static void AddUnit(Unit unit)
+    {
+        if (iconDict.ContainsKey(unit))
+        {
+            Debug.LogError("CycleUnitIcons: Unit already found in icon dictionary");
+            return;
+        }
+        
+        float posOffset = TurnCycle.PANEL_WIDTH / (iconDict.Count + 1);
+        
+        Unit currUnit = unit;
+        Image image = new GameObject("Unit" + (iconDict.Count + 1), typeof(RectTransform)).AddComponent<Image>();
+        image.transform.SetParent(instance.transform, false);
+        image.sprite = currUnit.unitInfo.sprite;
+
+        image.rectTransform.anchorMin = new Vector2(0, 0.5f);
+        image.rectTransform.anchorMax = new Vector2(0, 0.5f);
+        image.rectTransform.anchoredPosition = new Vector2((iconDict.Count + 1) * posOffset, 0);
+
+        image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 30);
+        image.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 30);
+        iconDict[currUnit] = image;
+    }
+    
     public static void RemoveUnit(Unit unit)
     {
         if (!iconDict.ContainsKey(unit))
