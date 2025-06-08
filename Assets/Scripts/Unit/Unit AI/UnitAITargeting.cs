@@ -49,7 +49,9 @@ public class UnitAITargeting
                                   (potentialUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy ? unitAI.Aggression : unitAI.AllySynergy));
 
         // Score Factor 2: Distance Away
-        score += Mathf.RoundToInt(unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP / (float)distance);
+        if (unitAI != potentialUnit) {
+            score += Mathf.RoundToInt(unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP / (float)distance);
+        }
         
         // Score Factor 3: Action Impact
         score += potentialUnit.unitInfo.UnitAffiliation != unitAI.unitInfo.UnitAffiliation
