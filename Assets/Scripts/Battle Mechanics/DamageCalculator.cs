@@ -16,9 +16,14 @@ public class DamageCalculator : MonoBehaviour
             case DamageType.Magic:
                 projected = attacker.finalMagicAttack + action.BasePower - target.finalMagicDefense;
                 break;
+            case DamageType.Healing:    // Will need revision when introducing damage gitdealt to undead
+                return (attacker.finalMagicAttack + action.BasePower) * -1;
+                break;
+            case DamageType.Revival:    // Will need revision when introducing damage dealt to undead
+                if (target.IsDead()) { return (attacker.finalMagicAttack + action.BasePower + target.finalHP) * -1; }
+                break;
         }
 
-        if (action.DamageType == DamageType.Healing) { return projected * -1; }
         return projected > 0 ? projected : 1;
     }
     
@@ -87,7 +92,7 @@ public class DamageCalculator : MonoBehaviour
         if (target.IsDead()) { return 0; }
         if (target.currentHP == target.finalHP) { return 0; }
         
-        int damage = action.BasePower;
+        int damage = attacker.finalMagicAttack + action.BasePower;
         damage = ApplyDamageRoll(damage > 0 ? damage : 1);
         target.currentHP += target.currentHP + damage > target.finalHP ? target.finalHP - target.currentHP : damage;
         

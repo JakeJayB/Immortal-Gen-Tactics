@@ -36,6 +36,10 @@ public class UnitAITargeting
 
     private int CalcPriorityScore(EnemyUnit unitAI, Unit potentialUnit)
     {
+        // Skip the calculation process if enemy unit is already dead
+        if (potentialUnit.unitInfo.IsDead() &&
+            potentialUnit.unitInfo.UnitAffiliation != unitAI.unitInfo.UnitAffiliation) { return -1; }
+        
         int score = 0;
         int distance = Pathfinder.DistanceBetweenUnits(unitAI, potentialUnit);
         
@@ -177,6 +181,7 @@ public class UnitAITargeting
                 potentialUnit.unitInfo.currentHP == potentialUnit.unitInfo.finalHP) { continue; }
             //if (unitAI.unitInfo.currentAP < action.APCost || unitAI.unitInfo.currentMP < action.MPCost) { continue; }
             if (unitAI.unitInfo.currentMP < action.MPCost) { continue; }
+            if (unitAI.unitInfo.IsDead() && action.DamageType == DamageType.Healing) { continue; }
             
             // Instantiate the damage value the current action will have in the future
             int futureHealing = 0;
@@ -192,6 +197,11 @@ public class UnitAITargeting
             if (unitAI.unitInfo.UnitAffiliation == potentialUnit.unitInfo.UnitAffiliation) { 
                 futureHealing = DamageCalculator.ProjectHealing(action,
                     unitAI.unitInfo, potentialUnit.unitInfo); }
+
+            // Calculate Bonus If Unit Will Be Revived
+            if (potentialUnit.unitInfo.IsDead() && action.DamageType == DamageType.Revival) {
+                futureHealing += potentialUnit.unitInfo.finalHP;
+            }
             
             futureHealing -= Mathf.RoundToInt(action.MPCost * unitAI.ResourceManagement);
             futureHealing -= Mathf.RoundToInt((action.APCost + additionalAPCost) * unitAI.ReactionAllocation);
