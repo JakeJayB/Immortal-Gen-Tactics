@@ -115,6 +115,12 @@ public class AIActionScore
                 ? nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness
                 : -nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness;
         }
+
+        if (TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(TargetCell.x, TargetCell.z), out var unitOnTile)) {
+            positionScore += Mathf.RoundToInt(
+                (Pathfinder.DistanceBetweenUnits(unitAI, unitOnTile)
+                - Pathfinder.DistanceBetweenCells(PotentialCell, TargetCell)) * unitAI.TacticalPositioning);
+        }
         
         return positionScore;
     }
@@ -176,13 +182,13 @@ public class AIActionScore
 
             // If no action is within range of the AI unit and still has a value of zero,
             // have the AI unit move as close as possible.
-            if (distance != 0) {
+            //if (distance != 0) {
                 //projectedFutureDamage += projectedFutureDamage == 0
                     //? 20 / distance * (int)unitAI.TacticalPositioning
                     //: 0;
 
-                projectedFutureDamage += 20 / distance * (int)unitAI.TacticalPositioning;
-            }
+                //projectedFutureDamage += 20 / distance * (int)unitAI.TacticalPositioning;
+            //}
             
             foresightScore += projectedFutureDamage;
         }
