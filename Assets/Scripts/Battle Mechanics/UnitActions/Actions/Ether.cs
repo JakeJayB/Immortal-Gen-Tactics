@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class Ether : UnitAction
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override string Name { get; protected set; } = "Ether";
     public override int MPCost { get; protected set; } = 0;
     public override int APCost { get; protected set; } = 1;
@@ -28,8 +16,10 @@ public class Ether : UnitAction
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
     
-    public override List<Tile> Area(Unit unit) {
-        return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range);
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
+        return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+            ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
+            : unit.unitInfo.Vector2CellLocation()], Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";
@@ -57,7 +47,7 @@ public class Ether : UnitAction
     {
         Store(UnitMenu.SubMenu);
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForMove(Area(unit)); // TODO: OPTIMIZE THIS LATER!!
+        ActionUtility.ShowSelectableTilesForMove(Area(unit, null)); // TODO: OPTIMIZE THIS LATER!!
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }

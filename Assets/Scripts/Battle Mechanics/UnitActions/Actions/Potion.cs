@@ -16,8 +16,10 @@ public class Potion : UnitAction
     public override int Range { get; protected set; } = 1;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;
-    public override List<Tile> Area(Unit unit) {
-        return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range);
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
+        return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+            ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
+            : unit.unitInfo.Vector2CellLocation()], Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";
@@ -28,7 +30,7 @@ public class Potion : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
-        foreach (var tile in Area(unit))
+        foreach (var tile in Area(unit, null))
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
             {
@@ -54,7 +56,7 @@ public class Potion : UnitAction
     {
         Store(UnitMenu.SubMenu);
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(Area(unit));
+        ActionUtility.ShowSelectableTilesForAction(Area(unit, null));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }

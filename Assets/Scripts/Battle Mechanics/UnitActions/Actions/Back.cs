@@ -17,16 +17,14 @@ public class Back : UnitAction
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
 
-    public override List<Tile> Area(Unit unit)
-    {
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         throw new NotImplementedException();
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_back";
     
     public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
-    {
+    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell) {
         throw new System.NotImplementedException();
     }
 

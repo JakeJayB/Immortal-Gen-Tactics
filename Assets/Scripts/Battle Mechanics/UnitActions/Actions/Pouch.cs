@@ -19,9 +19,9 @@ public class Pouch : UnitAction
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
 
-    public override List<Tile> Area(Unit unit)
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell)
     {
-        throw new NotImplementedException();
+        return new List<Tile>();
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";

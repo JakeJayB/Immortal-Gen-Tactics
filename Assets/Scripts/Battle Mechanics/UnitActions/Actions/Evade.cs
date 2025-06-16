@@ -15,7 +15,7 @@ public class Evade : UnitAction
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
-    public override List<Tile> Area(Unit unit) {
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
             unit.unitInfo.finalEvade);
     }
@@ -30,7 +30,7 @@ public class Evade : UnitAction
 
     public override void ActivateAction(Unit unit) {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForMove(Area(unit));
+        ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
@@ -40,9 +40,9 @@ public class Evade : UnitAction
         // Have AI Units show their range of movement before moving
         if (unit.GetComponent<EnemyUnit>())
         {
-            ActionUtility.ShowSelectableTilesForMove(Area(unit));
+            ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
             yield return new WaitForSeconds(2.0f);
-            ActionUtility.HideSelectableTilesForAction(Area(unit));
+            ActionUtility.HideSelectableTilesForAction(Area(unit, null));
         }
         
         // Spend an Action Point to execute the Action

@@ -15,8 +15,10 @@ public class SplashSpell : UnitAction
     public override int Range { get; protected set; } = 3;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 1;
-    public override List<Tile> Area(Unit unit) {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
+        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+                ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
+                : unit.unitInfo.Vector2CellLocation()],
             Range, Pattern.Splash);
     }
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
@@ -28,7 +30,7 @@ public class SplashSpell : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
 
-        foreach (var tile in Area(unit))
+        foreach (var tile in Area(unit, null))
         {
             foreach (var targetedTile in TilemapUtility.GetSplashTilesInRange(tile, Splash))
             {
@@ -55,7 +57,7 @@ public class SplashSpell : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(Area(unit));
+        ActionUtility.ShowSelectableTilesForAction(Area(unit, null));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }

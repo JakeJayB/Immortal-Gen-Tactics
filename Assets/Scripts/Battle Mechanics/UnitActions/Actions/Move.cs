@@ -16,8 +16,10 @@ public class Move : UnitAction
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
-    public override List<Tile> Area(Unit unit) {
-        return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
+        return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+                ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
+                : unit.unitInfo.Vector2CellLocation()],
             unit.unitInfo.finalMove);
     }
 
@@ -29,7 +31,7 @@ public class Move : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
 
-        foreach (var tile in Area(unit))
+        foreach (var tile in Area(unit, null))
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) { continue; }
 
@@ -59,7 +61,7 @@ public class Move : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForMove(Area(unit));
+        ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
@@ -69,9 +71,9 @@ public class Move : UnitAction
         // Have AI Units show their range of movement before moving
         if (unit.GetComponent<EnemyUnit>())
         {
-            ActionUtility.ShowSelectableTilesForMove(Area(unit));
+            ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
             yield return new WaitForSeconds(2.0f);
-            ActionUtility.HideSelectableTilesForAction(Area(unit));
+            ActionUtility.HideSelectableTilesForAction(Area(unit, null));
         }
         
         // Spend an Action Point to execute the Action

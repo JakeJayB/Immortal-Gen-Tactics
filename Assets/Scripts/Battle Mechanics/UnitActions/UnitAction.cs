@@ -18,7 +18,7 @@ public abstract class UnitAction
     public abstract int Range { get; protected set; }
     public abstract AIActionScore ActionScore { get; protected set; }
     public abstract int Splash { get; protected set; }
-    public abstract List<Tile> Area(Unit unit);
+    public abstract List<Tile> Area(Unit unit, Vector3Int? hypoCell);
     public abstract string SlotImageAddress { get; protected set; }
 
     public abstract Sprite SlotImage();

@@ -18,29 +18,29 @@ public class AIActionScore
     // [+] Scores Damage/Healing Done To Ally & Enemy Units
     // [+] Scores Potential Death
     // [+] Scores Potential Revival
-    public int CalcDamageScore(EnemyUnit unitAI)
+    public int CalcDamageScore(EnemyUnit unitAI, UnitAction action, Vector3Int potentialCell, bool moved = false)
     {
         int damageScore = 0;        // Holds the calculated damage score
         int projectedDamage = 0;    // Amount of damage projected to happen to the unit on tile
         Unit unitOnTile;            // Holds the unit found on an observed tile
         
-        switch (Action.AttackPattern)
+        switch (action.AttackPattern)
         {
             case Pattern.Direct:
                 // Skip checking this tile if no unit exists on it...
-                if (!TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(PotentialCell.x, PotentialCell.z), out unitOnTile)) { break; }
+                if (!TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(potentialCell.x, potentialCell.z), out unitOnTile)) { break; }
                 
                 damageScore += CalcDamageToUnit(unitAI, unitOnTile);
                 break;
 
             case Pattern.Linear:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                             TilemapCreator.TileLocator[unitAI.unitInfo.Vector2CellLocation()],
-                             Action.Range))
+                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.unitInfo.Vector2CellLocation()],
+                             action.Range))
                 {
                     // Only check the direction that contains the potential cell currently being scored
                     if (direction.Contains(
-                            TilemapCreator.TileLocator[new Vector2Int(PotentialCell.x, PotentialCell.z)]))
+                            TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)]))
                     {
                         foreach (var tile in direction)
                         {
@@ -58,8 +58,8 @@ public class AIActionScore
 
             case Pattern.Splash:
                 foreach (var splashTile in TilemapUtility.GetSplashTilesInRange(
-                             TilemapCreator.TileLocator[new Vector2Int(PotentialCell.x, PotentialCell.z)],
-                             Action.Splash))
+                             TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)],
+                             action.Splash))
                 {
                     // Continue to the next tile if no unit exists on this current one
                     if (!TilemapCreator.UnitLocator.TryGetValue(splashTile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
@@ -148,23 +148,7 @@ public class AIActionScore
                 if (action.Range + action.Splash < distance) { continue; }
                 if (unitAI.unitInfo.currentAP - Action.APCost < action.APCost || unitAI.unitInfo.currentMP - Action.MPCost < action.MPCost) { continue; }
                 
-                int futureDamage = 0; 
-            
-                if (distance <= action.Range + action.Splash && unitAI.unitInfo.UnitAffiliation != unitOnTile.unitInfo.UnitAffiliation) { 
-                    projectedDamage = DamageCalculator.ProjectDamage(action,
-                        unitAI.unitInfo, unitOnTile.unitInfo);
-                    futureDamage += unitOnTile.unitInfo.currentHP - projectedDamage < 1 ?
-                        unitOnTile.unitInfo.finalHP * (int)unitAI.Aggression :  // If the action kills a unit, score higher
-                        projectedDamage * (int)unitAI.Aggression;   // Else, score the original damaging amount
-                }
-                else if (distance <= action.Range + action.Splash && unitAI.unitInfo.UnitAffiliation == unitOnTile.unitInfo.UnitAffiliation) {
-                    projectedDamage = DamageCalculator.ProjectHealing(action,
-                        unitAI.unitInfo, unitOnTile.unitInfo);
-                    futureDamage += unitOnTile.unitInfo.IsDead() && Action.DamageType == DamageType.Revival ? 
-                        unitOnTile.unitInfo.finalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
-                        projectedDamage * (int)unitAI.AllySynergy;  // Else, score the original healing amount
-                    
-                }
+                int futureDamage = CalcFutureActionScore(unitAI, action);
             
                 // The closer the AI unit is to its target, the higher the score
                 // TODO: Figure out how to make the optimal distance formula
@@ -224,6 +208,26 @@ public class AIActionScore
     
     // -------------------------------------------------------------------------------------------------------------------
 
+    private int CalcFutureActionScore(EnemyUnit unitAI, UnitAction futureAction)
+    {
+        int bestScore = 0;
+
+        foreach (var tile in futureAction.Area(unitAI, Action.GetType() == typeof(Move) ? PotentialCell : null)) {
+            int potentialScore = CalcDamageScore(unitAI, futureAction, tile.TileInfo.CellLocation);
+            
+            // Score higher for DeadZoning a Target
+            // TODO: Balance the score calculation.
+            if (Pathfinder.DistanceBetweenCells(tile.TileInfo.CellLocation, TargetCell) < futureAction.Splash) 
+            { potentialScore += Mathf.RoundToInt(potentialScore * 0.2f * unitAI.TacticalPositioning); }
+            
+            if (potentialScore > bestScore) { bestScore = potentialScore; }
+        }
+
+        return bestScore;
+    }
+    
+    // -------------------------------------------------------------------------------------------------------------------
+    
     public AIActionScore EvaluateScore(UnitAction action, EnemyUnit unit, Vector3Int potentialCell,
         Vector3Int targetCell, List<Unit> allyUnits, List<Unit> enemyUnits)
     {
@@ -233,7 +237,7 @@ public class AIActionScore
 
         var targetUnit = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
 
-        DamageScore = CalcDamageScore(unit);
+        DamageScore = CalcDamageScore(unit, action, potentialCell);
         PositionScore = CalcPositionScore(unit, enemyUnits);
         ForesightScore = CalcForesightScore(unit);
         

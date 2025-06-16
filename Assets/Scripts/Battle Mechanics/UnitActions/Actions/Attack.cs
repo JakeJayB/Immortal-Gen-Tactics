@@ -18,10 +18,11 @@ public class Attack : UnitAction
     public override int Range { get; protected set; } = 1; // FIX!! -- Needs to Reflect Unit's Weapon Range
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;
-    public override List<Tile> Area(Unit unit)
-    {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()], Range,
-            AttackPattern);
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
+        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+                ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
+                : unit.unitInfo.Vector2CellLocation()],
+            Range, AttackPattern);
     }
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
@@ -62,7 +63,7 @@ public class Attack : UnitAction
     public override void ActivateAction(Unit unit)
     {
         UnitMenu.HideMenu();
-        ActionUtility.ShowSelectableTilesForAction(Area(unit));
+        ActionUtility.ShowSelectableTilesForAction(Area(unit, null));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }

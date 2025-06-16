@@ -16,8 +16,7 @@ public class Wait : UnitAction
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
-    public override List<Tile> Area(Unit unit)
-    {
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return new List<Tile>();
     }
 
