@@ -144,22 +144,6 @@ public class EnemyUnit : Unit
         }
     }
 
-    public Unit GetNearbyUnit()
-    {
-        Unit closest = null;
-
-        foreach (var unit in FindNearbyUnits())
-        {
-            if (!closest) closest = unit;
-            if (Pathfinder.DistanceBetweenUnits(unit, this) < Pathfinder.DistanceBetweenUnits(closest, this))
-            {
-                closest = unit;
-            }
-        }
-
-        return closest;
-    }
-
     // TODO: AI doesn't perform any organic decision-making if it doesn't recognize an enemy.
     // TODO: Switch the value of 20 back to the unit's finalMove.
     public List<Unit> FindNearbyUnits()
@@ -183,33 +167,6 @@ public class EnemyUnit : Unit
         }
 
         return nearbyUnits;
-    }
-    
-    private Tile DecideTile(Unit targetUnit, List<Tile> tempPath)
-    {
-        Tile chosenTile = null;
-        List<Tile> shortestPath = tempPath;
-
-        foreach (Tile tile in Rangefinder.GetTilesInRange(
-                     TilemapCreator.TileLocator[new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z)],
-                     unitInfo.finalMove, Pattern.Splash))
-        {
-            Vector2Int tileCell = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
-            
-            if (!TilemapCreator.UnitLocator.ContainsKey(tileCell))
-            {
-                List<Tile> foundPath = Pathfinder.FindPath(TilemapCreator.TileLocator[tileCell],
-                    TilemapCreator.TileLocator[new Vector2Int(targetUnit.unitInfo.CellLocation.x, targetUnit.unitInfo.CellLocation.z)]);
-
-                if (foundPath.Count < shortestPath.Count)
-                {
-                    shortestPath = foundPath;
-                    chosenTile = tile;
-                }
-            }
-        }
-
-        return chosenTile ?? TilemapCreator.TileLocator[new Vector2Int(shortestPath[^1].TileInfo.CellLocation.x, shortestPath[^1].TileInfo.CellLocation.z)];
     }
 
     public bool InRange(Unit unit, int range, Pattern pattern)
