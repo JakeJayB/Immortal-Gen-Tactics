@@ -90,9 +90,14 @@ public class ChainSystem
             
                 Debug.Log($"Unit {unit.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
                 Debug.Log($"Unit {unit.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
-            
-                if (unit.GetComponent<EnemyUnit>()) { } // If the unit is an AI Enemy, do a specific instruction
-                else { yield return OfferChainReaction(unit); } // Else, offer the player the ability to react
+
+                if (unit.GetComponent<EnemyUnit>()) {
+                    ReactionInProgress = true;
+                    yield return unit.GetComponent<EnemyUnit>().React();
+                } // If the unit is an AI Enemy, do a specific instruction
+                else {
+                    yield return OfferChainReaction(unit);
+                } // Else, offer the player the ability to react
             }
         }
         

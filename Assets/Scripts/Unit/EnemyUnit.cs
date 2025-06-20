@@ -9,13 +9,13 @@ public class EnemyUnit : Unit
     private List<AIBehavior> AIBehavior;
     
     // AI Behavioral Factors
-    public float Aggression { get; private set; } = 2.5f;                  // Values Damage Dealt & Kills
-    public float Survival { get; private set; } = 0.5f;                    // Values Avoiding Damage & Death
-    public float TacticalPositioning { get; private set; } = 1.5f;         // Values Advantageous Positioning
-    public float AllySynergy { get; private set; } = 2.5f;                 // Values Team-Based Actions
-    public float ResourceManagement { get; private set; } = 0;          // Values Optimal Resource Balancing (MP, AP, Items)
+    public float Aggression { get; private set; } = 3.0f;                  // Values Damage Dealt & Kills
+    public float Survival { get; private set; } = 1.5f;                    // Values Avoiding Damage & Death
+    public float TacticalPositioning { get; private set; } = 2.0f;         // Values Advantageous Positioning
+    public float AllySynergy { get; private set; } = 2.0f;                 // Values Team-Based Actions
+    public float ResourceManagement { get; private set; } = 1.5f;          // Values Optimal Resource Balancing (MP, AP, Items)
     public float ReactionAwareness { get; private set; } = 0;           // Values Minimal Reaction Opportunities from Opponent
-    public float ReactionAllocation { get; private set; } = 0;          // Values Saving AP for Reactions
+    public float ReactionAllocation { get; private set; } = 1.15f;          // Values Saving AP for Reactions
 
     public Unit targetedUnit;
 
@@ -78,10 +78,17 @@ public class EnemyUnit : Unit
         CanvasUI.ShowTurnUnitInfoDisplay(unitInfo);
         StartCoroutine(DecideAction()); 
     }
+
+    public IEnumerator React()
+    {
+        CanvasUI.ShowTurnUnitInfoDisplay(unitInfo);
+        yield return StartCoroutine(DecideAction()); 
+    }
     
     private IEnumerator DecideAction()
     {
         var actionDetermined = false;
+        var isReacting = ChainSystem.ReactionInProgress;
         
         AIBehavior = AIBehavior.OrderBy(a => a.Priority).ToList();
         
@@ -105,7 +112,9 @@ public class EnemyUnit : Unit
             var nearbyUnit = targetedUnit.unitInfo.Vector2CellLocation();
             
             // Softmax Implementation
-            List<UnitAction> turnActions = unitInfo.ActionSet.GetAITurnActions();
+            List<UnitAction> turnActions = isReacting
+                ? unitInfo.ActionSet.GetAIReactions()
+                : unitInfo.ActionSet.GetAITurnActions();
             List<UnitAction> potentialActions = new();
             List<float> actionScores = new List<float>();
             foreach (var action in turnActions)
@@ -131,8 +140,12 @@ public class EnemyUnit : Unit
             // If AI Unit selects an action that impacts the target unit, de-prioritize them
             if (chosenAction.ActionType != ActionType.Move) { targetedUnit = null; }
         }
-        
-        if (ChainSystem.Peek().GetType() == typeof(Wait)) {
+
+        if (isReacting) {
+            targetedUnit = null;
+            yield return null;
+        }
+        else if (ChainSystem.Peek().GetType() == typeof(Wait)) {
             yield return new WaitForSeconds(2f);
             yield return ChainSystem.ExecuteChain();
             targetedUnit = null;

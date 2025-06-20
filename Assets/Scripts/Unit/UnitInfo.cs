@@ -15,7 +15,7 @@ public class UnitInfo : MonoBehaviour
 
     // Unit Current Stat Values
     public int currentHP; //{ get; protected internal set; }
-    public int currentMP { get; protected internal set; }
+    public int currentMP; //{ get; protected internal set; }
     public int currentAP { get; protected internal set; }
     public int currentCT { get; protected internal set; }
     public int currentLevel { get; protected internal set; } = 1;

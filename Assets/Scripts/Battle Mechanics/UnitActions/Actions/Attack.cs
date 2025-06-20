@@ -30,9 +30,8 @@ public class Attack : UnitAction
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
     public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
-        ActionScore = new AIActionScore();
+        ActionScore = null;
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
-        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
 
         foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
                      TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
@@ -48,16 +47,15 @@ public class Attack : UnitAction
                         foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                     Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
-                    if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+                    if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
 
                     break;
                 }
             }
         }
 
-        Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
-        Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
-        return ActionScore.TotalScore();
+        Debug.Log("Best Heuristic Score: " + (ActionScore == null ? "N/A" : ActionScore.TotalScore()));
+        return ActionScore?.TotalScore() ?? -9999;
     }
 
     public override void ActivateAction(Unit unit)

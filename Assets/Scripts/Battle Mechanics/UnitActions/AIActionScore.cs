@@ -11,6 +11,8 @@ public class AIActionScore
     public int DamageScore { get; set; } = -1;
     public int PositionScore { get; set; } = -1;
     public int ForesightScore { get; set; } = -1;
+    public int ResourceScore { get; set; } = -1;
+    public int ReactionScore { get; set; } = -1;
     public Vector3Int PotentialCell { get; private set; }
     public Vector3Int TargetCell { get; set; }
     
@@ -126,6 +128,9 @@ public class AIActionScore
         // If the AI Unit is waiting, do not check for foresight
         if (Action.ActionType == ActionType.Wait) { return 0; }
 
+        // If the AI Unit is reacting, do not check for foresight
+        if (ChainSystem.ReactionInProgress) { return 0; }
+
         // If the current action will deplete all remaining AP, do not check for foresight
         if (unitAI.unitInfo.currentAP - Action.APCost == 0) { return 0; }
         
@@ -169,16 +174,42 @@ public class AIActionScore
     {
         int resourceScore = 0;
 
-        resourceScore += unitAI.unitInfo.currentMP - Action.MPCost * (int)unitAI.ResourceManagement;
-        resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ResourceManagement;
+        // resourceScore += unitAI.unitInfo.currentMP - Action.MPCost * (int)unitAI.ResourceManagement;
+        // resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ResourceManagement;
         
         if (Action.ActionType == ActionType.Wait) {
-            resourceScore += (unitAI.unitInfo.currentAP - Action.APCost) * (int)Mathf.Pow(unitAI.ReactionAllocation, 1); 
+            resourceScore += (unitAI.unitInfo.currentAP - Action.APCost) * (int)Mathf.Pow(unitAI.ReactionAllocation, 2); 
         }
 
         return resourceScore;
     }
 
+    public int CalcReactionScore(EnemyUnit unitAI)
+    {
+        int reactionScore = 0;
+        
+        (UnitAction initialAction, Vector2Int target, Unit attacker) = ChainSystem.GetInitialChain();
+        
+        int projectedDamage =
+            DamageCalculator.ProjectDamage(initialAction, attacker.unitInfo, unitAI.unitInfo);
+        
+        if (unitAI.unitInfo.currentHP - projectedDamage < 1) {
+            reactionScore += unitAI.unitInfo.finalHP * (int)unitAI.Survival;
+        } else {
+            reactionScore += projectedDamage * (int)unitAI.Survival;
+        }
+
+        if (TilemapUtility.GetTargetedArea(attacker, initialAction, target).Contains(
+                TilemapCreator.TileLocator[Action.ActionType == ActionType.Move 
+                    ? new Vector2Int(PotentialCell.x, PotentialCell.z) 
+                    : unitAI.unitInfo.Vector2CellLocation()]))
+        {
+            reactionScore *= -1;
+        }
+
+        return reactionScore;
+    }
+    
     // -------------------------------------------------------------------------------------------------------------------
 
     private int CalcDamageToUnit(EnemyUnit unitAI, Unit unitOnTile)
@@ -235,15 +266,15 @@ public class AIActionScore
         PotentialCell = potentialCell;
         TargetCell = targetCell;
 
-        var targetUnit = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
-
         DamageScore = CalcDamageScore(unit, action, potentialCell);
         PositionScore = CalcPositionScore(unit, enemyUnits);
         ForesightScore = CalcForesightScore(unit);
+        ResourceScore = CalcResourceScore(unit);
+        ReactionScore = ChainSystem.ReactionInProgress ? CalcReactionScore(unit) : 0;
         
         return this;
     }
 
-    public int TotalScore() => DamageScore + PositionScore + ForesightScore;
+    public int TotalScore() => DamageScore + PositionScore + ForesightScore + ResourceScore + ReactionScore;
     public Vector2Int Vector2PotentialLocation() { return new Vector2Int(PotentialCell.x, PotentialCell.z); }
 }

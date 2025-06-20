@@ -7,8 +7,15 @@ public static class SoftmaxAILogic
 {
     public static UnitAction DetermineAction(List<UnitAction> potentialActions, List<float> actionScores, float temperature = 1.75f)
     {
+        // Get the best action possible out of all the potential actions
+        var bestAction = potentialActions[actionScores.IndexOf(actionScores.Max())];
+        
         // Filter out negative scores (Absolutely no current value)
         (potentialActions, actionScores) = FilterNegatives(potentialActions, actionScores);
+
+        // If no positive action exists, use the best one available
+        // TODO: Revise this so that the AI can choose not to do anything.
+        if (potentialActions.Count < 1) { return bestAction; }
         
         int count = potentialActions.Count;
         float[] expScores = new float[count];

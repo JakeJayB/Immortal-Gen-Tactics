@@ -10,7 +10,7 @@ public class Evade : UnitAction
     public override int Priority { get; protected set; } = 0;
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override int BasePower { get; protected set; } = 0;
-    public override ActionType ActionType { get; protected set; } = ActionType.React;
+    public override ActionType ActionType { get; protected set; } = ActionType.Move;
     public override Pattern AttackPattern { get; protected set; } = Pattern.None;
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
@@ -25,7 +25,21 @@ public class Evade : UnitAction
 
     public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
-        throw new System.NotImplementedException();
+        ActionScore = null;
+        Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
+
+        foreach (var tile in Area(unit, null))
+        {
+            if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) { continue; }
+
+            AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+            if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+        }
+
+        Debug.Log("Best Heuristic Score: " + (ActionScore == null ? "N/A" : ActionScore.TotalScore()));
+        return ActionScore?.TotalScore() ?? -9999;
     }
 
     public override void ActivateAction(Unit unit) {

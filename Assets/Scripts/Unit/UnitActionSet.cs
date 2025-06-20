@@ -98,6 +98,17 @@ public class UnitActionSet
         return allActions;
     }
     
+    public List<UnitAction> GetAIReactions() {
+        List<UnitAction> allReactions = new List<UnitAction>();
+        
+        // Add all Reaction-Based Actions
+        allReactions.Add(new Evade());
+        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList); }
+        allReactions.Add(new DoNothing());
+        
+        return allReactions;
+    }
+    
     public List<UnitAction> GetAllItems() {
         List<UnitAction> attackActions = new List<UnitAction>();
         attackActions.AddRange(unitActions[ActionType.Item]);
