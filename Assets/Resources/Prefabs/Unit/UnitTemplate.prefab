@@ -125,11 +125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96277bd0eff6d3f4ebcfda8702159ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponL: 0
-  WeaponR: 0
-  ArmorHead: 100
-  ArmorBody: 101
-  ArmorHands: 102
-  ArmorFeet: 103
-  AccessoryA: 200
-  AccessoryB: 200
+  Equipment:
+    WeaponL: 0
+    WeaponR: 0
+    ArmorHead: 100
+    ArmorBody: 101
+    ArmorHands: 102
+    ArmorFeet: 103
+    AccessoryA: 200
+    AccessoryB: 200

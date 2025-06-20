@@ -1,0 +1,22 @@
+{
+    "UnitActions": [
+        {
+            "ID": 0,
+            "name": "SplashSpell"
+        },
+        {
+            "ID": 1,
+            "name": "Heal"
+        }
+    ],
+    "Items": [
+        {
+            "ID": 100,
+            "name": "Potion"
+        },
+        {
+            "ID": 101,
+            "name": "Ether"
+        }
+    ]
+}
