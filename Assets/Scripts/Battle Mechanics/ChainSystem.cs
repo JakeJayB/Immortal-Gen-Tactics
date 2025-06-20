@@ -78,7 +78,7 @@ public class ChainSystem
             {
                 //var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
                 var unitCell = unit.unitInfo.Vector2CellLocation();
-                var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.finalSense, Pattern.Splash);
+                var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.FinalSense, Pattern.Splash);
 
                 // Unit cannot react if they don't have any available AP
                 // Unit cannot react if they are dead

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class UnitEquipment
 {
     // Unit Info Reference
     private UnitInfo unitInfo;
     
     // Equipment Slots
-    public Weapon leftHand { get; private set; }
-    public Weapon rightHand { get; private set; }
+    public Weapon leftHand;
+    public Weapon rightHand;
 
     public Dictionary<ArmorType, Armor> armorSlots { get; private set; } = new Dictionary<ArmorType, Armor>()
     {
@@ -18,9 +19,9 @@ public class UnitEquipment
         { ArmorType.Hands, null },
         { ArmorType.Feet, null }
     };
-    
-    public Accessory accessoryA { get; private set; }
-    public Accessory accessoryB { get; private set; }
+
+    public Accessory accessoryA;
+    public Accessory accessoryB;
     
     // Bonus Stat Values
     public int bonusHP { get; private set; }

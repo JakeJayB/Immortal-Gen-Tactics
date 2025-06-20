@@ -20,7 +20,7 @@ public class Move : UnitAction
         return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.unitInfo.Vector2CellLocation()],
-            unit.unitInfo.finalMove);
+            unit.unitInfo.FinalMove);
     }
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";

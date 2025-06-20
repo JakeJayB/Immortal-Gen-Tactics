@@ -107,7 +107,7 @@ public class AIActionScore
             // TODO: Account for enemy reactions that can reach them.
             // TODO: Calculate the potential damage that could reach them (hindsight).
             // TODO: Create a hindsight function that calculates the danger of discovered reactions from enemy units.
-            if (nearbyUnit.unitInfo.currentAP < 1 || distance > nearbyUnit.unitInfo.finalSense) continue;
+            if (nearbyUnit.unitInfo.currentAP < 1 || distance > nearbyUnit.unitInfo.FinalSense) continue;
             positionScore += nearbyUnit.unitInfo.UnitAffiliation == unitAI.unitInfo.UnitAffiliation
                 ? nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness
                 : -nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness;
@@ -194,7 +194,7 @@ public class AIActionScore
             DamageCalculator.ProjectDamage(initialAction, attacker.unitInfo, unitAI.unitInfo);
         
         if (unitAI.unitInfo.currentHP - projectedDamage < 1) {
-            reactionScore += unitAI.unitInfo.finalHP * (int)unitAI.Survival;
+            reactionScore += unitAI.unitInfo.FinalHP * (int)unitAI.Survival;
         } else {
             reactionScore += projectedDamage * (int)unitAI.Survival;
         }
@@ -222,7 +222,7 @@ public class AIActionScore
                 DamageCalculator.ProjectDamage(Action, unitAI.unitInfo, unitOnTile.unitInfo);
 
             projectedScore += unitOnTile.unitInfo.currentHP - projectedDamage < 1 ?
-                unitOnTile.unitInfo.finalHP * (int)unitAI.Aggression :  // If the action kills a unit, score higher
+                unitOnTile.unitInfo.FinalHP * (int)unitAI.Aggression :  // If the action kills a unit, score higher
                 projectedDamage * (int)unitAI.Aggression;   // Else, score the original damaging amount
                                 
         } else { // Calc Healing Towards Allies
@@ -230,7 +230,7 @@ public class AIActionScore
                 DamageCalculator.ProjectHealing(Action, unitAI.unitInfo, unitOnTile.unitInfo);
                                 
             projectedScore += unitOnTile.unitInfo.IsDead() && Action.DamageType == DamageType.Revival ? 
-                unitOnTile.unitInfo.finalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
+                unitOnTile.unitInfo.FinalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
                 projectedDamage * (int)unitAI.AllySynergy;  // Else, score the original healing amount
         }
 

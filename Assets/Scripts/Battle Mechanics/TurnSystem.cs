@@ -60,7 +60,7 @@ public class UnitPriorityQueue
     {
         if (a.unitInfo.currentCT > b.unitInfo.currentCT) return true;
         if (a.unitInfo.currentCT < b.unitInfo.currentCT) return false;
-        return a.unitInfo.finalSpeed > b.unitInfo.finalSpeed;
+        return a.unitInfo.FinalSpeed > b.unitInfo.FinalSpeed;
     }
 
 
@@ -134,7 +134,7 @@ private void HeapifyUp(int index)
         {
             foreach(Unit unit in Heap)
             {
-                unit.unitInfo.currentCT = Mathf.Clamp(unit.unitInfo.currentCT + unit.unitInfo.finalSpeed, 0, 100);
+                unit.unitInfo.currentCT = Mathf.Clamp(unit.unitInfo.currentCT + unit.unitInfo.FinalSpeed, 0, 100);
             }
             Heapify();
         } while (PeekCT() != 100);
@@ -149,7 +149,7 @@ private void HeapifyUp(int index)
         sortedList.Sort((a, b) => {
             int ctComparison = b.unitInfo.currentCT.CompareTo(a.unitInfo.currentCT);
             if (ctComparison == 0)
-                return b.unitInfo.finalSpeed.CompareTo(a.unitInfo.finalSpeed); // Tie-breaker
+                return b.unitInfo.FinalSpeed.CompareTo(a.unitInfo.FinalSpeed); // Tie-breaker
             return ctComparison;
         });
         return sortedList;

@@ -17,7 +17,7 @@ public class Evade : UnitAction
     public override int Splash { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
-            unit.unitInfo.finalEvade);
+            unit.unitInfo.FinalEvade);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";

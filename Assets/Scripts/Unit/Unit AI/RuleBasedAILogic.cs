@@ -5,11 +5,11 @@ public class RuleBasedAILogic
 {
     // HP-Based Rules
     public static bool CurrentHPIsAbovePercent(float percentThreshold, UnitInfo unitInfo) {
-        var healthPercent = unitInfo.currentHP / (float)unitInfo.finalHP;
+        var healthPercent = unitInfo.currentHP / (float)unitInfo.FinalHP;
         return healthPercent > percentThreshold;
     }
     public static bool CurrentHPIsBelowPercent(float percentThreshold, UnitInfo unitInfo) {
-        var healthPercent = unitInfo.currentHP / (float)unitInfo.finalHP;
+        var healthPercent = unitInfo.currentHP / (float)unitInfo.FinalHP;
         return healthPercent < percentThreshold;
     }
 

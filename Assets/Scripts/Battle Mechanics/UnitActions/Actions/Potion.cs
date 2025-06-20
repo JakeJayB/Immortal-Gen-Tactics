@@ -81,7 +81,7 @@ public class Potion : UnitAction
             yield return DamageDisplay.DisplayUnitDamage(foundUnit.unitInfo, heal);
         }
 
-        Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.finalHP);
+        Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.FinalHP);
         yield return null;
     }
 }

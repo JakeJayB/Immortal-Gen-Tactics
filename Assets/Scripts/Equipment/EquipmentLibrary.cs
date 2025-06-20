@@ -2,6 +2,7 @@ using System;
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -112,4 +113,86 @@ public class EquipmentLibrary : MonoBehaviour
             Debug.Log(accessory.name + " has been added to WeaponLibrary. (ID: " + accessory.ID + ")");
         }
     }
+    
+    private static void EnsureInitialized()
+    {
+        if (Weapons == null || Armor == null || Accessories == null ||
+            Weapons.Count == 0 && Armor.Count == 0 && Accessories.Count == 0)
+        {
+            InitializeLibraryEditorSafe();
+        }
+    }
+
+    
+#if UNITY_EDITOR
+    public static List<(int id, string name)> GetWeaponDropdownOptions()
+    {
+        EnsureInitialized();
+
+        return Weapons
+            .Select(pair => (pair.Key, pair.Value.equipName))
+            .OrderBy(t => t.Key)
+            .ToList();
+    }
+
+    public static List<(int id, string name)> GetArmorDropdownOptions(ArmorType type)
+    {
+        EnsureInitialized();
+
+        return Armor
+            .Where(pair => pair.Value.armorType == type)
+            .Select(pair => (pair.Key, pair.Value.equipName))
+            .OrderBy(t => t.Key)
+            .ToList();
+    }
+
+    public static List<(int id, string name)> GetAccessoryDropdownOptions()
+    {
+        EnsureInitialized();
+
+        return Accessories
+            .Select(pair => (pair.Key, pair.Value.equipName))
+            .OrderBy(t => t.Key)
+            .ToList();
+    }
+    
+    private static void InitializeLibraryEditorSafe()
+    {
+        Weapons = new Dictionary<int, Weapon>();
+        Armor = new Dictionary<int, Armor>();
+        Accessories = new Dictionary<int, Accessory>();
+
+        string filePath = DEFAULT_DIRECTORY + FILE_NAME;
+
+        if (File.Exists(filePath))
+        {
+            EquipmentList equipmentList = JsonUtility.FromJson<EquipmentList>(File.ReadAllText(filePath));
+
+            foreach (var weapon in equipmentList.Weapons)
+            {
+                if (!Weapons.ContainsKey(weapon.ID))
+                    Weapons.Add(weapon.ID, new Weapon(weapon));
+            }
+
+            foreach (var armor in equipmentList.Armor)
+            {
+                if (!Armor.ContainsKey(armor.ID))
+                    Armor.Add(armor.ID, new Armor(armor));
+            }
+
+            foreach (var accessory in equipmentList.Accessories)
+            {
+                if (!Accessories.ContainsKey(accessory.ID))
+                    Accessories.Add(accessory.ID, new Accessory(accessory));
+            }
+        }
+        else
+        {
+            Debug.LogError($"File '{filePath}' does not exist...");
+        }
+    }
+
+#endif
+
+
 }

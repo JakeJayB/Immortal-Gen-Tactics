@@ -44,9 +44,9 @@ public class ActionUtility
         switch (actionType)
         {
             case "Move":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalMove, Pattern.Splash), OverlayMaterial.MOVE);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.FinalMove, Pattern.Splash), OverlayMaterial.MOVE);
             case "Attack":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.finalAttack, Pattern.Linear), OverlayMaterial.ATTACK);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.unitInfo.FinalAttack, Pattern.Linear), OverlayMaterial.ATTACK);
             case "SplashSpell (Test)":
                 return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 3, Pattern.Splash), OverlayMaterial.ATTACK);
             case "Potion":

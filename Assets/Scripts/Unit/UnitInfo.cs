@@ -14,28 +14,28 @@ public class UnitInfo : MonoBehaviour
     public UnitAffiliation UnitAffiliation;
 
     // Unit Current Stat Values
-    public int currentHP; //{ get; protected internal set; }
-    public int currentMP; //{ get; protected internal set; }
+    public int currentHP { get; protected internal set; }
+    public int currentMP { get; protected internal set; }
     public int currentAP { get; protected internal set; }
     public int currentCT { get; protected internal set; }
     public int currentLevel { get; protected internal set; } = 1;
     
     protected int currentEXP;
-    public bool Dead = false;
+    private bool Dead = false;
     
     // Unit Final Stat Values
     # region Unit Final Stat Values
-    [SerializeField] public int finalHP;
-    [SerializeField] public int finalMP;
-    [SerializeField] public int finalAP;
-    [SerializeField] public int finalAttack;
-    [SerializeField] public int finalDefense;
-    [SerializeField] public int finalMagicAttack;
-    [SerializeField] public int finalMagicDefense;
-    [SerializeField] public int finalMove;
-    [SerializeField] public int finalEvade;
-    [SerializeField] public int finalSpeed;
-    [SerializeField] public int finalSense;
+    public int FinalHP { get; private set; }
+    public int FinalMP { get; private set; }
+    public int FinalAP { get; private set; }
+    public int FinalAttack { get; private set; }
+    public int FinalDefense { get; private set; }
+    public int FinalMagicAttack { get; private set; }
+    public int FinalMagicDefense { get; private set; }
+    public int FinalMove { get; private set; }
+    public int FinalEvade { get; private set; }
+    public int FinalSpeed { get; private set; }
+    public int FinalSense { get; private set; }
     # endregion
     
     // Unit Base Stat Values
@@ -86,9 +86,9 @@ public class UnitInfo : MonoBehaviour
 
     private void ResetCurrentStatPoints()
     {
-        currentHP = finalHP;
-        currentMP = finalMP;
-        currentAP = finalAP;
+        currentHP = FinalHP;
+        currentMP = FinalMP;
+        currentAP = FinalAP;
         currentCT = 0;
     }
 
@@ -113,22 +113,22 @@ public class UnitInfo : MonoBehaviour
 
     public void ApplyEquipmentBonuses()
     {
-        finalHP = baseHP + equipment.bonusHP;
-        finalMP = baseMP + equipment.bonusMP;
-        finalAP = baseAP + equipment.bonusAP;
-        finalAttack = baseAttack + equipment.bonusAttack;
-        finalMagicAttack = baseMagicAttack + equipment.bonusMagicAttack;
-        finalDefense = baseDefense + equipment.bonusDefense;
-        finalMagicDefense = baseMagicDefense + equipment.bonusMagicDefense;
-        finalMove = baseMove + equipment.bonusMove;
-        finalEvade = baseEvade + equipment.bonusEvade;
-        finalSpeed = baseSpeed + equipment.bonusSpeed;
-        finalSense = baseSense;
+        FinalHP = baseHP + equipment.bonusHP;
+        FinalMP = baseMP + equipment.bonusMP;
+        FinalAP = baseAP + equipment.bonusAP;
+        FinalAttack = baseAttack + equipment.bonusAttack;
+        FinalMagicAttack = baseMagicAttack + equipment.bonusMagicAttack;
+        FinalDefense = baseDefense + equipment.bonusDefense;
+        FinalMagicDefense = baseMagicDefense + equipment.bonusMagicDefense;
+        FinalMove = baseMove + equipment.bonusMove;
+        FinalEvade = baseEvade + equipment.bonusEvade;
+        FinalSpeed = baseSpeed + equipment.bonusSpeed;
+        FinalSense = baseSense;
     }
     
     public Vector2Int Vector2CellLocation() { return new Vector2Int(CellLocation.x, CellLocation.z); }
     
-    public void RefreshAP() { currentAP = finalAP; }
+    public void RefreshAP() { currentAP = FinalAP; }
 
     public bool IsAlive() { return currentHP > 0; }
 

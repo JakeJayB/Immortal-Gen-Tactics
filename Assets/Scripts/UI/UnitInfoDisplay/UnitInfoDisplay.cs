@@ -291,11 +291,11 @@ public class UnitInfoDisplay : MonoBehaviour
             ? Resources.Load<Sprite>("Sprites/Units/Test_Player/PlayerProfile")
             : Resources.Load<Sprite>("Sprites/Units/Test_Enemy/EnemyProfile");
         
-        HPValues.text = unitInfo.currentHP + "/" + unitInfo.finalHP;
-        UpdateHPSlider((float)unitInfo.currentHP / unitInfo.finalHP);
+        HPValues.text = unitInfo.currentHP + "/" + unitInfo.FinalHP;
+        UpdateHPSlider((float)unitInfo.currentHP / unitInfo.FinalHP);
         
-        MPValues.text = unitInfo.currentMP + "/" + unitInfo.finalMP;
-        UpdateMPSlider((float)unitInfo.currentMP / unitInfo.finalMP);
+        MPValues.text = unitInfo.currentMP + "/" + unitInfo.FinalMP;
+        UpdateMPSlider((float)unitInfo.currentMP / unitInfo.FinalMP);
 
         for (int i = 0; i < ActionPoints.Length; i++)
         {
@@ -303,7 +303,7 @@ public class UnitInfoDisplay : MonoBehaviour
                 ActionPoints[i].gameObject.SetActive(true);
                 ActionPoints[i].sprite = Resources.Load<Sprite>("Sprites/UnitInfo/ActionPoint");
             }
-            else if (i + 1 <= unitInfo.finalAP) {
+            else if (i + 1 <= unitInfo.FinalAP) {
                 ActionPoints[i].gameObject.SetActive(true);
                 ActionPoints[i].sprite = Resources.Load<Sprite>("Sprites/UnitInfo/UsedActionPoint");
             }

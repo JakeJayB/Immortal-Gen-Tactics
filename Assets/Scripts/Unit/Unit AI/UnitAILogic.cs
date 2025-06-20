@@ -15,9 +15,9 @@ public class UnitAILogic : MonoBehaviour
         (Unit, int) prioritizedUnit = (null, 0);
         foreach (var unit in units)
         {
-            if (!prioritizedUnit.Item1) { prioritizedUnit = (unit, Pathfinder.DistanceBetweenUnits(AI, unit) / AI.unitInfo.finalMove); }
+            if (!prioritizedUnit.Item1) { prioritizedUnit = (unit, Pathfinder.DistanceBetweenUnits(AI, unit) / AI.unitInfo.FinalMove); }
 
-            int usedAP = Pathfinder.DistanceBetweenUnits(prioritizedUnit.Item1, unit) / AI.unitInfo.finalMove;
+            int usedAP = Pathfinder.DistanceBetweenUnits(prioritizedUnit.Item1, unit) / AI.unitInfo.FinalMove;
             if (AI.InRange(unit, 1, Pattern.Linear)) { usedAP -= 2; }
             if (usedAP < prioritizedUnit.Item2) { prioritizedUnit = (unit, usedAP); }
         }
