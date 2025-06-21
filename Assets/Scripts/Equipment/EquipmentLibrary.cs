@@ -6,7 +6,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-
 [Serializable]
 public class EquipmentData {
     public int ID;
@@ -119,31 +118,40 @@ public class EquipmentLibrary : MonoBehaviour
     {
         EnsureInitialized();
 
-        return Weapons
+        var options = Weapons
             .Select(pair => (pair.Key, pair.Value.equipName))
             .OrderBy(t => t.Key)
             .ToList();
+        
+        options.Insert(0, (-1, "None"));
+        return options;
     }
 
     public static List<(int id, string name)> GetArmorDropdownOptions(ArmorType type)
     {
         EnsureInitialized();
 
-        return Armor
+        var options = Armor
             .Where(pair => pair.Value.armorType == type)
             .Select(pair => (pair.Key, pair.Value.equipName))
             .OrderBy(t => t.Key)
             .ToList();
+        
+        options.Insert(0, (-1, "None"));
+        return options;
     }
 
     public static List<(int id, string name)> GetAccessoryDropdownOptions()
     {
         EnsureInitialized();
 
-        return Accessories
+        var options = Accessories
             .Select(pair => (pair.Key, pair.Value.equipName))
             .OrderBy(t => t.Key)
             .ToList();
+        
+        options.Insert(0, (-1, "None"));
+        return options;
     }
     
     private static void InitializeLibraryEditorSafe()

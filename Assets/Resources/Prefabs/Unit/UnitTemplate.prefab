@@ -130,11 +130,11 @@ MonoBehaviour:
   Items:
     Items: 
   Equipment:
-    WeaponL: 0
-    WeaponR: 0
-    ArmorHead: 100
-    ArmorBody: 101
-    ArmorHands: 102
-    ArmorFeet: 103
-    AccessoryA: 200
-    AccessoryB: 200
+    WeaponL: -1
+    WeaponR: -1
+    ArmorHead: -1
+    ArmorBody: -1
+    ArmorHands: -1
+    ArmorFeet: -1
+    AccessoryA: -1
+    AccessoryB: -1
