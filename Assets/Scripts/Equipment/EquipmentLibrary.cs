@@ -8,9 +8,7 @@ using UnityEngine;
 
 
 [Serializable]
-public class EquipmentData
-{
-    // Equipment Info
+public class EquipmentData {
     public int ID;
     public string name;
     public int HP;
@@ -25,29 +23,21 @@ public class EquipmentData
 }
 
 [Serializable]
-public class WeaponData : EquipmentData
-{
-    // Weapon Info
+public class WeaponData : EquipmentData {
     public int maxDurability;
     public int range;
 }
 
 [Serializable]
-public class ArmorData : EquipmentData
-{
-    // Armor Info
+public class ArmorData : EquipmentData {
     public ArmorType armorType;
 }
 
 [Serializable]
-public class AccessoryData : EquipmentData
-{
-    
-}
+public class AccessoryData : EquipmentData { }
 
 [Serializable]
-public class EquipmentList
-{
+public class EquipmentList {
     public List<WeaponData> Weapons = new List<WeaponData>();
     public List<ArmorData> Armor = new List<ArmorData>();
     public List<AccessoryData> Accessories = new List<AccessoryData>();
@@ -191,8 +181,5 @@ public class EquipmentLibrary : MonoBehaviour
             Debug.LogError($"File '{filePath}' does not exist...");
         }
     }
-
 #endif
-
-
 }

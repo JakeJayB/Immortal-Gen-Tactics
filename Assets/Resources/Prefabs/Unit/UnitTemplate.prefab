@@ -125,6 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96277bd0eff6d3f4ebcfda8702159ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Actions:
+    Actions: 
+  Items:
+    Items: 
   Equipment:
     WeaponL: 0
     WeaponR: 0

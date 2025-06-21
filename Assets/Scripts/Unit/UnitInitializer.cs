@@ -1,8 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
+public class ActionInitializer {
+    [UnitActionIDDropdown(UnitActionType.Action)] public int[] Actions;
+}
+
+[Serializable]
+public class ItemInitializer {
+    [UnitActionIDDropdown(UnitActionType.Item)] public int[] Items;
+}
+
+[Serializable]
 public class EquipmentInitializer {
     [EquipmentIDDropdown(EquipmentType.Weapon)] public int WeaponL;
     [EquipmentIDDropdown(EquipmentType.Weapon)] public int WeaponR;
@@ -14,8 +23,10 @@ public class EquipmentInitializer {
     [EquipmentIDDropdown(EquipmentType.Accessory)] public int AccessoryB;
 }
 
-[System.Serializable]
+[Serializable]
 public class UnitInitializer : MonoBehaviour
 {
+    public ActionInitializer Actions;
+    public ItemInitializer Items;
     public EquipmentInitializer Equipment;
 }
