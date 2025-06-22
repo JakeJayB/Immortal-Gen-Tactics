@@ -35,8 +35,8 @@ public class Pouch : UnitAction
     private int Capacity = 3;
     private List<UnitAction> Storage = new List<UnitAction>() {
         new Potion(),
-        new Potion(),
-        new Potion()
+        new Ether(),
+        new SoulSpark()
     };
 
     public void StoreItem(UnitAction newItem)
@@ -50,7 +50,7 @@ public class Pouch : UnitAction
         Debug.LogError("ERROR: Storage for 'Pouch' accessory is full.");
     }
 
-    public void UseItem(UnitAction item) { Storage.Remove(item); }
+    private void UseItem(UnitAction item) { Storage.Remove(item); }
     
     public override void ActivateAction(Unit unit)
     {

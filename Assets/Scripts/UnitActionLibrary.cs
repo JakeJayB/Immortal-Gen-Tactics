@@ -17,7 +17,8 @@ public class UnitActionLibrary : MonoBehaviour
     private static Dictionary<int, Func<UnitAction>> Items { get; set; } = new()
     {
         {100, () => new Potion()},
-        {101, () => new Ether()}
+        {101, () => new Ether()},
+        {102, () => new SoulSpark()}
     };
 
     public static UnitAction FindAction(int id) {

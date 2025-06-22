@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ether : UnitAction
+public class Ether : Item
 {
     public override string Name { get; protected set; } = "Ether";
     public override int MPCost { get; protected set; } = 0;
@@ -39,9 +39,6 @@ public class Ether : UnitAction
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
         return ActionScore.TotalScore();
     }
-
-    private UnitAction Storage = null;
-    public void Store(UnitAction storage) { Storage = storage; }
     
     public override void ActivateAction(Unit unit) 
     {
@@ -58,11 +55,7 @@ public class Ether : UnitAction
         PayAPCost(unit);
         
         // Consume Item and Remove it from ActionSet
-        if (Storage != null) {
-            yield return Storage.ExecuteAction(unit, selectedCell);
-        } else {
-            unit.unitInfo.ActionSet.RemoveAction(this);
-        }
+        yield return Consume(unit, selectedCell);
         
         if (TilemapCreator.UnitLocator.TryGetValue(selectedCell, out var foundUnit))
         {

@@ -5,34 +5,22 @@ using UnityEngine;
 
 public class Revive : UnitAction
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override string Name { get; protected set; } = "Revive";
     public override int MPCost { get; protected set; } = 10;
     public override int APCost { get; protected set; } = 2;
     public override int Priority { get; protected set; } = 5;
     public override DamageType DamageType { get; protected set; } = DamageType.Revival;
-    public override int BasePower { get; protected set; } = 10;
+    public override int BasePower { get; protected set; } = 15;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
     public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
     public override int Range { get; protected set; } = 2;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+        return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.unitInfo.Vector2CellLocation()],
-            Range, Pattern.Splash);
+            Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";

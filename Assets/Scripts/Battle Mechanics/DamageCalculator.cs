@@ -16,7 +16,7 @@ public class DamageCalculator : MonoBehaviour
             case DamageType.Magic:
                 projected = attacker.FinalMagicAttack + action.BasePower - target.FinalMagicDefense;
                 break;
-            case DamageType.Healing:    // Will need revision when introducing damage gitdealt to undead
+            case DamageType.Healing:    // Will need revision when introducing damage dealt to undead
                 return (attacker.FinalMagicAttack + action.BasePower) * -1;
                 break;
             case DamageType.Revival:    // Will need revision when introducing damage dealt to undead
