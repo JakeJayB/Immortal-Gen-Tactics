@@ -44,7 +44,7 @@ public class UnitActionLibrary : MonoBehaviour
     {
         
         return UnitActions
-            .Select(pair => (pair.Key, pair.Value().GetType().Name))
+            .Select(pair => (pair.Key, pair.Value.Invoke().Name))
             .OrderBy(t => t.Key)
             .ToList();
     }
@@ -52,7 +52,7 @@ public class UnitActionLibrary : MonoBehaviour
     public static List<(int id, string name)> GetItemDropdownOptions()
     {
         return Items
-            .Select(pair => (pair.Key, pair.Value.GetType().Name))
+            .Select(pair => (pair.Key, pair.Value.Invoke().Name))
             .OrderBy(t => t.Key)
             .ToList();
     }
