@@ -61,9 +61,9 @@ public class EquipmentLibrary : MonoBehaviour
 
     public static void InitializeLibrary()
     {
-        Weapons = new Dictionary<int, Weapon>();
-        Armor = new Dictionary<int, Armor>();
-        Accessories = new Dictionary<int, Accessory>();
+        Weapons = new Dictionary<int, Weapon> { {-1, null} };
+        Armor = new Dictionary<int, Armor> { {-1, null} };
+        Accessories = new Dictionary<int, Accessory> { {-1, null} };
         LoadFromJSON();
     }
     
@@ -119,7 +119,7 @@ public class EquipmentLibrary : MonoBehaviour
         EnsureInitialized();
 
         var options = Weapons
-            .Select(pair => (pair.Key, pair.Value.equipName))
+            .Select(pair => (pair.Key, pair.Value?.equipName ?? "None"))
             .OrderBy(t => t.Key)
             .ToList();
         
@@ -132,8 +132,8 @@ public class EquipmentLibrary : MonoBehaviour
         EnsureInitialized();
 
         var options = Armor
-            .Where(pair => pair.Value.armorType == type)
-            .Select(pair => (pair.Key, pair.Value.equipName))
+            .Where(pair => pair.Key == -1 || pair.Value?.armorType == type)
+            .Select(pair => (pair.Key, pair.Value?.equipName ?? "None"))
             .OrderBy(t => t.Key)
             .ToList();
         
@@ -146,7 +146,7 @@ public class EquipmentLibrary : MonoBehaviour
         EnsureInitialized();
 
         var options = Accessories
-            .Select(pair => (pair.Key, pair.Value.equipName))
+            .Select(pair => (pair.Key, pair.Value?.equipName ?? "None"))
             .OrderBy(t => t.Key)
             .ToList();
         

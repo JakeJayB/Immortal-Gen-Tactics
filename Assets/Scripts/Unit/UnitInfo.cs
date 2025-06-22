@@ -65,7 +65,7 @@ public class UnitInfo : MonoBehaviour
         if (unitInitializer)
         {
             ActionSet = new UnitActionSet(unitInitializer.GetUnitActions());
-            equipment = new UnitEquipment(unitInitializer.GetEquipment());
+            equipment = new UnitEquipment(this, unitInitializer.GetEquipment());
         }
         else
         {

@@ -292,10 +292,10 @@ public class UnitInfoDisplay : MonoBehaviour
             : Resources.Load<Sprite>("Sprites/Units/Test_Enemy/EnemyProfile");
         
         HPValues.text = unitInfo.currentHP + "/" + unitInfo.FinalHP;
-        UpdateHPSlider((float)unitInfo.currentHP / unitInfo.FinalHP);
+        UpdateHPSlider(unitInfo.FinalHP > 0 ? (float)unitInfo.currentHP / unitInfo.FinalHP : 0);
         
         MPValues.text = unitInfo.currentMP + "/" + unitInfo.FinalMP;
-        UpdateMPSlider((float)unitInfo.currentMP / unitInfo.FinalMP);
+        UpdateMPSlider(unitInfo.FinalMP > 0 ? (float)unitInfo.currentMP / unitInfo.FinalMP : 0);
 
         for (int i = 0; i < ActionPoints.Length; i++)
         {

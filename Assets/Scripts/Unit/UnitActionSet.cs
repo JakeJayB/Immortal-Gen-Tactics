@@ -10,16 +10,16 @@ public class UnitActionSet
     
     public UnitActionSet(int[] actionSet) {
         foreach (var action in actionSet) {
-           AddAction(UnitActionLibrary.FindAction(action)); 
+            AddAction(UnitActionLibrary.FindAction(action)); 
         }
     }
-    
+
     private Dictionary<ActionType, List<UnitAction>> unitActions = new()
     {
         { ActionType.Attack, new List<UnitAction>() { new Attack() } },
-        { ActionType.React, new List<UnitAction>() {  } },
+        { ActionType.React, new List<UnitAction>() {  } }
     };
-
+    
     public void AddAction(UnitAction action)
     {
         if (!unitActions.TryGetValue(action.ActionType, out List<UnitAction> actionList)) {

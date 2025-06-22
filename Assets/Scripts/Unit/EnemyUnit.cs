@@ -53,19 +53,23 @@ public class EnemyUnit : Unit
     
     public static Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
-        GameObject gameObj = new GameObject("Enemy Unit " + initLocation);
+        GameObject gameObj = Instantiate(Resources.Load<GameObject>("Prefabs/Unit/Enemy"));
+        //GameObject gameObj = new GameObject("Enemy Unit " + initLocation);
         EnemyUnit unit = gameObj.AddComponent<EnemyUnit>();
         unit.gameObj = gameObj;
 
-        unit.unitInfo = gameObj.AddComponent<UnitInfo>();
+        //unit.unitInfo = gameObj.AddComponent<UnitInfo>();
+        unit.unitInfo = gameObj.GetComponent<UnitInfo>();
+        
         unit.unitInfo.CellLocation = initLocation;
         unit.unitInfo.UnitDirection = unitDirection;
         unit.unitInfo.UnitAffiliation = UnitAffiliation.Enemy;
         unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
-
-        unit.unitEquipment = new UnitEquipment(unit.unitInfo);
+        
+        //unit.unitEquipment = new UnitEquipment(unit.unitInfo);
 
         unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
+        //unit.unitRenderer = gameObj.GetComponent<UnitRenderer>();
         unit.unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();

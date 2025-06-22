@@ -41,9 +41,11 @@ public class UnitEquipment
         InitializeBonusStats();
     }
 
-    public UnitEquipment(int[] equipmentSet)
+    public UnitEquipment(UnitInfo unitInfo, int[] equipmentSet)
     {
         if (equipmentSet.Length != 8) { Debug.LogError("Equipment Set Does Not Reference All 8 Slots");}
+        this.unitInfo = unitInfo;
+        
         EquipLeftHand(EquipmentLibrary.Weapons[equipmentSet[0]]);
         EquipRightHand(EquipmentLibrary.Weapons[equipmentSet[1]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[2]]);

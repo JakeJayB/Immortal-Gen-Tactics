@@ -10,7 +10,8 @@ public class UnitRenderer : MonoBehaviour
     // TODO: Find a way to work with sprite sheets instead of individual sprite for efficiency
     public void Render(Vector3Int cellLocation, UnitDirection unitDirection)
     {
-        SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        //SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = !gameObject.GetComponent<EnemyUnit>() ? gameObject.AddComponent<SpriteRenderer>() : gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite =
             Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Down)");
         
