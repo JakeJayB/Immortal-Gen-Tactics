@@ -40,11 +40,24 @@ public class UnitEquipment
         this.unitInfo = unitInfo;
         InitializeBonusStats();
     }
-    
 
+    public UnitEquipment(int[] equipmentSet)
+    {
+        if (equipmentSet.Length != 8) { Debug.LogError("Equipment Set Does Not Reference All 8 Slots");}
+        EquipLeftHand(EquipmentLibrary.Weapons[equipmentSet[0]]);
+        EquipRightHand(EquipmentLibrary.Weapons[equipmentSet[1]]);
+        EquipArmor(EquipmentLibrary.Armor[equipmentSet[2]]);
+        EquipArmor(EquipmentLibrary.Armor[equipmentSet[3]]);
+        EquipArmor(EquipmentLibrary.Armor[equipmentSet[4]]);
+        EquipArmor(EquipmentLibrary.Armor[equipmentSet[5]]);
+        EquipAccessoryA(EquipmentLibrary.Accessories[equipmentSet[6]]);
+        EquipAccessoryB(EquipmentLibrary.Accessories[equipmentSet[7]]);
+    }
+    
     // Equip Functions
     public void EquipLeftHand(Weapon weapon)
     {
+        if (weapon == null) return;
         RemoveLeftWeapon();
         leftHand = weapon; 
         AddEquipmentBonus(weapon);
@@ -53,6 +66,7 @@ public class UnitEquipment
 
     public void EquipRightHand(Weapon weapon)
     {
+        if (weapon == null) return;
         RemoveRightWeapon();
         rightHand = weapon; 
         AddEquipmentBonus(weapon);
@@ -61,6 +75,7 @@ public class UnitEquipment
 
     public void EquipArmor(Armor armor)
     {
+        if (armor == null) return;
         if (!armorSlots.ContainsKey(armor.armorType))
         {
             Debug.LogError("Invalid Armor Type");
@@ -75,6 +90,7 @@ public class UnitEquipment
 
     public void EquipAccessoryA(Accessory accessory)
     {
+        if (accessory == null) return;
         accessoryA = accessory;
         AddEquipmentBonus(accessoryA);
         Debug.Log("AccessoryA successfully equipped.");
@@ -82,6 +98,7 @@ public class UnitEquipment
 
     public void EquipAccessoryB(Accessory accessory)
     {
+        if (accessory == null) return;
         accessoryB = accessory;
         AddEquipmentBonus(accessoryB);
         Debug.Log("AccessoryB successfully equipped.");

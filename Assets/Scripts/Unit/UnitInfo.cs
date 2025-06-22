@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitInfo : MonoBehaviour
@@ -60,25 +61,25 @@ public class UnitInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetBaseStats();
-        equipment = new UnitEquipment(this);
-        equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
-        /*
-        equipment.EquipRightHand(EquipmentLibrary.Weapons[1]);
-        equipment.EquipArmor(EquipmentLibrary.Armor[100]);
-        equipment.EquipArmor(EquipmentLibrary.Armor[101]);
-        equipment.EquipArmor(EquipmentLibrary.Armor[102]);
-        equipment.EquipArmor(EquipmentLibrary.Armor[103]);
-        equipment.EquipAccessoryA(EquipmentLibrary.Accessories[200]);
-        equipment.EquipAccessoryB(EquipmentLibrary.Accessories[201]);*/
+        var unitInitializer = gameObject.GetComponent<UnitInitializer>();
+        if (unitInitializer)
+        {
+            ActionSet = new UnitActionSet(unitInitializer.GetUnitActions());
+            equipment = new UnitEquipment(unitInitializer.GetEquipment());
+        }
+        else
+        {
+            SetBaseStats(); // TODO: This function needs to set base stats based on UnitInitializer.
+            equipment = new UnitEquipment(this);
+            equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
 
-
-        ActionSet = new UnitActionSet();
-        ActionSet.AddAction(new SplashSpell());
-        ActionSet.AddAction(new Heal());
-        ActionSet.AddAction(new Revive());
-        ActionSet.AddAction(new Pouch());
-        ActionSet.AddAction(new Potion());
+            ActionSet = new UnitActionSet();
+            ActionSet.AddAction(new SplashSpell());
+            ActionSet.AddAction(new Heal());
+            ActionSet.AddAction(new Revive());
+            ActionSet.AddAction(new Pouch());
+            ActionSet.AddAction(new Potion());
+        }
         
         ApplyEquipmentBonuses();
         ResetCurrentStatPoints();
@@ -91,8 +92,7 @@ public class UnitInfo : MonoBehaviour
         currentAP = FinalAP;
         currentCT = 0;
     }
-
-
+    
     private void SetBaseStats()
     {
         float statMultipler = 1 + (currentLevel - 1) * 0.2f;
@@ -110,7 +110,7 @@ public class UnitInfo : MonoBehaviour
         //baseSpeed = Mathf.RoundToInt(5 * statMultipler);
         baseSense = 2;
     }
-
+    
     public void ApplyEquipmentBonuses()
     {
         FinalHP = baseHP + equipment.bonusHP;

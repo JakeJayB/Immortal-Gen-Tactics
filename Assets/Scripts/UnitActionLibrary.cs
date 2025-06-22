@@ -19,12 +19,32 @@ public class UnitActionLibrary : MonoBehaviour
         {100, () => new Potion()},
         {101, () => new Ether()}
     };
+
+    public static UnitAction FindAction(int id) {
+        switch (id)
+        {
+            case < 100:
+                if (UnitActions.TryGetValue(id, out var actionInstance))
+                    return actionInstance.Invoke();
+                break;
+            case < 200:
+                if (Items.TryGetValue(id, out var itemInstance))
+                    return itemInstance.Invoke();
+                break;
+            default:
+                Debug.LogError($"Cannot find UnitAction with ID ({id}).");
+                return null;
+        }
+        
+        return null;
+    }
     
 #if UNITY_EDITOR
     public static List<(int id, string name)> GetUnitActionDropdownOptions()
     {
+        
         return UnitActions
-            .Select(pair => (pair.Key, pair.Value.Invoke().Name))
+            .Select(pair => (pair.Key, pair.Value().GetType().Name))
             .OrderBy(t => t.Key)
             .ToList();
     }
@@ -32,7 +52,7 @@ public class UnitActionLibrary : MonoBehaviour
     public static List<(int id, string name)> GetItemDropdownOptions()
     {
         return Items
-            .Select(pair => (pair.Key, pair.Value.Invoke().Name))
+            .Select(pair => (pair.Key, pair.Value.GetType().Name))
             .OrderBy(t => t.Key)
             .ToList();
     }

@@ -6,16 +6,19 @@ using UnityEngine;
 
 public class UnitActionSet
 {
-    private Dictionary<ActionType, List<UnitAction>> unitActions;
-
-    public UnitActionSet()
-    {
-        unitActions = new Dictionary<ActionType, List<UnitAction>>()
-        {
-            { ActionType.Attack, new List<UnitAction>() { new Attack() } },
-            { ActionType.React, new List<UnitAction>() {  } },
-        };
+    public UnitActionSet() { }
+    
+    public UnitActionSet(int[] actionSet) {
+        foreach (var action in actionSet) {
+           AddAction(UnitActionLibrary.FindAction(action)); 
+        }
     }
+    
+    private Dictionary<ActionType, List<UnitAction>> unitActions = new()
+    {
+        { ActionType.Attack, new List<UnitAction>() { new Attack() } },
+        { ActionType.React, new List<UnitAction>() {  } },
+    };
 
     public void AddAction(UnitAction action)
     {

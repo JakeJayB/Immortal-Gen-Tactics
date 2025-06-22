@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -21,6 +22,10 @@ public class EquipmentInitializer {
     [EquipmentIDDropdown(EquipmentType.ArmorFeet)] public int ArmorFeet;
     [EquipmentIDDropdown(EquipmentType.Accessory)] public int AccessoryA;
     [EquipmentIDDropdown(EquipmentType.Accessory)] public int AccessoryB;
+
+    public int[] All() {
+        return new [] { WeaponL, WeaponR, ArmorHead, ArmorBody, ArmorHands, ArmorFeet, AccessoryA, AccessoryB };
+    }
 }
 
 [Serializable]
@@ -29,4 +34,13 @@ public class UnitInitializer : MonoBehaviour
     public ActionInitializer Actions;
     public ItemInitializer Items;
     public EquipmentInitializer Equipment;
+
+    public int[] GetUnitActions()
+    {
+        var actions = Actions?.Actions ?? Array.Empty<int>();
+        var items = Items?.Items ?? Array.Empty<int>();
+        return actions.Concat(items).ToArray();
+    }
+    
+    public int[] GetEquipment() { return Equipment.All(); }
 }
