@@ -66,6 +66,7 @@ public class UnitInfo : MonoBehaviour
         {
             ActionSet = new UnitActionSet(unitInitializer.GetUnitActions());
             equipment = new UnitEquipment(this, unitInitializer.GetEquipment());
+            Destroy(unitInitializer);
         }
         else
         {
