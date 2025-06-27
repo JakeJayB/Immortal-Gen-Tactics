@@ -36,6 +36,7 @@ public class UnitMenu : MonoBehaviour
             }
             else {
                 HideMenu();
+                InfoBar.HideInfo();
                 if (ChainSystem.ReactionInProgress)
                 {
                     MapCursor.InactiveState();

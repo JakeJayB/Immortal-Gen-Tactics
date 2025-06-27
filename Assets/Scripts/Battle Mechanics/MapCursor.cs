@@ -98,6 +98,7 @@ public class MapCursor : MonoBehaviour
                 currentUnit = hoverCell;
                 StartCoroutine(UnitMenu.ShowMenu(unit));
                 UnitMenu.DisplayUnitMenu(unit);
+                InfoBar.DisplayInfo(InfoTabType.Action);
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }
@@ -135,6 +136,7 @@ public class MapCursor : MonoBehaviour
         {
             if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
             {
+                InfoBar.HideInfo();
                 if (ChainSystem.UnitIsReacting())
                 {
                     // Call IEnumerator as a normal function, ignoring 'yield return' instructions
@@ -180,6 +182,8 @@ public class MapCursor : MonoBehaviour
         MoveCursor(currentUnit);
         CanvasUI.HideTargetUnitInfoDisplay();
         yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
+        InfoBar.DisplayInfo(InfoTabType.Action);
+        
     }
 
     private void MoveCursorUp() {
@@ -259,6 +263,7 @@ public class MapCursor : MonoBehaviour
         RemoveTileOutline();
         CanvasUI.HideTurnUnitInfoDisplay();
         CanvasUI.HideTargetUnitInfoDisplay();
+        InfoBar.HideInfo();
         hoverCell = Vector2Int.zero;
         currentUnit = Vector2Int.zero;
         TurnSystem.ContinueLoop();
