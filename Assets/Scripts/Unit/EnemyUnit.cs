@@ -9,13 +9,13 @@ public class EnemyUnit : Unit
     private List<AIBehavior> AIBehavior;
     
     // AI Behavioral Factors
-    public float Aggression { get; private set; } = 3.0f;                  // Values Damage Dealt & Kills
-    public float Survival { get; private set; } = 1.5f;                    // Values Avoiding Damage & Death
-    public float TacticalPositioning { get; private set; } = 2.0f;         // Values Advantageous Positioning
-    public float AllySynergy { get; private set; } = 2.0f;                 // Values Team-Based Actions
-    public float ResourceManagement { get; private set; } = 1.5f;          // Values Optimal Resource Balancing (MP, AP, Items)
-    public float ReactionAwareness { get; private set; } = 0;           // Values Minimal Reaction Opportunities from Opponent
-    public float ReactionAllocation { get; private set; } = 1.15f;          // Values Saving AP for Reactions
+    public float Aggression;                  // Values Damage Dealt & Kills
+    public float Survival;                    // Values Avoiding Damage & Death
+    public float TacticalPositioning;         // Values Advantageous Positioning
+    public float AllySynergy;                 // Values Team-Based Actions
+    public float ResourceManagement;          // Values Optimal Resource Balancing (MP, AP, Items)
+    public float ReactionAwareness;           // Values Minimal Reaction Opportunities from Opponent
+    public float ReactionAllocation;          // Values Saving AP for Reactions
 
     public Unit targetedUnit;
 
@@ -54,27 +54,36 @@ public class EnemyUnit : Unit
     public static Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
         GameObject gameObj = Instantiate(Resources.Load<GameObject>("Prefabs/Unit/Enemy"));
-        //GameObject gameObj = new GameObject("Enemy Unit " + initLocation);
         EnemyUnit unit = gameObj.AddComponent<EnemyUnit>();
         unit.gameObj = gameObj;
-
-        //unit.unitInfo = gameObj.AddComponent<UnitInfo>();
+        
+        unit.InitializeAIBehaviors();
         unit.unitInfo = gameObj.GetComponent<UnitInfo>();
         
         unit.unitInfo.CellLocation = initLocation;
         unit.unitInfo.UnitDirection = unitDirection;
         unit.unitInfo.UnitAffiliation = UnitAffiliation.Enemy;
         unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
-        
-        //unit.unitEquipment = new UnitEquipment(unit.unitInfo);
 
         unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
-        //unit.unitRenderer = gameObj.GetComponent<UnitRenderer>();
         unit.unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();
         unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();
         return unit;
+    }
+
+    private void InitializeAIBehaviors() {
+        var unitInitializer = GetComponent<UnitInitializer>().Behaviors;
+        if (unitInitializer == null) return;
+
+        Aggression = unitInitializer.Aggression;
+        Survival = unitInitializer.Survival;
+        TacticalPositioning = unitInitializer.TacticalPositioning;
+        AllySynergy = unitInitializer.AllySynergy;
+        ResourceManagement = unitInitializer.ResourceManagement;
+        ReactionAwareness = unitInitializer.ReactionAwareness;
+        ReactionAllocation = unitInitializer.ReactionAllocation;
     }
 
     public void StartTurn() 

@@ -31,7 +31,7 @@ public class EquipmentInitializer {
 [Serializable]
 public class AIBehaviorInitializer
 {
-    public float Agression;
+    public float Aggression;
     public float Survival;
     public float TacticalPositioning;
     public float AllySynergy;
@@ -40,7 +40,7 @@ public class AIBehaviorInitializer
     public float ReactionAllocation;
 
     public float[] All() {
-        return new [] { Agression, Survival, TacticalPositioning, AllySynergy, ResourceManagement, ReactionAwareness,
+        return new [] { Aggression, Survival, TacticalPositioning, AllySynergy, ResourceManagement, ReactionAwareness,
             ReactionAllocation };
     }
 }

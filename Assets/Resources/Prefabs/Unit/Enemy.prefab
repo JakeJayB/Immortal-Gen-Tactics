@@ -138,3 +138,11 @@ MonoBehaviour:
     ArmorFeet: -1
     AccessoryA: -1
     AccessoryB: -1
+  Behaviors:
+    Aggression: 3
+    Survival: 1.5
+    TacticalPositioning: 2
+    AllySynergy: 2
+    ResourceManagement: 1.5
+    ReactionAwareness: 0
+    ReactionAllocation: 1.15
