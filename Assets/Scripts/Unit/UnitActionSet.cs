@@ -95,7 +95,7 @@ public class UnitActionSet
         
         // Add all Turn-Based Actions
         // Setting Move after Unique Actions to prevent bad movement
-        foreach (var actionList in unitActions.Values) { allActions.AddRange(actionList); }
+        foreach (var actionList in unitActions.Values) { allActions.AddRange(actionList.Distinct()); }
         allActions.Add(new Move());
         allActions.Add(new Wait());
         
@@ -107,7 +107,7 @@ public class UnitActionSet
         
         // Add all Reaction-Based Actions
         allReactions.Add(new Evade());
-        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList); }
+        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList.Distinct()); }
         allReactions.Add(new DoNothing());
         
         return allReactions;
@@ -115,7 +115,7 @@ public class UnitActionSet
     
     public List<UnitAction> GetAllItems() {
         List<UnitAction> attackActions = new List<UnitAction>();
-        attackActions.AddRange(unitActions[ActionType.Item]);
+        attackActions.AddRange(unitActions[ActionType.Item].Distinct());
         return attackActions;
     }
 }
