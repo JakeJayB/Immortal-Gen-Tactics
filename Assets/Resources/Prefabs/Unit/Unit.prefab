@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1820586773048093051}
   - component: {fileID: 788627460761843028}
+  - component: {fileID: -9066204493168473866}
+  - component: {fileID: -3572902646055802042}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Unit
@@ -84,3 +86,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-9066204493168473866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976009931439373049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd830b5ea05c38c458e6821b2befd497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellLocation: {x: 0, y: 0, z: 0}
+  UnitDirection: 0
+  sprite: {fileID: 21300000, guid: e98e74cd85fb4bc4abf523d568620083, type: 3}
+  UnitAffiliation: 0
+  baseHP: 30
+  baseMP: 20
+  baseAP: 2
+  baseAttack: 10
+  baseDefense: 6
+  baseMagicAttack: 10
+  baseMagicDefense: 3
+  baseMove: 3
+  baseEvade: 1
+  baseSpeed: 15
+  baseSense: 2
+--- !u!114 &-3572902646055802042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976009931439373049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96277bd0eff6d3f4ebcfda8702159ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Actions:
+    Actions: 0000000001000000
+  Items:
+    Items: 
+  Equipment:
+    WeaponL: 0
+    WeaponR: -1
+    ArmorHead: -1
+    ArmorBody: -1
+    ArmorHands: -1
+    ArmorFeet: -1
+    AccessoryA: -1
+    AccessoryB: -1
+  Behaviors:
+    Aggression: 0
+    Survival: 0
+    TacticalPositioning: 0
+    AllySynergy: 0
+    ResourceManagement: 0
+    ReactionAwareness: 0
+    ReactionAllocation: 0

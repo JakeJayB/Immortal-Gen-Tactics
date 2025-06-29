@@ -12,7 +12,6 @@ public class PartyManager : MonoBehaviour
         unitList = new List<Unit>();
         for (int i = 0; i < 5; i++)
         {
-
             Unit unit = Unit.Initialize(Vector3Int.zero, UnitDirection.Forward);
             unit.transform.SetParent(transform);
             unit.gameObj.SetActive(false);

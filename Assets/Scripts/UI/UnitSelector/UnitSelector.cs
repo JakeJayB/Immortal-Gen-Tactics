@@ -199,7 +199,7 @@ public class UnitSelector : MonoBehaviour
 
                 // adding new unit to the selected tileCell
                 unit = SelectorUnitIcons.GetUnit(tileCell);
-                if(unit != null)
+                if(unit)
                 {
                     // Placing Unit to new location
                     unit.unitInfo.CellLocation = newLocation;
