@@ -5,7 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Pouch : UnitAction
+public class Pouch : Storage
 {
     public override string Name { get; protected set; } = "Pouch";
     public override int MPCost { get; protected set; } = 0;
@@ -31,26 +31,18 @@ public class Pouch : UnitAction
     {
         return -9999;
     }
+
+    public sealed override int Capacity { get; protected set; } = 3;
+    public override List<UnitAction> Items { get; protected set; }
     
-    private int Capacity = 3;
-    private List<UnitAction> Storage = new List<UnitAction>() {
-        new Potion(),
-        new Ether(),
-        new SoulSpark()
-    };
-
-    public void StoreItem(UnitAction newItem)
+    public Pouch() { }
+    public Pouch(int[] items)
     {
-        if (Storage.Count > Capacity) { return; }
-        
-        for (int i = 0; i < Storage.Count; i++) {
-            if (Storage[i] == null) { Storage[i] = newItem; return; }
+        if (items.Length > Capacity) return;
+        foreach (var item in items) {
+            StoreItem(UnitActionLibrary.FindAction(item));
         }
-        
-        Debug.LogError("ERROR: Storage for 'Pouch' accessory is full.");
     }
-
-    private void UseItem(UnitAction item) { Storage.Remove(item); }
     
     public override void ActivateAction(Unit unit)
     {
@@ -59,7 +51,7 @@ public class Pouch : UnitAction
         
         // Instantiate items as UnitActions
         var pouchActions = new List<UnitAction>();
-        foreach (var pocket in Storage)
+        foreach (var pocket in Items)
         {
             if (pocket == null) { continue; }
             pouchActions.Add(pocket);
