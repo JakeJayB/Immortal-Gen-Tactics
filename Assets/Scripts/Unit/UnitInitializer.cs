@@ -29,12 +29,30 @@ public class EquipmentInitializer {
 }
 
 [Serializable]
+public class AIBehaviorInitializer
+{
+    public float Agression;
+    public float Survival;
+    public float TacticalPositioning;
+    public float AllySynergy;
+    public float ResourceManagement;
+    public float ReactionAwareness;
+    public float ReactionAllocation;
+
+    public float[] All() {
+        return new [] { Agression, Survival, TacticalPositioning, AllySynergy, ResourceManagement, ReactionAwareness,
+            ReactionAllocation };
+    }
+}
+
+[Serializable]
 public class UnitInitializer : MonoBehaviour
 {
     public ActionInitializer Actions;
     public ItemInitializer Items;
     public EquipmentInitializer Equipment;
-
+    public AIBehaviorInitializer Behaviors;
+    
     public int[] GetUnitActions()
     {
         var actions = Actions?.Actions ?? Array.Empty<int>();
@@ -43,4 +61,6 @@ public class UnitInitializer : MonoBehaviour
     }
     
     public int[] GetEquipment() { return Equipment.All(); }
+
+    public float[] GetBehaviors() { return Behaviors.All(); }
 }
