@@ -117,7 +117,6 @@ public class ChainSystem
         CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
 
         yield return UnitMenu.ShowMenu(unit);
-        InfoBar.DisplayInfo(InfoTabType.Reaction);
         yield return new WaitUntil(ReactionHasEnded);
 
         ReactingUnit = null;

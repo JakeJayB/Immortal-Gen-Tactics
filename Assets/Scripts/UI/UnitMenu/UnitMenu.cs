@@ -167,6 +167,9 @@ public class UnitMenu : MonoBehaviour
         SubMenu = null;
         InSubMenu = false;
         Menu.SetActive(true);
+        
+        // Display Info Bar for Unit Menu
+        InfoBar.DisplayInfo(ChainSystem.ReactionInProgress ? InfoTabType.Reaction : InfoTabType.Action);
     }
 
     public static void HideMenu() { Menu.SetActive(false); }

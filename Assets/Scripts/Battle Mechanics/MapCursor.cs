@@ -96,9 +96,8 @@ public class MapCursor : MonoBehaviour
                 InactiveState();
                 //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileObj.transform);
                 currentUnit = hoverCell;
-                StartCoroutine(UnitMenu.ShowMenu(unit));
                 UnitMenu.DisplayUnitMenu(unit);
-                InfoBar.DisplayInfo(InfoTabType.Action);
+                StartCoroutine(UnitMenu.ShowMenu(unit));
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }
@@ -182,8 +181,6 @@ public class MapCursor : MonoBehaviour
         MoveCursor(currentUnit);
         CanvasUI.HideTargetUnitInfoDisplay();
         yield return UnitMenu.ShowMenu(TilemapCreator.UnitLocator[currentUnit]);
-        InfoBar.DisplayInfo(InfoTabType.Action);
-        
     }
 
     private void MoveCursorUp() {

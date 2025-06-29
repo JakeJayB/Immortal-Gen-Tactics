@@ -870,7 +870,7 @@ public class LeanTween : MonoBehaviour {
     * @param {GameObject} gameObject:GameObject GameObject that you want to test if it is tweening
     */
     public static bool isTweening( GameObject gameObject = null ){
-        if(gameObject==null){
+        if(!gameObject){
             for(int i = 0; i <= tweenMaxSearch; i++){
                 if(tweens[i].toggle)
                     return true;
