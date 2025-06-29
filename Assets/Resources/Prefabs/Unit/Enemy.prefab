@@ -128,7 +128,8 @@ MonoBehaviour:
   Actions:
     Actions: 
   Items:
-    Items: 
+    StorageAItems: 
+    StorageBItems: 
   Equipment:
     WeaponL: -1
     WeaponR: -1

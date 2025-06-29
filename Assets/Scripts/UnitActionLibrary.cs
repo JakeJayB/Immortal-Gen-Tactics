@@ -43,19 +43,24 @@ public class UnitActionLibrary : MonoBehaviour
 #if UNITY_EDITOR
     public static List<(int id, string name)> GetUnitActionDropdownOptions()
     {
-        
-        return UnitActions
+        var options =  UnitActions
             .Select(pair => (pair.Key, pair.Value.Invoke().Name))
             .OrderBy(t => t.Key)
             .ToList();
+        
+        options.Insert(0, (-1, "None"));
+        return options;
     }
 
     public static List<(int id, string name)> GetItemDropdownOptions()
     {
-        return Items
+        var options = Items
             .Select(pair => (pair.Key, pair.Value.Invoke().Name))
             .OrderBy(t => t.Key)
             .ToList();
+        
+        options.Insert(0, (-1, "None"));
+        return options;
     }
 #endif
 }

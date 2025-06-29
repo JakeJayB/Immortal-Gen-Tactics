@@ -9,7 +9,10 @@ public class ActionInitializer {
 
 [Serializable]
 public class ItemInitializer {
-    [UnitActionIDDropdown(UnitActionType.Item)] public int[] Items;
+    [UnitActionIDDropdown(UnitActionType.Item)] public int[] StorageAItems;
+    [UnitActionIDDropdown(UnitActionType.Item)] public int[] StorageBItems;
+
+    public int[] All() { return StorageAItems.Concat(StorageBItems).ToArray(); }
 }
 
 [Serializable]
@@ -56,7 +59,7 @@ public class UnitInitializer : MonoBehaviour
     public int[] GetUnitActions()
     {
         var actions = Actions?.Actions ?? Array.Empty<int>();
-        var items = Items?.Items ?? Array.Empty<int>();
+        var items = Items?.All() ?? Array.Empty<int>();
         return actions.Concat(items).ToArray();
     }
     
