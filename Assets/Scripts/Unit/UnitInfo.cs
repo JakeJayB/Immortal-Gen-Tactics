@@ -64,7 +64,7 @@ public class UnitInfo : MonoBehaviour
         var unitInitializer = gameObject.GetComponent<UnitInitializer>();
         if (unitInitializer)
         {
-            ActionSet = new UnitActionSet(unitInitializer.GetActions());
+            ActionSet = new UnitActionSet(unitInitializer, IsAIUnit());
             equipment = new UnitEquipment(this, unitInitializer);
             Destroy(unitInitializer);
         }
@@ -150,4 +150,6 @@ public class UnitInfo : MonoBehaviour
     }
 
     public bool IsDead() { return Dead; }
+
+    public bool IsAIUnit() { return gameObject.GetComponent<EnemyUnit>(); }
 }

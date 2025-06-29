@@ -228,6 +228,7 @@ public class UnitEquipment
     }
 
     private void ApplyStorageAction(UnitAction action, int[] accItems) {
+        if (unitInfo.IsAIUnit()) { return; }
         if (action is Storage storage) { storage.Initialize(accItems); }
         unitInfo.ActionSet.AddAction(action);
     }

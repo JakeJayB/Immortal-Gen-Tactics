@@ -8,8 +8,8 @@ public class UnitActionSet
 {
     public UnitActionSet() { }
     
-    public UnitActionSet(int[] actionSet) {
-        foreach (var action in actionSet) {
+    public UnitActionSet(UnitInitializer unitInitializer, bool isAIUnit) {
+        foreach (var action in isAIUnit ? unitInitializer.GetAIActions() : unitInitializer.GetActions()) {
             if (action < 0) { continue; }
             AddAction(UnitActionLibrary.FindAction(action)); 
         }
@@ -28,7 +28,7 @@ public class UnitActionSet
             unitActions[action.ActionType] = actionList;
         }
 
-        if (UnitActionExistsInSet(unitActions[action.ActionType], action)) {
+        if (action.ActionType != ActionType.Item && UnitActionExistsInSet(unitActions[action.ActionType], action)) {
             Debug.LogError($"ERROR: Unit already knows the action {action.Name}");
             return;
         }

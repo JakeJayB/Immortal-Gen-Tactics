@@ -13,15 +13,14 @@ public abstract class Storage : UnitAction
         }
     }
     
-    protected void StoreItem(UnitAction newItem)
-    {
+    protected void StoreItem(UnitAction newItem) {
         for (int i = 0; i < Capacity; i++) {
             if (Items[i] == null) { Items[i] = newItem; return; }
         }
         
         Debug.LogError("ERROR: Storage for 'Pouch' accessory is full.");
     }
-
+    
     protected void UseItem(int itemIndex) {
         Items[itemIndex] = null;
         OrganizeItems(itemIndex);
