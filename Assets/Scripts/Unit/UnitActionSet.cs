@@ -10,6 +10,7 @@ public class UnitActionSet
     
     public UnitActionSet(int[] actionSet) {
         foreach (var action in actionSet) {
+            if (action < 0) { continue; }
             AddAction(UnitActionLibrary.FindAction(action)); 
         }
     }

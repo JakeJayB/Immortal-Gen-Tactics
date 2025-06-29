@@ -12,6 +12,7 @@
             "magicDefense": 0,
             "move": 0,
             "speed": 0,
+            "action": -1,
             "maxDurability": 20,
             "range": 1
         },
@@ -27,6 +28,7 @@
             "magicDefense": 3,
             "move": 0,
             "speed": 0,
+            "action": -1,
             "maxDurability": 75,
             "range": 1
         }
@@ -44,6 +46,7 @@
             "magicDefense": 1,
             "move": 0,
             "speed": 0,
+            "action": -1,
             "armorType": 0
         },
         {
@@ -58,6 +61,7 @@
             "magicDefense": 1,
             "move": 0,
             "speed": 0,
+            "action": -1,
             "armorType": 1
         },
         {
@@ -72,6 +76,7 @@
             "magicDefense": 1,
             "move": 0,
             "speed": 0,
+            "action": -1,
             "armorType": 2
         },
         {
@@ -86,6 +91,7 @@
             "magicDefense": 1,
             "move": 3,
             "speed": 2,
+            "action": -1,
             "armorType": 3
         }
     ],
@@ -101,7 +107,8 @@
             "defense": 0,
             "magicDefense": 3,
             "move": 0,
-            "speed": 0
+            "speed": 0,
+            "action": -1
         },
         {
             "ID": 201,
@@ -114,7 +121,22 @@
             "defense": 0,
             "magicDefense": 0,
             "move": 3,
-            "speed": 7
+            "speed": 7,
+            "action": -1
+        },
+        {
+            "ID": 202,
+            "name": "Pouch",
+            "HP": 0,
+            "MP": 0,
+            "AP": 0,
+            "attack": 0,
+            "magicAttack": 0,
+            "defense": 0,
+            "magicDefense": 0,
+            "move": 0,
+            "speed": 0,
+            "action": 202
         }
     ]
 }

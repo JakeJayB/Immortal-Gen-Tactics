@@ -56,7 +56,7 @@ public class UnitInfo : MonoBehaviour
     public UnitEquipment equipment;
     
     // Unit Action Set
-    public UnitActionSet ActionSet { get; protected internal set; }
+    public UnitActionSet ActionSet { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -64,8 +64,8 @@ public class UnitInfo : MonoBehaviour
         var unitInitializer = gameObject.GetComponent<UnitInitializer>();
         if (unitInitializer)
         {
-            ActionSet = new UnitActionSet(unitInitializer.GetUnitActions());
-            equipment = new UnitEquipment(this, unitInitializer.GetEquipment());
+            ActionSet = new UnitActionSet(unitInitializer.GetActions());
+            equipment = new UnitEquipment(this, unitInitializer);
             Destroy(unitInitializer);
         }
         else

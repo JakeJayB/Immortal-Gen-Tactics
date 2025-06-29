@@ -41,8 +41,9 @@ public class UnitEquipment
         InitializeBonusStats();
     }
 
-    public UnitEquipment(UnitInfo unitInfo, int[] equipmentSet)
+    public UnitEquipment(UnitInfo unitInfo, UnitInitializer unitInitializer)
     {
+        var equipmentSet = unitInitializer.GetEquipment();
         if (equipmentSet.Length != 8) { Debug.LogError("Equipment Set Does Not Reference All 8 Slots");}
         this.unitInfo = unitInfo;
         
@@ -52,8 +53,8 @@ public class UnitEquipment
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[3]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[4]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[5]]);
-        EquipAccessoryA(EquipmentLibrary.Accessories[equipmentSet[6]]);
-        EquipAccessoryB(EquipmentLibrary.Accessories[equipmentSet[7]]);
+        EquipAccessoryA(EquipmentLibrary.Accessories[equipmentSet[6]], unitInitializer.Items.StorageAItems);
+        EquipAccessoryB(EquipmentLibrary.Accessories[equipmentSet[7]], unitInitializer.Items.StorageBItems);
     }
     
     // Equip Functions
@@ -90,19 +91,53 @@ public class UnitEquipment
         Debug.Log($"{armor.armorType} successfully equipped.");
     }
 
-    public void EquipAccessoryA(Accessory accessory)
+    public void EquipAccessoryA(Accessory accessory, int[] accAItems = null)
     {
         if (accessory == null) return;
         accessoryA = accessory;
         AddEquipmentBonus(accessoryA);
+        
+        var accAction = UnitActionLibrary.FindAction(accessory.equipAction);
+        if (accAction != null)
+        {
+            switch (accAction.ActionType)
+            {
+                case ActionType.Accessory:
+                    break;
+                case ActionType.Storage:
+                    ApplyStorageAction(accAction, accAItems);
+                    break;
+                default:
+                    Debug.Log("");
+                    break;
+            }
+        }
+        
         Debug.Log("AccessoryA successfully equipped.");
     }
 
-    public void EquipAccessoryB(Accessory accessory)
+    public void EquipAccessoryB(Accessory accessory, int[] accBItems = null)
     {
         if (accessory == null) return;
         accessoryB = accessory;
         AddEquipmentBonus(accessoryB);
+        
+        var accAction = UnitActionLibrary.FindAction(accessory.equipAction);
+        if (accAction != null)
+        {
+            switch (accAction.ActionType)
+            {
+                case ActionType.Accessory:
+                    break;
+                case ActionType.Storage:
+                    ApplyStorageAction(accAction, accBItems);
+                    break;
+                default:
+                    Debug.Log("");
+                    break;
+            }
+        }
+        
         Debug.Log("AccessoryB successfully equipped.");
     }
     
@@ -186,5 +221,14 @@ public class UnitEquipment
         bonusSpeed -= equipment.equipSpeed;
         
         unitInfo.ApplyEquipmentBonuses();
+    }
+
+    private void ApplyEquipmentAction(UnitAction action) {
+        unitInfo.ActionSet.AddAction(action);
+    }
+
+    private void ApplyStorageAction(UnitAction action, int[] accItems) {
+        if (action is Storage storage) { storage.Initialize(accItems); }
+        unitInfo.ActionSet.AddAction(action);
     }
 }

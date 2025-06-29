@@ -9,5 +9,6 @@ public enum ActionType
     Attack,
     Accessory,
     Item,
+    Storage,
     Wait
 }

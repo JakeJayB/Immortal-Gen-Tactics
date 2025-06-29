@@ -128,7 +128,7 @@ MonoBehaviour:
   Actions:
     Actions: 0000000001000000
   Items:
-    StorageAItems: 
+    StorageAItems: 640000006500000064000000
     StorageBItems: 
   Equipment:
     WeaponL: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
     ArmorBody: -1
     ArmorHands: -1
     ArmorFeet: -1
-    AccessoryA: -1
+    AccessoryA: 202
     AccessoryB: -1
   Behaviors:
     Aggression: 0

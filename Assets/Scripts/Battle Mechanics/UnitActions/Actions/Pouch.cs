@@ -7,13 +7,15 @@ using UnityEngine;
 
 public class Pouch : Storage
 {
+    public Pouch() { Items = new UnitAction[Capacity]; }
+
     public override string Name { get; protected set; } = "Pouch";
     public override int MPCost { get; protected set; } = 0;
     public override int APCost { get; protected set; } = 0;
     public override int Priority { get; protected set; } = 0;
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override int BasePower { get; protected set; } = 0;
-    public override ActionType ActionType { get; protected set; } = ActionType.Accessory;
+    public override ActionType ActionType { get; protected set; } = ActionType.Storage;
     public override Pattern AttackPattern { get; protected set; } = Pattern.None;
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
@@ -33,16 +35,7 @@ public class Pouch : Storage
     }
 
     public sealed override int Capacity { get; protected set; } = 3;
-    public override List<UnitAction> Items { get; protected set; }
-    
-    public Pouch() { }
-    public Pouch(int[] items)
-    {
-        if (items.Length > Capacity) return;
-        foreach (var item in items) {
-            StoreItem(UnitActionLibrary.FindAction(item));
-        }
-    }
+    public sealed override UnitAction[] Items { get; protected set; }
     
     public override void ActivateAction(Unit unit)
     {
@@ -63,7 +56,7 @@ public class Pouch : Storage
 
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
-        UseItem(ChainSystem.CurrentChain.Item1);
+        UseItem(UnitMenuCursor.slotIndex);
         yield return null;
     }
 }

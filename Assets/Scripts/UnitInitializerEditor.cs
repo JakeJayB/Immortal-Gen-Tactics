@@ -8,7 +8,7 @@ public static class ValidItemAccessories
 {
     public static readonly Dictionary<int, int> StorageCapacity = new()
     {
-        { 101, 3 }, // Pouch
+        { 202, 3 }, // Pouch
         { 102, 8 }, // Backpack
     };
 

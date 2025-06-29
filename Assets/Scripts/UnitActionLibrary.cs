@@ -21,6 +21,11 @@ public class UnitActionLibrary : MonoBehaviour
         {102, () => new SoulSpark()}
     };
 
+    private static Dictionary<int, Func<UnitAction>> EquipActions { get; set; } = new()
+    {
+        {202, () => new Pouch()}
+    };
+
     public static UnitAction FindAction(int id) {
         switch (id)
         {
@@ -31,6 +36,10 @@ public class UnitActionLibrary : MonoBehaviour
             case < 200:
                 if (Items.TryGetValue(id, out var itemInstance))
                     return itemInstance.Invoke();
+                break;
+            case < 300:
+                if (EquipActions.TryGetValue(id, out var equipInstance))
+                    return equipInstance.Invoke();
                 break;
             default:
                 Debug.LogError($"Cannot find UnitAction with ID ({id}).");

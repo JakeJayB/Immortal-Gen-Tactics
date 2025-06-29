@@ -17,6 +17,7 @@ public class Weapon : Equipment
         equipMagicDefense = data.magicDefense;
         equipMove = data.move;
         equipSpeed = data.speed;
+        equipAction = data.action;
         maxDurability = data.maxDurability;
         range = data.range;
     }
@@ -38,6 +39,7 @@ public class Armor : Equipment
         equipMagicDefense = data.magicDefense;
         equipMove = data.move;
         equipSpeed = data.speed;
+        equipAction = data.action;
         armorType = data.armorType;
     }
 }
@@ -56,6 +58,7 @@ public class Accessory : Equipment
         equipMagicDefense = data.magicDefense;
         equipMove = data.move;
         equipSpeed = data.speed;
+        equipAction = data.action;
     }
 }
 
@@ -75,4 +78,5 @@ public class Equipment
     public int equipMove { get; protected set; }
     public int equipEvade { get; protected set; }
     public int equipSpeed { get; protected set; }
+    public int equipAction { get; protected set; }
 }

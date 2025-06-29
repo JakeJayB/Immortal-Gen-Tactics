@@ -56,14 +56,8 @@ public class UnitInitializer : MonoBehaviour
     public EquipmentInitializer Equipment;
     public AIBehaviorInitializer Behaviors;
     
-    public int[] GetUnitActions()
-    {
-        var actions = Actions?.Actions ?? Array.Empty<int>();
-        var items = Items?.All() ?? Array.Empty<int>();
-        return actions.Concat(items).ToArray();
-    }
-    
+    public int[] GetActions() { return Actions.Actions; }
+    public int[] GetItems() { return Items.All(); }
     public int[] GetEquipment() { return Equipment.All(); }
-
     public float[] GetBehaviors() { return Behaviors.All(); }
 }

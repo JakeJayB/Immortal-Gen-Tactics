@@ -19,6 +19,7 @@ public class EquipmentData {
     public int magicDefense;
     public int move;
     public int speed;
+    public int action;
 }
 
 [Serializable]
