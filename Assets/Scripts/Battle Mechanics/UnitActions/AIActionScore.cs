@@ -113,6 +113,8 @@ public class AIActionScore
                 : -nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness;
         }
 
+        if (ChainSystem.ReactionInProgress) return positionScore;
+        
         if (TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(TargetCell.x, TargetCell.z), out var unitOnTile)) {
             positionScore += Mathf.RoundToInt(
                 (Pathfinder.DistanceBetweenUnits(unitAI, unitOnTile)
@@ -174,11 +176,11 @@ public class AIActionScore
     {
         int resourceScore = 0;
 
-        // resourceScore += unitAI.unitInfo.currentMP - Action.MPCost * (int)unitAI.ResourceManagement;
-        // resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ResourceManagement;
+        resourceScore += unitAI.unitInfo.currentMP - Action.MPCost * (int)unitAI.ResourceManagement;
+        resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ResourceManagement;
         
         if (Action.ActionType == ActionType.Wait) {
-            resourceScore += (unitAI.unitInfo.currentAP - Action.APCost) * (int)Mathf.Pow(unitAI.ReactionAllocation, 2); 
+            resourceScore += (unitAI.unitInfo.FinalAP - unitAI.unitInfo.currentAP) * (int)unitAI.ReactionAllocation; 
         }
 
         return resourceScore;
@@ -193,18 +195,16 @@ public class AIActionScore
         int projectedDamage =
             DamageCalculator.ProjectDamage(initialAction, attacker.unitInfo, unitAI.unitInfo);
         
-        if (unitAI.unitInfo.currentHP - projectedDamage < 1) {
-            reactionScore += unitAI.unitInfo.FinalHP * (int)unitAI.Survival;
-        } else {
-            reactionScore += projectedDamage * (int)unitAI.Survival;
-        }
-
         if (TilemapUtility.GetTargetedArea(attacker, initialAction, target).Contains(
                 TilemapCreator.TileLocator[Action.ActionType == ActionType.Move 
                     ? new Vector2Int(PotentialCell.x, PotentialCell.z) 
                     : unitAI.unitInfo.Vector2CellLocation()]))
         {
-            reactionScore *= -1;
+            if (unitAI.unitInfo.currentHP - projectedDamage < 1) {
+                reactionScore -= unitAI.unitInfo.FinalHP * (int)unitAI.Survival;
+            } else {
+                reactionScore -= projectedDamage * (int)unitAI.Survival;
+            }
         }
 
         return reactionScore;

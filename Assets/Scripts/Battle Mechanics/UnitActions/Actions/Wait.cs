@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Wait : UnitAction
@@ -26,7 +27,6 @@ public class Wait : UnitAction
     {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
-        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
         ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
             unit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());

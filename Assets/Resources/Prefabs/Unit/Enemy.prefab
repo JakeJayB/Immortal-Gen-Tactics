@@ -102,13 +102,13 @@ MonoBehaviour:
   UnitDirection: 0
   sprite: {fileID: 0}
   UnitAffiliation: 1
-  baseHP: 20
+  baseHP: 30
   baseMP: 0
   baseAP: 3
-  baseAttack: 10
-  baseDefense: 10
+  baseAttack: 15
+  baseDefense: 7
   baseMagicAttack: 0
-  baseMagicDefense: 0
+  baseMagicDefense: 4
   baseMove: 3
   baseEvade: 1
   baseSpeed: 7
@@ -128,7 +128,7 @@ MonoBehaviour:
   Actions:
     Actions: 
   Items:
-    StorageAItems: 6600000066000000ffffffff
+    StorageAItems: 640000006600000066000000
     StorageBItems: 
   Equipment:
     WeaponL: -1

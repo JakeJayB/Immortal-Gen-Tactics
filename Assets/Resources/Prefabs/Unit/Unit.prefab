@@ -102,7 +102,7 @@ MonoBehaviour:
   UnitDirection: 0
   sprite: {fileID: 21300000, guid: e98e74cd85fb4bc4abf523d568620083, type: 3}
   UnitAffiliation: 0
-  baseHP: 30
+  baseHP: 20
   baseMP: 20
   baseAP: 2
   baseAttack: 10
@@ -111,7 +111,7 @@ MonoBehaviour:
   baseMagicDefense: 3
   baseMove: 3
   baseEvade: 1
-  baseSpeed: 15
+  baseSpeed: 9
   baseSense: 2
 --- !u!114 &-3572902646055802042
 MonoBehaviour:

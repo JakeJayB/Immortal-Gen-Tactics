@@ -14,25 +14,6 @@ public class UnitAITargeting
     public int ReactionAwarenessScore { get; set; } = -1;
     public int ReactionAllocationScore { get; set; } = -1;
     public Unit TargetUnit { get; set; }
-    
-    // TODO: Decide how to target units
-    
-    // Notes
-    // Based on each action, we want to consider the...
-    // ...AP Cost (initial and additional based on movements needed)
-    // ...MP Cost
-    // ...HP Ratio
-    // ...Potential Damage/Healing
-    // ...Potential Death/Revival
-    // ...Difference in Lvl/Stats
-    // ...Surrounding Units (Ally/Enemy)
-    
-    // Eseentially...
-    // ...Distance
-    // ...Health
-    // ...Matchup
-    // ...Surroundings
-    // ...Impact
 
     private int CalcPriorityScore(EnemyUnit unitAI, Unit potentialUnit)
     {
@@ -43,10 +24,12 @@ public class UnitAITargeting
         int score = 0;
         int distance = Pathfinder.DistanceBetweenUnits(unitAI, potentialUnit);
         
+        
+        // TODO: This factor needs to be apart of the Score Functions so that they're only applied if they have an action that can impact the unit.
         // Score Factor 1: HP Ratio
         // The Lower the Health, the Higher the Score
-        score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP / (float)potentialUnit.unitInfo.currentHP * 
-                                  (potentialUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy ? unitAI.Aggression : unitAI.AllySynergy));
+        //score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP / (float)potentialUnit.unitInfo.currentHP * 
+                                  //(potentialUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy ? unitAI.Aggression : unitAI.AllySynergy));
 
         // Score Factor 2: Distance Away
         if (unitAI != potentialUnit) {
@@ -106,6 +89,12 @@ public class UnitAITargeting
         }
 
         score += projectedFutureDamage;
+        
+        if (projectedFutureDamage > 0) {
+            score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP /
+            (float)potentialUnit.unitInfo.currentHP * (int)unitAI.Aggression); 
+        }
+        
         return score;
     }
 
@@ -213,6 +202,12 @@ public class UnitAITargeting
         }
 
         score += projectedFutureDamage;
+
+        if (projectedFutureDamage > 0) {
+            score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP /
+                (float)potentialUnit.unitInfo.currentHP * (int)unitAI.AllySynergy);
+        }
+        
         return score;
     }
     

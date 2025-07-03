@@ -11,7 +11,7 @@ public static class SoftmaxAILogic
         var bestAction = potentialActions[actionScores.IndexOf(actionScores.Max())];
         
         // Filter out negative scores (Absolutely no current value)
-        (potentialActions, actionScores) = FilterNegatives(potentialActions, actionScores);
+        (potentialActions, actionScores) = FilterActions(potentialActions, actionScores);
 
         // If no positive action exists, use the best one available
         // TODO: Revise this so that the AI can choose not to do anything.
@@ -36,7 +36,7 @@ public static class SoftmaxAILogic
         }
 
         // Choose based on weighted random
-        float rand = UnityEngine.Random.value;
+        float rand = Random.value;
         float cumulative = 0f;
 
         for (int i = 0; i < count; i++)
@@ -51,6 +51,35 @@ public static class SoftmaxAILogic
         return potentialActions[count - 1];
     }
 
+    
+
+    private static (List<UnitAction>, List<float>) FilterActions(List<UnitAction> potentialActions,
+        List<float> actionScores)
+    {
+        (potentialActions, actionScores) = FilterNegatives(potentialActions, actionScores);
+        (potentialActions, actionScores) = FilterWaitAction(potentialActions, actionScores);
+        return (potentialActions, actionScores);
+    }
+    
+    private static (List<UnitAction>, List<float>) FilterWaitAction(List<UnitAction> potentialActions,
+        List<float> actionScores)
+    {
+        if (ChainSystem.ReactionInProgress) return (potentialActions, actionScores);
+        
+        int waitIndex = potentialActions.FindIndex(action => action is Wait);
+        float waitScore = actionScores[waitIndex];
+
+        // If no other action has a score higher than the Wait action, return as-is
+        if (!actionScores.Any(score => score > waitScore))
+            return (potentialActions, actionScores);
+
+        // Otherwise, remove Wait
+        potentialActions.RemoveAt(waitIndex);
+        actionScores.RemoveAt(waitIndex);
+
+        return (potentialActions, actionScores);
+    }
+    
     private static (List<UnitAction>, List<float>) FilterNegatives(List<UnitAction> potentialActions, List<float> actionScores)
     {
         List<UnitAction> filteredActions = new();
