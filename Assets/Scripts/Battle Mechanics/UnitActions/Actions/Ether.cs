@@ -35,9 +35,9 @@ public class Ether : Item
         ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
             unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
         
-        Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
+        Debug.Log("Best Heuristic Score: " + (ActionScore.TotalScore() < 0 ? "N/A" : ActionScore.TotalScore()));
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
-        return ActionScore.TotalScore();
+        return ActionScore.TotalScore() < 0 ? -9999 : ActionScore.TotalScore();
     }
     
     public override void ActivateAction(Unit unit) 

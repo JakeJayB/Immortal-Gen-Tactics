@@ -28,7 +28,6 @@ public class SoulSpark : Item
     {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
-        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
         foreach (var tile in Area(unit, null))
         {
@@ -43,10 +42,10 @@ public class SoulSpark : Item
                 if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
             }
         }
-        
-        Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
+
+        Debug.Log("Best Heuristic Score: " + (ActionScore.DamageScore <= 0 ? "N/A" : ActionScore.TotalScore()));
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
-        return ActionScore.TotalScore();
+        return ActionScore.DamageScore <= 0 ? -9999 : ActionScore.TotalScore();
     }
 
     public override void ActivateAction(Unit unit)

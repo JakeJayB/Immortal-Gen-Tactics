@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -176,11 +177,11 @@ public class AIActionScore
     {
         int resourceScore = 0;
 
-        resourceScore += unitAI.unitInfo.currentMP - Action.MPCost * (int)unitAI.ResourceManagement;
-        resourceScore += unitAI.unitInfo.currentAP - Action.APCost * (int)unitAI.ResourceManagement;
+        resourceScore += Mathf.RoundToInt(unitAI.unitInfo.currentMP - Action.MPCost * unitAI.ResourceManagement);
+        resourceScore += Mathf.RoundToInt(unitAI.unitInfo.currentAP - Action.APCost * unitAI.ResourceManagement);
         
         if (Action.ActionType == ActionType.Wait) {
-            resourceScore += (unitAI.unitInfo.FinalAP - unitAI.unitInfo.currentAP) * (int)unitAI.ReactionAllocation; 
+            resourceScore += Mathf.RoundToInt((unitAI.unitInfo.FinalAP - unitAI.unitInfo.currentAP) * unitAI.ReactionAllocation); 
         }
 
         return resourceScore;

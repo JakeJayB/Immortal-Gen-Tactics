@@ -140,10 +140,10 @@ MonoBehaviour:
     AccessoryA: 202
     AccessoryB: -1
   Behaviors:
-    Aggression: 3
-    Survival: 1.5
+    Aggression: 4
+    Survival: 2
     TacticalPositioning: 2
     AllySynergy: 2
-    ResourceManagement: 1.5
+    ResourceManagement: 2
     ReactionAwareness: 0
-    ReactionAllocation: 1.15
+    ReactionAllocation: 2

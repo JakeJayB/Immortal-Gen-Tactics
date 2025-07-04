@@ -31,6 +31,10 @@ public class DamageCalculator : MonoBehaviour
     {
         // Dead units cannot be healed, they must be revived first
         if (target.IsDead() && action.DamageType == DamageType.Healing) { return 0; }
+
+        // Units that aren't dead can't be revived
+        if (target.IsAlive() && action.DamageType == DamageType.Revival) { return 0; }
+        
         int healingAmount = 0;
         
         switch (action.ActionType)
