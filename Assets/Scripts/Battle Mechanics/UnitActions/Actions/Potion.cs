@@ -26,7 +26,7 @@ public class Potion : Item
     public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
     public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
     {
-        ActionScore = new AIActionScore();
+        ActionScore = null;
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         
         foreach (var tile in Area(unit, null))
@@ -39,13 +39,13 @@ public class Potion : Item
                     foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
-                if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+                if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
             }
         }
         
-        Debug.Log("Best Heuristic Score: " + (ActionScore.DamageScore <= 0 ? "N/A" : ActionScore.TotalScore()));
-        Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
-        return ActionScore.DamageScore <= 0 ? -9999 : ActionScore.TotalScore();
+        Debug.Log("Best Heuristic Score: " + (ActionScore?.DamageScore <= 0 ? "N/A" : ActionScore?.TotalScore()));
+        Debug.Log("Decided Cell Location: " + ActionScore?.PotentialCell);
+        return ActionScore!.DamageScore <= 0 ? -9999 : ActionScore.TotalScore();
     }
     
     public override void ActivateAction(Unit unit)

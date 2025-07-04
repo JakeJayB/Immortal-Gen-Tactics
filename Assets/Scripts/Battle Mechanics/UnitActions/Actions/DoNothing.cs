@@ -8,7 +8,7 @@ public class DoNothing : UnitAction
     public override int MPCost { get; protected set; } = 0;
     public override int APCost { get; protected set; } = 0;
     public override int Priority { get; protected set; } = 0;
-    public override DamageType DamageType { get; protected set; }
+    public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override int BasePower { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Wait;
     public override Pattern AttackPattern { get; protected set; } = Pattern.None;

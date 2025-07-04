@@ -177,8 +177,8 @@ public class AIActionScore
     {
         int resourceScore = 0;
 
-        resourceScore += Mathf.RoundToInt(unitAI.unitInfo.currentMP - Action.MPCost * unitAI.ResourceManagement);
-        resourceScore += Mathf.RoundToInt(unitAI.unitInfo.currentAP - Action.APCost * unitAI.ResourceManagement);
+        resourceScore -= Mathf.RoundToInt(Action.MPCost * unitAI.ResourceManagement);
+        resourceScore -= Mathf.RoundToInt(Action.APCost * unitAI.ResourceManagement);
         
         if (Action.ActionType == ActionType.Wait) {
             resourceScore += Mathf.RoundToInt((unitAI.unitInfo.FinalAP - unitAI.unitInfo.currentAP) * unitAI.ReactionAllocation); 

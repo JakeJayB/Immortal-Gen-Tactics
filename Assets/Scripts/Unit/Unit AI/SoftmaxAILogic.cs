@@ -60,6 +60,22 @@ public static class SoftmaxAILogic
         (potentialActions, actionScores) = FilterWaitAction(potentialActions, actionScores);
         return (potentialActions, actionScores);
     }
+    private static (List<UnitAction>, List<float>) FilterNegatives(List<UnitAction> potentialActions, List<float> actionScores)
+    {
+        List<UnitAction> filteredActions = new();
+        List<float> filteredScores = new();
+
+        for (int i = 0; i < potentialActions.Count; i++)
+        {
+            if (actionScores[i] >= 0)
+            {
+                filteredActions.Add(potentialActions[i]);
+                filteredScores.Add(actionScores[i]);
+            }
+        }
+        
+        return (filteredActions, filteredScores);
+    }
     
     private static (List<UnitAction>, List<float>) FilterWaitAction(List<UnitAction> potentialActions,
         List<float> actionScores)
@@ -78,22 +94,5 @@ public static class SoftmaxAILogic
         actionScores.RemoveAt(waitIndex);
 
         return (potentialActions, actionScores);
-    }
-    
-    private static (List<UnitAction>, List<float>) FilterNegatives(List<UnitAction> potentialActions, List<float> actionScores)
-    {
-        List<UnitAction> filteredActions = new();
-        List<float> filteredScores = new();
-
-        for (int i = 0; i < potentialActions.Count; i++)
-        {
-            if (actionScores[i] >= 0)
-            {
-                filteredActions.Add(potentialActions[i]);
-                filteredScores.Add(actionScores[i]);
-            }
-        }
-        
-        return (filteredActions, filteredScores);
     }
 }
