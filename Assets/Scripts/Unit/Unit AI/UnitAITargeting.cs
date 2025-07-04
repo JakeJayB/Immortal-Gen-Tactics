@@ -34,7 +34,7 @@ public class UnitAITargeting
         // Score Factor 2: Distance Away
         if (unitAI != potentialUnit) {
             // score += Mathf.RoundToInt(unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP / (float)distance);
-            score += unitAI.unitInfo.FinalMove * unitAI.unitInfo.currentAP - distance;
+            score += unitAI.unitInfo.FinalMove * (ChainSystem.ReactionInProgress ? 1 : unitAI.unitInfo.currentAP) - distance;
         }
         
         // Score Factor 3: Action Impact
@@ -63,9 +63,10 @@ public class UnitAITargeting
         {
             // Skip Actions that Heal an Enemy
             // Skip Actions that can't be Currently Used by the UnitAI
+            // Skip Reactions that aren't in Range
             if (action.DamageType == DamageType.Healing) { continue; }
-            //if (unitAI.unitInfo.currentAP < action.APCost || unitAI.unitInfo.currentMP < action.MPCost) { continue; }
             if (unitAI.unitInfo.currentMP < action.MPCost) { continue; }
+            if (ChainSystem.ReactionInProgress && action.Range + action.Splash < distance) { continue; }
             
             // Instantiate the damage value the current action will have in the future
             int futureDamage = 0;
@@ -171,9 +172,10 @@ public class UnitAITargeting
             if (action.DamageType is DamageType.Physical or DamageType.Magic ) { continue; }
             if (action.DamageType == DamageType.Healing &&
                 potentialUnit.unitInfo.currentHP == potentialUnit.unitInfo.FinalHP) { continue; }
-            //if (unitAI.unitInfo.currentAP < action.APCost || unitAI.unitInfo.currentMP < action.MPCost) { continue; }
             if (unitAI.unitInfo.currentMP < action.MPCost) { continue; }
             if (unitAI.unitInfo.IsDead() && action.DamageType == DamageType.Healing) { continue; }
+            if (ChainSystem.ReactionInProgress && action.Range + action.Splash < distance) { continue; }
+            
             
             // Instantiate the damage value the current action will have in the future
             int futureHealing = 0;
