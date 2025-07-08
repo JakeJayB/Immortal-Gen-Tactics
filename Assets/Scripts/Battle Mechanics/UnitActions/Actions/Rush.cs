@@ -1,0 +1,108 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Rush : UnitAction
+{
+    public override string Name { get; protected set; } = "Rush";
+    public override int MPCost { get; protected set; } = 0;
+    public override int APCost { get; protected set; } = 1;
+    public override int Priority { get; protected set; } = 1;
+    public override DamageType DamageType { get; protected set; } = DamageType.Physical;
+    public override int BasePower { get; protected set; } = 10;
+    public override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override Pattern AttackPattern { get; protected set; } = Pattern.Rush;
+    public override int Range { get; protected set; }
+    public override AIActionScore ActionScore { get; protected set; }
+    public override int Splash { get; protected set; } = 0;
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell)
+    {
+        // Update Range Based On Unit's Movement
+        Range = unit.unitInfo.FinalMove;
+        
+        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+                ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
+                : unit.unitInfo.Vector2CellLocation()],
+            Range, AttackPattern);
+    }
+
+    public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
+    public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
+
+    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
+    {
+        ActionScore = null;
+        Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
+
+        foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
+                     TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+                     Range))
+        {
+            foreach (var tile in direction)
+            {
+                if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
+                {
+                    if (foundUnit.unitInfo.IsDead()) { continue; }
+                    
+                    AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                        foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+                    Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                    if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+
+                    break;
+                }
+            }
+        }
+
+        Debug.Log("Best Heuristic Score: " + (ActionScore == null ? "N/A" : ActionScore.TotalScore()));
+        return ActionScore?.TotalScore() ?? -9999;
+    }
+
+    public override void ActivateAction(Unit unit)
+    {
+        UnitMenu.HideMenu();
+        ActionUtility.ShowSelectableTilesForAction(Area(unit, null));
+        ChainSystem.HoldPotentialChain(this, unit);
+        MapCursor.ActionState();
+    }
+
+    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
+    {
+        // Spend an Action Point to execute the Action
+        PayAPCost(unit);
+        
+        Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+        Vector2Int displacement = selectedCell - originCell;
+
+        Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
+        int numOfCells = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
+        Vector2Int previousCell = originCell;
+
+        for (int i = 1; i <= numOfCells; i++)
+        {
+            Vector2Int nextCell = originCell + direction * i;
+            if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
+            {
+                // Remove the Location the Unit is currently at in UnitLocator
+                TilemapCreator.UnitLocator.Remove(originCell);
+        
+                // Updates the location as the Unit moves
+                yield return unit.unitMovement.Move(unit, previousCell);
+        
+                // Adds the location of the tile the Unit ended at in UnitLocator
+                TilemapCreator.UnitLocator.Add(previousCell, unit);
+                
+                int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
+                SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
+                Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
+                break;
+            }
+
+            previousCell = nextCell;
+        }
+        
+        yield return null;
+    }
+}

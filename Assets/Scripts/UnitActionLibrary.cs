@@ -11,7 +11,8 @@ public class UnitActionLibrary : MonoBehaviour
     {
         {0, () => new SplashSpell()},
         {1, () => new Heal()},
-        {2, () => new Revive()}
+        {2, () => new Revive()},
+        {3, () => new Rush()}
     };
 
     private static Dictionary<int, Func<UnitAction>> Items { get; set; } = new()

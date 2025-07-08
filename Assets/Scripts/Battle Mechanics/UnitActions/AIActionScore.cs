@@ -48,7 +48,35 @@ public class AIActionScore
                         foreach (var tile in direction)
                         {
                             // Skip to the next tile if no unit exists on this one...
-                            if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { break; }
+                            if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
+                            
+                            damageScore += CalcDamageToUnit(unitAI, unitOnTile);
+                        }
+
+                        break;
+                    }
+                }
+                
+                break;
+            
+            case Pattern.Rush:
+                foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
+                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.unitInfo.Vector2CellLocation()],
+                             action.Range))
+                {
+                    
+                    // Only check the direction that contains the potential cell currently being scored
+                    if (direction.Contains(
+                            TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)]))
+                    {
+                        foreach (var tile in direction)
+                        {
+                            // Skip to the next tile if no unit exists on this one...
+                            if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
+
+                            if (Pathfinder.DistanceBetweenUnits(unitOnTile, unitAI) <
+                                Pathfinder.DistanceBetweenCells(unitOnTile.unitInfo.CellLocation,
+                                    unitAI.unitInfo.CellLocation)) { break; }
                             
                             damageScore += CalcDamageToUnit(unitAI, unitOnTile);
                         }

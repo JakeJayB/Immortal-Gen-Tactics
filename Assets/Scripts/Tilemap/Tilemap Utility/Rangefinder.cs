@@ -8,15 +8,15 @@ public enum Pattern
 {
     Direct,
     Linear,
+    Rush,
     Arc,
     Splash,
     All,
     None
 }
 
-public class Rangefinder
+public static class Rangefinder
 {
-
     public static List<Tile> GetTilesInRange(Tile characterTile, int range, Pattern rangePattern)
     {
         switch (rangePattern)
@@ -24,6 +24,7 @@ public class Rangefinder
             case Pattern.Direct:
                 return TilemapUtility.GetDirectTile(characterTile, range);
             case Pattern.Linear:
+            case Pattern.Rush:
                 return TilemapUtility.GetLinearTilesInRange(characterTile, range);
             case Pattern.Arc:
                 Debug.LogError("Rangefinder: Arc pattern not implemented yet. Returning null");
