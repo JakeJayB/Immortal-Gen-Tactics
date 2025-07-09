@@ -105,8 +105,13 @@ public class Rush : UnitAction
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
                 yield return BattleFX.InflictBlowback(targetUnit, (Range - i) / 2 < 1 ? 1 : (Range - i) / 2, direction);
                 
+                var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
+                    ? previousCell : nextCell;
+                
+                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return unit.unitMovement.Move(unit, endLocation); }
+                
                 // Adds the location of the tile the Unit ended at in UnitLocator
-                TilemapCreator.UnitLocator.Add(previousCell, unit);
+                TilemapCreator.UnitLocator.Add(endLocation, unit);
                 break;
             }
 

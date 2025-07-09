@@ -42,9 +42,14 @@ public class BattleFX : MonoBehaviour
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
                 yield return InflictBlowback(targetUnit, (strength - i) / 2, direction);
+
+                var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
+                    ? previousCell : nextCell;
+                
+                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return unit.unitMovement.Move(unit, endLocation); }
                 
                 // Adds the location of the tile the Unit ended at in UnitLocator
-                TilemapCreator.UnitLocator.Add(previousCell, unit);
+                TilemapCreator.UnitLocator.Add(endLocation, unit);
                 break;
             }
 
