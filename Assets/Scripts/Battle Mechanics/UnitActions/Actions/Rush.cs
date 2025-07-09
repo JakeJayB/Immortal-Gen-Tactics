@@ -81,22 +81,40 @@ public class Rush : UnitAction
         for (int i = 1; i <= Range; i++)
         {
             Vector2Int nextCell = originCell + direction * i;
+
+            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
+            {
+                TilemapCreator.UnitLocator.Remove(originCell);
+                yield return unit.unitMovement.Move(unit, previousCell);
+                TilemapCreator.UnitLocator.Add(previousCell, unit);
+                yield break;
+            }
+            
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
             {
                 // Remove the Location the Unit is currently at in UnitLocator
                 TilemapCreator.UnitLocator.Remove(originCell);
         
                 // Updates the location as the Unit moves
-                yield return unit.unitMovement.Move(unit, previousCell);
-        
-                // Adds the location of the tile the Unit ended at in UnitLocator
-                TilemapCreator.UnitLocator.Add(previousCell, unit);
+                if (TilemapCreator.UnitLocator.TryGetValue(targetUnit.unitInfo.Vector2CellLocation(),
+                        out var otherUnit))
+                {
+                    yield return unit.unitMovement.Move(unit, previousCell);
+                }
+                else
+                {
+                    yield return unit.unitMovement.Move(unit, nextCell);
+                }
+                
                 
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
-                yield return BattleFX.InflictBlowback(targetUnit, Range - i, direction);
+                yield return BattleFX.InflictBlowback(targetUnit, (Range - i) / 2 < 1 ? 1 : (Range - i) / 2, direction);
+                
+                // Adds the location of the tile the Unit ended at in UnitLocator
+                TilemapCreator.UnitLocator.Add(previousCell, unit);
                 break;
             }
 
