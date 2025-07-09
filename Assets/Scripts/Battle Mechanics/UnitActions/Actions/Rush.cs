@@ -96,6 +96,7 @@ public class Rush : UnitAction
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
+                yield return BattleFX.InflictBlowback(targetUnit, Range - i, direction);
                 break;
             }
 
