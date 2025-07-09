@@ -72,7 +72,7 @@ public class Rush : UnitAction
         // Spend an Action Point to execute the Action
         PayAPCost(unit);
         
-        Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+        Vector2Int originCell = unit.unitInfo.Vector2CellLocation();
         Vector2Int displacement = selectedCell - originCell;
         Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
         
@@ -82,6 +82,7 @@ public class Rush : UnitAction
         {
             Vector2Int nextCell = originCell + direction * i;
 
+            // Stop the unit from trying to traverse null tile locations
             if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
             {
                 TilemapCreator.UnitLocator.Remove(originCell);
@@ -94,18 +95,9 @@ public class Rush : UnitAction
             {
                 // Remove the Location the Unit is currently at in UnitLocator
                 TilemapCreator.UnitLocator.Remove(originCell);
-        
-                // Updates the location as the Unit moves
-                if (TilemapCreator.UnitLocator.TryGetValue(targetUnit.unitInfo.Vector2CellLocation(),
-                        out var otherUnit))
-                {
-                    yield return unit.unitMovement.Move(unit, previousCell);
-                }
-                else
-                {
-                    yield return unit.unitMovement.Move(unit, nextCell);
-                }
                 
+                // Updates the location as the Unit moves
+                yield return unit.unitMovement.Move(unit, previousCell);
                 
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);

@@ -65,6 +65,8 @@ public class ChainSystem
 
             yield return action.ExecuteAction(unit, target);
         }
+        
+        TurnSystem.IsGameOver();
     }
 
     private static IEnumerator ReactionPhase(Vector2Int target)

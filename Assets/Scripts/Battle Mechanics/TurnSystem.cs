@@ -233,7 +233,7 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    private static void IsGameOver()
+    public static void IsGameOver()
     {
         bool enemyAlive = false;
         bool allyAlive = false;
@@ -280,8 +280,6 @@ public class TurnSystem : MonoBehaviour
 
         TurnCycle.RemoveUnit(unit);
         unitQueue.Remove(unit);
-
-        IsGameOver();
     }
 
     public static void ContinueLoop() => continueLoop = true;
