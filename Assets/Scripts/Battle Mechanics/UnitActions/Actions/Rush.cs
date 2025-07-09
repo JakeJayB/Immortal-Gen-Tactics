@@ -74,12 +74,11 @@ public class Rush : UnitAction
         
         Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
         Vector2Int displacement = selectedCell - originCell;
-
         Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
-        int numOfCells = Mathf.Max(Mathf.Abs(displacement.x), Mathf.Abs(displacement.y));
+        
         Vector2Int previousCell = originCell;
 
-        for (int i = 1; i <= numOfCells; i++)
+        for (int i = 1; i <= Range; i++)
         {
             Vector2Int nextCell = originCell + direction * i;
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
@@ -101,6 +100,17 @@ public class Rush : UnitAction
             }
 
             previousCell = nextCell;
+
+            if (i != Range) continue;
+            
+            // Remove the Location the Unit is currently at in UnitLocator
+            TilemapCreator.UnitLocator.Remove(originCell);
+        
+            // Updates the location as the Unit moves
+            yield return unit.unitMovement.Move(unit, previousCell);
+        
+            // Adds the location of the tile the Unit ended at in UnitLocator
+            TilemapCreator.UnitLocator.Add(previousCell, unit);
         }
         
         yield return null;

@@ -205,6 +205,7 @@ public class TilemapUtility
                 break;
             
             case Pattern.Linear:
+            case Pattern.Rush:
                 var linearDirections =
                     TilemapUtility.GetDirectionalLinearTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
                         action.Range);
