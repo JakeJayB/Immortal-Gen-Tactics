@@ -69,18 +69,13 @@ public class AIActionScore
                     if (direction.Contains(
                             TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)]))
                     {
-                        foreach (var tile in direction)
-                        {
-                            // Skip to the next tile if no unit exists on this one...
-                            if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
+                        Vector2Int displacement = new Vector2Int(potentialCell.x, potentialCell.z) - unitAI.unitInfo.Vector2CellLocation();
+                        Vector2Int rushDirection = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
+                        Vector2Int projectedLocation = Pathfinder.ProjectedRushLocation(unitAI, rushDirection);
 
-                            if (Pathfinder.DistanceBetweenUnits(unitOnTile, unitAI) <
-                                Pathfinder.DistanceBetweenCells(unitOnTile.unitInfo.CellLocation,
-                                    unitAI.unitInfo.CellLocation)) { break; }
-                            
-                            damageScore += CalcDamageToUnit(unitAI, unitOnTile);
-                        }
-
+                        if (!TilemapCreator.UnitLocator.TryGetValue(projectedLocation, out var hitUnit)) break;
+                        
+                        damageScore += CalcDamageToUnit(unitAI, hitUnit);
                         break;
                     }
                 }
