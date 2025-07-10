@@ -26,6 +26,11 @@ public class BattleFX : MonoBehaviour
                 TilemapCreator.UnitLocator.Remove(startCell);
                 yield return unit.unitMovement.Move(unit, previousCell);
                 TilemapCreator.UnitLocator.Add(previousCell, unit);
+                
+                int damage = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.20 * (strength - 1))), unit.unitInfo);
+                SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
+                yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, damage);
+                
                 yield break;
             }
             
@@ -37,10 +42,11 @@ public class BattleFX : MonoBehaviour
                 // Updates the location as the Unit moves
                 yield return unit.unitMovement.Move(unit, previousCell);
                 
-                int damage = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.15 * (strength - 1))), unit.unitInfo);
+                int damageA = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.10 * (strength - 1))), unit.unitInfo);
+                int damageB = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.10 * (strength - 1))), targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
-                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
-                Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
+                yield return DamageDisplay.DisplayUnitDamage(unit.unitInfo, damageA);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damageB);
                 yield return InflictBlowback(targetUnit, (strength - i) / 2, direction);
 
                 var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)

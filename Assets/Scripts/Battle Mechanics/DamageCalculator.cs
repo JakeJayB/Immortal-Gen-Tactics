@@ -110,9 +110,9 @@ public class DamageCalculator : MonoBehaviour
     public static int DamageFixedAmount(int amount, UnitInfo target)
     {
         target.currentHP -= amount;
-        int damage = target.currentHP < 0 ? 0 : target.currentHP;
-        target.currentHP = damage;
-        return damage;
+        target.currentHP = target.currentHP < 0 ? 0 : target.currentHP;
+        if (target.currentHP <= 0) { target.Die(); }
+        return amount;
     }
     
     public static int HealFixedAmount(int amount, UnitInfo target)
