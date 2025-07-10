@@ -71,11 +71,10 @@ public class AIActionScore
                     {
                         Vector2Int displacement = new Vector2Int(potentialCell.x, potentialCell.z) - unitAI.unitInfo.Vector2CellLocation();
                         Vector2Int rushDirection = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
-                        Vector2Int projectedLocation = Pathfinder.ProjectedRushLocation(unitAI, rushDirection);
+                        Unit projectedTarget = Pathfinder.ProjectedRushTarget(unitAI, rushDirection);
 
-                        if (!TilemapCreator.UnitLocator.TryGetValue(projectedLocation, out var hitUnit)) break;
-                        
-                        damageScore += CalcDamageToUnit(unitAI, hitUnit);
+                        if (!projectedTarget) break;
+                        damageScore += CalcDamageToUnit(unitAI, projectedTarget);
                         break;
                     }
                 }

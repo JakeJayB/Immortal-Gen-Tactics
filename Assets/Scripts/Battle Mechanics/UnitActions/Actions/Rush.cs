@@ -42,7 +42,7 @@ public class Rush : UnitAction
             foreach (var tile in direction)
             {
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    tile.TileInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;

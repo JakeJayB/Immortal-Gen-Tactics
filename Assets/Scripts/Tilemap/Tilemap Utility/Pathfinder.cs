@@ -101,6 +101,24 @@ public class Pathfinder
         return Mathf.Abs(dx) + Mathf.Abs(dz);
     }
 
+    public static Unit ProjectedRushTarget(Unit unit, Vector2Int direction)
+    {
+        Vector2Int startCell = unit.unitInfo.Vector2CellLocation();
+        
+        for (int i = 1; i <= unit.unitInfo.FinalMove; i++)
+        {
+            Vector2Int nextCell = startCell + direction * i;
+
+            // Stop the unit from trying to traverse null tile locations
+            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile)) { return null; }
+            
+            // Return unit if one is found on the tile
+            if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit)) { return targetUnit; }
+        }
+        
+        return null;
+    }
+    
     public static Vector2Int ProjectedRushLocation(Unit unit, Vector2Int direction)
     {
         Vector2Int projectedLocation = Vector2Int.zero;
@@ -112,23 +130,19 @@ public class Pathfinder
             Vector2Int nextCell = startCell + direction * i;
 
             // Stop the unit from trying to traverse null tile locations
-            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
-            {
-                projectedLocation = previousCell;
-                break;
+            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile)) {
+                return previousCell;
             }
             
-            if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
-            {
-                projectedLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
+            if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit)) {
+                return TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
                     ? previousCell : nextCell;
-                break;
             }
 
             previousCell = nextCell;
 
             if (i != unit.unitInfo.FinalMove) continue;
-            projectedLocation = previousCell;
+            return previousCell;
         }
         
         return projectedLocation;
