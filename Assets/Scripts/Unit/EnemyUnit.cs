@@ -134,11 +134,13 @@ public class EnemyUnit : Unit
             {
                 if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
 
+                /*
                 if ((targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy &&
                      action.DamageType is DamageType.Physical or DamageType.Magic) ||
                     (targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player &&
                      action.DamageType == DamageType.Healing))
                     continue;
+                */
                 
                 potentialActions.Add(action);
                 actionScores.Add(action.CalculateActionScore(this, nearbyUnit) / 2); // TODO: Fix Score Balancing to Prevent Softmax Overflow

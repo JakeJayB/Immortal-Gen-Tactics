@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Actions:
-    Actions: 
+    Actions: 03000000
   Items:
     StorageAItems: 640000006600000066000000
     StorageBItems: 

@@ -220,14 +220,21 @@ public class AIActionScore
         int reactionScore = 0;
         
         (UnitAction initialAction, Vector2Int target, Unit attacker) = ChainSystem.GetInitialChain();
+
+        Vector2Int projectedLocation = unitAI.unitInfo.Vector2CellLocation();
+        if (Action.ActionType == ActionType.Move) projectedLocation = new Vector2Int(PotentialCell.x, PotentialCell.z);
+        else if (Action.AttackPattern == Pattern.Rush)
+        {
+            Vector2Int displacement = new Vector2Int(PotentialCell.x, PotentialCell.z) - unitAI.unitInfo.Vector2CellLocation();
+            Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
+            projectedLocation = Pathfinder.ProjectedRushLocation(unitAI, direction);
+        }
         
         int projectedDamage =
             DamageCalculator.ProjectDamage(initialAction, attacker.unitInfo, unitAI.unitInfo);
         
         if (TilemapUtility.GetTargetedArea(attacker, initialAction, target).Contains(
-                TilemapCreator.TileLocator[Action.ActionType == ActionType.Move 
-                    ? new Vector2Int(PotentialCell.x, PotentialCell.z) 
-                    : unitAI.unitInfo.Vector2CellLocation()]))
+                TilemapCreator.TileLocator[projectedLocation]))
         {
             if (unitAI.unitInfo.currentHP - projectedDamage < 1) {
                 reactionScore -= unitAI.unitInfo.FinalHP * (int)unitAI.Survival;

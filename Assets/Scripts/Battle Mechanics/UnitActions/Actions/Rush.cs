@@ -9,7 +9,7 @@ public class Rush : UnitAction
     public override int APCost { get; protected set; } = 1;
     public override int Priority { get; protected set; } = 1;
     public override DamageType DamageType { get; protected set; } = DamageType.Physical;
-    public override int BasePower { get; protected set; } = 10;
+    public override int BasePower { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
     public override Pattern AttackPattern { get; protected set; } = Pattern.Rush;
     public override int Range { get; protected set; }
@@ -34,12 +34,22 @@ public class Rush : UnitAction
         ActionScore = null;
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
 
+        Area(unit, null);
         foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
                      TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
                      Range))
         {
             foreach (var tile in direction)
             {
+                AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
+                    tile.TileInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            
+                Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
+
+                break;
+                
+                /*
                 if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
                 {
                     if (foundUnit.unitInfo.IsDead()) { continue; }
@@ -52,6 +62,7 @@ public class Rush : UnitAction
 
                     break;
                 }
+                */
             }
         }
 

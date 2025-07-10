@@ -100,4 +100,37 @@ public class Pathfinder
     
         return Mathf.Abs(dx) + Mathf.Abs(dz);
     }
+
+    public static Vector2Int ProjectedRushLocation(Unit unit, Vector2Int direction)
+    {
+        Vector2Int projectedLocation = Vector2Int.zero;
+        Vector2Int startCell = unit.unitInfo.Vector2CellLocation();
+        Vector2Int previousCell = startCell;
+        
+        for (int i = 1; i <= unit.unitInfo.FinalMove; i++)
+        {
+            Vector2Int nextCell = startCell + direction * i;
+
+            // Stop the unit from trying to traverse null tile locations
+            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
+            {
+                projectedLocation = previousCell;
+                break;
+            }
+            
+            if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
+            {
+                projectedLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
+                    ? previousCell : nextCell;
+                break;
+            }
+
+            previousCell = nextCell;
+
+            if (i != unit.unitInfo.FinalMove) continue;
+            projectedLocation = previousCell;
+        }
+        
+        return projectedLocation;
+    }
 }
