@@ -136,7 +136,9 @@ public class SelectorUnitIcons : MonoBehaviour
             // resets unit to default position
             unit.gameObj.SetActive(false);
             unit.unitInfo.CellLocation = Vector3Int.zero;
-            unit.unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
+            SpriteRenderer spriteRenderer = unit.gameObject.GetComponent<SpriteRenderer>();
+            UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+            unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
 
             activeUnits.Remove(currentIdx);
             UnshadeUnitIcon();
@@ -153,7 +155,9 @@ public class SelectorUnitIcons : MonoBehaviour
                     // resets unit to default position
                     unit.gameObj.SetActive(false);
                     unit.unitInfo.CellLocation = Vector3Int.zero;
-                    unit.unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
+                    SpriteRenderer spriteRenderer = unit.gameObject.GetComponent<SpriteRenderer>();
+                    UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                    unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
                     break;
                 }
             }

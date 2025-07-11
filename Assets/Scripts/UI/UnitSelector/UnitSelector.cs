@@ -157,8 +157,13 @@ public class UnitSelector : MonoBehaviour
                     unitSelected.unitInfo.CellLocation = unit2Location;
                     unit.unitInfo.CellLocation = tempCell;
 
-                    unitSelected.unitRenderer.PositionUnit(unit2Location);
-                    unit.unitRenderer.PositionUnit(tempCell);
+                    SpriteRenderer spriteRenderer = unitSelected.gameObject.GetComponent<SpriteRenderer>();
+                    UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                    unitRenderer.PositionUnit(unit2Location);
+                    
+                    spriteRenderer = unit.gameObject.GetComponent<SpriteRenderer>();
+                    unitRenderer = new UnitRenderer(spriteRenderer);
+                    unitRenderer.PositionUnit(tempCell);
 
                     // Add new locations to UnitLocator
                     TilemapCreator.UnitLocator.Add(unitSelected.unitInfo.Vector2CellLocation(), unitSelected);
@@ -187,7 +192,9 @@ public class UnitSelector : MonoBehaviour
                 // Placing Unit to new location
                 TilemapCreator.UnitLocator.Remove(new Vector2Int(currLocation.x, currLocation.z));
                 unitSelected.unitInfo.CellLocation = newLocation;
-                unitSelected.unitRenderer.PositionUnit(newLocation);
+                SpriteRenderer spriteRenderer = unitSelected.gameObject.GetComponent<SpriteRenderer>();
+                UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                unitRenderer.PositionUnit(newLocation);
                 TilemapCreator.UnitLocator.Add(unitSelected.unitInfo.Vector2CellLocation(), unitSelected);
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
