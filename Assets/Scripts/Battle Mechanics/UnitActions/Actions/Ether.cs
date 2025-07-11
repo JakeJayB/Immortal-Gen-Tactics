@@ -26,7 +26,7 @@ public class Ether : Item
     public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
 
     // TODO: Fix this. Borrows from Potion.
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");

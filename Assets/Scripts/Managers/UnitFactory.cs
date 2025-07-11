@@ -13,9 +13,9 @@ public static class UnitFactory
                 unit.Initialize(initLocation, unitDirection);
                 return unit;
             case UnitAffiliation.Enemy:
-                EnemyUnit enemyUnit = new EnemyUnit(instance);
-                enemyUnit.InitializeAI(initLocation, unitDirection);
-                return enemyUnit;
+                AIUnit aiUnit = new AIUnit(instance);
+                aiUnit.InitializeAI(initLocation, unitDirection);
+                return aiUnit;
         }
         
         return null;

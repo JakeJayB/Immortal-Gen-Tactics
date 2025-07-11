@@ -21,7 +21,7 @@ public class AIActionScore
     // [+] Scores Damage/Healing Done To Ally & Enemy Units
     // [+] Scores Potential Death
     // [+] Scores Potential Revival
-    public int CalcDamageScore(EnemyUnit unitAI, UnitAction action, Vector3Int potentialCell, bool moved = false)
+    public int CalcDamageScore(AIUnit unitAI, UnitAction action, Vector3Int potentialCell, bool moved = false)
     {
         int damageScore = 0;        // Holds the calculated damage score
         int projectedDamage = 0;    // Amount of damage projected to happen to the unit on tile
@@ -108,7 +108,7 @@ public class AIActionScore
     // CalcPositionScore
     // [+] Scores Nearby Units Who Sense the AI Unit
     // [+] Scores Proximity Between AI Unit and Target
-    public int CalcPositionScore(EnemyUnit unitAI, List<Unit> nearbyUnits)
+    public int CalcPositionScore(AIUnit unitAI, List<Unit> nearbyUnits)
     {
         int positionScore = 0;      // Holds the calculated damage score
         int distance = 0;
@@ -148,7 +148,7 @@ public class AIActionScore
     }
 
     // TODO: Calculate the next best action after this current one to contribute its value to the score.
-    public int CalcForesightScore(EnemyUnit unitAI)
+    public int CalcForesightScore(AIUnit unitAI)
     {
         // If the AI Unit is waiting, do not check for foresight
         if (Action.ActionType == ActionType.Wait) { return 0; }
@@ -195,7 +195,7 @@ public class AIActionScore
         return foresightScore;
     }
 
-    public int CalcResourceScore(EnemyUnit unitAI)
+    public int CalcResourceScore(AIUnit unitAI)
     {
         int resourceScore = 0;
 
@@ -209,7 +209,7 @@ public class AIActionScore
         return resourceScore;
     }
 
-    public int CalcReactionScore(EnemyUnit unitAI)
+    public int CalcReactionScore(AIUnit unitAI)
     {
         int reactionScore = 0;
         
@@ -242,7 +242,7 @@ public class AIActionScore
     
     // -------------------------------------------------------------------------------------------------------------------
 
-    private int CalcDamageToUnit(EnemyUnit unitAI, Unit unitOnTile)
+    private int CalcDamageToUnit(AIUnit unitAI, Unit unitOnTile)
     {
         int projectedDamage = 0;    // Projected Damage or Healing Inflicted
         int projectedScore = 0;     // Total Value Projected to Come From Projected Damage
@@ -269,7 +269,7 @@ public class AIActionScore
     
     // -------------------------------------------------------------------------------------------------------------------
 
-    private int CalcFutureActionScore(EnemyUnit unitAI, UnitAction futureAction)
+    private int CalcFutureActionScore(AIUnit unitAI, UnitAction futureAction)
     {
         int bestScore = 0;
 
@@ -289,7 +289,7 @@ public class AIActionScore
     
     // -------------------------------------------------------------------------------------------------------------------
     
-    public AIActionScore EvaluateScore(UnitAction action, EnemyUnit unit, Vector3Int potentialCell,
+    public AIActionScore EvaluateScore(UnitAction action, AIUnit unit, Vector3Int potentialCell,
         Vector3Int targetCell, List<Unit> allyUnits, List<Unit> enemyUnits)
     {
         Action = action;

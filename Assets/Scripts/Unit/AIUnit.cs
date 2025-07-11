@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyUnit : Unit
+public class AIUnit : Unit
 {
     // AI Behavior Set
     public AIUnitBehavior AIUnitBehavior;
@@ -21,7 +21,7 @@ public class EnemyUnit : Unit
 
     public Unit targetedUnit;
 
-    public EnemyUnit(GameObject gameObj) : base(gameObj) { }
+    public AIUnit(GameObject gameObj) : base(gameObj) { }
     
     public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {

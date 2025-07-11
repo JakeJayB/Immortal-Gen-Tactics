@@ -25,7 +25,7 @@ public class DoNothing : UnitAction
         throw new System.NotImplementedException();
     }
 
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");

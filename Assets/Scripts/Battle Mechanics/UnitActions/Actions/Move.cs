@@ -25,7 +25,7 @@ public class Move : UnitAction
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
@@ -58,7 +58,7 @@ public class Move : UnitAction
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
         // Have AI Units show their range of movement before moving
-        if (unit is EnemyUnit)
+        if (unit is AIUnit)
         {
             ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
             yield return new WaitForSeconds(2.0f);
@@ -80,6 +80,6 @@ public class Move : UnitAction
         CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
         CanvasUI.HideTargetUnitInfoDisplay();
 
-        if (unit is not EnemyUnit) { MapCursor.currentUnit = selectedCell; }
+        if (unit is not AIUnit) { MapCursor.currentUnit = selectedCell; }
     }
 }

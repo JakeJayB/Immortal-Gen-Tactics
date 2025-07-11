@@ -23,7 +23,7 @@ public class Wait : UnitAction
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_wait";
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
     {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");

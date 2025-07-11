@@ -24,7 +24,7 @@ public class Back : UnitAction
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_back";
     
     public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell) {
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell) {
         throw new System.NotImplementedException();
     }
 

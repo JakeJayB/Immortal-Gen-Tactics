@@ -17,19 +17,19 @@ public class AIUnitBehavior : MonoBehaviour
         
     }
     
-    public void StartTurn(EnemyUnit unitAI) 
+    public void StartTurn(AIUnit unitAI) 
     {
         CanvasUI.ShowTurnUnitInfoDisplay(unitAI.unitInfo);
         StartCoroutine(DecideAction(unitAI)); 
     }
     
-    public IEnumerator React(EnemyUnit unitAI)
+    public IEnumerator React(AIUnit unitAI)
     {
         CanvasUI.ShowTurnUnitInfoDisplay(unitAI.unitInfo);
         yield return StartCoroutine(DecideAction(unitAI)); 
     }
     
-    private IEnumerator DecideAction(EnemyUnit unitAI)
+    private IEnumerator DecideAction(AIUnit unitAI)
     {
         var actionDetermined = false;
         var isReacting = ChainSystem.ReactionInProgress;

@@ -28,7 +28,7 @@ public class Attack : UnitAction
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
 
     public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell)
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
     {
         ActionScore = null;
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");

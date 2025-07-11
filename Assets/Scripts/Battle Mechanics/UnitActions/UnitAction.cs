@@ -23,7 +23,7 @@ public abstract class UnitAction
 
     public abstract Sprite SlotImage();
 
-    public abstract float CalculateActionScore(EnemyUnit unit, Vector2Int selectedCell);
+    public abstract float CalculateActionScore(AIUnit unit, Vector2Int selectedCell);
 
     public abstract void ActivateAction(Unit unit);
     public abstract IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell);

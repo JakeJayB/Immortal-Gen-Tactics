@@ -208,7 +208,7 @@ public class TurnSystem : MonoBehaviour
             CurrentUnit = unitQueue.Dequeue(); // Set the new unit whose turn is about to start
             CurrentUnit.unitInfo.RefreshAP();  // Unit AP refreshes to max amount at start of new turn
 
-            if (CurrentUnit is EnemyUnit enemyUnit)
+            if (CurrentUnit is AIUnit enemyUnit)
             {
                 MapCursor.SetGameObjInactive();
                 Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();

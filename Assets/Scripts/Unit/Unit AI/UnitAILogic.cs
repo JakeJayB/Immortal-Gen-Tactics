@@ -10,7 +10,7 @@ public class UnitAILogic : MonoBehaviour
 
     // This is test based on EnemyUnit's Move stat
     // The less AP that are needed to reach a unit, the more it will prioritize them
-    public static Unit PrioritizeUnit(EnemyUnit AI, List<Unit> units)
+    public static Unit PrioritizeUnit(AIUnit AI, List<Unit> units)
     {
         (Unit, int) prioritizedUnit = (null, 0);
         foreach (var unit in units)

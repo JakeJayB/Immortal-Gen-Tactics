@@ -154,5 +154,5 @@ public class UnitInfo : MonoBehaviour
 
     public bool IsDead() { return Dead; }
 
-    public bool IsAIUnit() { return unit is EnemyUnit; }
+    public bool IsAIUnit() { return unit is AIUnit; }
 }

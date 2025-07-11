@@ -93,7 +93,7 @@ public class ChainSystem
                 Debug.Log($"Unit {unit.gameObj.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
                 Debug.Log($"Unit {unit.gameObj.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
 
-                if (unit is EnemyUnit unitAI) {
+                if (unit is AIUnit unitAI) {
                     ReactionInProgress = true;
                     yield return unitAI.AIUnitBehavior.React(unitAI);
                 } // If the unit is an AI Enemy, do a specific instruction
@@ -122,7 +122,7 @@ public class ChainSystem
         yield return new WaitUntil(ReactionHasEnded);
 
         ReactingUnit = null;
-        if (TurnSystem.CurrentUnit is EnemyUnit) { MapCursor.SetGameObjInactive(); }
+        if (TurnSystem.CurrentUnit is AIUnit) { MapCursor.SetGameObjInactive(); }
         Debug.Log("Unit finished using reaction menu...");
     }
     

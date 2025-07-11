@@ -15,7 +15,7 @@ public class UnitAITargeting
     public int ReactionAllocationScore { get; set; } = -1;
     public Unit TargetUnit { get; set; }
 
-    private int CalcPriorityScore(EnemyUnit unitAI, Unit potentialUnit)
+    private int CalcPriorityScore(AIUnit unitAI, Unit potentialUnit)
     {
         // Skip the calculation process if enemy unit is already dead
         if (potentialUnit.unitInfo.IsDead() &&
@@ -50,7 +50,7 @@ public class UnitAITargeting
     
     // Aggression Score
     // Scores higher the closer an enemy unit is towards death.
-    private int CalcAggressionScore(EnemyUnit unitAI, Unit potentialUnit) {
+    private int CalcAggressionScore(AIUnit unitAI, Unit potentialUnit) {
         int score = 0;
         int distance = Pathfinder.DistanceBetweenUnits(unitAI, potentialUnit);
         
@@ -102,7 +102,7 @@ public class UnitAITargeting
     // Tactical Awareness Score
     // Completed!!
     // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
-    public int CalcSurvivalScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
+    public int CalcSurvivalScore(AIUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
         int score = 0;
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
         
@@ -114,7 +114,7 @@ public class UnitAITargeting
     // Tactical Awareness Score
     // Completed!!
     // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
-    public int CalcTacticalPositioningScore(EnemyUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
+    public int CalcTacticalPositioningScore(AIUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
         int score = 0;
         int currentDistance = Pathfinder.DistanceBetweenCells(unit.unitInfo.CellLocation, targetCell);
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
@@ -152,7 +152,7 @@ public class UnitAITargeting
     // TODO: Find an easy way to determine if the unit is able to provide support to the ally.
             // Can the AI 'reach' the unit?
             // Can the AI 'use' the action to support the unit?
-    public int CalcAllySynergyScore(EnemyUnit unitAI, Unit potentialUnit) {
+    public int CalcAllySynergyScore(AIUnit unitAI, Unit potentialUnit) {
         int score = 0;
         int distance = Pathfinder.DistanceBetweenUnits(unitAI, potentialUnit);
         
@@ -215,13 +215,13 @@ public class UnitAITargeting
     
     // Resource Management Score
     // Completed!!
-    public int CalcResourceManagementScore(EnemyUnit unit) {
+    public int CalcResourceManagementScore(AIUnit unit) {
         return -(unit.unitInfo.currentMP - Action.MPCost) / unit.unitInfo.FinalMP * Mathf.RoundToInt(unit.ResourceManagement);
     }
 
     // Reaction Awareness Score
     // Completed!!
-    public int CalcReactionAwarenessScore(EnemyUnit unit, Vector3Int potentialCell, List<Unit> enemyUnits) {
+    public int CalcReactionAwarenessScore(AIUnit unit, Vector3Int potentialCell, List<Unit> enemyUnits) {
         int score = 0;
         int threatLevel = 0;
         
@@ -241,12 +241,12 @@ public class UnitAITargeting
     
     // Reaction Allocation Score
     // Completed!!
-    public int CalcReactionAllocationScore(EnemyUnit unit) {
+    public int CalcReactionAllocationScore(AIUnit unit) {
         return 20 * (unit.unitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.ReactionAllocation);
     }
 
     // TODO: Implement Softmax to organically choose a unit to target (Most AI will target the same unit)
-    public UnitAITargeting EvaluateScore(EnemyUnit unitAI)
+    public UnitAITargeting EvaluateScore(AIUnit unitAI)
     {
         var score = 0;
         foreach (var potentialUnit in TilemapCreator.UnitLocator.Values)
