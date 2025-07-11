@@ -1,0 +1,16 @@
+{
+	"name": "EquipmentAssemblyTests",
+	"rootNamespace": "IGS.Tests",
+	"references": [
+		"EquipmentAssembly"
+	],
+	"includePlatforms": [ "Editor" ],
+	"excludePlatforms": [],
+	"allowUnsafeCode": false,
+	"overrideReferences": false,
+	"precompiledReferences": [],
+	"autoReferenced": false,
+	"defineConstraints": [],
+	"optionalUnityReferences": [],
+	"testAssemblies": true
+}

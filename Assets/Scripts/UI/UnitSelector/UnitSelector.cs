@@ -203,7 +203,9 @@ public class UnitSelector : MonoBehaviour
                 {
                     // Placing Unit to new location
                     unit.unitInfo.CellLocation = newLocation;
-                    unit.unitRenderer.PositionUnit(newLocation);
+                    SpriteRenderer spriteRenderer = unit.gameObject.GetComponent<SpriteRenderer>();
+                    UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                    unitRenderer.PositionUnit(newLocation);
                     TilemapCreator.UnitLocator.Add(unit.unitInfo.Vector2CellLocation(), unit);
 
                     // signal to SelectorUnitIcons that the new unit is now active

@@ -1,0 +1,11 @@
+{
+	"name": "CoreAssembly",
+	"rootNamespace": "IGS.Core",
+	"references": [],
+	"includePlatforms": [],
+	"excludePlatforms": [],
+	"allowUnsafeCode": false,
+	"overrideReferences": false,
+	"precompiledReferences": [],
+	"autoReferenced": true
+}

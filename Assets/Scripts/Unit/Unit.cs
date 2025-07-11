@@ -24,8 +24,9 @@ public class Unit : MonoBehaviour
         unit.unitInfo.UnitDirection = unitDirection;
         unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
 
-        unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
-        unit.unitRenderer.Render(initLocation, unitDirection);
+        SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
+        UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
+        unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();
         unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();

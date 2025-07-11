@@ -65,8 +65,9 @@ public class EnemyUnit : Unit
         unit.unitInfo.UnitDirection = unitDirection;
         unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
 
-        unit.unitRenderer = gameObj.AddComponent<UnitRenderer>();
-        unit.unitRenderer.Render(initLocation, unitDirection);
+        SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
+        UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
+        unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();
         unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();
