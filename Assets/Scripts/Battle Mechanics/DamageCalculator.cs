@@ -33,7 +33,7 @@ public class DamageCalculator : MonoBehaviour
         if (target.IsDead() && action.DamageType == DamageType.Healing) { return 0; }
 
         // Units that aren't dead can't be revived
-        if (target.IsAlive() && action.DamageType == DamageType.Revival) { return 0; }
+        if (!target.IsDead() && action.DamageType == DamageType.Revival) { return 0; }
         
         int healingAmount = 0;
         

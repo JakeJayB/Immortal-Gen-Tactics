@@ -134,8 +134,6 @@ public class UnitInfo : MonoBehaviour
     
     public void RefreshAP() { currentAP = FinalAP; }
 
-    public bool IsAlive() { return currentHP > 0; }
-
     public void Die()
     {
         if(Dead) return; 
