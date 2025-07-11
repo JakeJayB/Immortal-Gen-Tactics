@@ -6,9 +6,11 @@ public static class UnitFactory
 {
     public static Unit Create(GameObject prefab, Vector3Int initLocation, UnitDirection unitDirection) {
         GameObject instance = Object.Instantiate(prefab);
-        UnitDefinitionData unitData = instance.GetComponent<UDDLoader>().GetUDD();
+        instance.AddComponent<BillboardEffect>();
+        
+        UnitDefinitionData unitData = instance.GetComponent<UDDLoader>().LoadedUDD;
 
-        if (instance.GetComponent<UDDLoader>().IsUnitAIControlled) {
+        if (unitData.IsUnitAIControlled) {
             AIUnit aiUnit = new AIUnit(instance, unitData);
             aiUnit.InitializeAI(initLocation, unitDirection);
             return aiUnit;

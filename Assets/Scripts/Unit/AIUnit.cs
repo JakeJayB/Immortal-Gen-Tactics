@@ -62,8 +62,6 @@ public class AIUnit : Unit
         
         // TODO: Fix this so that sprite renderer or some other script handles updating the sprites properly
         spriteRender.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
-
-        gameObj.AddComponent<BillboardEffect>();
         return this;
     }
 

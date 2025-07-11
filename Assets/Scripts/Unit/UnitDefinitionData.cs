@@ -73,6 +73,7 @@ public class UnitDefinitionData
     public EquipmentDefinitionData Equipment = new();
     public AIDefinitionData Behaviors = new();
     public UnitAffiliation UnitAffiliation;
+    public bool IsUnitAIControlled = false;
     
     public int[] GetActions() { return Actions.Actions; }
     public int[] GetItems() { return Items.All(); }

@@ -8,9 +8,7 @@ public class UDDLoader : MonoBehaviour {
     [TextArea(10, 30)]
     public string previewJson; // Optional: show contents in Inspector
     
-    [SerializeField] private UnitDefinitionData LoadedUDD;
-    public UnitAffiliation UnitAffiliation;
-    public bool IsUnitAIControlled = false;
+    public UnitDefinitionData LoadedUDD;
     
     [ContextMenu("Load UDD From JSON")]
     public void LoadJson() {
@@ -40,10 +38,5 @@ public class UDDLoader : MonoBehaviour {
         File.WriteAllText(path, json);
         previewJson = json;
         Debug.Log($"Saved to {path}");
-    }
-
-    public UnitDefinitionData GetUDD() {
-        LoadedUDD.UnitAffiliation = UnitAffiliation;
-        return LoadedUDD;
     }
 }

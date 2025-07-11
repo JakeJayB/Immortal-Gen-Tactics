@@ -43,8 +43,7 @@ public class Unit
         SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
         UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
         unitRenderer.Render(initLocation, unitDirection);
-
-        gameObj.AddComponent<BillboardEffect>();
+        
         return this;
     }
 }
