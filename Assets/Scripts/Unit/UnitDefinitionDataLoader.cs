@@ -35,7 +35,7 @@ public class UDDLoader : MonoBehaviour {
             return;
         }
 
-        string path = Path.Combine(Application.dataPath, "Data/Units", JsonFileName);
+        string path = Path.Combine(Application.dataPath, "Resources/JSON/UDD", JsonFileName);
         string json = JsonUtility.ToJson(LoadedUDD, true); // Pretty print
         File.WriteAllText(path, json);
         previewJson = json;

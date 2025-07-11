@@ -1,41 +1,48 @@
 {
-  "BaseStats": {
-    "BaseHP": 20,
-    "BaseMP": 10,
-    "BaseAP": 2,
-    "BaseAttack": 15,
-    "BaseDefense": 7,
-    "BaseMagicAttack": 0,
-    "BaseMagicDefense": 0,
-    "BaseMove": 3,
-    "BaseEvade": 1,
-    "BaseSpeed": 10,
-    "BaseSense": 2,
-  },
-  "Actions": {
-    "Actions": [3]
-  },
-  "Items": {
-    "StorageAItems": [100, 102],
-    "StorageBItems": []
-  },
-  "Equipment": {
-    "WeaponL": 0,
-    "WeaponR": -1,
-    "ArmorHead": 0,
-    "ArmorBody": 0,
-    "ArmorHands": 0,
-    "ArmorFeet": 0,
-    "AccessoryA": 202,
-    "AccessoryB": -1
-  },
-  "Behaviors": {
-    "Aggression": 4,
-    "Survival": 2,
-    "TacticalPositioning": 2,
-    "AllySynergy": 2,
-    "ResourceManagement": 2,
-    "ReactionAwareness": 0,
-    "ReactionAllocation": 2
-  }
+    "BaseStats": {
+        "BaseHP": 20,
+        "BaseMP": 10,
+        "BaseAP": 2,
+        "BaseAttack": 15,
+        "BaseDefense": 10,
+        "BaseMagicAttack": 0,
+        "BaseMagicDefense": 0,
+        "BaseMove": 3,
+        "BaseEvade": 1,
+        "BaseSpeed": 12,
+        "BaseSense": 2
+    },
+    "Actions": {
+        "Actions": [
+            3
+        ]
+    },
+    "Items": {
+        "StorageAItems": [
+            100,
+            102,
+            102
+        ],
+        "StorageBItems": []
+    },
+    "Equipment": {
+        "WeaponL": 0,
+        "WeaponR": -1,
+        "ArmorHead": -1,
+        "ArmorBody": -1,
+        "ArmorHands": -1,
+        "ArmorFeet": -1,
+        "AccessoryA": 202,
+        "AccessoryB": -1
+    },
+    "Behaviors": {
+        "Aggression": 4.0,
+        "Survival": 2.0,
+        "TacticalPositioning": 2.0,
+        "AllySynergy": 2.0,
+        "ResourceManagement": 2.0,
+        "ReactionAwareness": 0.0,
+        "ReactionAllocation": 2.0
+    },
+    "UnitAffiliation": 0
 }
