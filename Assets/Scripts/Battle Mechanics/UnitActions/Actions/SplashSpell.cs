@@ -77,7 +77,7 @@ public class SplashSpell : UnitAction
             {
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("MagicHit", 0.45f);
-                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
             }
         }
         

@@ -59,8 +59,8 @@ public class AIUnitBehavior : MonoBehaviour
             
             // Softmax Implementation
             List<UnitAction> turnActions = isReacting
-                ? unitAI.unitInfo.ActionSet.GetAIReactions()
-                : unitAI.unitInfo.ActionSet.GetAITurnActions();
+                ? unitAI.ActionSet.GetAIReactions()
+                : unitAI.ActionSet.GetAITurnActions();
             List<UnitAction> potentialActions = new();
             List<float> actionScores = new List<float>();
             foreach (var action in turnActions)

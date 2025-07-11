@@ -13,7 +13,7 @@ public abstract class Item : UnitAction
         if (Storage != null) {
             yield return Storage.ExecuteAction(unit, selectedCell);
         } else {
-            unit.unitInfo.ActionSet.RemoveAction(this);
+            unit.ActionSet.RemoveAction(this);
         }
     }
 }

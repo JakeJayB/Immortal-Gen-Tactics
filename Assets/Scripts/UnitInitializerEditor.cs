@@ -18,7 +18,7 @@ public static class ValidItemAccessories
     }
 }
 
-[CustomEditor(typeof(UnitInitializer))]
+[CustomEditor(typeof(UnitDefinitionData))]
 public class UnitInitializerEditor : Editor
 {
     public override void OnInspectorGUI()

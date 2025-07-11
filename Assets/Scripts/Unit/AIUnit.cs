@@ -21,14 +21,20 @@ public class AIUnit : Unit
 
     public Unit targetedUnit;
 
-    public AIUnit(GameObject gameObj) : base(gameObj) { }
+    public AIUnit(GameObject gameObj, UnitDefinitionData unitData) : base(gameObj, unitData) {
+        if (unitData == null) return;
+
+        Aggression = unitData.Behaviors.Aggression;
+        Survival = unitData.Behaviors.Survival;
+        TacticalPositioning = unitData.Behaviors.TacticalPositioning;
+        AllySynergy = unitData.Behaviors.AllySynergy;
+        ResourceManagement = unitData.Behaviors.ResourceManagement;
+        ReactionAwareness = unitData.Behaviors.ReactionAwareness;
+        ReactionAllocation = unitData.Behaviors.ReactionAllocation;
+    }
     
     public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
-        InitializeAIBehaviors();
-        
-        unitInfo = gameObj.GetComponent<UnitInfo>();
-        unitInfo.unit = this;
         unitInfo.CellLocation = initLocation;
         unitInfo.UnitDirection = unitDirection;
         unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
@@ -39,7 +45,7 @@ public class AIUnit : Unit
             new AIBehavior
             {
                 Priority = 0,
-                Condition = () => RuleBasedAILogic.CurrentHPIsBelowPercent(0.4f, unitInfo) && RuleBasedAILogic.HasItem(new Potion(), unitInfo),
+                Condition = () => RuleBasedAILogic.CurrentHPIsBelowPercent(0.4f, unitInfo) && RuleBasedAILogic.HasItem(new Potion(), this),
                 Action = new Potion()
             },
             new AIBehavior
@@ -62,7 +68,7 @@ public class AIUnit : Unit
     }
 
     private void InitializeAIBehaviors() {
-        var unitInitializer = gameObj.GetComponent<UnitInitializer>().Behaviors;
+        var unitInitializer = gameObj.GetComponent<UnitDefinitionData>().Behaviors;
         if (unitInitializer == null) return;
 
         Aggression = unitInitializer.Aggression;

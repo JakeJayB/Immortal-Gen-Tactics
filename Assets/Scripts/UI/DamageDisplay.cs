@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DamageDisplay : MonoBehaviour
 {
-    public static IEnumerator DisplayUnitDamage(UnitInfo unitInfo, int damage)
+    public static IEnumerator DisplayUnitDamage(Unit unit, int damage)
     {
         yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
         TMP_Text displayText =  new GameObject("Display Text", typeof(RectTransform)).AddComponent<TextMeshProUGUI>();
@@ -19,7 +19,7 @@ public class DamageDisplay : MonoBehaviour
         displayText.fontStyle = FontStyles.Bold;
         
         // Convert world position to viewport position (0-1 range)
-        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unitInfo.transform.position);
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.gameObj.transform.position);
 
         // Convert viewport position to canvas local position
         Vector2 textPosition = new Vector2(

@@ -70,7 +70,7 @@ public class Potion : Item
             // Heal Unit by Specified Amount
             int heal = DamageCalculator.HealFixedAmount(BasePower, foundUnit.unitInfo);
             SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-            yield return DamageDisplay.DisplayUnitDamage(foundUnit.unitInfo, heal);
+            yield return DamageDisplay.DisplayUnitDamage(foundUnit, heal);
         }
 
         Debug.Log(unit.gameObj.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.FinalHP);

@@ -61,7 +61,7 @@ public class Ether : Item
         {
             // Heal Unit by Specified Amount
             SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-            yield return DamageDisplay.DisplayUnitDamage(foundUnit.unitInfo, DamageCalculator.HealFixedAmountMP(BasePower, foundUnit.unitInfo));
+            yield return DamageDisplay.DisplayUnitDamage(foundUnit, DamageCalculator.HealFixedAmountMP(BasePower, foundUnit.unitInfo));
 
             if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
                 CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);

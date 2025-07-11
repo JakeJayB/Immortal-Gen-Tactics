@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UnitInfo : MonoBehaviour
+public class UnitInfo
 {
     // Unit
     public Unit unit;
@@ -43,53 +43,42 @@ public class UnitInfo : MonoBehaviour
     # endregion
     
     // Unit Base Stat Values
-    [SerializeField] private int baseHP;
-    [SerializeField] private int baseMP;
-    [SerializeField] private int baseAP;
-    [SerializeField] private int baseAttack;
-    [SerializeField] private int baseDefense;
-    [SerializeField] private int baseMagicAttack;
-    [SerializeField] private int baseMagicDefense;
-    [SerializeField] private int baseMove;
-    [SerializeField] private int baseEvade;
-    [SerializeField] private int baseSpeed;
-    [SerializeField] private int baseSense;
-    
-    // Unit Equipment
-    public UnitEquipment equipment;
-    
-    // Unit Action Set
-    public UnitActionSet ActionSet { get; private set; }
+    private int baseHP;
+    private int baseMP;
+    private int baseAP;
+    private int baseAttack;
+    private int baseDefense;
+    private int baseMagicAttack;
+    private int baseMagicDefense;
+    private int baseMove;
+    private int baseEvade;
+    private int baseSpeed;
+    private int baseSense;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        var unitInitializer = gameObject.GetComponent<UnitInitializer>();
-        if (unitInitializer)
-        {
-            ActionSet = new UnitActionSet(unitInitializer, IsAIUnit());
-            equipment = new UnitEquipment(this, unitInitializer);
-            Destroy(unitInitializer);
-        }
-        else
-        {
-            SetBaseStats(); // TODO: This function needs to set base stats based on UnitInitializer.
-            equipment = new UnitEquipment(this);
-            equipment.EquipLeftHand(EquipmentLibrary.Weapons[0]);
-
-            ActionSet = new UnitActionSet();
-            ActionSet.AddAction(new SplashSpell());
-            ActionSet.AddAction(new Heal());
-            ActionSet.AddAction(new Revive());
-            ActionSet.AddAction(new Pouch());
-            ActionSet.AddAction(new Potion());
-        }
+    public UnitInfo(Unit unit) {
+        this.unit = unit;
+    }
+    
+    public void Initialize(UnitDefinitionData udd) {
         
-        ApplyEquipmentBonuses();
-        ResetCurrentStatPoints();
+        // Unit Affiliation
+        UnitAffiliation = udd.UnitAffiliation;
+        
+        // Set the Base Stats
+        baseHP = udd.BaseStats.BaseHP;
+        baseMP = udd.BaseStats.BaseMP;
+        baseAP = udd.BaseStats.BaseAP;
+        baseAttack = udd.BaseStats.BaseAttack;
+        baseDefense = udd.BaseStats.BaseDefense;
+        baseMagicAttack = udd.BaseStats.BaseMagicAttack;
+        baseMagicDefense = udd.BaseStats.BaseMagicDefense;
+        baseMove = udd.BaseStats.BaseMove;
+        baseEvade = udd.BaseStats.BaseEvade;
+        baseSpeed = udd.BaseStats.BaseSpeed;
+        baseSense = udd.BaseStats.BaseSense;
     }
 
-    private void ResetCurrentStatPoints()
+    public void ResetCurrentStatPoints()
     {
         currentHP = FinalHP;
         currentMP = FinalMP;
@@ -97,36 +86,18 @@ public class UnitInfo : MonoBehaviour
         currentCT = 0;
     }
     
-    private void SetBaseStats()
-    {
-        float statMultipler = 1 + (currentLevel - 1) * 0.2f;
-
-        baseHP = Mathf.RoundToInt(30 * statMultipler);
-        baseMP = Mathf.RoundToInt(15 * statMultipler);
-        baseAP = 2;
-        baseAttack = Mathf.RoundToInt(3 * statMultipler);
-        baseDefense = Mathf.RoundToInt(1 * statMultipler); 
-        baseMagicAttack = Mathf.RoundToInt(4 * statMultipler);
-        baseMagicDefense = Mathf.RoundToInt(2 * statMultipler);
-        baseMove = 4;
-        baseEvade = 1;
-        baseSpeed = UnityEngine.Random.Range(8, 13);
-        //baseSpeed = Mathf.RoundToInt(5 * statMultipler);
-        baseSense = 2;
-    }
-    
     public void ApplyEquipmentBonuses()
     {
-        FinalHP = baseHP + equipment.bonusHP;
-        FinalMP = baseMP + equipment.bonusMP;
-        FinalAP = baseAP + equipment.bonusAP;
-        FinalAttack = baseAttack + equipment.bonusAttack;
-        FinalMagicAttack = baseMagicAttack + equipment.bonusMagicAttack;
-        FinalDefense = baseDefense + equipment.bonusDefense;
-        FinalMagicDefense = baseMagicDefense + equipment.bonusMagicDefense;
-        FinalMove = baseMove + equipment.bonusMove;
-        FinalEvade = baseEvade + equipment.bonusEvade;
-        FinalSpeed = baseSpeed + equipment.bonusSpeed;
+        FinalHP = baseHP + unit.equipment.bonusHP;
+        FinalMP = baseMP + unit.equipment.bonusMP;
+        FinalAP = baseAP + unit.equipment.bonusAP;
+        FinalAttack = baseAttack + unit.equipment.bonusAttack;
+        FinalMagicAttack = baseMagicAttack + unit.equipment.bonusMagicAttack;
+        FinalDefense = baseDefense + unit.equipment.bonusDefense;
+        FinalMagicDefense = baseMagicDefense + unit.equipment.bonusMagicDefense;
+        FinalMove = baseMove + unit.equipment.bonusMove;
+        FinalEvade = baseEvade + unit.equipment.bonusEvade;
+        FinalSpeed = baseSpeed + unit.equipment.bonusSpeed;
         FinalSense = baseSense;
     }
     
@@ -138,7 +109,7 @@ public class UnitInfo : MonoBehaviour
     {
         if(Dead) return; 
         Dead = true;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+        unit.gameObj.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
         TurnSystem.RemoveUnit(unit);
     }
     
@@ -146,11 +117,9 @@ public class UnitInfo : MonoBehaviour
     {
         if(!Dead) return; 
         Dead = false;
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        unit.gameObj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         TurnSystem.AddUnit(unit);
     }
 
     public bool IsDead() { return Dead; }
-
-    public bool IsAIUnit() { return unit is AIUnit; }
 }

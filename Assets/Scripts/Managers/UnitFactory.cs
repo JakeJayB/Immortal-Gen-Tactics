@@ -6,18 +6,16 @@ public static class UnitFactory
 {
     public static Unit Create(GameObject prefab, Vector3Int initLocation, UnitDirection unitDirection) {
         GameObject instance = Object.Instantiate(prefab);
-        
-        switch (instance.gameObject.GetComponent<UnitInfo>().UnitAffiliation) {
-            case UnitAffiliation.Player:
-                Unit unit = new Unit(instance);
-                unit.Initialize(initLocation, unitDirection);
-                return unit;
-            case UnitAffiliation.Enemy:
-                AIUnit aiUnit = new AIUnit(instance);
-                aiUnit.InitializeAI(initLocation, unitDirection);
-                return aiUnit;
+        UnitDefinitionData unitData = instance.GetComponent<UDDLoader>().GetUDD();
+
+        if (instance.GetComponent<UDDLoader>().IsUnitAIControlled) {
+            AIUnit aiUnit = new AIUnit(instance, unitData);
+            aiUnit.InitializeAI(initLocation, unitDirection);
+            return aiUnit;
         }
         
-        return null;
+        Unit unit = new Unit(instance, unitData);
+        unit.Initialize(initLocation, unitDirection);
+        return unit;
     }
 }

@@ -50,15 +50,13 @@ public class EquipmentLibrary : MonoBehaviour
     public static Dictionary<int, Weapon> Weapons { get; private set; }
     public static Dictionary<int, Armor> Armor { get; private set; }
     public static Dictionary<int, Accessory> Accessories { get; private set; }
-
-
+    
     public static void Clear()
     {
         Weapons = null;
         Armor = null;
         Accessories = null;
     }
-
 
     public static void InitializeLibrary()
     {

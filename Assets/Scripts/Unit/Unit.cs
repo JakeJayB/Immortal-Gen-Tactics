@@ -7,13 +7,31 @@ using UnityEngine;
 public class Unit
 {
     public GameObject gameObj { get; set; }
-    public UnitInfo unitInfo { get; set; }
+    
+    // Unit Properties
+    public UnitInfo unitInfo { get; protected set; }
+    public UnitEquipment equipment { get; protected set; }
+    public UnitActionSet ActionSet { get; protected set; }
 
-    public Unit(GameObject gameObj)
+    // Constructor
+    public Unit(GameObject gameObj, UnitDefinitionData unitData)
     {
         this.gameObj = gameObj;
-        unitInfo = gameObj.GetComponent<UnitInfo>();
-        unitInfo.unit = this;
+
+        if (unitData == null) {
+            Debug.LogError($"[{gameObj.name}]: UDD not found!");
+        }
+        
+        unitInfo = new UnitInfo(this);
+        unitInfo.Initialize(unitData);
+        
+        ActionSet = new UnitActionSet(this);
+        ActionSet.Initialize(unitData);
+        
+        equipment = new UnitEquipment(this);
+        equipment.Initialize(unitData);
+        
+        unitInfo.ResetCurrentStatPoints();
     }
 
     public Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)

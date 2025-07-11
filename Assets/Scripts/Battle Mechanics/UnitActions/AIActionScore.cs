@@ -173,7 +173,7 @@ public class AIActionScore
                 ? Pathfinder.DistanceBetweenCells(PotentialCell, unitOnTile.unitInfo.CellLocation)
                 : Pathfinder.DistanceBetweenUnits(unitAI, unitOnTile);
             
-            foreach (var action in unitAI.unitInfo.ActionSet.GetAITurnActions())
+            foreach (var action in unitAI.ActionSet.GetAITurnActions())
             {
                 if (action.Range + action.Splash < distance) { continue; }
                 if (unitAI.unitInfo.currentAP - Action.APCost < action.APCost || unitAI.unitInfo.currentMP - Action.MPCost < action.MPCost) { continue; }

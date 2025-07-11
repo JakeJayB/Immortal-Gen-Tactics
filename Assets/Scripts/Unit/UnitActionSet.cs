@@ -6,15 +6,17 @@ using UnityEngine;
 
 public class UnitActionSet
 {
-    public UnitActionSet() { }
+    public UnitActionSet(Unit unit) { this.unit = unit; }
     
-    public UnitActionSet(UnitInitializer unitInitializer, bool isAIUnit) {
-        foreach (var action in isAIUnit ? unitInitializer.GetAIActions() : unitInitializer.GetActions()) {
+    public void Initialize(UnitDefinitionData unitData) {
+        foreach (var action in unit is AIUnit ? unitData.GetAIActions() : unitData.GetActions()) {
             if (action < 0) { continue; }
             AddAction(UnitActionLibrary.FindAction(action)); 
         }
     }
 
+    private Unit unit;
+    
     private Dictionary<ActionType, List<UnitAction>> unitActions = new()
     {
         { ActionType.Attack, new List<UnitAction>() { new Attack() } },

@@ -74,6 +74,6 @@ public class SoulSpark : Item
         // Heal Unit by Specified Amount
         int heal = DamageCalculator.HealDamage(this, unit.unitInfo, foundUnit.unitInfo);
         SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-        yield return DamageDisplay.DisplayUnitDamage(foundUnit.unitInfo, heal);
+        yield return DamageDisplay.DisplayUnitDamage(foundUnit, heal);
     }
 }

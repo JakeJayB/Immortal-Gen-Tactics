@@ -52,6 +52,11 @@ public class TilemapCreator : MonoBehaviour
         LoadFromJson();
     }
 
+    public static void Initialize()
+    {
+        
+    }
+    
     private void LoadFromJson()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);

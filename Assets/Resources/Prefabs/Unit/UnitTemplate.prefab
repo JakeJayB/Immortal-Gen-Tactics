@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2249301679501652483}
   - component: {fileID: 1862177645846334466}
-  - component: {fileID: -3767793882833959440}
-  - component: {fileID: 3560732417484004532}
+  - component: {fileID: -8576361326180096148}
   m_Layer: 0
   m_Name: UnitTemplate
   m_TagString: Unit
@@ -86,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3767793882833959440
+--- !u!114 &-8576361326180096148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,46 +94,54 @@ MonoBehaviour:
   m_GameObject: {fileID: 6440675629119989819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd830b5ea05c38c458e6821b2befd497, type: 3}
+  m_Script: {fileID: 11500000, guid: b2ee6fddbcad07a459142865c7d1210f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellLocation: {x: 0, y: 0, z: 0}
-  UnitDirection: 0
-  sprite: {fileID: 0}
-  UnitAffiliation: 0
-  baseHP: 0
-  baseMP: 0
-  baseAP: 0
-  baseAttack: 0
-  baseDefense: 0
-  baseMagicAttack: 0
-  baseMagicDefense: 0
-  baseMove: 0
-  baseEvade: 0
-  baseSpeed: 0
-  baseSense: 0
---- !u!114 &3560732417484004532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6440675629119989819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96277bd0eff6d3f4ebcfda8702159ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Actions:
-    Actions: 
-  Items:
-    Items: 
-  Equipment:
-    WeaponL: -1
-    WeaponR: -1
-    ArmorHead: -1
-    ArmorBody: -1
-    ArmorHands: -1
-    ArmorFeet: -1
-    AccessoryA: -1
-    AccessoryB: -1
+  JsonFileName: UDD_Test.json
+  previewJson: "{\r\n  \"BaseStats\": {\r\n    \"BaseHP\": 20,\r\n    \"BaseMP\":
+    10,\r\n    \"BaseAP\": 2,\r\n    \"BaseAttack\": 15,\r\n    \"BaseDefense\":
+    7,\r\n    \"BaseMagicAttack\": 0,\r\n    \"BaseMagicDefense\": 0,\r\n    \"BaseMove\":
+    3,\r\n    \"BaseEvade\": 1,\r\n    \"BaseSpeed\": 10,\r\n    \"BaseSense\": 2\r\n 
+    },\r\n  \"Actions\": {\r\n    \"Actions\": [3]\r\n  },\r\n  \"Items\": {\r\n   
+    \"StorageAItems\": [100, 102],\r\n    \"StorageBItems\": []\r\n  },\r\n  \"Equipment\":
+    {\r\n    \"WeaponL\": 0,\r\n    \"WeaponR\": -1,\r\n    \"ArmorHead\": 0,\r\n   
+    \"ArmorBody\": 0,\r\n    \"ArmorHands\": 0,\r\n    \"ArmorFeet\": 0,\r\n    \"AccessoryA\":
+    202,\r\n    \"AccessoryB\": -1\r\n  },\r\n  \"Behaviors\": {\r\n    \"Aggression\":
+    4,\r\n    \"Survival\": 2,\r\n    \"TacticalPositioning\": 2,\r\n    \"AllySynergy\":
+    2,\r\n    \"ResourceManagement\": 2,\r\n    \"ReactionAwareness\": 0,\r\n   
+    \"ReactionAllocation\": 2\r\n  }\r\n}\r\n"
+  LoadedUDD:
+    BaseStats:
+      BaseHP: 20
+      BaseMP: 10
+      BaseAP: 2
+      BaseAttack: 15
+      BaseDefense: 7
+      BaseMagicAttack: 0
+      BaseMagicDefense: 0
+      BaseMove: 3
+      BaseEvade: 1
+      BaseSpeed: 10
+      BaseSense: 2
+    Actions:
+      Actions: 03000000
+    Items:
+      StorageAItems: 6400000066000000
+      StorageBItems: 
+    Equipment:
+      WeaponL: 0
+      WeaponR: -1
+      ArmorHead: -1
+      ArmorBody: -1
+      ArmorHands: -1
+      ArmorFeet: -1
+      AccessoryA: 202
+      AccessoryB: -1
+    Behaviors:
+      Aggression: 4
+      Survival: 2
+      TacticalPositioning: 2
+      AllySynergy: 2
+      ResourceManagement: 2
+      ReactionAwareness: 0
+      ReactionAllocation: 2

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public class UnitEquipment
 {
     // Unit Info Reference
-    private UnitInfo unitInfo;
+    private Unit unit;
     
     // Equipment Slots
     public Weapon leftHand;
@@ -35,26 +36,26 @@ public class UnitEquipment
     public int bonusEvade { get; private set; }
     public int bonusSpeed { get; private set; }
 
-    public UnitEquipment(UnitInfo unitInfo)
+    public UnitEquipment(Unit unit)
     {
-        this.unitInfo = unitInfo;
+        this.unit = unit;
         InitializeBonusStats();
     }
 
-    public UnitEquipment(UnitInfo unitInfo, UnitInitializer unitInitializer)
+    public void Initialize(UnitDefinitionData unitData)
     {
-        var equipmentSet = unitInitializer.GetEquipment();
+        var equipmentSet = unitData.GetEquipment();
         if (equipmentSet.Length != 8) { Debug.LogError("Equipment Set Does Not Reference All 8 Slots");}
-        this.unitInfo = unitInfo;
         
+        EquipmentLibrary.InitializeLibrary();
         EquipLeftHand(EquipmentLibrary.Weapons[equipmentSet[0]]);
         EquipRightHand(EquipmentLibrary.Weapons[equipmentSet[1]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[2]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[3]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[4]]);
         EquipArmor(EquipmentLibrary.Armor[equipmentSet[5]]);
-        EquipAccessoryA(EquipmentLibrary.Accessories[equipmentSet[6]], unitInitializer.Items.StorageAItems);
-        EquipAccessoryB(EquipmentLibrary.Accessories[equipmentSet[7]], unitInitializer.Items.StorageBItems);
+        EquipAccessoryA(EquipmentLibrary.Accessories[equipmentSet[6]], unitData.Items.StorageAItems);
+        EquipAccessoryB(EquipmentLibrary.Accessories[equipmentSet[7]], unitData.Items.StorageBItems);
     }
     
     // Equip Functions
@@ -205,7 +206,7 @@ public class UnitEquipment
         bonusEvade += equipment.equipEvade;
         bonusSpeed += equipment.equipSpeed;
         
-        unitInfo.ApplyEquipmentBonuses();
+        unit.unitInfo.ApplyEquipmentBonuses();
     }
     
     private void RemoveEquipmentBonus(Equipment equipment)
@@ -220,16 +221,16 @@ public class UnitEquipment
         bonusMove -= equipment.equipMove;
         bonusSpeed -= equipment.equipSpeed;
         
-        unitInfo.ApplyEquipmentBonuses();
+        unit.unitInfo.ApplyEquipmentBonuses();
     }
 
     private void ApplyEquipmentAction(UnitAction action) {
-        unitInfo.ActionSet.AddAction(action);
+        unit.ActionSet.AddAction(action);
     }
 
     private void ApplyStorageAction(UnitAction action, int[] accItems) {
-        if (unitInfo.IsAIUnit()) { return; }
+        if (unit is AIUnit) { return; }
         if (action is Storage storage) { storage.Initialize(accItems); }
-        unitInfo.ActionSet.AddAction(action);
+        unit.ActionSet.AddAction(action);
     }
 }

@@ -285,7 +285,7 @@ public class UnitInfoDisplay : MonoBehaviour
     
     public void DisplayUnitInfo(UnitInfo unitInfo)
     {
-        Name.text = unitInfo.name;
+        Name.text = unitInfo.unit.gameObj.name;
         
         ProfileImage.sprite = unitInfo.UnitAffiliation == UnitAffiliation.Player
             ? Resources.Load<Sprite>("Sprites/Units/Test_Player/PlayerProfile")

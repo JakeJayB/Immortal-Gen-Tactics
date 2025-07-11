@@ -84,7 +84,7 @@ public class Attack : UnitAction
             {
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
-                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
             }
         }

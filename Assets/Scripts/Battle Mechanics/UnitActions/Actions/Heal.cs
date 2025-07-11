@@ -78,7 +78,7 @@ public class Heal : UnitAction
             {
                 int damage = DamageCalculator.HealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
             }
         }
         

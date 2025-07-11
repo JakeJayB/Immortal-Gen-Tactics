@@ -18,7 +18,7 @@ public class RuleBasedAILogic
     public static bool CurrentAPIsBelow(int threshold, UnitInfo unitInfo) { return unitInfo.currentAP < threshold; }
     
     // Item-Based Rules
-    public static bool HasItem(UnitAction item, UnitInfo unitInfo) {
-        return unitInfo.ActionSet.GetAllTurnActions().Any(action => action.GetType() == item.GetType());
+    public static bool HasItem(UnitAction item, AIUnit unit) {
+        return unit.ActionSet.GetAllTurnActions().Any(action => action.GetType() == item.GetType());
     }
 }

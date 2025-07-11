@@ -112,7 +112,7 @@ public class Rush : UnitAction
                 
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
-                yield return DamageDisplay.DisplayUnitDamage(targetUnit.unitInfo, damage);
+                yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
                 yield return BattleFX.InflictBlowback(targetUnit, (Range - i) / 2 < 1 ? 1 : (Range - i) / 2, direction);
                 
