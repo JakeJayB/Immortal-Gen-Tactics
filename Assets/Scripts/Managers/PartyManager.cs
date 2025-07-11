@@ -13,8 +13,8 @@ public class PartyManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             Unit unit = UnitFactory.Create(Resources.Load<GameObject>("Prefabs/Unit/Unit"), Vector3Int.zero, UnitDirection.Forward);
-            unit.gameObj.transform.SetParent(transform);
-            unit.gameObj.SetActive(false);
+            unit.GameObj.transform.SetParent(transform);
+            unit.GameObj.SetActive(false);
             unitList.Add(unit);
         }       
     }

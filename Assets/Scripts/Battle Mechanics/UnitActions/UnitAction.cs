@@ -28,7 +28,7 @@ public abstract class UnitAction
     public abstract void ActivateAction(Unit unit);
     public abstract IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell);
 
-    protected void PayAPCost(Unit unit) { unit.unitInfo.currentAP -= APCost; }
+    protected void PayAPCost(Unit unit) { unit.UnitInfo.currentAP -= APCost; }
 
-    protected void PayMPCost(Unit unit) { unit.unitInfo.currentMP -= MPCost; }
+    protected void PayMPCost(Unit unit) { unit.UnitInfo.currentMP -= MPCost; }
 }

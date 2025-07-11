@@ -60,7 +60,7 @@ public class SelectorUnitIcons : MonoBehaviour
         unitIconRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BACKGROUND_HEIGHT * 0.6f);
 
         unitImage = icon.AddComponent<Image>();
-        unitImage.sprite = PartyManager.unitList[currentIdx].unitInfo.sprite;
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitInfo.sprite;
     }
 
     public static void NextUnit()
@@ -79,7 +79,7 @@ public class SelectorUnitIcons : MonoBehaviour
 
         Debug.Log($"Current Idx: {currentIdx}");
 
-        unitImage.sprite = PartyManager.unitList[currentIdx].unitInfo.sprite;
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitInfo.sprite;
 
         if (activeUnits.ContainsKey(currentIdx))
             ShadeUnitIcon();
@@ -101,7 +101,7 @@ public class SelectorUnitIcons : MonoBehaviour
 
         Debug.Log($"Current Idx: {currentIdx}");
 
-        unitImage.sprite = PartyManager.unitList[currentIdx].unitInfo.sprite;
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitInfo.sprite;
 
         if (activeUnits.ContainsKey(currentIdx))
             ShadeUnitIcon();
@@ -123,7 +123,7 @@ public class SelectorUnitIcons : MonoBehaviour
     public static void ActivateCurrentUnit()
     {
         Unit unit = PartyManager.unitList[currentIdx];
-        unit.gameObj.SetActive(true);
+        unit.GameObj.SetActive(true);
         activeUnits.Add(currentIdx, unit);
         ShadeUnitIcon();
     }
@@ -134,11 +134,11 @@ public class SelectorUnitIcons : MonoBehaviour
         if (activeUnits.ContainsKey(currentIdx) && activeUnits[currentIdx] == unit)
         {
             // resets unit to default position
-            unit.gameObj.SetActive(false);
-            unit.unitInfo.CellLocation = Vector3Int.zero;
-            SpriteRenderer spriteRenderer = unit.gameObj.GetComponent<SpriteRenderer>();
+            unit.GameObj.SetActive(false);
+            unit.UnitInfo.CellLocation = Vector3Int.zero;
+            SpriteRenderer spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
             UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
-            unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
+            unitRenderer.PositionUnit(unit.UnitInfo.CellLocation);
 
             activeUnits.Remove(currentIdx);
             UnshadeUnitIcon();
@@ -153,11 +153,11 @@ public class SelectorUnitIcons : MonoBehaviour
                     activeUnits.Remove(item.Key);
 
                     // resets unit to default position
-                    unit.gameObj.SetActive(false);
-                    unit.unitInfo.CellLocation = Vector3Int.zero;
-                    SpriteRenderer spriteRenderer = unit.gameObj.GetComponent<SpriteRenderer>();
+                    unit.GameObj.SetActive(false);
+                    unit.UnitInfo.CellLocation = Vector3Int.zero;
+                    SpriteRenderer spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
                     UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
-                    unitRenderer.PositionUnit(unit.unitInfo.CellLocation);
+                    unitRenderer.PositionUnit(unit.UnitInfo.CellLocation);
                     break;
                 }
             }

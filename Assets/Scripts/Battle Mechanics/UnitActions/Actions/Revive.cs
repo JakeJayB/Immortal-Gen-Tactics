@@ -19,7 +19,7 @@ public class Revive : UnitAction
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-                : unit.unitInfo.Vector2CellLocation()],
+                : unit.UnitInfo.Vector2CellLocation()],
             Range);
     }
 
@@ -36,10 +36,10 @@ public class Revive : UnitAction
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
             {
-                if (!foundUnit.unitInfo.IsDead()) { continue; }
+                if (!foundUnit.UnitInfo.IsDead()) { continue; }
                 
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -69,13 +69,13 @@ public class Revive : UnitAction
 
         if (TilemapCreator.UnitLocator.TryGetValue(selectedCell, out var foundUnit))
         {
-            if (foundUnit.unitInfo.IsDead())
+            if (foundUnit.UnitInfo.IsDead())
             {
                 // Revive Unit
-                foundUnit.unitInfo.Revive();
+                foundUnit.UnitInfo.Revive();
                 
                 // Heal Unit by Specified Amount
-                int heal = DamageCalculator.HealDamage(this, unit.unitInfo, foundUnit.unitInfo);
+                int heal = DamageCalculator.HealDamage(this, unit.UnitInfo, foundUnit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(foundUnit, heal);
             }

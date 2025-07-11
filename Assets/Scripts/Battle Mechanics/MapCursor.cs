@@ -113,7 +113,7 @@ public class MapCursor : MonoBehaviour
             InactiveState();
             SetHoverCell(currentUnit);
             CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
-            CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+            CanvasUI.ShowTurnUnitInfoDisplay(unit.UnitInfo);
             CanvasUI.HideTargetUnitInfoDisplay();
             StartCoroutine(UnitMenu.ShowMenu(unit));
             SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
@@ -154,7 +154,7 @@ public class MapCursor : MonoBehaviour
         {
             InactiveState();
             if (ChainSystem.UnitIsReacting())
-                CanvasUI.ShowTargetUnitInfoDisplay(ChainSystem.ReactingUnit.unitInfo);
+                CanvasUI.ShowTargetUnitInfoDisplay(ChainSystem.ReactingUnit.UnitInfo);
             else
                 CanvasUI.HideTargetUnitInfoDisplay();
 
@@ -176,7 +176,7 @@ public class MapCursor : MonoBehaviour
         yield return ChainSystem.ExecuteChain();
         
         // Set 'currentUnit' back to the current unit in the turn system
-        currentUnit = TurnSystem.CurrentUnit.unitInfo.Vector2CellLocation();
+        currentUnit = TurnSystem.CurrentUnit.UnitInfo.Vector2CellLocation();
         //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
         MoveCursor(currentUnit);
         CanvasUI.HideTargetUnitInfoDisplay();
@@ -251,7 +251,7 @@ public class MapCursor : MonoBehaviour
     {
         SetHoverCell(cell2D);
         currentUnit = cell2D;
-        CanvasUI.ShowTurnUnitInfoDisplay(TilemapCreator.UnitLocator[cell2D].unitInfo);
+        CanvasUI.ShowTurnUnitInfoDisplay(TilemapCreator.UnitLocator[cell2D].UnitInfo);
         CursorControlState = ControlState.Active;
     }
 
@@ -337,21 +337,21 @@ public class MapCursor : MonoBehaviour
             switch (CursorControlState)
             {
                 case ControlState.Start:
-                    if(foundUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy)
-                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
+                    if(foundUnit.UnitInfo.UnitAffiliation == UnitAffiliation.Enemy)
+                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.UnitInfo);
                     break;
                 case ControlState.Active:
                     if (foundUnit == TurnSystem.CurrentUnit)
                     {
-                        CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.unitInfo);
+                        CanvasUI.ShowTurnUnitInfoDisplay(foundUnit.UnitInfo);
                         CanvasUI.HideTargetUnitInfoDisplay();
                     }
                     else
-                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo);
+                        CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.UnitInfo);
 
                     break;
                 case ControlState.Action:
-                    CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.unitInfo); 
+                    CanvasUI.ShowTargetUnitInfoDisplay(foundUnit.UnitInfo); 
                     break;
                 default:
                     Debug.LogError("Control State not valid...");

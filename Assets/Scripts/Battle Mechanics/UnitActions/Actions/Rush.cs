@@ -18,11 +18,11 @@ public class Rush : UnitAction
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell)
     {
         // Update Range Based On Unit's Movement
-        Range = unit.unitInfo.FinalMove;
+        Range = unit.UnitInfo.FinalMove;
         
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-                : unit.unitInfo.Vector2CellLocation()],
+                : unit.UnitInfo.Vector2CellLocation()],
             Range, AttackPattern);
     }
 
@@ -36,13 +36,13 @@ public class Rush : UnitAction
 
         Area(unit, null);
         foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                     TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+                     TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
                      Range))
         {
             foreach (var tile in direction)
             {
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    TilemapCreator.UnitLocator[selectedCell].UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -83,7 +83,7 @@ public class Rush : UnitAction
         // Spend an Action Point to execute the Action
         PayAPCost(unit);
         
-        Vector2Int originCell = unit.unitInfo.Vector2CellLocation();
+        Vector2Int originCell = unit.UnitInfo.Vector2CellLocation();
         Vector2Int displacement = selectedCell - originCell;
         Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
         
@@ -110,16 +110,16 @@ public class Rush : UnitAction
                 // Updates the location as the Unit moves
                 yield return UnitMovement.Move(unit, previousCell);
                 
-                int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
+                int damage = DamageCalculator.DealDamage(this, unit.UnitInfo, targetUnit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
-                Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
+                Debug.Log("Attack: unit attacked! HP: " + targetUnit.UnitInfo.currentHP + "/" + targetUnit.UnitInfo.FinalHP);
                 yield return BattleFX.InflictBlowback(targetUnit, (Range - i) / 2 < 1 ? 1 : (Range - i) / 2, direction);
                 
                 var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
                     ? previousCell : nextCell;
                 
-                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return UnitMovement.Move(unit, endLocation); }
+                if (unit.UnitInfo.Vector2CellLocation() != endLocation) { yield return UnitMovement.Move(unit, endLocation); }
                 
                 // Adds the location of the tile the Unit ended at in UnitLocator
                 TilemapCreator.UnitLocator.Add(endLocation, unit);

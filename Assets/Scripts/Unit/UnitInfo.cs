@@ -88,16 +88,16 @@ public class UnitInfo
     
     public void ApplyEquipmentBonuses()
     {
-        FinalHP = baseHP + unit.equipment.bonusHP;
-        FinalMP = baseMP + unit.equipment.bonusMP;
-        FinalAP = baseAP + unit.equipment.bonusAP;
-        FinalAttack = baseAttack + unit.equipment.bonusAttack;
-        FinalMagicAttack = baseMagicAttack + unit.equipment.bonusMagicAttack;
-        FinalDefense = baseDefense + unit.equipment.bonusDefense;
-        FinalMagicDefense = baseMagicDefense + unit.equipment.bonusMagicDefense;
-        FinalMove = baseMove + unit.equipment.bonusMove;
-        FinalEvade = baseEvade + unit.equipment.bonusEvade;
-        FinalSpeed = baseSpeed + unit.equipment.bonusSpeed;
+        FinalHP = baseHP + unit.Equipment.bonusHP;
+        FinalMP = baseMP + unit.Equipment.bonusMP;
+        FinalAP = baseAP + unit.Equipment.bonusAP;
+        FinalAttack = baseAttack + unit.Equipment.bonusAttack;
+        FinalMagicAttack = baseMagicAttack + unit.Equipment.bonusMagicAttack;
+        FinalDefense = baseDefense + unit.Equipment.bonusDefense;
+        FinalMagicDefense = baseMagicDefense + unit.Equipment.bonusMagicDefense;
+        FinalMove = baseMove + unit.Equipment.bonusMove;
+        FinalEvade = baseEvade + unit.Equipment.bonusEvade;
+        FinalSpeed = baseSpeed + unit.Equipment.bonusSpeed;
         FinalSense = baseSense;
     }
     
@@ -109,7 +109,7 @@ public class UnitInfo
     {
         if(Dead) return; 
         Dead = true;
-        unit.gameObj.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
+        unit.GameObj.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
         TurnSystem.RemoveUnit(unit);
     }
     
@@ -117,7 +117,7 @@ public class UnitInfo
     {
         if(!Dead) return; 
         Dead = false;
-        unit.gameObj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        unit.GameObj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         TurnSystem.AddUnit(unit);
     }
 

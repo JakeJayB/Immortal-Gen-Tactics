@@ -19,8 +19,8 @@ public class Move : UnitAction
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-                : unit.unitInfo.Vector2CellLocation()],
-            unit.unitInfo.FinalMove);
+                : unit.UnitInfo.Vector2CellLocation()],
+            unit.UnitInfo.FinalMove);
     }
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_walk";
@@ -36,7 +36,7 @@ public class Move : UnitAction
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) { continue; }
 
             AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                TilemapCreator.UnitLocator[selectedCell].UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
             // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
             if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -66,18 +66,18 @@ public class Move : UnitAction
         }
         
         // Spend an Action Point to execute the Action
-        --unit.unitInfo.currentAP;
+        --unit.UnitInfo.currentAP;
         
         // Remove the Location the Unit is currently at in UnitLocator
-        TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
+        TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.UnitInfo.CellLocation.x, unit.UnitInfo.CellLocation.z));
         
         // Updates the location as the Unit moves
         yield return UnitMovement.Move(unit, selectedCell);
         
         // Adds the location of the tile the Unit ended at in UnitLocator
-        TilemapCreator.UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
+        TilemapCreator.UnitLocator.Add(new Vector2Int(unit.UnitInfo.CellLocation.x, unit.UnitInfo.CellLocation.z), unit);
         
-        CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+        CanvasUI.ShowTurnUnitInfoDisplay(unit.UnitInfo);
         CanvasUI.HideTargetUnitInfoDisplay();
 
         if (unit is not AIUnit) { MapCursor.currentUnit = selectedCell; }

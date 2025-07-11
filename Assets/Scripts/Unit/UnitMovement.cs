@@ -10,7 +10,7 @@ public class UnitMovement : MonoBehaviour
     public static IEnumerator Move(Unit unit, Vector2Int destination)
     {
         var tilemap = TilemapCreator.TileLocator;
-        var unitCell = unit.unitInfo.CellLocation;
+        var unitCell = unit.UnitInfo.CellLocation;
         
         List<Tile> path = Pathfinder.FindPath(tilemap[new Vector2Int(unitCell.x, unitCell.z)], tilemap[destination]);
 
@@ -30,17 +30,17 @@ public class UnitMovement : MonoBehaviour
 
             // Move unit toward the tile and ensure it stops exactly before continuing
             // Once the unit gets close enough to the destination, end the loop to snap it.
-            while (Vector3.Distance(unit.gameObj.transform.position, targetPosition) > 0.05f)
+            while (Vector3.Distance(unit.GameObj.transform.position, targetPosition) > 0.05f)
             {
                 float step = TRAVEL_SPEED * Time.deltaTime;
-                unit.gameObj.transform.position = Vector3.MoveTowards(unit.gameObj.transform.position, targetPosition, step);
+                unit.GameObj.transform.position = Vector3.MoveTowards(unit.GameObj.transform.position, targetPosition, step);
                 
                 yield return null; // Wait for next frame
             }
 
             // Snap to exact tile position
-            unit.gameObj.transform.position = targetPosition;
-            unit.unitInfo.CellLocation = nextTile.TileInfo.CellLocation;
+            unit.GameObj.transform.position = targetPosition;
+            unit.UnitInfo.CellLocation = nextTile.TileInfo.CellLocation;
 
             // Remove the tile just move on from the path list
             path.RemoveAt(0);

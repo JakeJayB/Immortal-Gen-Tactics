@@ -31,7 +31,7 @@ public class UnitPriorityQueue
             return;
         }
 
-        unit.unitInfo.currentCT = 0;
+        unit.UnitInfo.currentCT = 0;
         Heap.Add(unit);
         HeapifyUp(Heap.Count - 1);
     }
@@ -53,14 +53,14 @@ public class UnitPriorityQueue
     public int PeekCT()
     {
         if (Heap.Count == 0) return -1;
-        return Heap[0].unitInfo.currentCT;
+        return Heap[0].UnitInfo.currentCT;
     }
 
     private static bool IsHigherPriority(Unit a, Unit b)
     {
-        if (a.unitInfo.currentCT > b.unitInfo.currentCT) return true;
-        if (a.unitInfo.currentCT < b.unitInfo.currentCT) return false;
-        return a.unitInfo.FinalSpeed > b.unitInfo.FinalSpeed;
+        if (a.UnitInfo.currentCT > b.UnitInfo.currentCT) return true;
+        if (a.UnitInfo.currentCT < b.UnitInfo.currentCT) return false;
+        return a.UnitInfo.FinalSpeed > b.UnitInfo.FinalSpeed;
     }
 
 
@@ -114,7 +114,7 @@ private void HeapifyUp(int index)
 
     public static void Add(Unit unit)
     {
-        Debug.Log($"TurnSystem: Unit {unit.gameObj.name} added to queue");
+        Debug.Log($"TurnSystem: Unit {unit.GameObj.name} added to queue");
         Heap.Add(unit);
         Heapify();
         TurnCycle.CycleUnits(ToSortedList(true));
@@ -122,7 +122,7 @@ private void HeapifyUp(int index)
     
     public void Remove(Unit unit)
     {
-        Debug.Log($"TurnSystem: Unit {unit.gameObj.name} removed from queue");
+        Debug.Log($"TurnSystem: Unit {unit.GameObj.name} removed from queue");
         Heap.Remove(unit);
         Heapify();
         TurnCycle.CycleUnits(ToSortedList(true));
@@ -134,7 +134,7 @@ private void HeapifyUp(int index)
         {
             foreach(Unit unit in Heap)
             {
-                unit.unitInfo.currentCT = Mathf.Clamp(unit.unitInfo.currentCT + unit.unitInfo.FinalSpeed, 0, 100);
+                unit.UnitInfo.currentCT = Mathf.Clamp(unit.UnitInfo.currentCT + unit.UnitInfo.FinalSpeed, 0, 100);
             }
             Heapify();
         } while (PeekCT() != 100);
@@ -147,9 +147,9 @@ private void HeapifyUp(int index)
             sortedList.Add(TurnSystem.CurrentUnit);
        
         sortedList.Sort((a, b) => {
-            int ctComparison = b.unitInfo.currentCT.CompareTo(a.unitInfo.currentCT);
+            int ctComparison = b.UnitInfo.currentCT.CompareTo(a.UnitInfo.currentCT);
             if (ctComparison == 0)
-                return b.unitInfo.FinalSpeed.CompareTo(a.unitInfo.FinalSpeed); // Tie-breaker
+                return b.UnitInfo.FinalSpeed.CompareTo(a.UnitInfo.FinalSpeed); // Tie-breaker
             return ctComparison;
         });
         return sortedList;
@@ -160,7 +160,7 @@ private void HeapifyUp(int index)
         Debug.Log("-------------------------------------------");
         foreach(Unit unit in Heap)
         {
-            Debug.Log($"{unit.gameObj.name}'s CT: {unit.unitInfo.currentCT}");
+            Debug.Log($"{unit.GameObj.name}'s CT: {unit.UnitInfo.currentCT}");
         }
         Debug.Log("-------------------------------------------");
     }
@@ -206,19 +206,19 @@ public class TurnSystem : MonoBehaviour
         while (startLoop && unitQueue.Count > 0)
         {
             CurrentUnit = unitQueue.Dequeue(); // Set the new unit whose turn is about to start
-            CurrentUnit.unitInfo.RefreshAP();  // Unit AP refreshes to max amount at start of new turn
+            CurrentUnit.UnitInfo.RefreshAP();  // Unit AP refreshes to max amount at start of new turn
 
             if (CurrentUnit is AIUnit enemyUnit)
             {
                 MapCursor.SetGameObjInactive();
-                Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
+                Vector2Int unitLocation = CurrentUnit.UnitInfo.Vector2CellLocation();
                 CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
                 enemyUnit.AIUnitBehavior.StartTurn(enemyUnit);
             }
             else
             {
                 MapCursor.SetGameObjActive();
-                Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
+                Vector2Int unitLocation = CurrentUnit.UnitInfo.Vector2CellLocation();
                 CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
                 MapCursor.StartMove(unitLocation);
             }
@@ -240,12 +240,12 @@ public class TurnSystem : MonoBehaviour
 
         foreach (Unit unit in TilemapCreator.UnitLocator.Values)
         {
-            if (unit.unitInfo.IsDead())
+            if (unit.UnitInfo.IsDead())
                 continue;
 
-            if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy)
+            if (unit.UnitInfo.UnitAffiliation == UnitAffiliation.Enemy)
                 enemyAlive = true;
-            else if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
+            else if (unit.UnitInfo.UnitAffiliation == UnitAffiliation.Player)
                 allyAlive = true;
 
             // If both sides have at least one living unit, we can stop early
@@ -268,7 +268,7 @@ public class TurnSystem : MonoBehaviour
 
     public static void AddUnit(Unit unit)
     {
-        unit.unitInfo.currentCT = 0;
+        unit.UnitInfo.currentCT = 0;
         CycleUnitIcons.AddUnit(unit);
         UnitPriorityQueue.Add(unit);
     }

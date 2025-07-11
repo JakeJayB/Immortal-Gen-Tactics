@@ -19,7 +19,7 @@ public class Potion : Item
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
             ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-            : unit.unitInfo.Vector2CellLocation()], Range);
+            : unit.UnitInfo.Vector2CellLocation()], Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";
@@ -33,10 +33,10 @@ public class Potion : Item
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
             {
-                if (foundUnit.unitInfo.IsDead()) { continue; }
+                if (foundUnit.UnitInfo.IsDead()) { continue; }
                 
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -68,12 +68,12 @@ public class Potion : Item
         if (TilemapCreator.UnitLocator.TryGetValue(selectedCell, out var foundUnit))
         {
             // Heal Unit by Specified Amount
-            int heal = DamageCalculator.HealFixedAmount(BasePower, foundUnit.unitInfo);
+            int heal = DamageCalculator.HealFixedAmount(BasePower, foundUnit.UnitInfo);
             SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
             yield return DamageDisplay.DisplayUnitDamage(foundUnit, heal);
         }
 
-        Debug.Log(unit.gameObj.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.FinalHP);
+        Debug.Log(unit.GameObj.name + " is using a potion. HP: " + unit.UnitInfo.currentHP + "/" + unit.UnitInfo.FinalHP);
         yield return null;
     }
 }

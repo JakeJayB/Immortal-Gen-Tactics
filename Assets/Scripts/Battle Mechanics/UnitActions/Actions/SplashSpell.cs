@@ -18,7 +18,7 @@ public class SplashSpell : UnitAction
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-                : unit.unitInfo.Vector2CellLocation()],
+                : unit.UnitInfo.Vector2CellLocation()],
             Range, Pattern.Splash);
     }
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
@@ -36,10 +36,10 @@ public class SplashSpell : UnitAction
             {
                 if (TilemapCreator.UnitLocator.TryGetValue(targetedTile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
                 {
-                    if (foundUnit.unitInfo.IsDead()) { continue; }
+                    if (foundUnit.UnitInfo.IsDead()) { continue; }
                     
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                        foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                        foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                     // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                     if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -75,7 +75,7 @@ public class SplashSpell : UnitAction
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit))
             {
-                int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
+                int damage = DamageCalculator.DealDamage(this, unit.UnitInfo, targetUnit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("MagicHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
             }

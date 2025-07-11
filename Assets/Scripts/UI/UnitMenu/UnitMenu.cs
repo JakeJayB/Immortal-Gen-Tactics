@@ -104,7 +104,7 @@ public class UnitMenu : MonoBehaviour
             slot.transform.SetParent(Menu.transform, false);
         
             // TODO: Makes sure to get actions from actual unit instead of the testing list of UnitActions
-            slot.DefineSlot(actions[i], unit.unitInfo);
+            slot.DefineSlot(actions[i], unit.UnitInfo);
             slot.PositionSlot(i, actions.Count);
         
             MenuSlots.Add(slot);
@@ -124,7 +124,7 @@ public class UnitMenu : MonoBehaviour
             slot.transform.SetParent(Menu.transform, false);
         
             // TODO: Makes sure to get actions from actual unit instead of the testing list of UnitActions
-            slot.DefineSlot(actions[i], unit.unitInfo);
+            slot.DefineSlot(actions[i], unit.UnitInfo);
             slot.PositionSlot(i, actions.Count);
         
             MenuSlots.Add(slot);
@@ -146,7 +146,7 @@ public class UnitMenu : MonoBehaviour
 
     public static IEnumerator ShowMenu(Unit unit)
     {
-        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileObj.transform);
+        CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()].TileObj.transform);
         yield return new WaitUntil(() => !LeanTween.isTweening(Camera.main.transform.parent.gameObject));
 
         DisplayUnitMenu(unit);
@@ -154,7 +154,7 @@ public class UnitMenu : MonoBehaviour
         var canvasRect = Canvas.GetComponent<RectTransform>();
 
         // Convert world position to viewport position (0-1 range)
-        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.gameObj.transform.position);
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.GameObj.transform.position);
 
         // Convert viewport position to canvas local position
         Vector2 menuPosition = new Vector2(

@@ -79,19 +79,19 @@ public class ChainSystem
             foreach (var unit in TilemapCreator.UnitLocator.Values)
             {
                 //var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
-                var unitCell = unit.unitInfo.Vector2CellLocation();
-                var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.unitInfo.FinalSense, Pattern.Splash);
+                var unitCell = unit.UnitInfo.Vector2CellLocation();
+                var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.UnitInfo.FinalSense, Pattern.Splash);
 
                 // Unit cannot react if they don't have any available AP
                 // Unit cannot react if they are dead
                 // Unit cannot react if they already added an action to the ChainSystem
                 // Unit cannot react if they are too far to sense the initial action
                 // TODO: Fix this rule!!! Unit cannot react if the action is not an attack type
-                if (unit.unitInfo.currentAP <= 0 || unit.unitInfo.IsDead() || Chain.Any(chain => chain.Item3 == unit) ||
+                if (unit.UnitInfo.currentAP <= 0 || unit.UnitInfo.IsDead() || Chain.Any(chain => chain.Item3 == unit) ||
                     !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
             
-                Debug.Log($"Unit {unit.gameObj.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
-                Debug.Log($"Unit {unit.gameObj.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
+                Debug.Log($"Unit {unit.GameObj.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
+                Debug.Log($"Unit {unit.GameObj.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
 
                 if (unit is AIUnit unitAI) {
                     ReactionInProgress = true;
@@ -109,14 +109,14 @@ public class ChainSystem
 
     private static IEnumerator OfferChainReaction(Unit unit)
     {
-        Debug.Log("Unit " + unit.gameObj.name + " should be reacting...");
+        Debug.Log("Unit " + unit.GameObj.name + " should be reacting...");
         ReactionInProgress = true;
         ReactingUnit = unit;
-        Vector2Int unitCell = unit.unitInfo.Vector2CellLocation();
+        Vector2Int unitCell = unit.UnitInfo.Vector2CellLocation();
         MapCursor.currentUnit = unitCell;
         MapCursor.SetHoverCell(unitCell);
         MapCursor.SetGameObjActive();
-        CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
+        CanvasUI.ShowTargetUnitInfoDisplay(unit.UnitInfo);
 
         yield return UnitMenu.ShowMenu(unit);
         yield return new WaitUntil(ReactionHasEnded);

@@ -206,7 +206,7 @@ public class UnitEquipment
         bonusEvade += equipment.equipEvade;
         bonusSpeed += equipment.equipSpeed;
         
-        unit.unitInfo.ApplyEquipmentBonuses();
+        unit.UnitInfo.ApplyEquipmentBonuses();
     }
     
     private void RemoveEquipmentBonus(Equipment equipment)
@@ -221,7 +221,7 @@ public class UnitEquipment
         bonusMove -= equipment.equipMove;
         bonusSpeed -= equipment.equipSpeed;
         
-        unit.unitInfo.ApplyEquipmentBonuses();
+        unit.UnitInfo.ApplyEquipmentBonuses();
     }
 
     private void ApplyEquipmentAction(UnitAction action) {

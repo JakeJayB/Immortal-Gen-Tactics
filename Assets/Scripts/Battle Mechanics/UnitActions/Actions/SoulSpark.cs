@@ -18,7 +18,7 @@ public class SoulSpark : Item
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return TilemapUtility.GetLinearTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
             ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-            : unit.unitInfo.Vector2CellLocation()], Range);
+            : unit.UnitInfo.Vector2CellLocation()], Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
@@ -33,10 +33,10 @@ public class SoulSpark : Item
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
             {
-                if (!foundUnit.unitInfo.IsDead()) { continue; }
+                if (!foundUnit.UnitInfo.IsDead()) { continue; }
                 
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                 // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                 if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -66,13 +66,13 @@ public class SoulSpark : Item
         yield return Consume(unit, selectedCell);
 
         if (!TilemapCreator.UnitLocator.TryGetValue(selectedCell, out var foundUnit)) yield break;
-        if (!foundUnit.unitInfo.IsDead()) yield break;
+        if (!foundUnit.UnitInfo.IsDead()) yield break;
         
         // Revive Unit
-        foundUnit.unitInfo.Revive();
+        foundUnit.UnitInfo.Revive();
                 
         // Heal Unit by Specified Amount
-        int heal = DamageCalculator.HealDamage(this, unit.unitInfo, foundUnit.unitInfo);
+        int heal = DamageCalculator.HealDamage(this, unit.UnitInfo, foundUnit.UnitInfo);
         SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
         yield return DamageDisplay.DisplayUnitDamage(foundUnit, heal);
     }

@@ -19,7 +19,7 @@ public class DamageDisplay : MonoBehaviour
         displayText.fontStyle = FontStyles.Bold;
         
         // Convert world position to viewport position (0-1 range)
-        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.gameObj.transform.position);
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.GameObj.transform.position);
 
         // Convert viewport position to canvas local position
         Vector2 textPosition = new Vector2(

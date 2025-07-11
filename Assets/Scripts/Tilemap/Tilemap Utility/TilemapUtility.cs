@@ -28,7 +28,7 @@ public class TilemapUtility
             {UnitDirection.Right, Vector2Int.right}
         };
 
-        Vector2Int direction = directions[TilemapCreator.UnitLocator[startPos].unitInfo.UnitDirection];
+        Vector2Int direction = directions[TilemapCreator.UnitLocator[startPos].UnitInfo.UnitDirection];
         for (int i = 1; i <= range; i++)
         {
             Vector2Int checkPos = startPos + direction * i;
@@ -207,7 +207,7 @@ public class TilemapUtility
             case Pattern.Linear:
             case Pattern.Rush:
                 var linearDirections =
-                    TilemapUtility.GetDirectionalLinearTilesInRange(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+                    TilemapUtility.GetDirectionalLinearTilesInRange(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
                         action.Range);
 
                 foreach (var direction in linearDirections)

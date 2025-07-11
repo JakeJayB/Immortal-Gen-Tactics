@@ -19,13 +19,13 @@ public class AIUnitBehavior : MonoBehaviour
     
     public void StartTurn(AIUnit unitAI) 
     {
-        CanvasUI.ShowTurnUnitInfoDisplay(unitAI.unitInfo);
+        CanvasUI.ShowTurnUnitInfoDisplay(unitAI.UnitInfo);
         StartCoroutine(DecideAction(unitAI)); 
     }
     
     public IEnumerator React(AIUnit unitAI)
     {
-        CanvasUI.ShowTurnUnitInfoDisplay(unitAI.unitInfo);
+        CanvasUI.ShowTurnUnitInfoDisplay(unitAI.UnitInfo);
         yield return StartCoroutine(DecideAction(unitAI)); 
     }
     
@@ -37,7 +37,7 @@ public class AIUnitBehavior : MonoBehaviour
         unitAI.AIBehavior = unitAI.AIBehavior.OrderBy(a => a.Priority).ToList();
         
         // Decide Target
-        unitAI.targetedUnit = unitAI.targetedUnit == null || !unitAI.targetedUnit.gameObj
+        unitAI.targetedUnit = unitAI.targetedUnit == null || !unitAI.targetedUnit.GameObj
             ? new UnitAITargeting().EvaluateScore(unitAI).TargetUnit 
             : unitAI.targetedUnit;
 
@@ -48,14 +48,14 @@ public class AIUnitBehavior : MonoBehaviour
             actionDetermined = true;
             Debug.Log("AIUnit performing " + behavior.Action.Name + "!");
             ChainSystem.HoldPotentialChain(behavior.Action, unitAI);
-            yield return ChainSystem.AddAction(new Vector2Int(unitAI.unitInfo.CellLocation.x, unitAI.unitInfo.CellLocation.z));
+            yield return ChainSystem.AddAction(new Vector2Int(unitAI.UnitInfo.CellLocation.x, unitAI.UnitInfo.CellLocation.z));
             break;
         }
 
         if (!actionDetermined)
         {
-            Debug.Log($"!!!!!!!!!!!!{unitAI.targetedUnit.unitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
-            var nearbyUnit = unitAI.targetedUnit.unitInfo.Vector2CellLocation();
+            Debug.Log($"!!!!!!!!!!!!{unitAI.targetedUnit.UnitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
+            var nearbyUnit = unitAI.targetedUnit.UnitInfo.Vector2CellLocation();
             
             // Softmax Implementation
             List<UnitAction> turnActions = isReacting
@@ -65,7 +65,7 @@ public class AIUnitBehavior : MonoBehaviour
             List<float> actionScores = new List<float>();
             foreach (var action in turnActions)
             {
-                if (unitAI.unitInfo.currentAP < action.APCost || unitAI.unitInfo.currentMP < action.MPCost) { continue; }
+                if (unitAI.UnitInfo.currentAP < action.APCost || unitAI.UnitInfo.currentMP < action.MPCost) { continue; }
 
                 /*
                 if ((targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy &&
@@ -81,7 +81,7 @@ public class AIUnitBehavior : MonoBehaviour
 
             UnitAction chosenAction = SoftmaxAILogic.DetermineAction(potentialActions, actionScores);
         
-            Debug.Log(unitAI.gameObj.name + " choose to " + chosenAction.Name + " this turn.");
+            Debug.Log(unitAI.GameObj.name + " choose to " + chosenAction.Name + " this turn.");
             ChainSystem.HoldPotentialChain(chosenAction, unitAI);
             yield return ChainSystem.AddAction(chosenAction.ActionScore.Vector2PotentialLocation());
             
@@ -100,7 +100,7 @@ public class AIUnitBehavior : MonoBehaviour
         }
         else {
             yield return ChainSystem.ExecuteChain();
-            if (unitAI.targetedUnit != null && unitAI.targetedUnit.unitInfo.IsDead()) { unitAI.targetedUnit = null; }
+            if (unitAI.targetedUnit != null && unitAI.targetedUnit.UnitInfo.IsDead()) { unitAI.targetedUnit = null; }
             StartCoroutine(DecideAction(unitAI));
         }
     }

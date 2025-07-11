@@ -21,7 +21,7 @@ public class Attack : UnitAction
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-                : unit.unitInfo.Vector2CellLocation()],
+                : unit.UnitInfo.Vector2CellLocation()],
             Range, AttackPattern);
     }
 
@@ -34,17 +34,17 @@ public class Attack : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
 
         foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                     TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()],
+                     TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
                      Range))
         {
             foreach (var tile in direction)
             {
                 if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
                 {
-                    if (foundUnit.unitInfo.IsDead()) { continue; }
+                    if (foundUnit.UnitInfo.IsDead()) { continue; }
                     
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                        foundUnit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                        foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
             
                     Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                     if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
@@ -71,7 +71,7 @@ public class Attack : UnitAction
         // Spend an Action Point to execute the Action
         PayAPCost(unit);
         
-        Vector2Int originCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
+        Vector2Int originCell = new Vector2Int(unit.UnitInfo.CellLocation.x, unit.UnitInfo.CellLocation.z);
         Vector2Int displacement = selectedCell - originCell;
 
         Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
@@ -82,10 +82,10 @@ public class Attack : UnitAction
             Vector2Int nextCell = originCell + direction * i;
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit))
             {
-                int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
+                int damage = DamageCalculator.DealDamage(this, unit.UnitInfo, targetUnit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
-                Debug.Log("Attack: unit attacked! HP: " + targetUnit.unitInfo.currentHP + "/" + targetUnit.unitInfo.FinalHP);
+                Debug.Log("Attack: unit attacked! HP: " + targetUnit.UnitInfo.currentHP + "/" + targetUnit.UnitInfo.FinalHP);
             }
         }
         

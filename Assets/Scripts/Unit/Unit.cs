@@ -6,44 +6,45 @@ using UnityEngine;
 
 public class Unit
 {
-    public GameObject gameObj { get; set; }
+    public GameObject GameObj { get; set; }
     
     // Unit Properties
-    public UnitInfo unitInfo { get; protected set; }
-    public UnitEquipment equipment { get; protected set; }
+    public UnitInfo UnitInfo { get; protected set; }
+    public UnitEquipment Equipment { get; protected set; }
     public UnitActionSet ActionSet { get; protected set; }
+    public UnitRenderer UnitRenderer { get; protected set; }
 
     // Constructor
-    public Unit(GameObject gameObj, UnitDefinitionData unitData)
+    public Unit(GameObject gameObj, UnitDefinitionData unitData, UnitRenderer unitRenderer)
     {
-        this.gameObj = gameObj;
+        GameObj = gameObj;
+        UnitRenderer = unitRenderer;
 
         if (unitData == null) {
-            Debug.LogError($"[{gameObj.name}]: UDD not found!");
+            Debug.LogError($"[Unit]: UDD not found for Unit '{gameObj.name}' during construction.");
         }
         
-        unitInfo = new UnitInfo(this);
-        unitInfo.Initialize(unitData);
+        UnitInfo = new UnitInfo(this);
+        UnitInfo.Initialize(unitData);
         
         ActionSet = new UnitActionSet(this);
         ActionSet.Initialize(unitData);
         
-        equipment = new UnitEquipment(this);
-        equipment.Initialize(unitData);
+        Equipment = new UnitEquipment(this);
+        Equipment.Initialize(unitData);
         
-        unitInfo.ResetCurrentStatPoints();
+        UnitInfo.ResetCurrentStatPoints();
     }
 
-    public Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)
+    public void Initialize(Vector3Int initLocation, UnitDirection unitDirection)
     {
-        unitInfo.CellLocation = initLocation;
-        unitInfo.UnitDirection = unitDirection;
-        unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
+        SetInitialPosition(initLocation, unitDirection);
+        UnitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
+        UnitRenderer.Render(initLocation, unitDirection);
+    }
 
-        SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
-        UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
-        unitRenderer.Render(initLocation, unitDirection);
-        
-        return this;
+    private void SetInitialPosition(Vector3Int initLocation, UnitDirection unitDirection) {
+        UnitInfo.CellLocation = initLocation;
+        UnitInfo.UnitDirection = unitDirection;
     }
 }

@@ -87,8 +87,8 @@ public class Pathfinder
 
     public static int DistanceBetweenUnits(Unit a, Unit b)
     {
-        int dx = a.unitInfo.CellLocation.x - b.unitInfo.CellLocation.x;
-        int dz = a.unitInfo.CellLocation.z - b.unitInfo.CellLocation.z;
+        int dx = a.UnitInfo.CellLocation.x - b.UnitInfo.CellLocation.x;
+        int dz = a.UnitInfo.CellLocation.z - b.UnitInfo.CellLocation.z;
     
         return Mathf.Abs(dx) + Mathf.Abs(dz);
     }
@@ -103,9 +103,9 @@ public class Pathfinder
 
     public static Unit ProjectedRushTarget(Unit unit, Vector2Int direction)
     {
-        Vector2Int startCell = unit.unitInfo.Vector2CellLocation();
+        Vector2Int startCell = unit.UnitInfo.Vector2CellLocation();
         
-        for (int i = 1; i <= unit.unitInfo.FinalMove; i++)
+        for (int i = 1; i <= unit.UnitInfo.FinalMove; i++)
         {
             Vector2Int nextCell = startCell + direction * i;
 
@@ -122,10 +122,10 @@ public class Pathfinder
     public static Vector2Int ProjectedRushLocation(Unit unit, Vector2Int direction)
     {
         Vector2Int projectedLocation = Vector2Int.zero;
-        Vector2Int startCell = unit.unitInfo.Vector2CellLocation();
+        Vector2Int startCell = unit.UnitInfo.Vector2CellLocation();
         Vector2Int previousCell = startCell;
         
-        for (int i = 1; i <= unit.unitInfo.FinalMove; i++)
+        for (int i = 1; i <= unit.UnitInfo.FinalMove; i++)
         {
             Vector2Int nextCell = startCell + direction * i;
 
@@ -141,7 +141,7 @@ public class Pathfinder
 
             previousCell = nextCell;
 
-            if (i != unit.unitInfo.FinalMove) continue;
+            if (i != unit.UnitInfo.FinalMove) continue;
             return previousCell;
         }
         

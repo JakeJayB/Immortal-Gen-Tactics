@@ -18,8 +18,8 @@ public class UnitAITargeting
     private int CalcPriorityScore(AIUnit unitAI, Unit potentialUnit)
     {
         // Skip the calculation process if enemy unit is already dead
-        if (potentialUnit.unitInfo.IsDead() &&
-            potentialUnit.unitInfo.UnitAffiliation != unitAI.unitInfo.UnitAffiliation) { return -1; }
+        if (potentialUnit.UnitInfo.IsDead() &&
+            potentialUnit.UnitInfo.UnitAffiliation != unitAI.UnitInfo.UnitAffiliation) { return -1; }
         
         int score = 0;
         int distance = Pathfinder.DistanceBetweenUnits(unitAI, potentialUnit);
@@ -34,11 +34,11 @@ public class UnitAITargeting
         // Score Factor 2: Distance Away
         if (unitAI != potentialUnit) {
             // score += Mathf.RoundToInt(unitAI.unitInfo.finalMove * unitAI.unitInfo.currentAP / (float)distance);
-            score += unitAI.unitInfo.FinalMove * (ChainSystem.ReactionInProgress ? 1 : unitAI.unitInfo.currentAP) - distance;
+            score += unitAI.UnitInfo.FinalMove * (ChainSystem.ReactionInProgress ? 1 : unitAI.UnitInfo.currentAP) - distance;
         }
         
         // Score Factor 3: Action Impact
-        score += potentialUnit.unitInfo.UnitAffiliation != unitAI.unitInfo.UnitAffiliation
+        score += potentialUnit.UnitInfo.UnitAffiliation != unitAI.UnitInfo.UnitAffiliation
             ? CalcAggressionScore(unitAI, potentialUnit)
             : CalcAllySynergyScore(unitAI, potentialUnit);
         
@@ -65,7 +65,7 @@ public class UnitAITargeting
             // Skip Actions that can't be Currently Used by the UnitAI
             // Skip Reactions that aren't in Range
             if (action.DamageType == DamageType.Healing) { continue; }
-            if (unitAI.unitInfo.currentMP < action.MPCost) { continue; }
+            if (unitAI.UnitInfo.currentMP < action.MPCost) { continue; }
             if (ChainSystem.ReactionInProgress && action.Range + action.Splash < distance) { continue; }
             
             // Instantiate the damage value the current action will have in the future
@@ -73,16 +73,16 @@ public class UnitAITargeting
             
             // Max Possible Distance UnitAI can be from the Potential Unit to Perform the Action on their Current Turn
             int maxPossibleDistance =
-                action.Range + unitAI.unitInfo.FinalMove * (unitAI.unitInfo.currentAP - action.APCost);
+                action.Range + unitAI.UnitInfo.FinalMove * (unitAI.UnitInfo.currentAP - action.APCost);
             
             // Additional AP Needed to Move Towards Potential Unit to Perform Action
-            int additionalAPCost = (distance - action.Range) / unitAI.unitInfo.FinalMove;
+            int additionalAPCost = (distance - action.Range) / unitAI.UnitInfo.FinalMove;
             
-            if (unitAI.unitInfo.UnitAffiliation != potentialUnit.unitInfo.UnitAffiliation) { 
+            if (unitAI.UnitInfo.UnitAffiliation != potentialUnit.UnitInfo.UnitAffiliation) { 
                 futureDamage = DamageCalculator.ProjectDamage(action,
-                    unitAI.unitInfo, potentialUnit.unitInfo); }
+                    unitAI.UnitInfo, potentialUnit.UnitInfo); }
 
-            if (potentialUnit.unitInfo.currentHP - futureDamage <= 0) { futureDamage = Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP); }
+            if (potentialUnit.UnitInfo.currentHP - futureDamage <= 0) { futureDamage = Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP); }
             futureDamage -= Mathf.RoundToInt(action.MPCost * unitAI.ResourceManagement);
             futureDamage -= Mathf.RoundToInt((action.APCost + additionalAPCost) * unitAI.ReactionAllocation);
             futureDamage *= (int)unitAI.Aggression;
@@ -92,8 +92,8 @@ public class UnitAITargeting
         score += projectedFutureDamage;
         
         if (projectedFutureDamage > 0) {
-            score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP /
-            (float)potentialUnit.unitInfo.currentHP * (int)unitAI.Aggression); 
+            score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP /
+            (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.Aggression); 
         }
         
         return score;
@@ -116,7 +116,7 @@ public class UnitAITargeting
     // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
     public int CalcTacticalPositioningScore(AIUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
         int score = 0;
-        int currentDistance = Pathfinder.DistanceBetweenCells(unit.unitInfo.CellLocation, targetCell);
+        int currentDistance = Pathfinder.DistanceBetweenCells(unit.UnitInfo.CellLocation, targetCell);
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
 
         if (TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(targetCell.x, targetCell.z), out var unitOnTile))
@@ -126,14 +126,14 @@ public class UnitAITargeting
             foreach (var action in unit.ActionSet.GetAllAttackActions())
             {
                 if (action.Range < distance) { continue; }
-                if (unit.unitInfo.currentAP < action.APCost || unit.unitInfo.currentMP < action.MPCost) { continue; }
+                if (unit.UnitInfo.currentAP < action.APCost || unit.UnitInfo.currentMP < action.MPCost) { continue; }
             
                 unitOnTile = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
                 int futureDamage = 0; 
             
-                if (distance <= action.Range && unit.unitInfo.UnitAffiliation != unitOnTile.unitInfo.UnitAffiliation) { 
+                if (distance <= action.Range && unit.UnitInfo.UnitAffiliation != unitOnTile.UnitInfo.UnitAffiliation) { 
                     futureDamage = DamageCalculator.ProjectDamage(action,
-                        unit.unitInfo, unitOnTile.unitInfo) * Mathf.RoundToInt(unit.Aggression); }
+                        unit.UnitInfo, unitOnTile.UnitInfo) * Mathf.RoundToInt(unit.Aggression); }
             
                 if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
             }
@@ -158,7 +158,7 @@ public class UnitAITargeting
         
         // Score Factor 1: HP Ratio
         // The lower the ratio, the higher the score
-        score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP / (float)potentialUnit.unitInfo.currentHP * unitAI.AllySynergy);
+        score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP / (float)potentialUnit.UnitInfo.currentHP * unitAI.AllySynergy);
         
         // Score Factor 2: Healing Impact
         // If an action would knock out the targeted unit, add a large amount to the score...
@@ -171,9 +171,9 @@ public class UnitAITargeting
             // Skip Actions that can't be Currently Used by the UnitAI
             if (action.DamageType is DamageType.Physical or DamageType.Magic ) { continue; }
             if (action.DamageType == DamageType.Healing &&
-                potentialUnit.unitInfo.currentHP == potentialUnit.unitInfo.FinalHP) { continue; }
-            if (unitAI.unitInfo.currentMP < action.MPCost) { continue; }
-            if (unitAI.unitInfo.IsDead() && action.DamageType == DamageType.Healing) { continue; }
+                potentialUnit.UnitInfo.currentHP == potentialUnit.UnitInfo.FinalHP) { continue; }
+            if (unitAI.UnitInfo.currentMP < action.MPCost) { continue; }
+            if (unitAI.UnitInfo.IsDead() && action.DamageType == DamageType.Healing) { continue; }
             if (ChainSystem.ReactionInProgress && action.Range + action.Splash < distance) { continue; }
             
             
@@ -182,19 +182,19 @@ public class UnitAITargeting
             
             // Max Possible Distance UnitAI can be from the Potential Unit to Perform the Action on their Current Turn
             int maxPossibleDistance =
-                action.Range + unitAI.unitInfo.FinalMove * (unitAI.unitInfo.currentAP - action.APCost);
+                action.Range + unitAI.UnitInfo.FinalMove * (unitAI.UnitInfo.currentAP - action.APCost);
             
             // Additional AP Needed to Move Towards Potential Unit to Perform Action
-            int additionalAPCost = (distance - action.Range) / unitAI.unitInfo.FinalMove;
+            int additionalAPCost = (distance - action.Range) / unitAI.UnitInfo.FinalMove;
             
             // Calculate the Value of Potential Healing
-            if (unitAI.unitInfo.UnitAffiliation == potentialUnit.unitInfo.UnitAffiliation) { 
+            if (unitAI.UnitInfo.UnitAffiliation == potentialUnit.UnitInfo.UnitAffiliation) { 
                 futureHealing = DamageCalculator.ProjectHealing(action,
-                    unitAI.unitInfo, potentialUnit.unitInfo); }
+                    unitAI.UnitInfo, potentialUnit.UnitInfo); }
 
             // Calculate Bonus If Unit Will Be Revived
-            if (potentialUnit.unitInfo.IsDead() && action.DamageType == DamageType.Revival) {
-                futureHealing += potentialUnit.unitInfo.FinalHP;
+            if (potentialUnit.UnitInfo.IsDead() && action.DamageType == DamageType.Revival) {
+                futureHealing += potentialUnit.UnitInfo.FinalHP;
             }
             
             futureHealing -= Mathf.RoundToInt(action.MPCost * unitAI.ResourceManagement);
@@ -206,8 +206,8 @@ public class UnitAITargeting
         score += projectedFutureDamage;
 
         if (projectedFutureDamage > 0) {
-            score += Mathf.RoundToInt(potentialUnit.unitInfo.FinalHP /
-                (float)potentialUnit.unitInfo.currentHP * (int)unitAI.AllySynergy);
+            score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP /
+                (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.AllySynergy);
         }
         
         return score;
@@ -216,7 +216,7 @@ public class UnitAITargeting
     // Resource Management Score
     // Completed!!
     public int CalcResourceManagementScore(AIUnit unit) {
-        return -(unit.unitInfo.currentMP - Action.MPCost) / unit.unitInfo.FinalMP * Mathf.RoundToInt(unit.ResourceManagement);
+        return -(unit.UnitInfo.currentMP - Action.MPCost) / unit.UnitInfo.FinalMP * Mathf.RoundToInt(unit.ResourceManagement);
     }
 
     // Reaction Awareness Score
@@ -226,10 +226,10 @@ public class UnitAITargeting
         int threatLevel = 0;
         
         foreach (var enemy in enemyUnits) {
-            int distance = Pathfinder.DistanceBetweenCells(potentialCell, enemy.unitInfo.CellLocation);
-            if (distance <= enemy.unitInfo.FinalSense) {
+            int distance = Pathfinder.DistanceBetweenCells(potentialCell, enemy.UnitInfo.CellLocation);
+            if (distance <= enemy.UnitInfo.FinalSense) {
                 score -= 10;
-                threatLevel -= enemy.unitInfo.currentLevel;
+                threatLevel -= enemy.UnitInfo.currentLevel;
             }
         }
 
@@ -242,7 +242,7 @@ public class UnitAITargeting
     // Reaction Allocation Score
     // Completed!!
     public int CalcReactionAllocationScore(AIUnit unit) {
-        return 20 * (unit.unitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.ReactionAllocation);
+        return 20 * (unit.UnitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.ReactionAllocation);
     }
 
     // TODO: Implement Softmax to organically choose a unit to target (Most AI will target the same unit)
@@ -252,7 +252,7 @@ public class UnitAITargeting
         foreach (var potentialUnit in TilemapCreator.UnitLocator.Values)
         {
             var newScore = CalcPriorityScore(unitAI, potentialUnit);
-            Debug.Log(potentialUnit.gameObj.name + " target score = " + newScore);
+            Debug.Log(potentialUnit.GameObj.name + " target score = " + newScore);
             //var newScore = unitAI.unitInfo.UnitAffiliation == potentialUnit.unitInfo.UnitAffiliation ? 
                 //CalcAggressionScore(unitAI, potentialUnit) : CalcAllySynergyScore(unitAI, potentialUnit);
 

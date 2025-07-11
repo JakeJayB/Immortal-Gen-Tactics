@@ -19,7 +19,7 @@ public class Ether : Item
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
             ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
-            : unit.unitInfo.Vector2CellLocation()], Range);
+            : unit.UnitInfo.Vector2CellLocation()], Range);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_item";
@@ -32,8 +32,8 @@ public class Ether : Item
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
-        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
-            unit.FindNearbyUnits()[0].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
+            unit.FindNearbyUnits()[0].UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
         
         Debug.Log("Best Heuristic Score: " + (ActionScore.TotalScore() < 0 ? "N/A" : ActionScore.TotalScore()));
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);
@@ -61,15 +61,15 @@ public class Ether : Item
         {
             // Heal Unit by Specified Amount
             SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
-            yield return DamageDisplay.DisplayUnitDamage(foundUnit, DamageCalculator.HealFixedAmountMP(BasePower, foundUnit.unitInfo));
+            yield return DamageDisplay.DisplayUnitDamage(foundUnit, DamageCalculator.HealFixedAmountMP(BasePower, foundUnit.UnitInfo));
 
-            if (unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
-                CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
+            if (unit.UnitInfo.UnitAffiliation == UnitAffiliation.Player)
+                CanvasUI.ShowTurnUnitInfoDisplay(unit.UnitInfo);
             else
-                CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
+                CanvasUI.ShowTargetUnitInfoDisplay(unit.UnitInfo);
         }
 
-        Debug.Log(unit.gameObj.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.FinalHP);
+        Debug.Log(unit.GameObj.name + " is using a potion. HP: " + unit.UnitInfo.currentHP + "/" + unit.UnitInfo.FinalHP);
         yield return null;
     }
 }

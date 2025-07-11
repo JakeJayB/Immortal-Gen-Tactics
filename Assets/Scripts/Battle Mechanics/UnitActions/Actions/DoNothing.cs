@@ -31,8 +31,8 @@ public class DoNothing : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
         
-        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileInfo.CellLocation,
-            unit.unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
+            unit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
         
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);

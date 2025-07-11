@@ -21,7 +21,8 @@ public class AIUnit : Unit
 
     public Unit targetedUnit;
 
-    public AIUnit(GameObject gameObj, UnitDefinitionData unitData) : base(gameObj, unitData) {
+    public AIUnit(GameObject gameObj,UnitDefinitionData unitData, UnitRenderer unitRenderer) 
+        : base(gameObj, unitData, unitRenderer) {
         if (unitData == null) return;
 
         Aggression = unitData.Behaviors.Aggression;
@@ -35,28 +36,28 @@ public class AIUnit : Unit
     
     public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
-        unitInfo.CellLocation = initLocation;
-        unitInfo.UnitDirection = unitDirection;
-        unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
+        UnitInfo.CellLocation = initLocation;
+        UnitInfo.UnitDirection = unitDirection;
+        UnitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
         
-        AIUnitBehavior = gameObj.AddComponent<AIUnitBehavior>();
+        AIUnitBehavior = GameObj.AddComponent<AIUnitBehavior>();
         AIBehavior = new List<AIBehavior>()
         {
             new AIBehavior
             {
                 Priority = 0,
-                Condition = () => RuleBasedAILogic.CurrentHPIsBelowPercent(0.4f, unitInfo) && RuleBasedAILogic.HasItem(new Potion(), this),
+                Condition = () => RuleBasedAILogic.CurrentHPIsBelowPercent(0.4f, UnitInfo) && RuleBasedAILogic.HasItem(new Potion(), this),
                 Action = new Potion()
             },
             new AIBehavior
             {
                 Priority = 9,
-                Condition = () => RuleBasedAILogic.CurrentAPIsBelow(1, unitInfo),
+                Condition = () => RuleBasedAILogic.CurrentAPIsBelow(1, UnitInfo),
                 Action = new Wait()
             },
         };
 
-        SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRender = GameObj.GetComponent<SpriteRenderer>();
         UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
         unitRenderer.Render(initLocation, unitDirection);
         
@@ -66,7 +67,7 @@ public class AIUnit : Unit
     }
 
     private void InitializeAIBehaviors() {
-        var unitInitializer = gameObj.GetComponent<UnitDefinitionData>().Behaviors;
+        var unitInitializer = GameObj.GetComponent<UnitDefinitionData>().Behaviors;
         if (unitInitializer == null) return;
 
         Aggression = unitInitializer.Aggression;
@@ -86,17 +87,17 @@ public class AIUnit : Unit
         
         // Check Units based on Unit's Movement Range for now until finalized
         // It will save an AP for an action once they select and move towards the opponent
-        var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()],
-            30 * (unitInfo.currentAP), Pattern.Splash);
+        var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()],
+            30 * (UnitInfo.currentAP), Pattern.Splash);
 
         // Don't Count the same tile as the Unit conducting the search
-        surroundings.Remove(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()]);
+        surroundings.Remove(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()]);
 
         foreach (Tile tile in surroundings)
         {
             var cell = new Vector2Int(tile.TileInfo.CellLocation.x, tile.TileInfo.CellLocation.z);
             if (TilemapCreator.UnitLocator.TryGetValue(cell, out Unit unit)) {
-                if (!unit.unitInfo.IsDead() && unit.unitInfo.UnitAffiliation != unitInfo.UnitAffiliation) { nearbyUnits.Add(unit); }
+                if (!unit.UnitInfo.IsDead() && unit.UnitInfo.UnitAffiliation != UnitInfo.UnitAffiliation) { nearbyUnits.Add(unit); }
             }
         }
 
@@ -106,8 +107,8 @@ public class AIUnit : Unit
     public bool InRange(Unit unit, int range, Pattern pattern)
     {
         var neighborTiles =
-            Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitInfo.Vector2CellLocation()], range, pattern);
+            Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()], range, pattern);
 
-        return neighborTiles.Contains(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()]);
+        return neighborTiles.Contains(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()]);
     }
 }

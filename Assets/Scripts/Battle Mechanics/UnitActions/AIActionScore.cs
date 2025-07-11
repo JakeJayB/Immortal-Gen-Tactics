@@ -38,7 +38,7 @@ public class AIActionScore
 
             case Pattern.Linear:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.unitInfo.Vector2CellLocation()],
+                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
                              action.Range))
                 {
                     // Only check the direction that contains the potential cell currently being scored
@@ -61,7 +61,7 @@ public class AIActionScore
             
             case Pattern.Rush:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.unitInfo.Vector2CellLocation()],
+                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
                              action.Range))
                 {
                     
@@ -69,7 +69,7 @@ public class AIActionScore
                     if (direction.Contains(
                             TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)]))
                     {
-                        Vector2Int displacement = new Vector2Int(potentialCell.x, potentialCell.z) - unitAI.unitInfo.Vector2CellLocation();
+                        Vector2Int displacement = new Vector2Int(potentialCell.x, potentialCell.z) - unitAI.UnitInfo.Vector2CellLocation();
                         Vector2Int rushDirection = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
                         Unit projectedTarget = Pathfinder.ProjectedRushTarget(unitAI, rushDirection);
 
@@ -122,7 +122,7 @@ public class AIActionScore
             // If the action is move-based, get the distance between the AI unit's potential position and the nearby unit
             // Otherwise, get the distance between the AI unit's current position and nearby unit
             distance = Action.ActionType == ActionType.Move 
-                ? Pathfinder.DistanceBetweenCells(PotentialCell, nearbyUnit.unitInfo.CellLocation)
+                ? Pathfinder.DistanceBetweenCells(PotentialCell, nearbyUnit.UnitInfo.CellLocation)
                 : Pathfinder.DistanceBetweenUnits(unitAI, nearbyUnit);
             
             // Add to score if within reaction distance of an ally unit
@@ -130,10 +130,10 @@ public class AIActionScore
             // TODO: Account for enemy reactions that can reach them.
             // TODO: Calculate the potential damage that could reach them (hindsight).
             // TODO: Create a hindsight function that calculates the danger of discovered reactions from enemy units.
-            if (nearbyUnit.unitInfo.currentAP < 1 || distance > nearbyUnit.unitInfo.FinalSense) continue;
-            positionScore += nearbyUnit.unitInfo.UnitAffiliation == unitAI.unitInfo.UnitAffiliation
-                ? nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness
-                : -nearbyUnit.unitInfo.currentLevel * (int)unitAI.ReactionAwareness;
+            if (nearbyUnit.UnitInfo.currentAP < 1 || distance > nearbyUnit.UnitInfo.FinalSense) continue;
+            positionScore += nearbyUnit.UnitInfo.UnitAffiliation == unitAI.UnitInfo.UnitAffiliation
+                ? nearbyUnit.UnitInfo.currentLevel * (int)unitAI.ReactionAwareness
+                : -nearbyUnit.UnitInfo.currentLevel * (int)unitAI.ReactionAwareness;
         }
 
         if (ChainSystem.ReactionInProgress) return positionScore;
@@ -157,7 +157,7 @@ public class AIActionScore
         if (ChainSystem.ReactionInProgress) { return 0; }
 
         // If the current action will deplete all remaining AP, do not check for foresight
-        if (unitAI.unitInfo.currentAP - Action.APCost == 0) { return 0; }
+        if (unitAI.UnitInfo.currentAP - Action.APCost == 0) { return 0; }
         
         int foresightScore = 0;
         int projectedDamage = 0;    // Amount of damage projected to happen to the unit on tile
@@ -170,13 +170,13 @@ public class AIActionScore
             // If the action is move-based, get the distance between the AI unit's potential position and the nearby unit
             // Otherwise, get the distance between the AI unit's current position and nearby unit
             int distance = Action.ActionType == ActionType.Move 
-                ? Pathfinder.DistanceBetweenCells(PotentialCell, unitOnTile.unitInfo.CellLocation)
+                ? Pathfinder.DistanceBetweenCells(PotentialCell, unitOnTile.UnitInfo.CellLocation)
                 : Pathfinder.DistanceBetweenUnits(unitAI, unitOnTile);
             
             foreach (var action in unitAI.ActionSet.GetAITurnActions())
             {
                 if (action.Range + action.Splash < distance) { continue; }
-                if (unitAI.unitInfo.currentAP - Action.APCost < action.APCost || unitAI.unitInfo.currentMP - Action.MPCost < action.MPCost) { continue; }
+                if (unitAI.UnitInfo.currentAP - Action.APCost < action.APCost || unitAI.UnitInfo.currentMP - Action.MPCost < action.MPCost) { continue; }
                 
                 int futureDamage = CalcFutureActionScore(unitAI, action);
             
@@ -203,7 +203,7 @@ public class AIActionScore
         resourceScore -= Mathf.RoundToInt(Action.APCost * unitAI.ResourceManagement);
         
         if (Action.ActionType == ActionType.Wait) {
-            resourceScore += Mathf.RoundToInt((unitAI.unitInfo.FinalAP - unitAI.unitInfo.currentAP) * unitAI.ReactionAllocation); 
+            resourceScore += Mathf.RoundToInt((unitAI.UnitInfo.FinalAP - unitAI.UnitInfo.currentAP) * unitAI.ReactionAllocation); 
         }
 
         return resourceScore;
@@ -215,23 +215,23 @@ public class AIActionScore
         
         (UnitAction initialAction, Vector2Int target, Unit attacker) = ChainSystem.GetInitialChain();
 
-        Vector2Int projectedLocation = unitAI.unitInfo.Vector2CellLocation();
+        Vector2Int projectedLocation = unitAI.UnitInfo.Vector2CellLocation();
         if (Action.ActionType == ActionType.Move) projectedLocation = new Vector2Int(PotentialCell.x, PotentialCell.z);
         else if (Action.AttackPattern == Pattern.Rush)
         {
-            Vector2Int displacement = new Vector2Int(PotentialCell.x, PotentialCell.z) - unitAI.unitInfo.Vector2CellLocation();
+            Vector2Int displacement = new Vector2Int(PotentialCell.x, PotentialCell.z) - unitAI.UnitInfo.Vector2CellLocation();
             Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
             projectedLocation = Pathfinder.ProjectedRushLocation(unitAI, direction);
         }
         
         int projectedDamage =
-            DamageCalculator.ProjectDamage(initialAction, attacker.unitInfo, unitAI.unitInfo);
+            DamageCalculator.ProjectDamage(initialAction, attacker.UnitInfo, unitAI.UnitInfo);
         
         if (TilemapUtility.GetTargetedArea(attacker, initialAction, target).Contains(
                 TilemapCreator.TileLocator[projectedLocation]))
         {
-            if (unitAI.unitInfo.currentHP - projectedDamage < 1) {
-                reactionScore -= unitAI.unitInfo.FinalHP * (int)unitAI.Survival;
+            if (unitAI.UnitInfo.currentHP - projectedDamage < 1) {
+                reactionScore -= unitAI.UnitInfo.FinalHP * (int)unitAI.Survival;
             } else {
                 reactionScore -= projectedDamage * (int)unitAI.Survival;
             }
@@ -247,20 +247,20 @@ public class AIActionScore
         int projectedDamage = 0;    // Projected Damage or Healing Inflicted
         int projectedScore = 0;     // Total Value Projected to Come From Projected Damage
         
-        if (unitOnTile.unitInfo.UnitAffiliation != unitAI.unitInfo.UnitAffiliation) { // Calc Damage Towards Enemies
+        if (unitOnTile.UnitInfo.UnitAffiliation != unitAI.UnitInfo.UnitAffiliation) { // Calc Damage Towards Enemies
             projectedDamage =
-                DamageCalculator.ProjectDamage(Action, unitAI.unitInfo, unitOnTile.unitInfo);
+                DamageCalculator.ProjectDamage(Action, unitAI.UnitInfo, unitOnTile.UnitInfo);
 
-            projectedScore += unitOnTile.unitInfo.currentHP - projectedDamage < 1 ?
-                unitOnTile.unitInfo.FinalHP * (int)unitAI.Aggression :  // If the action kills a unit, score higher
+            projectedScore += unitOnTile.UnitInfo.currentHP - projectedDamage < 1 ?
+                unitOnTile.UnitInfo.FinalHP * (int)unitAI.Aggression :  // If the action kills a unit, score higher
                 projectedDamage * (int)unitAI.Aggression;   // Else, score the original damaging amount
                                 
         } else { // Calc Healing Towards Allies
             projectedDamage =
-                DamageCalculator.ProjectHealing(Action, unitAI.unitInfo, unitOnTile.unitInfo);
+                DamageCalculator.ProjectHealing(Action, unitAI.UnitInfo, unitOnTile.UnitInfo);
                                 
-            projectedScore += unitOnTile.unitInfo.IsDead() && Action.DamageType == DamageType.Revival ? 
-                unitOnTile.unitInfo.FinalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
+            projectedScore += unitOnTile.UnitInfo.IsDead() && Action.DamageType == DamageType.Revival ? 
+                unitOnTile.UnitInfo.FinalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
                 projectedDamage * (int)unitAI.AllySynergy;  // Else, score the original healing amount
         }
 
