@@ -73,7 +73,7 @@ public class AIActionScore
                         Vector2Int rushDirection = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
                         Unit projectedTarget = Pathfinder.ProjectedRushTarget(unitAI, rushDirection);
 
-                        if (!projectedTarget) break;
+                        if (projectedTarget == null) break;
                         damageScore += CalcDamageToUnit(unitAI, projectedTarget);
                         break;
                     }

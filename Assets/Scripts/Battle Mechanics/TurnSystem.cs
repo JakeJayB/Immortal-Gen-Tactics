@@ -114,7 +114,7 @@ private void HeapifyUp(int index)
 
     public static void Add(Unit unit)
     {
-        Debug.Log($"TurnSystem: Unit {unit.name} added to queue");
+        Debug.Log($"TurnSystem: Unit {unit.gameObj.name} added to queue");
         Heap.Add(unit);
         Heapify();
         TurnCycle.CycleUnits(ToSortedList(true));
@@ -122,7 +122,7 @@ private void HeapifyUp(int index)
     
     public void Remove(Unit unit)
     {
-        Debug.Log($"TurnSystem: Unit {unit.name} removed from queue");
+        Debug.Log($"TurnSystem: Unit {unit.gameObj.name} removed from queue");
         Heap.Remove(unit);
         Heapify();
         TurnCycle.CycleUnits(ToSortedList(true));
@@ -160,7 +160,7 @@ private void HeapifyUp(int index)
         Debug.Log("-------------------------------------------");
         foreach(Unit unit in Heap)
         {
-            Debug.Log($"{unit.name}'s CT: {unit.unitInfo.currentCT}");
+            Debug.Log($"{unit.gameObj.name}'s CT: {unit.unitInfo.currentCT}");
         }
         Debug.Log("-------------------------------------------");
     }
@@ -208,12 +208,12 @@ public class TurnSystem : MonoBehaviour
             CurrentUnit = unitQueue.Dequeue(); // Set the new unit whose turn is about to start
             CurrentUnit.unitInfo.RefreshAP();  // Unit AP refreshes to max amount at start of new turn
 
-            if (CurrentUnit.GetComponent<EnemyUnit>())
+            if (CurrentUnit is EnemyUnit enemyUnit)
             {
                 MapCursor.SetGameObjInactive();
                 Vector2Int unitLocation = CurrentUnit.unitInfo.Vector2CellLocation();
                 CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
-                CurrentUnit.GetComponent<EnemyUnit>().StartTurn();
+                enemyUnit.AIUnitBehavior.StartTurn(enemyUnit);
             }
             else
             {

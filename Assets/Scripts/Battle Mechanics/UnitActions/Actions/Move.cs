@@ -40,17 +40,6 @@ public class Move : UnitAction
             
             // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
             if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
-            
-            /*foreach (var nearbyUnit in unit.FindNearbyUnits())
-            {
-                if (nearbyUnit.unitInfo.UnitAffiliation == unit.unitInfo.UnitAffiliation) { continue; }
-                
-                AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    TilemapCreator.UnitLocator[selectedCell].unitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
-            
-                // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
-                if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
-            }*/
         }
 
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
@@ -69,7 +58,7 @@ public class Move : UnitAction
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
         // Have AI Units show their range of movement before moving
-        if (unit.GetComponent<EnemyUnit>())
+        if (unit is EnemyUnit)
         {
             ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
             yield return new WaitForSeconds(2.0f);
@@ -87,20 +76,10 @@ public class Move : UnitAction
         
         // Adds the location of the tile the Unit ended at in UnitLocator
         TilemapCreator.UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);
-
-/*        if(unit.unitInfo.UnitAffiliation == UnitAffiliation.Player)
-        {
-            CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
-            CanvasUI.HideTargetUnitInfoDisplay();
-        }
-        else
-        {
-            CanvasUI.HideTurnUnitInfoDisplay();
-            CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
-        }*/
+        
         CanvasUI.ShowTurnUnitInfoDisplay(unit.unitInfo);
         CanvasUI.HideTargetUnitInfoDisplay();
 
-        if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
+        if (unit is not EnemyUnit) { MapCursor.currentUnit = selectedCell; }
     }
 }

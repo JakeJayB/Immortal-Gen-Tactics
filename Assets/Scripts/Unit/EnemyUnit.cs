@@ -7,7 +7,8 @@ using UnityEngine;
 public class EnemyUnit : Unit
 {
     // AI Behavior Set
-    private List<AIBehavior> AIBehavior;
+    public AIUnitBehavior AIUnitBehavior;
+    public List<AIBehavior> AIBehavior;
     
     // AI Behavioral Factors
     public float Aggression;                  // Values Damage Dealt & Kills
@@ -20,10 +21,19 @@ public class EnemyUnit : Unit
 
     public Unit targetedUnit;
 
-    // Start is called before the first frame update
-    void Start()
+    public EnemyUnit(GameObject gameObj) : base(gameObj) { }
+    
+    public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
-        unitInfo = GetComponent<UnitInfo>();
+        InitializeAIBehaviors();
+        
+        unitInfo = gameObj.GetComponent<UnitInfo>();
+        unitInfo.unit = this;
+        unitInfo.CellLocation = initLocation;
+        unitInfo.UnitDirection = unitDirection;
+        unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
+        
+        AIUnitBehavior = gameObj.AddComponent<AIUnitBehavior>();
         AIBehavior = new List<AIBehavior>()
         {
             new AIBehavior
@@ -39,41 +49,20 @@ public class EnemyUnit : Unit
                 Action = new Wait()
             },
         };
-        
-        // Remove following lines after EnemyUnits are properly
-        // implemented through the json files.
-        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    public static Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
-    {
-        GameObject gameObj = Instantiate(Resources.Load<GameObject>("Prefabs/Unit/Enemy"));
-        EnemyUnit unit = gameObj.AddComponent<EnemyUnit>();
-        unit.gameObj = gameObj;
-        
-        unit.InitializeAIBehaviors();
-        unit.unitInfo = gameObj.GetComponent<UnitInfo>();
-        
-        unit.unitInfo.CellLocation = initLocation;
-        unit.unitInfo.UnitDirection = unitDirection;
-        unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
 
         SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
         UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
         unitRenderer.Render(initLocation, unitDirection);
+        
+        // TODO: Fix this so that sprite renderer or some other script handles updating the sprites properly
+        spriteRender.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
 
-        unit.gameObj.AddComponent<BillboardEffect>();
-        return unit;
+        gameObj.AddComponent<BillboardEffect>();
+        return this;
     }
 
     private void InitializeAIBehaviors() {
-        var unitInitializer = GetComponent<UnitInitializer>().Behaviors;
+        var unitInitializer = gameObj.GetComponent<UnitInitializer>().Behaviors;
         if (unitInitializer == null) return;
 
         Aggression = unitInitializer.Aggression;
@@ -83,92 +72,6 @@ public class EnemyUnit : Unit
         ResourceManagement = unitInitializer.ResourceManagement;
         ReactionAwareness = unitInitializer.ReactionAwareness;
         ReactionAllocation = unitInitializer.ReactionAllocation;
-    }
-
-    public void StartTurn() 
-    {
-        CanvasUI.ShowTurnUnitInfoDisplay(unitInfo);
-        StartCoroutine(DecideAction()); 
-    }
-
-    public IEnumerator React()
-    {
-        CanvasUI.ShowTurnUnitInfoDisplay(unitInfo);
-        yield return StartCoroutine(DecideAction()); 
-    }
-    
-    private IEnumerator DecideAction()
-    {
-        var actionDetermined = false;
-        var isReacting = ChainSystem.ReactionInProgress;
-        
-        AIBehavior = AIBehavior.OrderBy(a => a.Priority).ToList();
-        
-        // Decide Target
-        targetedUnit = !targetedUnit ? new UnitAITargeting().EvaluateScore(this).TargetUnit : targetedUnit;
-
-        foreach (var behavior in AIBehavior)
-        {
-            if (!behavior.Condition()) continue;
-
-            actionDetermined = true;
-            Debug.Log("AIUnit performing " + behavior.Action.Name + "!");
-            ChainSystem.HoldPotentialChain(behavior.Action, this);
-            yield return ChainSystem.AddAction(new Vector2Int(unitInfo.CellLocation.x, unitInfo.CellLocation.z));
-            break;
-        }
-
-        if (!actionDetermined)
-        {
-            Debug.Log($"!!!!!!!!!!!!{targetedUnit.unitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
-            var nearbyUnit = targetedUnit.unitInfo.Vector2CellLocation();
-            
-            // Softmax Implementation
-            List<UnitAction> turnActions = isReacting
-                ? unitInfo.ActionSet.GetAIReactions()
-                : unitInfo.ActionSet.GetAITurnActions();
-            List<UnitAction> potentialActions = new();
-            List<float> actionScores = new List<float>();
-            foreach (var action in turnActions)
-            {
-                if (unitInfo.currentAP < action.APCost || unitInfo.currentMP < action.MPCost) { continue; }
-
-                /*
-                if ((targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Enemy &&
-                     action.DamageType is DamageType.Physical or DamageType.Magic) ||
-                    (targetedUnit.unitInfo.UnitAffiliation == UnitAffiliation.Player &&
-                     action.DamageType == DamageType.Healing))
-                    continue;
-                */
-                
-                potentialActions.Add(action);
-                actionScores.Add(action.CalculateActionScore(this, nearbyUnit) / 2); // TODO: Fix Score Balancing to Prevent Softmax Overflow
-            }
-
-            UnitAction chosenAction = SoftmaxAILogic.DetermineAction(potentialActions, actionScores);
-        
-            Debug.Log(name + " choose to " + chosenAction.Name + " this turn.");
-            ChainSystem.HoldPotentialChain(chosenAction, this);
-            yield return ChainSystem.AddAction(chosenAction.ActionScore.Vector2PotentialLocation());
-            
-            // If AI Unit selects an action that impacts the target unit, de-prioritize them
-            if (chosenAction.ActionType != ActionType.Move) { targetedUnit = null; }
-        }
-
-        if (isReacting) {
-            targetedUnit = null;
-            yield return null;
-        }
-        else if (ChainSystem.Peek().GetType() == typeof(Wait)) {
-            yield return new WaitForSeconds(2f);
-            yield return ChainSystem.ExecuteChain();
-            targetedUnit = null;
-        }
-        else {
-            yield return ChainSystem.ExecuteChain();
-            if (targetedUnit && targetedUnit.unitInfo.IsDead()) { targetedUnit = null; }
-            StartCoroutine(DecideAction());
-        }
     }
 
     // TODO: AI doesn't perform any organic decision-making if it doesn't recognize an enemy.

@@ -4,28 +4,29 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit
 {
     public GameObject gameObj { get; set; }
-
     public UnitInfo unitInfo { get; set; }
 
-    public static Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)
+    public Unit(GameObject gameObj)
     {
-        GameObject gameObj = Instantiate(Resources.Load<GameObject>("Prefabs/Unit/Unit"));
-        Unit unit = gameObj.AddComponent<Unit>();
-        unit.gameObj = gameObj;
+        this.gameObj = gameObj;
+        unitInfo = gameObj.GetComponent<UnitInfo>();
+        unitInfo.unit = this;
+    }
 
-        unit.unitInfo = gameObj.GetComponent<UnitInfo>();
-        unit.unitInfo.CellLocation = initLocation;
-        unit.unitInfo.UnitDirection = unitDirection;
-        unit.unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
+    public Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)
+    {
+        unitInfo.CellLocation = initLocation;
+        unitInfo.UnitDirection = unitDirection;
+        unitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
 
         SpriteRenderer spriteRender = gameObj.GetComponent<SpriteRenderer>();
         UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
         unitRenderer.Render(initLocation, unitDirection);
 
-        unit.gameObj.AddComponent<BillboardEffect>();
-        return unit;
+        gameObj.AddComponent<BillboardEffect>();
+        return this;
     }
 }

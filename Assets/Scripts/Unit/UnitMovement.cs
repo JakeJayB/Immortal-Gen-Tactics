@@ -30,16 +30,16 @@ public class UnitMovement : MonoBehaviour
 
             // Move unit toward the tile and ensure it stops exactly before continuing
             // Once the unit gets close enough to the destination, end the loop to snap it.
-            while (Vector3.Distance(unit.transform.position, targetPosition) > 0.05f)
+            while (Vector3.Distance(unit.gameObj.transform.position, targetPosition) > 0.05f)
             {
                 float step = TRAVEL_SPEED * Time.deltaTime;
-                unit.transform.position = Vector3.MoveTowards(unit.transform.position, targetPosition, step);
+                unit.gameObj.transform.position = Vector3.MoveTowards(unit.gameObj.transform.position, targetPosition, step);
                 
                 yield return null; // Wait for next frame
             }
 
             // Snap to exact tile position
-            unit.transform.position = targetPosition;
+            unit.gameObj.transform.position = targetPosition;
             unit.unitInfo.CellLocation = nextTile.TileInfo.CellLocation;
 
             // Remove the tile just move on from the path list

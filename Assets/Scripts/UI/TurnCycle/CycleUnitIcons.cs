@@ -107,13 +107,12 @@ public class CycleUnitIcons : MonoBehaviour
     
     public static void RemoveUnit(Unit unit)
     {
-        if (!iconDict.ContainsKey(unit))
+        if (!iconDict.TryGetValue(unit, out var image))
         {
             Debug.LogError("CycleUnitIcons: Unit not found in icon dictionary");
             return;
         }
 
-        Image image = iconDict[unit];
         Destroy(image.gameObject);
         iconDict.Remove(unit);
     }

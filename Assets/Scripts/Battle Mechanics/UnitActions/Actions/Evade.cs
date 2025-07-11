@@ -52,7 +52,7 @@ public class Evade : UnitAction
     public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
     {
         // Have AI Units show their range of movement before moving
-        if (unit.GetComponent<EnemyUnit>())
+        if (unit is EnemyUnit)
         {
             ActionUtility.ShowSelectableTilesForMove(Area(unit, null));
             yield return new WaitForSeconds(2.0f);
@@ -73,6 +73,6 @@ public class Evade : UnitAction
         
         CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
 
-        if (!unit.GetComponent<EnemyUnit>()) { MapCursor.currentUnit = selectedCell; }
+        if (unit is not EnemyUnit) { MapCursor.currentUnit = selectedCell; }
     }
 }

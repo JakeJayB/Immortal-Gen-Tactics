@@ -252,7 +252,7 @@ public class UnitAITargeting
         foreach (var potentialUnit in TilemapCreator.UnitLocator.Values)
         {
             var newScore = CalcPriorityScore(unitAI, potentialUnit);
-            Debug.Log(potentialUnit.name + " target score = " + newScore);
+            Debug.Log(potentialUnit.gameObj.name + " target score = " + newScore);
             //var newScore = unitAI.unitInfo.UnitAffiliation == potentialUnit.unitInfo.UnitAffiliation ? 
                 //CalcAggressionScore(unitAI, potentialUnit) : CalcAllySynergyScore(unitAI, potentialUnit);
 

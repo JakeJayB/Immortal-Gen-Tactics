@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class UnitInfo : MonoBehaviour
 {
+    // Unit
+    public Unit unit;
+    
     // Unit Cell Location
     public Vector3Int CellLocation;
     public UnitDirection UnitDirection;
@@ -138,7 +141,7 @@ public class UnitInfo : MonoBehaviour
         if(Dead) return; 
         Dead = true;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
-        TurnSystem.RemoveUnit(gameObject.GetComponent<Unit>());
+        TurnSystem.RemoveUnit(unit);
     }
     
     public void Revive()
@@ -146,10 +149,10 @@ public class UnitInfo : MonoBehaviour
         if(!Dead) return; 
         Dead = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        TurnSystem.AddUnit(gameObject.GetComponent<Unit>());
+        TurnSystem.AddUnit(unit);
     }
 
     public bool IsDead() { return Dead; }
 
-    public bool IsAIUnit() { return gameObject.GetComponent<EnemyUnit>(); }
+    public bool IsAIUnit() { return unit is EnemyUnit; }
 }

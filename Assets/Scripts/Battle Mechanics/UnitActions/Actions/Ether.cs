@@ -69,7 +69,7 @@ public class Ether : Item
                 CanvasUI.ShowTargetUnitInfoDisplay(unit.unitInfo);
         }
 
-        Debug.Log(unit.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.FinalHP);
+        Debug.Log(unit.gameObj.name + " is using a potion. HP: " + unit.unitInfo.currentHP + "/" + unit.unitInfo.FinalHP);
         yield return null;
     }
 }

@@ -157,11 +157,11 @@ public class UnitSelector : MonoBehaviour
                     unitSelected.unitInfo.CellLocation = unit2Location;
                     unit.unitInfo.CellLocation = tempCell;
 
-                    SpriteRenderer spriteRenderer = unitSelected.gameObject.GetComponent<SpriteRenderer>();
+                    SpriteRenderer spriteRenderer = unitSelected.gameObj.GetComponent<SpriteRenderer>();
                     UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
                     unitRenderer.PositionUnit(unit2Location);
                     
-                    spriteRenderer = unit.gameObject.GetComponent<SpriteRenderer>();
+                    spriteRenderer = unit.gameObj.GetComponent<SpriteRenderer>();
                     unitRenderer = new UnitRenderer(spriteRenderer);
                     unitRenderer.PositionUnit(tempCell);
 
@@ -192,7 +192,7 @@ public class UnitSelector : MonoBehaviour
                 // Placing Unit to new location
                 TilemapCreator.UnitLocator.Remove(new Vector2Int(currLocation.x, currLocation.z));
                 unitSelected.unitInfo.CellLocation = newLocation;
-                SpriteRenderer spriteRenderer = unitSelected.gameObject.GetComponent<SpriteRenderer>();
+                SpriteRenderer spriteRenderer = unitSelected.gameObj.GetComponent<SpriteRenderer>();
                 UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
                 unitRenderer.PositionUnit(newLocation);
                 TilemapCreator.UnitLocator.Add(unitSelected.unitInfo.Vector2CellLocation(), unitSelected);
@@ -206,11 +206,11 @@ public class UnitSelector : MonoBehaviour
 
                 // adding new unit to the selected tileCell
                 unit = SelectorUnitIcons.GetUnit(tileCell);
-                if(unit)
+                if(unit.gameObj)
                 {
                     // Placing Unit to new location
                     unit.unitInfo.CellLocation = newLocation;
-                    SpriteRenderer spriteRenderer = unit.gameObject.GetComponent<SpriteRenderer>();
+                    SpriteRenderer spriteRenderer = unit.gameObj.GetComponent<SpriteRenderer>();
                     UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
                     unitRenderer.PositionUnit(newLocation);
                     TilemapCreator.UnitLocator.Add(unit.unitInfo.Vector2CellLocation(), unit);

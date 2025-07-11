@@ -90,12 +90,12 @@ public class ChainSystem
                 if (unit.unitInfo.currentAP <= 0 || unit.unitInfo.IsDead() || Chain.Any(chain => chain.Item3 == unit) ||
                     !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
             
-                Debug.Log($"Unit {unit.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
-                Debug.Log($"Unit {unit.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
+                Debug.Log($"Unit {unit.gameObj.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
+                Debug.Log($"Unit {unit.gameObj.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
 
-                if (unit.GetComponent<EnemyUnit>()) {
+                if (unit is EnemyUnit unitAI) {
                     ReactionInProgress = true;
-                    yield return unit.GetComponent<EnemyUnit>().React();
+                    yield return unitAI.AIUnitBehavior.React(unitAI);
                 } // If the unit is an AI Enemy, do a specific instruction
                 else {
                     yield return OfferChainReaction(unit);
@@ -109,7 +109,7 @@ public class ChainSystem
 
     private static IEnumerator OfferChainReaction(Unit unit)
     {
-        Debug.Log("Unit " + unit.name + " should be reacting...");
+        Debug.Log("Unit " + unit.gameObj.name + " should be reacting...");
         ReactionInProgress = true;
         ReactingUnit = unit;
         Vector2Int unitCell = unit.unitInfo.Vector2CellLocation();
@@ -122,7 +122,7 @@ public class ChainSystem
         yield return new WaitUntil(ReactionHasEnded);
 
         ReactingUnit = null;
-        if (TurnSystem.CurrentUnit.GetComponent<EnemyUnit>()) { MapCursor.SetGameObjInactive(); }
+        if (TurnSystem.CurrentUnit is EnemyUnit) { MapCursor.SetGameObjInactive(); }
         Debug.Log("Unit finished using reaction menu...");
     }
     

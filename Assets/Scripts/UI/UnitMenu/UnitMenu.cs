@@ -154,7 +154,7 @@ public class UnitMenu : MonoBehaviour
         var canvasRect = Canvas.GetComponent<RectTransform>();
 
         // Convert world position to viewport position (0-1 range)
-        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.transform.position);
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(unit.gameObj.transform.position);
 
         // Convert viewport position to canvas local position
         Vector2 menuPosition = new Vector2(
