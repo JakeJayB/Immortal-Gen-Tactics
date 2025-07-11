@@ -66,7 +66,7 @@ public class Evade : UnitAction
         TilemapCreator.UnitLocator.Remove(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z));
         
         // Updates the location as the Unit moves
-        yield return unit.unitMovement.Move(unit, selectedCell);
+        yield return UnitMovement.Move(unit, selectedCell);
         
         // Adds the location of the tile the Unit ended at in UnitLocator
         TilemapCreator.UnitLocator.Add(new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z), unit);

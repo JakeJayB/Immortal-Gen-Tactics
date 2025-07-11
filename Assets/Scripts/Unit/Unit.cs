@@ -9,8 +9,6 @@ public class Unit : MonoBehaviour
     public GameObject gameObj { get; set; }
 
     public UnitInfo unitInfo { get; set; }
-    
-    public UnitMovement unitMovement { get; set; }
 
     public static Unit Initialize(Vector3Int initLocation, UnitDirection unitDirection)
     {
@@ -28,7 +26,6 @@ public class Unit : MonoBehaviour
         unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();
-        unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();
         return unit;
     }
 }

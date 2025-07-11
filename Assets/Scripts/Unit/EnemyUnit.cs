@@ -24,7 +24,6 @@ public class EnemyUnit : Unit
     void Start()
     {
         unitInfo = GetComponent<UnitInfo>();
-        unitMovement = GetComponent<UnitMovement>();
         AIBehavior = new List<AIBehavior>()
         {
             new AIBehavior
@@ -70,7 +69,6 @@ public class EnemyUnit : Unit
         unitRenderer.Render(initLocation, unitDirection);
 
         unit.gameObj.AddComponent<BillboardEffect>();
-        unit.unitMovement = unit.gameObj.AddComponent<UnitMovement>();
         return unit;
     }
 

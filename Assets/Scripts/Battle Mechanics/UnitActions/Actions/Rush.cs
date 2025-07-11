@@ -97,7 +97,7 @@ public class Rush : UnitAction
             if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
             {
                 TilemapCreator.UnitLocator.Remove(originCell);
-                yield return unit.unitMovement.Move(unit, previousCell);
+                yield return UnitMovement.Move(unit, previousCell);
                 TilemapCreator.UnitLocator.Add(previousCell, unit);
                 yield break;
             }
@@ -108,7 +108,7 @@ public class Rush : UnitAction
                 TilemapCreator.UnitLocator.Remove(originCell);
                 
                 // Updates the location as the Unit moves
-                yield return unit.unitMovement.Move(unit, previousCell);
+                yield return UnitMovement.Move(unit, previousCell);
                 
                 int damage = DamageCalculator.DealDamage(this, unit.unitInfo, targetUnit.unitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
@@ -119,7 +119,7 @@ public class Rush : UnitAction
                 var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
                     ? previousCell : nextCell;
                 
-                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return unit.unitMovement.Move(unit, endLocation); }
+                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return UnitMovement.Move(unit, endLocation); }
                 
                 // Adds the location of the tile the Unit ended at in UnitLocator
                 TilemapCreator.UnitLocator.Add(endLocation, unit);
@@ -134,7 +134,7 @@ public class Rush : UnitAction
             TilemapCreator.UnitLocator.Remove(originCell);
         
             // Updates the location as the Unit moves
-            yield return unit.unitMovement.Move(unit, previousCell);
+            yield return UnitMovement.Move(unit, previousCell);
         
             // Adds the location of the tile the Unit ended at in UnitLocator
             TilemapCreator.UnitLocator.Add(previousCell, unit);

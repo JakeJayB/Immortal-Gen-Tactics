@@ -24,7 +24,7 @@ public class BattleFX : MonoBehaviour
             if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
             {
                 TilemapCreator.UnitLocator.Remove(startCell);
-                yield return unit.unitMovement.Move(unit, previousCell);
+                yield return UnitMovement.Move(unit, previousCell);
                 TilemapCreator.UnitLocator.Add(previousCell, unit);
                 
                 int damage = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.20 * (strength - 1))), unit.unitInfo);
@@ -40,7 +40,7 @@ public class BattleFX : MonoBehaviour
                 TilemapCreator.UnitLocator.Remove(startCell);
         
                 // Updates the location as the Unit moves
-                yield return unit.unitMovement.Move(unit, previousCell);
+                yield return UnitMovement.Move(unit, previousCell);
                 
                 int damageA = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.10 * (strength - 1))), unit.unitInfo);
                 int damageB = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.10 * (strength - 1))), targetUnit.unitInfo);
@@ -52,7 +52,7 @@ public class BattleFX : MonoBehaviour
                 var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
                     ? previousCell : nextCell;
                 
-                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return unit.unitMovement.Move(unit, endLocation); }
+                if (unit.unitInfo.Vector2CellLocation() != endLocation) { yield return UnitMovement.Move(unit, endLocation); }
                 
                 // Adds the location of the tile the Unit ended at in UnitLocator
                 TilemapCreator.UnitLocator.Add(endLocation, unit);
@@ -67,7 +67,7 @@ public class BattleFX : MonoBehaviour
             TilemapCreator.UnitLocator.Remove(startCell);
         
             // Updates the location as the Unit moves
-            yield return unit.unitMovement.Move(unit, previousCell);
+            yield return UnitMovement.Move(unit, previousCell);
         
             // Adds the location of the tile the Unit ended at in UnitLocator
             TilemapCreator.UnitLocator.Add(previousCell, unit);
