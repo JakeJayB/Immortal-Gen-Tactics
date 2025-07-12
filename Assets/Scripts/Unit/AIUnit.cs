@@ -21,8 +21,8 @@ public class AIUnit : Unit
 
     public Unit targetedUnit;
 
-    public AIUnit(GameObject gameObj,UnitDefinitionData unitData, UnitRenderer unitRenderer) 
-        : base(gameObj, unitData, unitRenderer) {
+    public AIUnit(GameObject gameObj,UnitDefinitionData unitData, SpriteRenderer spriteRenderer) 
+        : base(gameObj, unitData, spriteRenderer) {
         if (unitData == null) return;
 
         Aggression = unitData.Behaviors.Aggression;
@@ -36,8 +36,7 @@ public class AIUnit : Unit
     
     public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
-        UnitInfo.CellLocation = initLocation;
-        UnitInfo.UnitDirection = unitDirection;
+        SetInitialPosition(initLocation, unitDirection);
         UnitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
         
         AIUnitBehavior = GameObj.AddComponent<AIUnitBehavior>();
@@ -57,12 +56,7 @@ public class AIUnit : Unit
             },
         };
 
-        SpriteRenderer spriteRender = GameObj.GetComponent<SpriteRenderer>();
-        UnitRenderer unitRenderer = new UnitRenderer(spriteRender);
-        unitRenderer.Render(initLocation, unitDirection);
-        
-        // TODO: Fix this so that sprite renderer or some other script handles updating the sprites properly
-        spriteRender.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
+        UnitRenderer.Render(UnitInfo.sprite);
         return this;
     }
 

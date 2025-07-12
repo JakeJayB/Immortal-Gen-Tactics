@@ -15,10 +15,9 @@ public class Unit
     public UnitRenderer UnitRenderer { get; protected set; }
 
     // Constructor
-    public Unit(GameObject gameObj, UnitDefinitionData unitData, UnitRenderer unitRenderer)
+    public Unit(GameObject gameObj, UnitDefinitionData unitData, SpriteRenderer spriteRenderer)
     {
         GameObj = gameObj;
-        UnitRenderer = unitRenderer;
 
         if (unitData == null) {
             Debug.LogError($"[Unit]: UDD not found for Unit '{gameObj.name}' during construction.");
@@ -33,17 +32,18 @@ public class Unit
         Equipment = new UnitEquipment(this);
         Equipment.Initialize(unitData);
         
+        UnitRenderer = new UnitRenderer(this, spriteRenderer);
+        
         UnitInfo.ResetCurrentStatPoints();
     }
 
-    public void Initialize(Vector3Int initLocation, UnitDirection unitDirection)
-    {
+    public void Initialize(Vector3Int initLocation, UnitDirection unitDirection) {
         SetInitialPosition(initLocation, unitDirection);
         UnitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
-        UnitRenderer.Render(initLocation, unitDirection);
+        UnitRenderer.Render(UnitInfo.sprite);
     }
 
-    private void SetInitialPosition(Vector3Int initLocation, UnitDirection unitDirection) {
+    protected void SetInitialPosition(Vector3Int initLocation, UnitDirection unitDirection) {
         UnitInfo.CellLocation = initLocation;
         UnitInfo.UnitDirection = unitDirection;
     }

@@ -13,7 +13,6 @@ public static class UnitFactory
         SpriteRenderer spriteRenderer = instance.GetComponent<SpriteRenderer>() 
             ? instance.GetComponent<SpriteRenderer>()
             : instance.AddComponent<SpriteRenderer>();
-        UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
         
         // Access the Unit Definition Data 
         UnitDefinitionData unitData = instance.GetComponent<UDDLoader>().LoadedUDD;
@@ -21,12 +20,12 @@ public static class UnitFactory
         // If the Unit is to be AI-controlled, create an AI Unit...
         // Otherwise, create a normal Unit
         if (unitData.IsUnitAIControlled) {
-            AIUnit aiUnit = new AIUnit(instance, unitData, unitRenderer);
+            AIUnit aiUnit = new AIUnit(instance, unitData, spriteRenderer);
             aiUnit.InitializeAI(initLocation, unitDirection);
             return aiUnit;
         }
         
-        Unit unit = new Unit(instance, unitData, unitRenderer);
+        Unit unit = new Unit(instance, unitData, spriteRenderer);
         unit.Initialize(initLocation, unitDirection);
         return unit;
     }

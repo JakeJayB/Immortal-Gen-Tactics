@@ -158,11 +158,11 @@ public class UnitSelector : MonoBehaviour
                     unit.UnitInfo.CellLocation = tempCell;
 
                     SpriteRenderer spriteRenderer = unitSelected.GameObj.GetComponent<SpriteRenderer>();
-                    UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                    UnitRenderer unitRenderer = new UnitRenderer(unitSelected, spriteRenderer);
                     unitRenderer.PositionUnit(unit2Location);
                     
                     spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
-                    unitRenderer = new UnitRenderer(spriteRenderer);
+                    unitRenderer = new UnitRenderer(unit, spriteRenderer);
                     unitRenderer.PositionUnit(tempCell);
 
                     // Add new locations to UnitLocator
@@ -193,7 +193,7 @@ public class UnitSelector : MonoBehaviour
                 TilemapCreator.UnitLocator.Remove(new Vector2Int(currLocation.x, currLocation.z));
                 unitSelected.UnitInfo.CellLocation = newLocation;
                 SpriteRenderer spriteRenderer = unitSelected.GameObj.GetComponent<SpriteRenderer>();
-                UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                UnitRenderer unitRenderer = new UnitRenderer(unitSelected, spriteRenderer);
                 unitRenderer.PositionUnit(newLocation);
                 TilemapCreator.UnitLocator.Add(unitSelected.UnitInfo.Vector2CellLocation(), unitSelected);
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
@@ -211,7 +211,7 @@ public class UnitSelector : MonoBehaviour
                     // Placing Unit to new location
                     unit.UnitInfo.CellLocation = newLocation;
                     SpriteRenderer spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
-                    UnitRenderer unitRenderer = new UnitRenderer(spriteRenderer);
+                    UnitRenderer unitRenderer = new UnitRenderer(unit, spriteRenderer);
                     unitRenderer.PositionUnit(newLocation);
                     TilemapCreator.UnitLocator.Add(unit.UnitInfo.Vector2CellLocation(), unit);
 
