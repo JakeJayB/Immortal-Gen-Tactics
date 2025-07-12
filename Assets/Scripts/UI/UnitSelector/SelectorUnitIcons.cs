@@ -60,7 +60,7 @@ public class SelectorUnitIcons : MonoBehaviour
         unitIconRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BACKGROUND_HEIGHT * 0.6f);
 
         unitImage = icon.AddComponent<Image>();
-        unitImage.sprite = PartyManager.unitList[currentIdx].UnitInfo.sprite;
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.GetSprite();
     }
 
     public static void NextUnit()
@@ -79,7 +79,7 @@ public class SelectorUnitIcons : MonoBehaviour
 
         Debug.Log($"Current Idx: {currentIdx}");
 
-        unitImage.sprite = PartyManager.unitList[currentIdx].UnitInfo.sprite;
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.GetSprite();
 
         if (activeUnits.ContainsKey(currentIdx))
             ShadeUnitIcon();
@@ -101,7 +101,7 @@ public class SelectorUnitIcons : MonoBehaviour
 
         Debug.Log($"Current Idx: {currentIdx}");
 
-        unitImage.sprite = PartyManager.unitList[currentIdx].UnitInfo.sprite;
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.GetSprite();
 
         if (activeUnits.ContainsKey(currentIdx))
             ShadeUnitIcon();

@@ -16,7 +16,7 @@ public class Pouch : Storage
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override int BasePower { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Storage;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.None;
+    public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.None;
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }

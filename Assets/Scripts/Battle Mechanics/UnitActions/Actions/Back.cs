@@ -12,7 +12,7 @@ public class Back : UnitAction
     public override DamageType DamageType { get; protected set; }
     public override int BasePower { get; protected set; }
     public override ActionType ActionType { get; protected set; }
-    public override Pattern AttackPattern { get; protected set; }
+    public override TilePattern AttackTilePattern { get; protected set; }
     public override int Range { get; protected set; }
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }

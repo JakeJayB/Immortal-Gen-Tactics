@@ -12,7 +12,6 @@ public class UnitInfo
     // Unit Cell Location
     public Vector3Int CellLocation;
     public UnitDirection UnitDirection;
-    public Sprite sprite;
     
     // Unit Affiliation
     public UnitAffiliation UnitAffiliation;

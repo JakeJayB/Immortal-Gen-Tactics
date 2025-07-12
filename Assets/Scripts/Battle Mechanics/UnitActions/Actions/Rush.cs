@@ -11,7 +11,7 @@ public class Rush : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.Physical;
     public override int BasePower { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Rush;
+    public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Rush;
     public override int Range { get; protected set; }
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;
@@ -23,7 +23,7 @@ public class Rush : UnitAction
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.UnitInfo.Vector2CellLocation()],
-            Range, AttackPattern);
+            Range, AttackTilePattern);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";

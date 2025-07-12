@@ -44,15 +44,15 @@ public class ActionUtility
         switch (actionType)
         {
             case "Move":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalMove, Pattern.Splash), OverlayMaterial.MOVE);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalMove, TilePattern.Splash), OverlayMaterial.MOVE);
             case "Attack":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalAttack, Pattern.Linear), OverlayMaterial.ATTACK);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalAttack, TilePattern.Linear), OverlayMaterial.ATTACK);
             case "SplashSpell (Test)":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 3, Pattern.Splash), OverlayMaterial.ATTACK);
+                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 3, TilePattern.Splash), OverlayMaterial.ATTACK);
             case "Potion":
                 return new Tuple<List<Tile>, OverlayMaterial>(
                     Rangefinder.GetTilesInRange(
-                        TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 0, Pattern.Splash),
+                        TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 0, TilePattern.Splash),
                     OverlayMaterial.MOVE);
             default:
                 throw new ArgumentException("ActionUtility: Invalid action type");

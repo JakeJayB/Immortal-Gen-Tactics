@@ -1,37 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-public enum Pattern
-{
-    Direct,
-    Linear,
-    Rush,
-    Arc,
-    Splash,
-    All,
-    None
-}
-
 public static class Rangefinder
 {
-    public static List<Tile> GetTilesInRange(Tile characterTile, int range, Pattern rangePattern)
+    public static List<Tile> GetTilesInRange(Tile characterTile, int range, TilePattern rangeTilePattern)
     {
-        switch (rangePattern)
+        switch (rangeTilePattern)
         {
-            case Pattern.Direct:
+            case TilePattern.Direct:
                 return TilemapUtility.GetDirectTile(characterTile, range);
-            case Pattern.Linear:
-            case Pattern.Rush:
+            case TilePattern.Linear:
+            case TilePattern.Rush:
                 return TilemapUtility.GetLinearTilesInRange(characterTile, range);
-            case Pattern.Arc:
+            case TilePattern.Arc:
                 Debug.LogError("Rangefinder: Arc pattern not implemented yet. Returning null");
                 return TilemapUtility.GetArcTiles(characterTile, range);
-            case Pattern.Splash:
+            case TilePattern.Splash:
                 return TilemapUtility.GetSplashTilesInRange(characterTile, range);
-            case Pattern.All:
+            case TilePattern.All:
                 return TilemapUtility.GetAllTiles();
             default:
                 return null;

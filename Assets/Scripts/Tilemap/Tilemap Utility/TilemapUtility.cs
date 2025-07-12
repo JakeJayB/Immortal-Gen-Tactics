@@ -198,14 +198,14 @@ public class TilemapUtility
     {
         List<Tile> targetedArea = new List<Tile>();
         
-        switch (action.AttackPattern)
+        switch (action.AttackTilePattern)
         {
-            case Pattern.Direct:
+            case TilePattern.Direct:
                 targetedArea.Add(TilemapCreator.TileLocator[targetedCell]);
                 break;
             
-            case Pattern.Linear:
-            case Pattern.Rush:
+            case TilePattern.Linear:
+            case TilePattern.Rush:
                 var linearDirections =
                     TilemapUtility.GetDirectionalLinearTilesInRange(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
                         action.Range);
@@ -219,13 +219,13 @@ public class TilemapUtility
 
                 break;
             
-            case Pattern.Splash:
+            case TilePattern.Splash:
                 targetedArea.AddRange(Rangefinder.GetTilesInRange
-                    (TilemapCreator.TileLocator[targetedCell],action.Splash, Pattern.Splash));
+                    (TilemapCreator.TileLocator[targetedCell],action.Splash, TilePattern.Splash));
 
                 break;
             
-            case Pattern.None:
+            case TilePattern.None:
                 break;
                 
             default:

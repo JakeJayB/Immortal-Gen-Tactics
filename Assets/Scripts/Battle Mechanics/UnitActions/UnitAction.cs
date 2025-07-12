@@ -14,7 +14,7 @@ public abstract class UnitAction
     public abstract DamageType DamageType { get; protected set; }
     public abstract int BasePower { get; protected set; }
     public abstract ActionType ActionType { get; protected set; }
-    public abstract Pattern AttackPattern { get; protected set; }
+    public abstract TilePattern AttackTilePattern { get; protected set; }
     public abstract int Range { get; protected set; }
     public abstract AIActionScore ActionScore { get; protected set; }
     public abstract int Splash { get; protected set; }

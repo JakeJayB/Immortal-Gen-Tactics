@@ -14,7 +14,7 @@ public class Attack : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.Physical;
     public override int BasePower { get; protected set; } = 0;
     public sealed override ActionType ActionType { get; protected set; } = ActionType.Attack;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Linear;
+    public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Linear;
     public override int Range { get; protected set; } = 1; // FIX!! -- Needs to Reflect Unit's Weapon Range
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;
@@ -22,7 +22,7 @@ public class Attack : UnitAction
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.UnitInfo.Vector2CellLocation()],
-            Range, AttackPattern);
+            Range, AttackTilePattern);
     }
 
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";

@@ -12,7 +12,7 @@ public class Revive : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.Revival;
     public override int BasePower { get; protected set; } = 15;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
+    public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override int Range { get; protected set; } = 2;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;

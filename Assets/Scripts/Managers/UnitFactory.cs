@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class UnitFactory
@@ -7,7 +5,6 @@ public static class UnitFactory
     public static Unit Create(GameObject prefab, Vector3Int initLocation, UnitDirection unitDirection) {
         // Instantiate the Prefab + Add Necessary Components
         GameObject instance = Object.Instantiate(prefab);
-        instance.AddComponent<BillboardEffect>();
 
         // Assign a SpriteRenderer to UnitRenderer
         SpriteRenderer spriteRenderer = instance.GetComponent<SpriteRenderer>() 

@@ -12,7 +12,7 @@ public class Potion : Item
     public override DamageType DamageType { get; protected set; } = DamageType.Healing;
     public override int BasePower { get; protected set; } = 20;
     public override ActionType ActionType { get; protected set; } = ActionType.Item;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Direct;
+    public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override int Range { get; protected set; } = 1;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 0;

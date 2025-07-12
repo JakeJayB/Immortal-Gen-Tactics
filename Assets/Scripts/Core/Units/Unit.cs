@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 public class Unit
 {
     public GameObject GameObj { get; set; }
@@ -39,8 +34,7 @@ public class Unit
 
     public void Initialize(Vector3Int initLocation, UnitDirection unitDirection) {
         SetInitialPosition(initLocation, unitDirection);
-        UnitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)");
-        UnitRenderer.Render(UnitInfo.sprite);
+        UnitRenderer.Render(Resources.Load<Sprite>("Sprites/Units/Test_Player/Test_Sprite(Right)"));
     }
 
     protected void SetInitialPosition(Vector3Int initLocation, UnitDirection unitDirection) {

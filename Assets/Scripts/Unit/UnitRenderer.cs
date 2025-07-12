@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitRenderer
@@ -9,9 +7,9 @@ public class UnitRenderer
     private readonly SpriteRenderer SpriteRenderer;
     private readonly Transform Transform;
     
-    public UnitRenderer(Unit unit, SpriteRenderer spriteRenderer)
-    {
+    public UnitRenderer(Unit unit, SpriteRenderer spriteRenderer) {
         Unit = unit;
+        Unit.GameObj.AddComponent<BillboardEffect>();
         SpriteRenderer = spriteRenderer;
         Transform = spriteRenderer.transform;
     }
@@ -50,4 +48,6 @@ public class UnitRenderer
             cellLocation.y * TileProperties.TILE_HEIGHT + HEIGHT_OFFSET, 
             cellLocation.z * TileProperties.TILE_LENGTH);
     }
+
+    public Sprite GetSprite() { return SpriteRenderer.sprite; }
 }

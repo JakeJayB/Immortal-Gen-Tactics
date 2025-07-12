@@ -24,7 +24,7 @@ public class AIUnit : Unit
     public AIUnit(GameObject gameObj,UnitDefinitionData unitData, SpriteRenderer spriteRenderer) 
         : base(gameObj, unitData, spriteRenderer) {
         if (unitData == null) return;
-
+        
         Aggression = unitData.Behaviors.Aggression;
         Survival = unitData.Behaviors.Survival;
         TacticalPositioning = unitData.Behaviors.TacticalPositioning;
@@ -37,8 +37,6 @@ public class AIUnit : Unit
     public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
         SetInitialPosition(initLocation, unitDirection);
-        UnitInfo.sprite = Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)");
-        
         AIUnitBehavior = GameObj.AddComponent<AIUnitBehavior>();
         AIBehavior = new List<AIBehavior>()
         {
@@ -56,21 +54,8 @@ public class AIUnit : Unit
             },
         };
 
-        UnitRenderer.Render(UnitInfo.sprite);
+        UnitRenderer.Render(Resources.Load<Sprite>("Sprites/Units/Test_Enemy/Test_Sprite_Enemy(Down-Left)"));
         return this;
-    }
-
-    private void InitializeAIBehaviors() {
-        var unitInitializer = GameObj.GetComponent<UnitDefinitionData>().Behaviors;
-        if (unitInitializer == null) return;
-
-        Aggression = unitInitializer.Aggression;
-        Survival = unitInitializer.Survival;
-        TacticalPositioning = unitInitializer.TacticalPositioning;
-        AllySynergy = unitInitializer.AllySynergy;
-        ResourceManagement = unitInitializer.ResourceManagement;
-        ReactionAwareness = unitInitializer.ReactionAwareness;
-        ReactionAllocation = unitInitializer.ReactionAllocation;
     }
 
     // TODO: AI doesn't perform any organic decision-making if it doesn't recognize an enemy.
@@ -82,7 +67,7 @@ public class AIUnit : Unit
         // Check Units based on Unit's Movement Range for now until finalized
         // It will save an AP for an action once they select and move towards the opponent
         var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()],
-            30 * (UnitInfo.currentAP), Pattern.Splash);
+            30 * (UnitInfo.currentAP), TilePattern.Splash);
 
         // Don't Count the same tile as the Unit conducting the search
         surroundings.Remove(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()]);
@@ -98,10 +83,10 @@ public class AIUnit : Unit
         return nearbyUnits;
     }
 
-    public bool InRange(Unit unit, int range, Pattern pattern)
+    public bool InRange(Unit unit, int range, TilePattern tilePattern)
     {
         var neighborTiles =
-            Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()], range, pattern);
+            Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()], range, tilePattern);
 
         return neighborTiles.Contains(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()]);
     }

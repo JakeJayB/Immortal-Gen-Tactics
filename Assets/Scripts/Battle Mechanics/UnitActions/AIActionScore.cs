@@ -27,16 +27,16 @@ public class AIActionScore
         int projectedDamage = 0;    // Amount of damage projected to happen to the unit on tile
         Unit unitOnTile;            // Holds the unit found on an observed tile
         
-        switch (action.AttackPattern)
+        switch (action.AttackTilePattern)
         {
-            case Pattern.Direct:
+            case TilePattern.Direct:
                 // Skip checking this tile if no unit exists on it...
                 if (!TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(potentialCell.x, potentialCell.z), out unitOnTile)) { break; }
                 
                 damageScore += CalcDamageToUnit(unitAI, unitOnTile);
                 break;
 
-            case Pattern.Linear:
+            case TilePattern.Linear:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
                              TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
                              action.Range))
@@ -59,7 +59,7 @@ public class AIActionScore
                 
                 break;
             
-            case Pattern.Rush:
+            case TilePattern.Rush:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
                              TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
                              action.Range))
@@ -81,7 +81,7 @@ public class AIActionScore
                 
                 break;
 
-            case Pattern.Splash:
+            case TilePattern.Splash:
                 foreach (var splashTile in TilemapUtility.GetSplashTilesInRange(
                              TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)],
                              action.Splash))
@@ -94,7 +94,7 @@ public class AIActionScore
 
                 break;
             
-            case Pattern.None:
+            case TilePattern.None:
                 break;
 
             default:
@@ -217,7 +217,7 @@ public class AIActionScore
 
         Vector2Int projectedLocation = unitAI.UnitInfo.Vector2CellLocation();
         if (Action.ActionType == ActionType.Move) projectedLocation = new Vector2Int(PotentialCell.x, PotentialCell.z);
-        else if (Action.AttackPattern == Pattern.Rush)
+        else if (Action.AttackTilePattern == TilePattern.Rush)
         {
             Vector2Int displacement = new Vector2Int(PotentialCell.x, PotentialCell.z) - unitAI.UnitInfo.Vector2CellLocation();
             Vector2Int direction = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));

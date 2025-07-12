@@ -11,7 +11,7 @@ public class Heal : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.Healing;
     public override int BasePower { get; protected set; } = 7;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
-    public override Pattern AttackPattern { get; protected set; } = Pattern.Splash;
+    public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Splash;
     public override int Range { get; protected set; } = 3;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; } = 1;
@@ -19,7 +19,7 @@ public class Heal : UnitAction
         return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.UnitInfo.Vector2CellLocation()],
-            Range, Pattern.Splash);
+            Range, TilePattern.Splash);
     }
 
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
@@ -72,7 +72,7 @@ public class Heal : UnitAction
         PayMPCost(unit);
 
         foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[selectedCell], Splash,
-                     AttackPattern))
+                     AttackTilePattern))
         {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit))
             {

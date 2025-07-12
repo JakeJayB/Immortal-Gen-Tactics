@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum OverlayMaterial
-{
-    MOVE,
-    ATTACK,
-    START
-}
-
 public class OverlayTile
 {
-
     private static Material MoveBlueMat = Resources.Load<Material>("Materials/Move Blue");
     private static Material AttackRedMat = Resources.Load<Material>("Materials/Attack Red");
     private static Material StartBlueMat = Resources.Load<Material>("Materials/Start Blue");

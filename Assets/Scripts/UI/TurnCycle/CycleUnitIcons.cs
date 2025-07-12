@@ -50,7 +50,7 @@ public class CycleUnitIcons : MonoBehaviour
             Unit currUnit = units[i];
             Image image = new GameObject("Unit" + (i + 1), typeof(RectTransform)).AddComponent<Image>();
             image.transform.SetParent(instance.transform, false);
-            image.sprite = currUnit.UnitInfo.sprite;
+            image.sprite = currUnit.UnitRenderer.GetSprite();
 
             image.rectTransform.anchorMin = new Vector2(0, 0.5f);
             image.rectTransform.anchorMax = new Vector2(0, 0.5f);
@@ -94,7 +94,7 @@ public class CycleUnitIcons : MonoBehaviour
         Unit currUnit = unit;
         Image image = new GameObject("Unit" + (iconDict.Count + 1), typeof(RectTransform)).AddComponent<Image>();
         image.transform.SetParent(instance.transform, false);
-        image.sprite = currUnit.UnitInfo.sprite;
+        image.sprite = currUnit.UnitRenderer.GetSprite();
 
         image.rectTransform.anchorMin = new Vector2(0, 0.5f);
         image.rectTransform.anchorMax = new Vector2(0, 0.5f);
