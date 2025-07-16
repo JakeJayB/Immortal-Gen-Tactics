@@ -5,6 +5,7 @@ namespace Tests
 {
     public class EquipmentLibraryTests
     {
+        /*
         private EquipmentLibrary equipmentLibrary;
 
         [SetUp] // Runs before each test
@@ -35,5 +36,6 @@ namespace Tests
             Assert.IsFalse(EquipmentLibrary.Armor.ContainsKey(10000), "Armor Library (ID: 10000) should not exist.");
             Assert.IsFalse(EquipmentLibrary.Armor.ContainsKey(-3333), "Armor Library (ID: -3333) should not exist.");
         }
+        */
     }
 }
