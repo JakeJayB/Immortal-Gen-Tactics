@@ -1,4 +1,4 @@
-public enum OverlayMaterial
+public enum OverlayState
 {
     MOVE,
     ATTACK,

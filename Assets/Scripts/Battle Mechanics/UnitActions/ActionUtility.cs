@@ -38,22 +38,22 @@ public class ActionUtility
         MemoryManager.AddListeners(Clear);
     }
 
-    public static Tuple<List<Tile>, OverlayMaterial> DetermineParameters(string actionType, Unit unit) 
+    public static Tuple<List<Tile>, OverlayState> DetermineParameters(string actionType, Unit unit) 
     {
         var unitLocation = unit.UnitInfo.CellLocation;
         switch (actionType)
         {
             case "Move":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalMove, TilePattern.Splash), OverlayMaterial.MOVE);
+                return new Tuple<List<Tile>, OverlayState>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalMove, TilePattern.Splash), OverlayState.MOVE);
             case "Attack":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalAttack, TilePattern.Linear), OverlayMaterial.ATTACK);
+                return new Tuple<List<Tile>, OverlayState>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], unit.UnitInfo.FinalAttack, TilePattern.Linear), OverlayState.ATTACK);
             case "SplashSpell (Test)":
-                return new Tuple<List<Tile>, OverlayMaterial>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 3, TilePattern.Splash), OverlayMaterial.ATTACK);
+                return new Tuple<List<Tile>, OverlayState>(Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 3, TilePattern.Splash), OverlayState.ATTACK);
             case "Potion":
-                return new Tuple<List<Tile>, OverlayMaterial>(
+                return new Tuple<List<Tile>, OverlayState>(
                     Rangefinder.GetTilesInRange(
                         TilemapCreator.TileLocator[new Vector2Int(unitLocation.x, unitLocation.z)], 0, TilePattern.Splash),
-                    OverlayMaterial.MOVE);
+                    OverlayState.MOVE);
             default:
                 throw new ArgumentException("ActionUtility: Invalid action type");
         }
@@ -73,11 +73,11 @@ public class ActionUtility
         ActionUtility.action = action;
         var parameters = DetermineParameters(ActionUtility.action, unit);
         List<Tile> tiles = parameters.Item1;
-        OverlayMaterial overlayMaterial = parameters.Item2;
+        OverlayState overlayState = parameters.Item2;
 
         foreach (var tile in tiles)
         {
-            tile.OverlayObj.ActivateOverlayTile(overlayMaterial);
+            tile.OverlayObj.ActivateOverlayTile(overlayState);
         }
     }
     
@@ -93,7 +93,7 @@ public class ActionUtility
         }
 
         foreach (var tile in area) {
-            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.ATTACK);
+            tile.OverlayObj.ActivateOverlayTile(OverlayState.ATTACK);
         } 
     }
     
@@ -109,7 +109,7 @@ public class ActionUtility
         }
 
             foreach (var tile in area) {
-            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.MOVE);
+            tile.OverlayObj.ActivateOverlayTile(OverlayState.MOVE);
         } 
     }
 

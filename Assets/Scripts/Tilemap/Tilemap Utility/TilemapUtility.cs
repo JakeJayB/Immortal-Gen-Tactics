@@ -240,7 +240,7 @@ public class TilemapUtility
     {
         foreach (var tile in targetedArea)
         {
-            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.ATTACK);
+            tile.OverlayObj.ActivateOverlayTile(OverlayState.ATTACK);
         }
     } 
     

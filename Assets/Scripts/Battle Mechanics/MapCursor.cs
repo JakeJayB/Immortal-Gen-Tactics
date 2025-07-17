@@ -313,7 +313,7 @@ public class MapCursor : MonoBehaviour
         foreach (Tile tile in TilemapCreator.TileLocator.Values)
         {
             if (!tile.TileInfo.IsStartArea) continue;
-            tile.OverlayObj.ActivateOverlayTile(OverlayMaterial.START);
+            tile.OverlayObj.ActivateOverlayTile(OverlayState.START);
             startTransform = tile.TileObj.transform;
         }
         SetHoverCell(new Vector2Int((int)startTransform.position.x, (int)startTransform.position.z));

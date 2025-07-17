@@ -12,13 +12,11 @@ public class CameraMovement : MonoBehaviour
 
     private static GameObject MainCamera;
 
-    private void Awake()
-    {
-        MainCamera = this.gameObject;
+    private void Awake() {
+        MainCamera = gameObject;
     }
 
-    void Update()
-    {
+    void Update() {
         if (MapCursor.GetState() == MapCursor.ControlState.Inactive) return;
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -29,19 +27,10 @@ public class CameraMovement : MonoBehaviour
             ToggleZoom();
     }
 
-    public static void Clear()
-    {
-        MainCamera = null;
-    }
-
-    public static void RegisterCleanup()
-    {
-        MemoryManager.AddListeners(Clear);
-    }
-
-
-    private void RotateCamera(float angle)
-    {
+    public static void Clear() { MainCamera = null; }
+    public static void RegisterCleanup() { MemoryManager.AddListeners(Clear); }
+    
+    private void RotateCamera(float angle) {
         if (LeanTween.isTweening(gameObject)) return;
 
         Transform hoverTile = TilemapCreator.TileLocator[MapCursor.hoverCell].TileObj.transform;
@@ -54,8 +43,7 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-    public void ToggleZoom()
-    {
+    public void ToggleZoom() {
         if (LeanTween.isTweening(gameObject)) return;
 
         float zoomMin = 2f;
@@ -72,8 +60,7 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-    public static void CheckAndMove(Transform point)
-    {
+    public static void CheckAndMove(Transform point) {
         if (LeanTween.isTweening(MainCamera)) return;
 
         // viewport bounds
@@ -88,12 +75,11 @@ public class CameraMovement : MonoBehaviour
         float cy = Mathf.Clamp(vp.y, minY, maxY);
 
         // if the point is outside, we'll move the camera
-        if (vp.x != cx || vp.y != cy)
-        {
+        if (vp.x != cx || vp.y != cy) {
             // build a viewport position that lies on the boundary
             Vector3 clampedVP = new Vector3(cx, cy, vp.z);
 
-            // convert that viewportÅ]boundary back into world space
+            // convert that viewportÔøΩ]boundary back into world space
             Vector3 worldAtBoundary = cam.ViewportToWorldPoint(clampedVP);
 
             // figure out how far to shift the camera so that our point
@@ -106,8 +92,7 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    public static void SetFocusPoint(Transform focusPoint)
-    {
+    public static void SetFocusPoint(Transform focusPoint) {
         LeanTween.move(MainCamera, focusPoint.position, MOVE_SPEED).setEase(LeanTweenType.easeInOutQuad);
     }
 
