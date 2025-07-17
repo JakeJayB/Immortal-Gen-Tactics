@@ -21,30 +21,21 @@ public class Heal : UnitAction
                 : unit.UnitInfo.Vector2CellLocation()],
             Range, TilePattern.Splash);
     }
-
     public override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_attack";
-    public override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
 
-    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
-    {
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell) {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
-        Debug.Log("Initial Heuristic Score: " + ActionScore.TotalScore());
 
-        foreach (var tile in Area(unit, null))
-        {
-            foreach (var targetedTile in TilemapUtility.GetSplashTilesInRange(tile, Splash))
-            {
-                if (TilemapCreator.UnitLocator.TryGetValue(targetedTile.TileInfo.Vector2CellLocation(), out Unit foundUnit))
-                {
+        foreach (var tile in Area(unit, null)) {
+            foreach (var targetedTile in TilemapUtility.GetSplashTilesInRange(tile, Splash)) {
+                if (TilemapCreator.UnitLocator.TryGetValue(targetedTile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) {
                     if (foundUnit.UnitInfo.IsDead()) { continue; }
                     
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
                         foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
-            
-                    // Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
+                    
                     if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
-
                     break;
                 }
             }
@@ -55,33 +46,25 @@ public class Heal : UnitAction
         return ActionScore.TotalScore();
     }
 
-    public override void ActivateAction(Unit unit)
-    {
+    public override void ActivateAction(Unit unit) {
         UnitMenu.HideMenu();
         ActionUtility.ShowSelectableTilesForAction(Area(unit, null));
         ChainSystem.HoldPotentialChain(this, unit);
         MapCursor.ActionState();
     }
 
-    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell)
-    {
-        // Spend the Action Points to execute the Action
-        PayAPCost(unit);
-        
-        // Spend the Magic Points needed to execute the Action
-        PayMPCost(unit);
+    public override IEnumerator ExecuteAction(Unit unit, Vector2Int selectedCell) {
+        PayAPCost(unit);    // Spend the Action Points to execute the Action
+        PayMPCost(unit);    // Spend the Magic Points needed to execute the Action
 
         foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[selectedCell], Splash,
-                     AttackTilePattern))
-        {
-            if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit))
-            {
+                     AttackTilePattern)) {
+            if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit)) {
                 int damage = DamageCalculator.HealDamage(this, unit.UnitInfo, targetUnit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("HealPotion", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
             }
         }
-        
         yield return null;
     }
 }

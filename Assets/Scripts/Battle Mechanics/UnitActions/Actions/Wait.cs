@@ -15,14 +15,10 @@ public class Wait : UnitAction
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }
     public override int Splash { get; protected set; }
-    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return new List<Tile>();
-    }
-
+    public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) { return new List<Tile>(); }
     public sealed override string SlotImageAddress { get; protected set; } = "Sprites/UnitMenu/Slots/igt_wait";
-    public sealed override Sprite SlotImage() { return Resources.Load<Sprite>(SlotImageAddress); }
-    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell)
-    {
+    
+    public override float CalculateActionScore(AIUnit unit, Vector2Int selectedCell) {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         
