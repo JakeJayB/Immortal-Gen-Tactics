@@ -7,13 +7,13 @@ public class OverlayTile {
     private OverlayState State;
     public bool IsSelectable;
 
-    public OverlayTile(GameObject OriginalTile, GameObject OverlayTilePrefab) {
-        OverlayObj = new GameObject("Overlay Tile for " + OriginalTile.name);
+    public OverlayTile(Tile Tile, GameObject OverlayTilePrefab) {
+        OverlayObj = new GameObject("Overlay Tile for " + Tile.TileObj.name);
         OverlayObj.SetActive(false);
-        OverlayObj.transform.position = new Vector3(OriginalTile.transform.position.x, 
-            OriginalTile.transform.position.y + OverlayTilePrefab.transform.position.y, 
-            OriginalTile.transform.transform.position.z);
-        OverlayObj.transform.rotation = OriginalTile.transform.rotation;
+        OverlayObj.transform.position = new Vector3(Tile.TileObj.transform.position.x, 
+            Tile.TileObj.transform.position.y + OverlayTilePrefab.transform.position.y, 
+            Tile.TileObj.transform.transform.position.z);
+        OverlayObj.transform.rotation = Tile.TileObj.transform.rotation;
         OverlayObj.transform.localScale = OverlayTilePrefab.transform.localScale;
 
         MeshFilter OverlayMF = OverlayObj.AddComponent<MeshFilter>();
@@ -23,7 +23,7 @@ public class OverlayTile {
         OverlayMR.materials = OverlayTilePrefab.GetComponent<MeshRenderer>().sharedMaterials;
         OverlayMR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
-        TileType = OriginalTile.GetComponent<TileInfo>().TileType;
+        TileType = Tile.TileInfo.TileType;
         State = OverlayState.MOVE;
     }
 

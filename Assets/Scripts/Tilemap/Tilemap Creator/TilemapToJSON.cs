@@ -97,10 +97,10 @@ public class TilemapToJSON : MonoBehaviour
             };
 
             if(tileInfo.TerrainType == TerrainType.WATER)
-                tileInfo.isTraversable = false;
+                tileInfo.IsTraversable = false;
 
             // TileType, TerrainType, and isStartArea are manually inputed
-            TileData tileData = new TileData(cellLocation, tileInfo.TileType, tileInfo.TerrainType, tileDirection, tileInfo.IsStartArea, tileInfo.isTraversable);
+            TileData tileData = new TileData(cellLocation, tileInfo.TileType, tileInfo.TerrainType, tileDirection, tileInfo.IsStartArea, tileInfo.IsTraversable);
             data.tiles.Add(tileData);
         }
     }

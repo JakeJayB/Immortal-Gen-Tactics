@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6668371359934730270}
-  - component: {fileID: 3156517441709421795}
   - component: {fileID: 2705984533422089478}
   - component: {fileID: 2941044824782264587}
   - component: {fileID: 6401203804189348344}
@@ -35,24 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3156517441709421795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175510703098029761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778a05ea0a37f9a4ea8bf53b481bf29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CellLocation: {x: 0, y: 0, z: 0}
-  TileType: 0
-  TerrainType: 3
-  TileDirection: 0
-  IsStartArea: 0
-  isTraversable: 1
 --- !u!114 &2705984533422089478
 MonoBehaviour:
   m_ObjectHideFlags: 0
