@@ -2,23 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tile {
-    public GameObject TileObj { get; private set; }
-    public TileInfo TileInfo { get; set; }
-    public OverlayTile OverlayObj { get; set; }
-    public string TilePrefabPath { get; set; }
-    
-    public Tile(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction, bool isStartArea, bool isTraversable, GameObject OverlayObjPrefab = null) {
-        // Creating the original Tile object
-        TileObj = new GameObject("Tile: " + cellLocation);
-        TileInfo = new TileInfo(cellLocation, tileType, terrainType, direction, isStartArea, isTraversable);
+public class TilemapManager : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
         
-        TileRenderer.Render(this, TilePrefabLibrary.FindPrefabPath(this));
-        
-        // Creating the Overlay Object
-        OverlayObj = new OverlayTile(this, OverlayObjPrefab);
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    
     public static void AddTiles(List<Vector3Int> cellLocation) {
         TerrainType DetermineTerrainType(Vector3Int cellLocation) {
             Dictionary<TerrainType, int> terrainCount = new Dictionary<TerrainType, int>();
@@ -52,7 +49,8 @@ public class Tile {
             terrainType = DetermineTerrainType(cellLocation3D);
 
             // Create Tile (automatically traversable, flat, and forward)
-            Tile tile = new Tile(cellLocation3D, TileType.Flat, terrainType, TileDirection.Forward, false, true, TilemapCreator.OverlayPrefabs[TileType.Flat]);
+            Tile tile = new Tile(cellLocation3D, TileType.Flat, terrainType, TileDirection.Forward, 
+                false, true, OverlayTilePrefabLibrary.FindPrefab(TileType.Flat));
 
             TilemapCreator.AllTiles.Add(cellLocation3D, tile);
             if (TilemapCreator.TileLocator.ContainsKey(cellLocation2D)) {
@@ -60,7 +58,7 @@ public class Tile {
                 existingTile.TileInfo.IsTraversable = false;
                 TilemapCreator.TileLocator.Remove(cellLocation2D);
 
-                MonoBehaviour.Destroy(existingTile.OverlayObj.OverlayObj);
+                MonoBehaviour.Destroy(existingTile.OverlayTile.OverlayObj);
                 TilemapCreator.TileLocator.Add(cellLocation2D, tile);
             }
             else {
@@ -77,8 +75,8 @@ public class Tile {
             TilemapCreator.TileLocator.Add(cellLocation2D, tile);
 
             // Create Overlay tile if not yet created
-            if (tile.OverlayObj == null)
-                tile.OverlayObj = new OverlayTile(tile, TilemapCreator.OverlayPrefabs[tile.TileInfo.TileType]);
+            if (tile.OverlayTile == null)
+                tile.OverlayTile = new OverlayTile(tile, OverlayTilePrefabLibrary.FindPrefab(tile.TileInfo.TileType));
         }
 
         foreach (Tile tile in tiles) {
@@ -103,9 +101,7 @@ public class Tile {
             MonoBehaviour.Destroy(tile.TileObj);
 
             //Destroy overlay tile gameobject from scene
-            if (tile.OverlayObj != null) MonoBehaviour.Destroy(tile.OverlayObj.OverlayObj);
+            if (tile.OverlayTile != null) MonoBehaviour.Destroy(tile.OverlayTile.OverlayObj);
         }
     }
-    
-    public bool IsSelectable() { return OverlayObj.IsSelectable; }
 }

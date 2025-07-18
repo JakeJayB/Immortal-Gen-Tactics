@@ -5,7 +5,6 @@ public class OverlayTile {
     public GameObject OverlayObj;
     private TileType TileType;
     private OverlayState State;
-    public bool IsSelectable { get; private set; }
 
     public OverlayTile(Tile Tile, GameObject OverlayTilePrefab) {
         OverlayObj = new GameObject("Overlay Tile for " + Tile.TileObj.name);
@@ -41,11 +40,9 @@ public class OverlayTile {
         }
 
         OverlayObj.SetActive(true);
-        IsSelectable = true;
     }
 
     public void DeactivateOverlayTile() {
         OverlayObj.SetActive(false);
-        IsSelectable = false;
     }
 }

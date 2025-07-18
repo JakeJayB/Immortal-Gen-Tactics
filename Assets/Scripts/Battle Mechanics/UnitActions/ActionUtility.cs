@@ -77,7 +77,7 @@ public class ActionUtility
 
         foreach (var tile in tiles)
         {
-            tile.OverlayObj.ActivateOverlayTile(overlayState);
+            tile.OverlayTile.ActivateOverlayTile(overlayState);
         }
     }
     
@@ -88,12 +88,12 @@ public class ActionUtility
         {
             foreach (var tile in TilemapCreator.TileLocator.Values)
             {
-                tile.OverlayObj.DeactivateOverlayTile();
+                tile.OverlayTile.DeactivateOverlayTile();
             }
         }
 
         foreach (var tile in area) {
-            tile.OverlayObj.ActivateOverlayTile(OverlayState.ATTACK);
+            tile.OverlayTile.ActivateOverlayTile(OverlayState.ATTACK);
         } 
     }
     
@@ -104,12 +104,12 @@ public class ActionUtility
         {
             foreach (var tile in TilemapCreator.TileLocator.Values)
             {
-                tile.OverlayObj.DeactivateOverlayTile();
+                tile.OverlayTile.DeactivateOverlayTile();
             }
         }
 
             foreach (var tile in area) {
-            tile.OverlayObj.ActivateOverlayTile(OverlayState.MOVE);
+            tile.OverlayTile.ActivateOverlayTile(OverlayState.MOVE);
         } 
     }
 
@@ -127,7 +127,7 @@ public class ActionUtility
 
         foreach (var tile in tiles)
         {
-            tile.OverlayObj.DeactivateOverlayTile();
+            tile.OverlayTile.DeactivateOverlayTile();
         }
         
         ActionUtility.action = null;
@@ -136,20 +136,20 @@ public class ActionUtility
     public static void HideSelectableTilesForAction(List<Tile> area)
     {
         foreach (var tile in area) {
-            tile.OverlayObj.DeactivateOverlayTile();
+            tile.OverlayTile.DeactivateOverlayTile();
         }
     }
     
     public static void HideSelectableTiles()
     {
         foreach (var tile in TilemapCreator.TileLocator.Values) {
-            tile.OverlayObj.DeactivateOverlayTile();
+            tile.OverlayTile.DeactivateOverlayTile();
         }
     }
 
     public static void HideAllSelectableTiles() {
         foreach (var tile in TilemapCreator.TileLocator.Values) {
-            tile.OverlayObj.DeactivateOverlayTile();
+            tile.OverlayTile.DeactivateOverlayTile();
         }
 
         var initialChain = ChainSystem.GetInitialChain();

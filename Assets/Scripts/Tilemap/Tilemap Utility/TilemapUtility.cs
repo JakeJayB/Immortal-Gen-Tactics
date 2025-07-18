@@ -240,7 +240,7 @@ public class TilemapUtility
     {
         foreach (var tile in targetedArea)
         {
-            tile.OverlayObj.ActivateOverlayTile(OverlayState.ATTACK);
+            tile.OverlayTile.ActivateOverlayTile(OverlayState.ATTACK);
         }
     } 
     
@@ -248,7 +248,7 @@ public class TilemapUtility
     {
         foreach (var tile in targetedArea)
         {
-            tile.OverlayObj.DeactivateOverlayTile();
+            tile.OverlayTile.DeactivateOverlayTile();
         }
     }
 }
