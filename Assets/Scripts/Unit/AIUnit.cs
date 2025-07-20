@@ -1,14 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class AIUnit : Unit
-{
+public class AIUnit : Unit {
     // AI Behavior Set
     public AIUnitBehavior AIUnitBehavior;
-    public List<AIBehavior> AIBehavior;
+    public List<AICondition> AIBehavior;
     
     // AI Behavioral Factors
     public float Aggression;                  // Values Damage Dealt & Kills
@@ -38,15 +34,15 @@ public class AIUnit : Unit
     {
         SetInitialPosition(initLocation, unitDirection);
         AIUnitBehavior = GameObj.AddComponent<AIUnitBehavior>();
-        AIBehavior = new List<AIBehavior>()
+        AIBehavior = new List<AICondition>()
         {
-            new AIBehavior
+            new AICondition
             {
                 Priority = 0,
                 Condition = () => RuleBasedAILogic.CurrentHPIsBelowPercent(0.4f, UnitInfo) && RuleBasedAILogic.HasItem(new Potion(), this),
                 Action = new Potion()
             },
-            new AIBehavior
+            new AICondition
             {
                 Priority = 9,
                 Condition = () => RuleBasedAILogic.CurrentAPIsBelow(1, UnitInfo),

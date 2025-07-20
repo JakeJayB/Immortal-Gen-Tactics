@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class AIBehavior
+public class AICondition
 {
     public int Priority { get; set; }
     public Func<bool> Condition { get; set; }
