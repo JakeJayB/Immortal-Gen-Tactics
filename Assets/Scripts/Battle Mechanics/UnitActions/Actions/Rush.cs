@@ -18,7 +18,7 @@ public class Rush : UnitAction
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
         Range = unit.UnitInfo.FinalMove;    // Update Range Based On Unit's Movement
         
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+        return Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.UnitInfo.Vector2CellLocation()],
             Range, AttackTilePattern);
@@ -31,7 +31,7 @@ public class Rush : UnitAction
 
         Area(unit, null);
         foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                     TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
+                     TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()],
                      Range)) {
             foreach (var tile in direction) {
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
@@ -66,7 +66,7 @@ public class Rush : UnitAction
             Vector2Int nextCell = originCell + direction * i;
 
             // Stop the unit from trying to traverse null tile locations
-            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile)) {
+            if (!TileLocator.SelectableTiles.TryGetValue(nextCell, out var tile)) {
                 TilemapCreator.UnitLocator.Remove(originCell);
                 yield return UnitMovement.Move(unit, previousCell);
                 TilemapCreator.UnitLocator.Add(previousCell, unit);

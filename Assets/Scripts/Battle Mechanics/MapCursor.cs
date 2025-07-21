@@ -9,8 +9,7 @@ public class MapCursor : MonoBehaviour
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
     
-    public enum ControlState
-    {
+    public enum ControlState {
         Start,
         Active,
         Action,
@@ -26,16 +25,14 @@ public class MapCursor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (CursorControlState == ControlState.Start) { StartControls(); }
         if (CursorControlState == ControlState.Active) { ActiveControls(); }
         if (CursorControlState == ControlState.Action) { ActionControls(); }
     }
 
 
-    public static void Clear()
-    {
+    public static void Clear() {
         gameObj = null;
         cameraMovement = null;
         hoverCell = Vector2Int.zero;
@@ -47,8 +44,7 @@ public class MapCursor : MonoBehaviour
     MemoryManager.AddListeners(Clear);
 
 
-    private void StartControls()
-    {
+    private void StartControls() {
         if (!Input.anyKeyDown) return;
 
         // Movement Controls
@@ -58,19 +54,16 @@ public class MapCursor : MonoBehaviour
         MoveCursorRight();
 
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
+        if (Input.GetKeyDown(KeyCode.A)) {
+            if (TileLocator.SelectableTiles[hoverCell].IsSelectable())
                  UnitSelector.PlaceUnit(hoverCell);
             else
                 SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
+        else if (Input.GetKeyDown(KeyCode.S)) {
             UnitSelector.ResetUnitSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && UnitSelector.IsThereActiveUnit())
-        {
+        else if (Input.GetKeyDown(KeyCode.Escape) && UnitSelector.IsThereActiveUnit()) {
             UnitSelector.DestroyMenu();
             SelectedStartPositions();
             RemoveTileOutline();
@@ -78,8 +71,7 @@ public class MapCursor : MonoBehaviour
     }
 
 
-    private void ActiveControls()
-    {
+    private void ActiveControls() {
         if (!Input.anyKeyDown) return;
 
         // Movement Controls
@@ -89,30 +81,25 @@ public class MapCursor : MonoBehaviour
         MoveCursorRight();
 
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out Unit unit) && unit == TurnSystem.CurrentUnit)
-            {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            if (TilemapCreator.UnitLocator.TryGetValue(hoverCell, out Unit unit) && unit == TurnSystem.CurrentUnit) {
                 InactiveState();
-                //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[unit.unitInfo.Vector2CellLocation()].TileObj.transform);
                 currentUnit = hoverCell;
                 UnitMenu.DisplayUnitMenu(unit);
                 StartCoroutine(UnitMenu.ShowMenu(unit));
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
             }
-            else
-            {
+            else {
                 SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
             }
         }
-        else if(Input.GetKeyDown(KeyCode.S)) 
-        {
+        else if(Input.GetKeyDown(KeyCode.S)) {
             Unit unit = TilemapCreator.UnitLocator[currentUnit];
 
             InactiveState();
             SetHoverCell(currentUnit);
-            CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
+            CameraMovement.SetFocusPoint(TileLocator.SelectableTiles[currentUnit].TileObj.transform);
             CanvasUI.ShowTurnUnitInfoDisplay(unit.UnitInfo);
             CanvasUI.HideTargetUnitInfoDisplay();
             StartCoroutine(UnitMenu.ShowMenu(unit));
@@ -120,24 +107,19 @@ public class MapCursor : MonoBehaviour
         }
     }
 
-    private void ActionControls()
-    {
+    private void ActionControls() {
         if (!Input.anyKeyDown) return;
-
-
+        
         // Movement Controls
         MoveCursorUp();
         MoveCursorDown();
         MoveCursorLeft();
         MoveCursorRight();
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (TilemapCreator.TileLocator[hoverCell].IsSelectable())
-            {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            if (TileLocator.SelectableTiles[hoverCell].IsSelectable()) {
                 InfoBar.HideInfo();
-                if (ChainSystem.UnitIsReacting())
-                {
+                if (ChainSystem.UnitIsReacting()) {
                     // Call IEnumerator as a normal function, ignoring 'yield return' instructions
                     ChainSystem.AddAction(hoverCell);
                 }
@@ -145,13 +127,11 @@ public class MapCursor : MonoBehaviour
                 StartCoroutine(ConfirmAction());
 
             }
-            else
-            {
+            else {
                 SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
+        else if (Input.GetKeyDown(KeyCode.S)) {
             InactiveState();
             if (ChainSystem.UnitIsReacting())
                 CanvasUI.ShowTargetUnitInfoDisplay(ChainSystem.ReactingUnit.UnitInfo);
@@ -168,8 +148,7 @@ public class MapCursor : MonoBehaviour
         }
     }
 
-    private static IEnumerator ConfirmAction()
-    {
+    private static IEnumerator ConfirmAction() {
         InactiveState();
         ActionUtility.HideAllSelectableTiles();
         yield return ChainSystem.AddAction(hoverCell);
@@ -219,16 +198,14 @@ public class MapCursor : MonoBehaviour
     }
 
     // Adjusts movement direction based on the camera's Y rotation
-    private Vector2Int GetRelativeDirection(Vector2Int inputDirection)
-    {
+    private Vector2Int GetRelativeDirection(Vector2Int inputDirection) {
         float cameraYRotation = cameraMovement.transform.eulerAngles.y;
 
         // Get the rotation step interval (8 intervals since camera rotates 45 degrees)
         int rotationStep = Mathf.RoundToInt(cameraYRotation / 45f) % 8; //
 
         // Map rotation steps to directional changes
-        Dictionary<int, Vector2Int> directionMap = new Dictionary<int, Vector2Int>
-        {
+        Dictionary<int, Vector2Int> directionMap = new Dictionary<int, Vector2Int> {
             { 0, inputDirection }, // 0 degrees: no change
             { 1, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 45 degrees
             { 2, new Vector2Int(inputDirection.y, -inputDirection.x) }, // 90 degrees: rotate 90 degrees clockwise
@@ -245,7 +222,7 @@ public class MapCursor : MonoBehaviour
 
     private static void MoveCursor(Vector2Int cell)
     {
-        if (TilemapCreator.TileLocator.ContainsKey(cell))
+        if (TileLocator.SelectableTiles.ContainsKey(cell))
         {
             SetHoverCell(cell);
             SoundFXManager.PlaySoundFXClip("MapCursor", 0.75f);
@@ -277,7 +254,7 @@ public class MapCursor : MonoBehaviour
         RemoveTileOutline();
         hoverCell = cell;
         AddTileOutline();
-        CameraMovement.CheckAndMove(TilemapCreator.TileLocator[hoverCell].TileObj.transform);
+        CameraMovement.CheckAndMove(TileLocator.SelectableTiles[hoverCell].TileObj.transform);
 
         // send hoverCell unit object to UI Manager
         //UIManager.SetRightPanel(hoverCell == currentUnit ? null : TilemapCreator.UnitLocator[hoverCell]);
@@ -287,7 +264,7 @@ public class MapCursor : MonoBehaviour
     {
 
         // adds outline effect on tile when mapcursor hovers it.
-        GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
+        GameObject tileObj = TileLocator.SelectableTiles[hoverCell].TileObj;
         if (!tileObj.GetComponent<Outline>())
         { 
             Outline outline = tileObj.AddComponent<Outline>();
@@ -307,7 +284,7 @@ public class MapCursor : MonoBehaviour
         if (hoverCell == null) return;
         
         // deactivates outline effect on tile
-        GameObject tileObj = TilemapCreator.TileLocator[hoverCell].TileObj;
+        GameObject tileObj = TileLocator.SelectableTiles[hoverCell].TileObj;
         if (tileObj.GetComponent<Outline>())
             tileObj.GetComponent<Outline>().enabled = false;
     }
@@ -316,7 +293,7 @@ public class MapCursor : MonoBehaviour
     public static void SelectStartPositions()
     {
         Transform startTransform = null;
-        foreach (Tile tile in TilemapCreator.TileLocator.Values)
+        foreach (Tile tile in TileLocator.SelectableTiles.Values)
         {
             if (!tile.TileInfo.IsStartArea) continue;
             tile.OverlayTile.ActivateOverlayTile(OverlayState.START);
@@ -328,7 +305,7 @@ public class MapCursor : MonoBehaviour
 
     private static void SelectedStartPositions()
     {
-        foreach (Tile tile in TilemapCreator.TileLocator.Values)
+        foreach (Tile tile in TileLocator.SelectableTiles.Values)
         {
             if (tile.TileInfo.IsStartArea)
                 tile.OverlayTile.DeactivateOverlayTile();

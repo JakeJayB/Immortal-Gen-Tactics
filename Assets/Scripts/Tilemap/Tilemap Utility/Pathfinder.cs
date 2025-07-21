@@ -92,7 +92,7 @@ public class Pathfinder {
             Vector2Int nextCell = startCell + direction * i;
 
             // Stop the unit from trying to traverse null tile locations
-            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile)) { return null; }
+            if (!TileLocator.SelectableTiles.TryGetValue(nextCell, out var tile)) { return null; }
             
             // Return unit if one is found on the tile
             if (TilemapCreator.UnitLocator.TryGetValue(nextCell, out var targetUnit)) { return targetUnit; }
@@ -112,7 +112,7 @@ public class Pathfinder {
             Vector2Int nextCell = startCell + direction * i;
 
             // Stop the unit from trying to traverse null tile locations
-            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile)) {
+            if (!TileLocator.SelectableTiles.TryGetValue(nextCell, out var tile)) {
                 return previousCell;
             }
             

@@ -21,7 +21,7 @@ public class BattleFX : MonoBehaviour
             Vector2Int nextCell = startCell + direction * i;
 
             // Stop the unit from trying to traverse null tile locations
-            if (!TilemapCreator.TileLocator.TryGetValue(nextCell, out var tile))
+            if (!TileLocator.SelectableTiles.TryGetValue(nextCell, out var tile))
             {
                 TilemapCreator.UnitLocator.Remove(startCell);
                 yield return UnitMovement.Move(unit, previousCell);

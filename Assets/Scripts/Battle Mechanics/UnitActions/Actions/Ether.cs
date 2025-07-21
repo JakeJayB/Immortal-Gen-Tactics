@@ -15,7 +15,7 @@ public class Ether : Item {
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return TilemapUtility.GetSplashTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+        return TilemapUtility.GetSplashTilesInRange(TileLocator.SelectableTiles[hypoCell.HasValue
             ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
             : unit.UnitInfo.Vector2CellLocation()], Range);
     }
@@ -26,7 +26,7 @@ public class Ether : Item {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         
-        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
+        ActionScore.EvaluateScore(this, unit, TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
             unit.FindNearbyUnits()[0].UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
         
         Debug.Log("Best Heuristic Score: " + (ActionScore.TotalScore() < 0 ? "N/A" : ActionScore.TotalScore()));

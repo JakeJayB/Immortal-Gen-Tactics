@@ -174,13 +174,13 @@ public class TurnSystem : MonoBehaviour {
             if (CurrentUnit is AIUnit enemyUnit) {
                 MapCursor.SetGameObjInactive();
                 Vector2Int unitLocation = CurrentUnit.UnitInfo.Vector2CellLocation();
-                CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
+                CameraMovement.CheckAndMove(TileLocator.SelectableTiles[unitLocation].TileObj.transform);
                 enemyUnit.AIUnitBehavior.StartTurn(enemyUnit);
             }
             else {
                 MapCursor.SetGameObjActive();
                 Vector2Int unitLocation = CurrentUnit.UnitInfo.Vector2CellLocation();
-                CameraMovement.CheckAndMove(TilemapCreator.TileLocator[unitLocation].TileObj.transform);
+                CameraMovement.CheckAndMove(TileLocator.SelectableTiles[unitLocation].TileObj.transform);
                 MapCursor.StartMove(unitLocation);
             }
 

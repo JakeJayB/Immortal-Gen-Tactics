@@ -1,27 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public class TilemapUtility {
+    public static List<Tile> GetArcTiles(Tile characterTile, int range) { return null; }
 
-
-public class TilemapUtility
-{
-
-    public static List<Tile> GetArcTiles(Tile characterTile, int range)
-    {
-        return null;
-    }
-
-
-    public static List<Tile> GetDirectTile(Tile characterTile, int range)
-    {
-        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+    public static List<Tile> GetDirectTile(Tile characterTile, int range) {
+        Dictionary<Vector2Int, Tile> selectableTiles = TileLocator.SelectableTiles;
         Vector2Int startPos = new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
         List<Tile> directTiles = new List<Tile>();
 
-        Dictionary<UnitDirection, Vector2Int> directions = new Dictionary<UnitDirection, Vector2Int>
-        {
+        Dictionary<UnitDirection, Vector2Int> directions = new Dictionary<UnitDirection, Vector2Int> {
             {UnitDirection.Forward, Vector2Int.up},
             {UnitDirection.Backward, Vector2Int.down},
             {UnitDirection.Left, Vector2Int.left},
@@ -29,11 +18,9 @@ public class TilemapUtility
         };
 
         Vector2Int direction = directions[TilemapCreator.UnitLocator[startPos].UnitInfo.UnitDirection];
-        for (int i = 1; i <= range; i++)
-        {
+        for (int i = 1; i <= range; i++) {
             Vector2Int checkPos = startPos + direction * i;
-            if (TileLocator.TryGetValue(checkPos, out var tile))
-            {
+            if (selectableTiles.TryGetValue(checkPos, out var tile)) {
                 directTiles.Add(tile);
             }
         }
@@ -44,28 +31,22 @@ public class TilemapUtility
 
 
 
-    public static List<Tile> GetLinearTilesInRange(Tile characterTile, int range)
-    {
-        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+    public static List<Tile> GetLinearTilesInRange(Tile characterTile, int range) {
+        Dictionary<Vector2Int, Tile> selectableTiles = TileLocator.SelectableTiles;
         Vector2Int startPos = new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
         List<Tile> linearTiles = new List<Tile>();
         
-
-        Vector2Int[] directions =
-        {
+        Vector2Int[] directions = {
             Vector2Int.right,
             Vector2Int.left,
             Vector2Int.up, 
             Vector2Int.down 
         };
 
-        foreach (var direction in directions)
-        {
-            for (int i = 1; i <= range; i++)
-            {
+        foreach (var direction in directions) {
+            for (int i = 1; i <= range; i++) {
                 Vector2Int checkPos = startPos + direction * i;
-                if (TileLocator.TryGetValue(checkPos, out var tile))
-                {
+                if (selectableTiles.TryGetValue(checkPos, out var tile)) {
                     linearTiles.Add(tile);
                 }
             }
@@ -75,9 +56,7 @@ public class TilemapUtility
     }
 
 
-    public static List<Tile> GetSplashTilesInRange(Tile characterTile, int range)
-    {
-
+    public static List<Tile> GetSplashTilesInRange(Tile characterTile, int range) {
         var inRangeTiles = new List<Tile>();
         int stepCount = 0;
 
@@ -86,12 +65,10 @@ public class TilemapUtility
         var tileForPreviousStep = new List<Tile>();
         tileForPreviousStep.Add(characterTile);
 
-        while (stepCount < range)
-        {
+        while (stepCount < range) {
             var surroundingTiles = new List<Tile>();
 
-            foreach (var tile in tileForPreviousStep)
-            {
+            foreach (var tile in tileForPreviousStep) {
                 surroundingTiles.AddRange(GetNeighborTiles(tile));
             }
 
@@ -105,7 +82,7 @@ public class TilemapUtility
     
     public static List<Tile> GetNeighborTiles(Tile currentTile)
     {
-        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+        Dictionary<Vector2Int, Tile> selectableTiles = TileLocator.SelectableTiles;
         List<Tile> neighbors = new List<Tile>();
 
         // Up
@@ -113,8 +90,7 @@ public class TilemapUtility
             currentTile.TileInfo.CellLocation.x + 1,
             currentTile.TileInfo.CellLocation.z);
 
-        if (TileLocator.TryGetValue(locationToCheck, out var upTile))
-        {
+        if (selectableTiles.TryGetValue(locationToCheck, out var upTile)) {
             neighbors.Add(upTile);
         }
 
@@ -123,8 +99,7 @@ public class TilemapUtility
             currentTile.TileInfo.CellLocation.x - 1,
             currentTile.TileInfo.CellLocation.z);
 
-        if (TileLocator.TryGetValue(locationToCheck, out var downTile))
-        {
+        if (selectableTiles.TryGetValue(locationToCheck, out var downTile)) {
             neighbors.Add(downTile);
         }
 
@@ -133,8 +108,7 @@ public class TilemapUtility
             currentTile.TileInfo.CellLocation.x,
             currentTile.TileInfo.CellLocation.z + 1);
 
-        if (TileLocator.TryGetValue(locationToCheck, out var leftTile))
-        {
+        if (selectableTiles.TryGetValue(locationToCheck, out var leftTile)) {
             neighbors.Add(leftTile);
         }
 
@@ -143,8 +117,7 @@ public class TilemapUtility
             currentTile.TileInfo.CellLocation.x,
             currentTile.TileInfo.CellLocation.z - 1);
 
-        if (TileLocator.TryGetValue(locationToCheck, value: out var rightTile))
-        {
+        if (selectableTiles.TryGetValue(locationToCheck, value: out var rightTile)) {
             neighbors.Add(rightTile);
         }
 
@@ -153,15 +126,15 @@ public class TilemapUtility
     }
 
 
-    public static List<Tile> GetAllTiles()
+    public static List<Tile> GetSelectableTiles()
     {
-        return new List<Tile>(TilemapCreator.TileLocator.Values);
+        return new List<Tile>(TileLocator.SelectableTiles.Values);
     }
     
     // Segment By Direction ------------------------------------------------------------------------------------------
     public static List<List<Tile>> GetDirectionalLinearTilesInRange(Tile characterTile, int range)
     {
-        Dictionary<Vector2Int, Tile> TileLocator = TilemapCreator.TileLocator;
+        Dictionary<Vector2Int, Tile> selectableTiles = TileLocator.SelectableTiles;
         Vector2Int startPos =
             new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
         List<List<Tile>> directionalTiles = new List<List<Tile>>();
@@ -182,7 +155,7 @@ public class TilemapUtility
             for (int i = 1; i <= range; i++)
             {
                 Vector2Int checkPos = startPos + direction * i;
-                if (TileLocator.TryGetValue(checkPos, out var tile))
+                if (selectableTiles.TryGetValue(checkPos, out var tile))
                 {
                     tilesInDirection.Add(tile);
                 }
@@ -201,18 +174,18 @@ public class TilemapUtility
         switch (action.AttackTilePattern)
         {
             case TilePattern.Direct:
-                targetedArea.Add(TilemapCreator.TileLocator[targetedCell]);
+                targetedArea.Add(TileLocator.SelectableTiles[targetedCell]);
                 break;
             
             case TilePattern.Linear:
             case TilePattern.Rush:
                 var linearDirections =
-                    TilemapUtility.GetDirectionalLinearTilesInRange(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
+                    TilemapUtility.GetDirectionalLinearTilesInRange(TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()],
                         action.Range);
 
                 foreach (var direction in linearDirections)
                 {
-                    if (direction.Contains(TilemapCreator.TileLocator[targetedCell])) {
+                    if (direction.Contains(TileLocator.SelectableTiles[targetedCell])) {
                         targetedArea.AddRange(direction);
                     }
                 }
@@ -221,7 +194,7 @@ public class TilemapUtility
             
             case TilePattern.Splash:
                 targetedArea.AddRange(Rangefinder.GetTilesInRange
-                    (TilemapCreator.TileLocator[targetedCell],action.Splash, TilePattern.Splash));
+                    (TileLocator.SelectableTiles[targetedCell],action.Splash, TilePattern.Splash));
 
                 break;
             

@@ -55,11 +55,11 @@ public class AIUnit : Unit {
         
         // Check Units based on Unit's Movement Range for now until finalized
         // It will save an AP for an action once they select and move towards the opponent
-        var surroundings = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()],
+        var surroundings = Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[UnitInfo.Vector2CellLocation()],
             30 * (UnitInfo.currentAP), TilePattern.Splash);
 
         // Don't Count the same tile as the Unit conducting the search
-        surroundings.Remove(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()]);
+        surroundings.Remove(TileLocator.SelectableTiles[UnitInfo.Vector2CellLocation()]);
 
         foreach (Tile tile in surroundings)
         {
@@ -75,8 +75,8 @@ public class AIUnit : Unit {
     public bool InRange(Unit unit, int range, TilePattern tilePattern)
     {
         var neighborTiles =
-            Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[UnitInfo.Vector2CellLocation()], range, tilePattern);
+            Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[UnitInfo.Vector2CellLocation()], range, tilePattern);
 
-        return neighborTiles.Contains(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()]);
+        return neighborTiles.Contains(TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()]);
     }
 }

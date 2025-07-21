@@ -23,8 +23,8 @@ public class TilemapManager : MonoBehaviour
 
             foreach (var direction in directions) {
                 Vector3Int neighborLocation = cellLocation + direction;
-                if (TilemapCreator.AllTiles.ContainsKey(neighborLocation)) {
-                    TerrainType terrain = TilemapCreator.AllTiles[neighborLocation].TileInfo.TerrainType;
+                if (TileLocator.TilemapTiles.ContainsKey(neighborLocation)) {
+                    TerrainType terrain = TileLocator.TilemapTiles[neighborLocation].TileInfo.TerrainType;
                     if (terrainCount.ContainsKey(terrain))
                         terrainCount[terrain]++;
                     else
@@ -40,7 +40,7 @@ public class TilemapManager : MonoBehaviour
             Vector3Int cellLocation3D = cell;
             TerrainType terrainType;
 
-            if (TilemapCreator.AllTiles.ContainsKey(cellLocation3D)) {
+            if (TileLocator.TilemapTiles.ContainsKey(cellLocation3D)) {
                 Debug.Log("Tile already exists at " + cellLocation3D);
                 continue;
             }
@@ -52,17 +52,17 @@ public class TilemapManager : MonoBehaviour
             Tile tile = new Tile(cellLocation3D, TileType.Flat, terrainType, TileDirection.Forward, 
                 false, true, OverlayTilePrefabLibrary.FindPrefab(TileType.Flat));
 
-            TilemapCreator.AllTiles.Add(cellLocation3D, tile);
-            if (TilemapCreator.TileLocator.ContainsKey(cellLocation2D)) {
-                Tile existingTile = TilemapCreator.TileLocator[cellLocation2D];
+            TileLocator.TilemapTiles.Add(cellLocation3D, tile);
+            if (TileLocator.SelectableTiles.ContainsKey(cellLocation2D)) {
+                Tile existingTile = TileLocator.SelectableTiles[cellLocation2D];
                 existingTile.TileInfo.IsTraversable = false;
-                TilemapCreator.TileLocator.Remove(cellLocation2D);
+                TileLocator.SelectableTiles.Remove(cellLocation2D);
 
                 MonoBehaviour.Destroy(existingTile.OverlayTile.OverlayObj);
-                TilemapCreator.TileLocator.Add(cellLocation2D, tile);
+                TileLocator.SelectableTiles.Add(cellLocation2D, tile);
             }
             else {
-                TilemapCreator.TileLocator.Add(cellLocation2D, tile);
+                TileLocator.SelectableTiles.Add(cellLocation2D, tile);
             }
         }
     }
@@ -72,7 +72,7 @@ public class TilemapManager : MonoBehaviour
             tile.TileInfo.IsTraversable = true;
 
             // add tile to Tilemapcreator.TileLocator
-            TilemapCreator.TileLocator.Add(cellLocation2D, tile);
+            TileLocator.SelectableTiles.Add(cellLocation2D, tile);
 
             // Create Overlay tile if not yet created
             if (tile.OverlayTile == null)
@@ -87,21 +87,21 @@ public class TilemapManager : MonoBehaviour
             if (TilemapCreator.UnitLocator.ContainsKey(cellLocation2D)) continue;
 
             //Remove tile instance from Tilecreator.TileLocator and Tilecreator.AllTiles
-            if (TilemapCreator.TileLocator.ContainsKey(cellLocation2D))
-                TilemapCreator.TileLocator.Remove(cellLocation2D);
+            if (TileLocator.SelectableTiles.ContainsKey(cellLocation2D))
+                TileLocator.SelectableTiles.Remove(cellLocation2D);
 
-            if(TilemapCreator.AllTiles.ContainsKey(cellLocation3D))
-                TilemapCreator.AllTiles.Remove(cellLocation3D);
+            if(TileLocator.TilemapTiles.ContainsKey(cellLocation3D))
+                TileLocator.TilemapTiles.Remove(cellLocation3D);
 
             //Add tile under destroyed tile to Tilecreator.Tilelocators
-            if(TilemapCreator.AllTiles.ContainsKey(cellLocation3D + Vector3Int.down))
-                UpdateTileLocator(TilemapCreator.AllTiles[cellLocation3D + Vector3Int.down], cellLocation2D);
+            if(TileLocator.TilemapTiles.ContainsKey(cellLocation3D + Vector3Int.down))
+                UpdateTileLocator(TileLocator.TilemapTiles[cellLocation3D + Vector3Int.down], cellLocation2D);
 
             //Destroy tile gameObject from scene
-            MonoBehaviour.Destroy(tile.TileObj);
+            Destroy(tile.TileObj);
 
             //Destroy overlay tile gameobject from scene
-            if (tile.OverlayTile != null) MonoBehaviour.Destroy(tile.OverlayTile.OverlayObj);
+            if (tile.OverlayTile != null) Destroy(tile.OverlayTile.OverlayObj);
         }
     }
 }

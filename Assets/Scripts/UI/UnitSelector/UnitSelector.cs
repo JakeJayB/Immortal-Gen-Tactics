@@ -187,7 +187,7 @@ public class UnitSelector : MonoBehaviour
             {
                 // Set current and new locations
                 Vector3Int currLocation = unitSelected.UnitInfo.CellLocation;
-                Vector3Int newLocation = TilemapCreator.TileLocator[tileCell].TileInfo.CellLocation + Vector3Int.up;
+                Vector3Int newLocation = TileLocator.SelectableTiles[tileCell].TileInfo.CellLocation + Vector3Int.up;
 
                 // Placing Unit to new location
                 TilemapCreator.UnitLocator.Remove(new Vector2Int(currLocation.x, currLocation.z));
@@ -202,7 +202,7 @@ public class UnitSelector : MonoBehaviour
             }
             else // if no unit was previously selected
             {
-                Vector3Int newLocation = TilemapCreator.TileLocator[tileCell].TileInfo.CellLocation + Vector3Int.up;
+                Vector3Int newLocation = TileLocator.SelectableTiles[tileCell].TileInfo.CellLocation + Vector3Int.up;
 
                 // adding new unit to the selected tileCell
                 unit = SelectorUnitIcons.GetUnit(tileCell);

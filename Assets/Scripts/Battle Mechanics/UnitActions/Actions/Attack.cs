@@ -15,7 +15,7 @@ public class Attack : UnitAction {
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Linear;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+        return Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.UnitInfo.Vector2CellLocation()],
             Range, AttackTilePattern);
@@ -28,7 +28,7 @@ public class Attack : UnitAction {
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
 
         foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                     TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
+                     TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()],
                      Range)) {
             foreach (var tile in direction) {
                 if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out Unit foundUnit)) {

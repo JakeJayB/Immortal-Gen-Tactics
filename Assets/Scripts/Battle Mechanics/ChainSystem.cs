@@ -80,7 +80,7 @@ public class ChainSystem
             {
                 //var unitCell = new Vector2Int(unit.unitInfo.CellLocation.x, unit.unitInfo.CellLocation.z);
                 var unitCell = unit.UnitInfo.Vector2CellLocation();
-                var unitSense = Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[unitCell], unit.UnitInfo.FinalSense, TilePattern.Splash);
+                var unitSense = Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[unitCell], unit.UnitInfo.FinalSense, TilePattern.Splash);
 
                 // Unit cannot react if they don't have any available AP
                 // Unit cannot react if they are dead
@@ -88,10 +88,10 @@ public class ChainSystem
                 // Unit cannot react if they are too far to sense the initial action
                 // TODO: Fix this rule!!! Unit cannot react if the action is not an attack type
                 if (unit.UnitInfo.currentAP <= 0 || unit.UnitInfo.IsDead() || Chain.Any(chain => chain.Item3 == unit) ||
-                    !unitSense.Contains(TilemapCreator.TileLocator[target])) continue;
+                    !unitSense.Contains(TileLocator.SelectableTiles[target])) continue;
             
                 Debug.Log($"Unit {unit.GameObj.name} already has action in chain: " + Chain.Any(chain => chain.Item3 == unit));
-                Debug.Log($"Unit {unit.GameObj.name} can sense the nearby action: " + unitSense.Contains(TilemapCreator.TileLocator[target]));
+                Debug.Log($"Unit {unit.GameObj.name} can sense the nearby action: " + unitSense.Contains(TileLocator.SelectableTiles[target]));
 
                 if (unit is AIUnit unitAI) {
                     ReactionInProgress = true;

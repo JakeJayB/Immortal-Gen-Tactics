@@ -16,7 +16,7 @@ public class SplashSpell : UnitAction
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Splash;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+        return Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[hypoCell.HasValue
                 ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
                 : unit.UnitInfo.Vector2CellLocation()],
             Range, TilePattern.Splash);
@@ -56,7 +56,7 @@ public class SplashSpell : UnitAction
         PayAPCost(unit);    // Spend the Action Points to execute the Action
         PayMPCost(unit);    // Spend the Magic Points needed to execute the Action
 
-        foreach (var tile in Rangefinder.GetTilesInRange(TilemapCreator.TileLocator[selectedCell], Splash,
+        foreach (var tile in Rangefinder.GetTilesInRange(TileLocator.SelectableTiles[selectedCell], Splash,
                      AttackTilePattern)) {
             if (TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out var targetUnit)) {
                 int damage = DamageCalculator.DealDamage(this, unit.UnitInfo, targetUnit.UnitInfo);

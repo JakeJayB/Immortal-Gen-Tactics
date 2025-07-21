@@ -15,7 +15,7 @@ public class SoulSpark : Item {
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return TilemapUtility.GetLinearTilesInRange(TilemapCreator.TileLocator[hypoCell.HasValue
+        return TilemapUtility.GetLinearTilesInRange(TileLocator.SelectableTiles[hypoCell.HasValue
             ? new Vector2Int(hypoCell.Value.x, hypoCell.Value.z)
             : unit.UnitInfo.Vector2CellLocation()], Range);
     }

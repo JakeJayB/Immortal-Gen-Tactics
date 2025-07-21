@@ -21,7 +21,7 @@ public class DoNothing : UnitAction {
         ActionScore = new AIActionScore();
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         
-        ActionScore.EvaluateScore(this, unit, TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
+        ActionScore.EvaluateScore(this, unit, TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
             unit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
         
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());

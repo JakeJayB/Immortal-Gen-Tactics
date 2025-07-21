@@ -9,15 +9,15 @@ public class UnitMovement : MonoBehaviour
     
     public static IEnumerator Move(Unit unit, Vector2Int destination)
     {
-        var tilemap = TilemapCreator.TileLocator;
+        var tilemap = TileLocator.SelectableTiles;
         var unitCell = unit.UnitInfo.CellLocation;
         
         List<Tile> path = Pathfinder.FindPath(tilemap[new Vector2Int(unitCell.x, unitCell.z)], tilemap[destination]);
 
-        yield return MoveUnitToTile(unit, destination, path);
+        yield return MoveUnitToTile(unit, path);
     }
 
-    private static IEnumerator MoveUnitToTile(Unit unit, Vector2Int destination, List<Tile> path)
+    private static IEnumerator MoveUnitToTile(Unit unit, List<Tile> path)
     {
         // Continue to move the unit until no more tiles are left in the path to advance towards
         while (path.Count > 0)

@@ -33,7 +33,7 @@ public class CameraMovement : MonoBehaviour
     private void RotateCamera(float angle) {
         if (LeanTween.isTweening(gameObject)) return;
 
-        Transform hoverTile = TilemapCreator.TileLocator[MapCursor.hoverCell].TileObj.transform;
+        Transform hoverTile = TileLocator.SelectableTiles[MapCursor.hoverCell].TileObj.transform;
         LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED)
                 .setEase(LeanTweenType.easeInOutQuad)
                 .setOnComplete(() =>

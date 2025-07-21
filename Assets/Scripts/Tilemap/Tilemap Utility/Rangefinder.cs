@@ -19,7 +19,7 @@ public static class Rangefinder
             case TilePattern.Splash:
                 return TilemapUtility.GetSplashTilesInRange(characterTile, range);
             case TilePattern.All:
-                return TilemapUtility.GetAllTiles();
+                return TilemapUtility.GetSelectableTiles();
             default:
                 return null;
 

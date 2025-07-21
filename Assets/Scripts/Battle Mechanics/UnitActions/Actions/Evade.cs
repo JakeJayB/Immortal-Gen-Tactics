@@ -16,7 +16,7 @@ public class Evade : UnitAction
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.None;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
-        return Rangefinder.GetMoveTilesInRange(TilemapCreator.TileLocator[unit.UnitInfo.Vector2CellLocation()],
+        return Rangefinder.GetMoveTilesInRange(TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()],
             unit.UnitInfo.FinalEvade);
     }
 

@@ -38,15 +38,14 @@ public class AIActionScore
 
             case TilePattern.Linear:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
+                             TileLocator.SelectableTiles[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
                              action.Range))
                 {
                     // Only check the direction that contains the potential cell currently being scored
                     if (direction.Contains(
-                            TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)]))
+                            TileLocator.SelectableTiles[new Vector2Int(potentialCell.x, potentialCell.z)]))
                     {
-                        foreach (var tile in direction)
-                        {
+                        foreach (var tile in direction) {
                             // Skip to the next tile if no unit exists on this one...
                             if (!TilemapCreator.UnitLocator.TryGetValue(tile.TileInfo.Vector2CellLocation(), out unitOnTile)) { continue; }
                             
@@ -61,13 +60,13 @@ public class AIActionScore
             
             case TilePattern.Rush:
                 foreach (var direction in TilemapUtility.GetDirectionalLinearTilesInRange(
-                             TilemapCreator.TileLocator[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
+                             TileLocator.SelectableTiles[moved ? new Vector2Int(PotentialCell.x, PotentialCell.z) : unitAI.UnitInfo.Vector2CellLocation()],
                              action.Range))
                 {
                     
                     // Only check the direction that contains the potential cell currently being scored
                     if (direction.Contains(
-                            TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)]))
+                            TileLocator.SelectableTiles[new Vector2Int(potentialCell.x, potentialCell.z)]))
                     {
                         Vector2Int displacement = new Vector2Int(potentialCell.x, potentialCell.z) - unitAI.UnitInfo.Vector2CellLocation();
                         Vector2Int rushDirection = new Vector2Int(Mathf.Clamp(displacement.x, -1, 1), Mathf.Clamp(displacement.y, -1, 1));
@@ -83,7 +82,7 @@ public class AIActionScore
 
             case TilePattern.Splash:
                 foreach (var splashTile in TilemapUtility.GetSplashTilesInRange(
-                             TilemapCreator.TileLocator[new Vector2Int(potentialCell.x, potentialCell.z)],
+                             TileLocator.SelectableTiles[new Vector2Int(potentialCell.x, potentialCell.z)],
                              action.Splash))
                 {
                     // Continue to the next tile if no unit exists on this current one
@@ -228,7 +227,7 @@ public class AIActionScore
             DamageCalculator.ProjectDamage(initialAction, attacker.UnitInfo, unitAI.UnitInfo);
         
         if (TilemapUtility.GetTargetedArea(attacker, initialAction, target).Contains(
-                TilemapCreator.TileLocator[projectedLocation]))
+                TileLocator.SelectableTiles[projectedLocation]))
         {
             if (unitAI.UnitInfo.currentHP - projectedDamage < 1) {
                 reactionScore -= unitAI.UnitInfo.FinalHP * (int)unitAI.AIBehavior.Survival;
