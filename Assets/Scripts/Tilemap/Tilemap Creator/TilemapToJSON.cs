@@ -24,7 +24,7 @@ public class TilemapToJSON : MonoBehaviour {
         GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         foreach (GameObject tile in tiles) {
-            TileInfo tileInfo = tile.GetComponent<TileInfo>();
+            TileInfo tileInfo = tile.GetComponent<TileReference>().Tile.TileInfo;
 
             // gets the tile location and determines the Vector3Int cell location
             Vector3 pos = tile.transform.position;
@@ -36,8 +36,7 @@ public class TilemapToJSON : MonoBehaviour {
 
             // Get the rotation of the tile and determines the tileDirection enum
             int rotation = Mathf.RoundToInt(tile.transform.eulerAngles.y);
-            TileDirection tileDirection = rotation switch
-            {
+            TileDirection tileDirection = rotation switch {
                 0 => TileDirection.Forward,
                 180 => TileDirection.Backward,
                 90 => TileDirection.Left,

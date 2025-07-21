@@ -7,6 +7,7 @@ public class Tile {
     
     public Tile(Vector3Int cellLocation, TileType tileType, TerrainType terrainType, TileDirection direction, bool isStartArea, bool isTraversable, GameObject OverlayObjPrefab = null) {
         TileObj = new GameObject("Tile: " + cellLocation);
+        TileObj.AddComponent<TileReference>().Reference(this);
         TileInfo = new TileInfo(cellLocation, tileType, terrainType, direction, isStartArea, isTraversable);
         TileRenderer.Render(this, TilePrefabLibrary.FindPrefabPath(this));
         TryAddOverlayTile(OverlayObjPrefab);
