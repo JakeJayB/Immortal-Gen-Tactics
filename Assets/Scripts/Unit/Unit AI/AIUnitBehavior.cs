@@ -34,14 +34,14 @@ public class AIUnitBehavior : MonoBehaviour
         var actionDetermined = false;
         var isReacting = ChainSystem.ReactionInProgress;
         
-        unitAI.AIBehavior = unitAI.AIBehavior.OrderBy(a => a.Priority).ToList();
+        unitAI.AIConditions = unitAI.AIConditions.OrderBy(a => a.Priority).ToList();
         
         // Decide Target
         unitAI.targetedUnit = unitAI.targetedUnit == null || !unitAI.targetedUnit.GameObj
             ? new UnitAITargeting().EvaluateScore(unitAI).TargetUnit 
             : unitAI.targetedUnit;
 
-        foreach (var behavior in unitAI.AIBehavior)
+        foreach (var behavior in unitAI.AIConditions)
         {
             if (!behavior.Condition()) continue;
 

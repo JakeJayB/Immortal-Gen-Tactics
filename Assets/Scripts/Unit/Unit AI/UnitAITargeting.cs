@@ -83,9 +83,9 @@ public class UnitAITargeting
                     unitAI.UnitInfo, potentialUnit.UnitInfo); }
 
             if (potentialUnit.UnitInfo.currentHP - futureDamage <= 0) { futureDamage = Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP); }
-            futureDamage -= Mathf.RoundToInt(action.MPCost * unitAI.ResourceManagement);
-            futureDamage -= Mathf.RoundToInt((action.APCost + additionalAPCost) * unitAI.ReactionAllocation);
-            futureDamage *= (int)unitAI.Aggression;
+            futureDamage -= Mathf.RoundToInt(action.MPCost * unitAI.AIBehavior.ResourceManagement);
+            futureDamage -= Mathf.RoundToInt((action.APCost + additionalAPCost) * unitAI.AIBehavior.ReactionAllocation);
+            futureDamage *= (int)unitAI.AIBehavior.Aggression;
             if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
         }
 
@@ -93,7 +93,7 @@ public class UnitAITargeting
         
         if (projectedFutureDamage > 0) {
             score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP /
-            (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.Aggression); 
+            (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.AIBehavior.Aggression); 
         }
         
         return score;
@@ -106,7 +106,7 @@ public class UnitAITargeting
         int score = 0;
         int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
         
-        score += distance * Mathf.RoundToInt(unit.TacticalPositioning);
+        score += distance * Mathf.RoundToInt(unit.AIBehavior.TacticalPositioning);
         //Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
         return score;
     }
@@ -133,7 +133,7 @@ public class UnitAITargeting
             
                 if (distance <= action.Range && unit.UnitInfo.UnitAffiliation != unitOnTile.UnitInfo.UnitAffiliation) { 
                     futureDamage = DamageCalculator.ProjectDamage(action,
-                        unit.UnitInfo, unitOnTile.UnitInfo) * Mathf.RoundToInt(unit.Aggression); }
+                        unit.UnitInfo, unitOnTile.UnitInfo) * Mathf.RoundToInt(unit.AIBehavior.Aggression); }
             
                 if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
             }
@@ -141,7 +141,7 @@ public class UnitAITargeting
             score += projectedFutureDamage;
         }
         
-        score += (currentDistance - distance) * Mathf.RoundToInt(unit.TacticalPositioning);
+        score += (currentDistance - distance) * Mathf.RoundToInt(unit.AIBehavior.TacticalPositioning);
         //Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
         return score;
     }
@@ -158,7 +158,7 @@ public class UnitAITargeting
         
         // Score Factor 1: HP Ratio
         // The lower the ratio, the higher the score
-        score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP / (float)potentialUnit.UnitInfo.currentHP * unitAI.AllySynergy);
+        score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP / (float)potentialUnit.UnitInfo.currentHP * unitAI.AIBehavior.AllySynergy);
         
         // Score Factor 2: Healing Impact
         // If an action would knock out the targeted unit, add a large amount to the score...
@@ -197,9 +197,9 @@ public class UnitAITargeting
                 futureHealing += potentialUnit.UnitInfo.FinalHP;
             }
             
-            futureHealing -= Mathf.RoundToInt(action.MPCost * unitAI.ResourceManagement);
-            futureHealing -= Mathf.RoundToInt((action.APCost + additionalAPCost) * unitAI.ReactionAllocation);
-            futureHealing *= (int)unitAI.AllySynergy;
+            futureHealing -= Mathf.RoundToInt(action.MPCost * unitAI.AIBehavior.ResourceManagement);
+            futureHealing -= Mathf.RoundToInt((action.APCost + additionalAPCost) * unitAI.AIBehavior.ReactionAllocation);
+            futureHealing *= (int)unitAI.AIBehavior.AllySynergy;
             if (futureHealing > projectedFutureDamage) { projectedFutureDamage = futureHealing; }
         }
 
@@ -207,7 +207,7 @@ public class UnitAITargeting
 
         if (projectedFutureDamage > 0) {
             score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP /
-                (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.AllySynergy);
+                (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.AIBehavior.AllySynergy);
         }
         
         return score;
@@ -216,7 +216,7 @@ public class UnitAITargeting
     // Resource Management Score
     // Completed!!
     public int CalcResourceManagementScore(AIUnit unit) {
-        return -(unit.UnitInfo.currentMP - Action.MPCost) / unit.UnitInfo.FinalMP * Mathf.RoundToInt(unit.ResourceManagement);
+        return -(unit.UnitInfo.currentMP - Action.MPCost) / unit.UnitInfo.FinalMP * Mathf.RoundToInt(unit.AIBehavior.ResourceManagement);
     }
 
     // Reaction Awareness Score
@@ -234,7 +234,7 @@ public class UnitAITargeting
         }
 
         score += threatLevel;
-        score *= Mathf.RoundToInt(unit.ReactionAwareness);
+        score *= Mathf.RoundToInt(unit.AIBehavior.ReactionAwareness);
         //Debug.Log("Unit " + potentialCell + " Reaction Awareness Score: " + score);
         return score;
     }
@@ -242,7 +242,7 @@ public class UnitAITargeting
     // Reaction Allocation Score
     // Completed!!
     public int CalcReactionAllocationScore(AIUnit unit) {
-        return 20 * (unit.UnitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.ReactionAllocation);
+        return 20 * (unit.UnitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.AIBehavior.ReactionAllocation);
     }
 
     // TODO: Implement Softmax to organically choose a unit to target (Most AI will target the same unit)

@@ -116,7 +116,7 @@ public class AIActionScore
         // Score higher for DeadZoning a Target
         // TODO: Balance the score calculation.
         if (Pathfinder.DistanceBetweenCells(PotentialCell, TargetCell) < Action.Splash) 
-        { positionScore += Mathf.RoundToInt(DamageScore * 0.2f * unitAI.TacticalPositioning); }
+        { positionScore += Mathf.RoundToInt(DamageScore * 0.2f * unitAI.AIBehavior.TacticalPositioning); }
         
         foreach (var nearbyUnit in nearbyUnits) {
             // If the action is move-based, get the distance between the AI unit's potential position and the nearby unit
@@ -132,8 +132,8 @@ public class AIActionScore
             // TODO: Create a hindsight function that calculates the danger of discovered reactions from enemy units.
             if (nearbyUnit.UnitInfo.currentAP < 1 || distance > nearbyUnit.UnitInfo.FinalSense) continue;
             positionScore += nearbyUnit.UnitInfo.UnitAffiliation == unitAI.UnitInfo.UnitAffiliation
-                ? nearbyUnit.UnitInfo.currentLevel * (int)unitAI.ReactionAwareness
-                : -nearbyUnit.UnitInfo.currentLevel * (int)unitAI.ReactionAwareness;
+                ? nearbyUnit.UnitInfo.currentLevel * (int)unitAI.AIBehavior.ReactionAwareness
+                : -nearbyUnit.UnitInfo.currentLevel * (int)unitAI.AIBehavior.ReactionAwareness;
         }
 
         if (ChainSystem.ReactionInProgress) return positionScore;
@@ -141,7 +141,7 @@ public class AIActionScore
         if (TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(TargetCell.x, TargetCell.z), out var unitOnTile)) {
             positionScore += Mathf.RoundToInt(
                 (Pathfinder.DistanceBetweenUnits(unitAI, unitOnTile)
-                - Pathfinder.DistanceBetweenCells(PotentialCell, TargetCell)) * unitAI.TacticalPositioning);
+                - Pathfinder.DistanceBetweenCells(PotentialCell, TargetCell)) * unitAI.AIBehavior.TacticalPositioning);
         }
         
         return positionScore;
@@ -183,7 +183,7 @@ public class AIActionScore
                 // The closer the AI unit is to its target, the higher the score
                 // TODO: Figure out how to make the optimal distance formula
                 if (action.Range != 0) {
-                    futureDamage += distance * distance / action.Range * (int)unitAI.TacticalPositioning;
+                    futureDamage += distance * distance / action.Range * (int)unitAI.AIBehavior.TacticalPositioning;
                 }
                 
                 if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
@@ -199,11 +199,11 @@ public class AIActionScore
     {
         int resourceScore = 0;
 
-        resourceScore -= Mathf.RoundToInt(Action.MPCost * unitAI.ResourceManagement);
-        resourceScore -= Mathf.RoundToInt(Action.APCost * unitAI.ResourceManagement);
+        resourceScore -= Mathf.RoundToInt(Action.MPCost * unitAI.AIBehavior.ResourceManagement);
+        resourceScore -= Mathf.RoundToInt(Action.APCost * unitAI.AIBehavior.ResourceManagement);
         
         if (Action.ActionType == ActionType.Wait) {
-            resourceScore += Mathf.RoundToInt((unitAI.UnitInfo.FinalAP - unitAI.UnitInfo.currentAP) * unitAI.ReactionAllocation); 
+            resourceScore += Mathf.RoundToInt((unitAI.UnitInfo.FinalAP - unitAI.UnitInfo.currentAP) * unitAI.AIBehavior.ReactionAllocation); 
         }
 
         return resourceScore;
@@ -231,9 +231,9 @@ public class AIActionScore
                 TilemapCreator.TileLocator[projectedLocation]))
         {
             if (unitAI.UnitInfo.currentHP - projectedDamage < 1) {
-                reactionScore -= unitAI.UnitInfo.FinalHP * (int)unitAI.Survival;
+                reactionScore -= unitAI.UnitInfo.FinalHP * (int)unitAI.AIBehavior.Survival;
             } else {
-                reactionScore -= projectedDamage * (int)unitAI.Survival;
+                reactionScore -= projectedDamage * (int)unitAI.AIBehavior.Survival;
             }
         }
 
@@ -252,16 +252,16 @@ public class AIActionScore
                 DamageCalculator.ProjectDamage(Action, unitAI.UnitInfo, unitOnTile.UnitInfo);
 
             projectedScore += unitOnTile.UnitInfo.currentHP - projectedDamage < 1 ?
-                unitOnTile.UnitInfo.FinalHP * (int)unitAI.Aggression :  // If the action kills a unit, score higher
-                projectedDamage * (int)unitAI.Aggression;   // Else, score the original damaging amount
+                unitOnTile.UnitInfo.FinalHP * (int)unitAI.AIBehavior.Aggression :  // If the action kills a unit, score higher
+                projectedDamage * (int)unitAI.AIBehavior.Aggression;   // Else, score the original damaging amount
                                 
         } else { // Calc Healing Towards Allies
             projectedDamage =
                 DamageCalculator.ProjectHealing(Action, unitAI.UnitInfo, unitOnTile.UnitInfo);
                                 
             projectedScore += unitOnTile.UnitInfo.IsDead() && Action.DamageType == DamageType.Revival ? 
-                unitOnTile.UnitInfo.FinalHP * (int)unitAI.AllySynergy : // If the action revives a unit, score higher
-                projectedDamage * (int)unitAI.AllySynergy;  // Else, score the original healing amount
+                unitOnTile.UnitInfo.FinalHP * (int)unitAI.AIBehavior.AllySynergy : // If the action revives a unit, score higher
+                projectedDamage * (int)unitAI.AIBehavior.AllySynergy;  // Else, score the original healing amount
         }
 
         return projectedScore;
@@ -279,7 +279,7 @@ public class AIActionScore
             // Score higher for DeadZoning a Target
             // TODO: Balance the score calculation.
             if (Pathfinder.DistanceBetweenCells(tile.TileInfo.CellLocation, TargetCell) < futureAction.Splash) 
-            { potentialScore += Mathf.RoundToInt(potentialScore * 0.2f * unitAI.TacticalPositioning); }
+            { potentialScore += Mathf.RoundToInt(potentialScore * 0.2f * unitAI.AIBehavior.TacticalPositioning); }
             
             if (potentialScore > bestScore) { bestScore = potentialScore; }
         }

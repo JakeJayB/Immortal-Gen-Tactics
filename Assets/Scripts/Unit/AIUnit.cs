@@ -4,37 +4,30 @@ using UnityEngine;
 public class AIUnit : Unit {
     // AI Behavior Set
     public AIUnitBehavior AIUnitBehavior;
-    public List<AICondition> AIBehavior;
-    
-    // AI Behavioral Factors
-    public float Aggression;                  // Values Damage Dealt & Kills
-    public float Survival;                    // Values Avoiding Damage & Death
-    public float TacticalPositioning;         // Values Advantageous Positioning
-    public float AllySynergy;                 // Values Team-Based Actions
-    public float ResourceManagement;          // Values Optimal Resource Balancing (MP, AP, Items)
-    public float ReactionAwareness;           // Values Minimal Reaction Opportunities from Opponent
-    public float ReactionAllocation;          // Values Saving AP for Reactions
+    public AIBehavior AIBehavior;
+    public List<AICondition> AIConditions;
 
     public Unit targetedUnit;
 
     public AIUnit(GameObject gameObj,UnitDefinitionData unitData, SpriteRenderer spriteRenderer) 
         : base(gameObj, unitData, spriteRenderer) {
         if (unitData == null) return;
-        
-        Aggression = unitData.Behaviors.Aggression;
-        Survival = unitData.Behaviors.Survival;
-        TacticalPositioning = unitData.Behaviors.TacticalPositioning;
-        AllySynergy = unitData.Behaviors.AllySynergy;
-        ResourceManagement = unitData.Behaviors.ResourceManagement;
-        ReactionAwareness = unitData.Behaviors.ReactionAwareness;
-        ReactionAllocation = unitData.Behaviors.ReactionAllocation;
+
+        AIBehavior = new AIBehavior(
+            unitData.Behaviors.Aggression,
+            unitData.Behaviors.Survival,
+            unitData.Behaviors.TacticalPositioning,
+            unitData.Behaviors.AllySynergy,
+            unitData.Behaviors.ResourceManagement,
+            unitData.Behaviors.ReactionAwareness,
+            unitData.Behaviors.ReactionAllocation);
     }
     
     public Unit InitializeAI(Vector3Int initLocation, UnitDirection unitDirection)
     {
         SetInitialPosition(initLocation, unitDirection);
         AIUnitBehavior = GameObj.AddComponent<AIUnitBehavior>();
-        AIBehavior = new List<AICondition>()
+        AIConditions = new List<AICondition>()
         {
             new AICondition
             {

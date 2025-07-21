@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class UnitInfo
-{
+public class UnitInfo {
     // Unit
     public Unit unit;
     
