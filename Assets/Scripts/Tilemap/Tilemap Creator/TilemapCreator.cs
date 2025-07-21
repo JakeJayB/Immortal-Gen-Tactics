@@ -36,12 +36,12 @@ public class TilemapCreator : MonoBehaviour
     
     private void LoadFromJson() {
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
-        DataList data;
+        TilemapData tilemapData;
 
         if (File.Exists(filePath)) {
-            data = JsonUtility.FromJson<DataList>(File.ReadAllText(filePath));
-            LoadTileMap(data.tiles);
-            LoadUnit(data.units);
+            tilemapData = JsonUtility.FromJson<TilemapData>(File.ReadAllText(filePath));
+            LoadTileMap(tilemapData.tiles);
+            LoadUnit(tilemapData.units);
         }
         else {
             Debug.LogError("File '" +  filePath + "' does not exist");

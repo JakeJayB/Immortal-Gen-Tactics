@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class TilePrefabCreator : MonoBehaviour
@@ -9,14 +6,12 @@ public class TilePrefabCreator : MonoBehaviour
     private const string PREFAB_EXTENSION = ".mesh";
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Tile flatTile = new Tile(new Vector3Int(0, 0, 0), TileType.Flat, TerrainType.STANDARD, TileDirection.Forward, false, true);
         SaveAsPrefab(flatTile.TileObj);
     }
 
-    void SaveAsPrefab(GameObject obj)
-    {
+    void SaveAsPrefab(GameObject obj) {
         Mesh mesh = obj.GetComponent<MeshFilter>().mesh;
         string meshName = obj.GetComponent<TileInfo>().TileType.ToString();
 
