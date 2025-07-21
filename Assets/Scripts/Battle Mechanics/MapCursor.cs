@@ -176,6 +176,12 @@ public class MapCursor : MonoBehaviour
         yield return ChainSystem.ExecuteChain();
         
         // Set 'currentUnit' back to the current unit in the turn system
+        // If unit died as a result of the chain, end their turn and move on
+        if (TurnSystem.CurrentUnit.UnitInfo.IsDead()) {
+            EndMove();
+            yield break;
+        }
+        
         currentUnit = TurnSystem.CurrentUnit.UnitInfo.Vector2CellLocation();
         //CameraMovement.SetFocusPoint(TilemapCreator.TileLocator[currentUnit].TileObj.transform);
         MoveCursor(currentUnit);

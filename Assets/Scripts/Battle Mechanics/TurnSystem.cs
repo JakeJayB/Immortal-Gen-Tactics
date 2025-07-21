@@ -143,7 +143,7 @@ private void HeapifyUp(int index)
     public static List<Unit> ToSortedList(bool includeCurrentUnit = false)
     {
         List<Unit> sortedList = new List<Unit>(Heap);
-        if(includeCurrentUnit && TurnSystem.CurrentUnit != null)
+        if(includeCurrentUnit && !TurnSystem.CurrentUnit.UnitInfo.IsDead())
             sortedList.Add(TurnSystem.CurrentUnit);
        
         sortedList.Sort((a, b) => {
@@ -227,7 +227,7 @@ public class TurnSystem : MonoBehaviour
             yield return new WaitUntil(() => continueLoop);
 
             continueLoop = false;
-            unitQueue.Enqueue(CurrentUnit);
+            if (!CurrentUnit.UnitInfo.IsDead()) unitQueue.Enqueue(CurrentUnit);
             CurrentUnit = null;
             yield return new WaitForSeconds(1f);
         }
@@ -273,11 +273,7 @@ public class TurnSystem : MonoBehaviour
         UnitPriorityQueue.Add(unit);
     }
     
-    public static void RemoveUnit(Unit unit)
-    {
-        if (CurrentUnit == unit)
-            CurrentUnit = null;
-
+    public static void RemoveUnit(Unit unit) {
         TurnCycle.RemoveUnit(unit);
         unitQueue.Remove(unit);
     }
