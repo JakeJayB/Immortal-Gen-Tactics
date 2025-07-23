@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.IO;
-using Unity.VisualScripting;
 
 public class UDDLoader : MonoBehaviour {
-    public string JsonFileName; // Just the filename, like "knight.json"
+    public string JsonFileName;
 
     [TextArea(10, 30)]
-    public string previewJson; // Optional: show contents in Inspector
+    public string previewJson;
     
     public UnitDefinitionData LoadedUDD;
     
@@ -25,16 +24,14 @@ public class UDDLoader : MonoBehaviour {
     }
     
     [ContextMenu("Save UDD To JSON")]
-    public void SaveJson()
-    {
-        if (LoadedUDD == null)
-        {
+    public void SaveJson() {
+        if (LoadedUDD == null) {
             Debug.LogError("No UDD loaded to save.");
             return;
         }
 
         string path = Path.Combine(Application.dataPath, "Resources/JSON/UDD", JsonFileName);
-        string json = JsonUtility.ToJson(LoadedUDD, true); // Pretty print
+        string json = JsonUtility.ToJson(LoadedUDD, true);
         File.WriteAllText(path, json);
         previewJson = json;
         Debug.Log($"Saved to {path}");

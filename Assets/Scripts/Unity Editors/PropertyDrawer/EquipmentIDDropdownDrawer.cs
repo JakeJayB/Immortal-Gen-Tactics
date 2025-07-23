@@ -1,21 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(EquipmentIDDropdownAttribute))]
-public class EquipmentIDDropdownDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
+public class EquipmentIDDropdownDrawer : PropertyDrawer {
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
         EquipmentIDDropdownAttribute dropdownAttr = (EquipmentIDDropdownAttribute)attribute;
 
         // Get the correct list of options based on dropdown type
-        var options = dropdownAttr.Type switch
-        {
+        var options = dropdownAttr.Type switch {
             EquipmentType.Weapon => EquipmentLibrary.GetWeaponDropdownOptions(),
             EquipmentType.ArmorHead => EquipmentLibrary.GetArmorDropdownOptions(ArmorType.Head),
             EquipmentType.ArmorBody => EquipmentLibrary.GetArmorDropdownOptions(ArmorType.Body),
@@ -25,8 +20,7 @@ public class EquipmentIDDropdownDrawer : PropertyDrawer
             _ => null
         };
         
-        if (options == null || options.Count == 0)
-        {
+        if (options == null || options.Count == 0) {
             EditorGUI.LabelField(position, label.text, "No weapons loaded.");
             return;
         }
