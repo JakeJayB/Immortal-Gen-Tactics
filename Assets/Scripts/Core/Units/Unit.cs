@@ -2,17 +2,14 @@ using UnityEngine;
 public class Unit
 {
     public GameObject GameObj { get; set; }
-    
-    // Unit Properties
     public UnitInfo UnitInfo { get; protected set; }
     public UnitEquipment Equipment { get; protected set; }
     public UnitActionSet ActionSet { get; protected set; }
     public UnitRenderer UnitRenderer { get; protected set; }
-
-    // Constructor
-    public Unit(GameObject gameObj, UnitDefinitionData unitData, SpriteRenderer spriteRenderer)
-    {
+    
+    public Unit(GameObject gameObj, UnitDefinitionData unitData, SpriteRenderer spriteRenderer) {
         GameObj = gameObj;
+        GameObj.AddComponent<UnitReference>().Reference(this);
 
         if (unitData == null) {
             Debug.LogError($"[Unit]: UDD not found for Unit '{gameObj.name}' during construction.");
