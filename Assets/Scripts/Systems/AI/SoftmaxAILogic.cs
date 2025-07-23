@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public static class SoftmaxAILogic
-{
-    public static UnitAction DetermineAction(List<UnitAction> potentialActions, List<float> actionScores, float temperature = 1.75f)
-    {
+public static class SoftmaxAILogic {
+    public static UnitAction DetermineAction(List<UnitAction> potentialActions, List<float> actionScores, float temperature = 1.75f) {
         // Get the best action possible out of all the potential actions
         var bestAction = potentialActions[actionScores.IndexOf(actionScores.Max())];
         
@@ -21,16 +19,14 @@ public static class SoftmaxAILogic
         float total = 0f;
 
         // Apply softmax
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             expScores[i] = Mathf.Exp(actionScores[i] / temperature);
             total += expScores[i];
         }
 
         // Normalize to probabilities
         float[] probabilities = new float[count];
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             probabilities[i] = expScores[i] / total;
         }
 
@@ -38,8 +34,7 @@ public static class SoftmaxAILogic
         float rand = Random.value;
         float cumulative = 0f;
 
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++) {
             cumulative += probabilities[i];
             Debug.Log($"Checking action {potentialActions[i]}, rand: {rand}, cumulative: {cumulative}");
             if (rand <= cumulative)
@@ -52,22 +47,18 @@ public static class SoftmaxAILogic
 
     
 
-    private static (List<UnitAction>, List<float>) FilterActions(List<UnitAction> potentialActions,
-        List<float> actionScores)
-    {
+    private static (List<UnitAction>, List<float>) FilterActions(List<UnitAction> potentialActions, List<float> actionScores) {
         (potentialActions, actionScores) = FilterNegatives(potentialActions, actionScores);
         (potentialActions, actionScores) = FilterWaitAction(potentialActions, actionScores);
         return (potentialActions, actionScores);
     }
-    private static (List<UnitAction>, List<float>) FilterNegatives(List<UnitAction> potentialActions, List<float> actionScores)
-    {
+    
+    private static (List<UnitAction>, List<float>) FilterNegatives(List<UnitAction> potentialActions, List<float> actionScores) {
         List<UnitAction> filteredActions = new();
         List<float> filteredScores = new();
 
-        for (int i = 0; i < potentialActions.Count; i++)
-        {
-            if (actionScores[i] >= 0)
-            {
+        for (int i = 0; i < potentialActions.Count; i++) {
+            if (actionScores[i] >= 0) {
                 filteredActions.Add(potentialActions[i]);
                 filteredScores.Add(actionScores[i]);
             }
@@ -76,9 +67,7 @@ public static class SoftmaxAILogic
         return (filteredActions, filteredScores);
     }
     
-    private static (List<UnitAction>, List<float>) FilterWaitAction(List<UnitAction> potentialActions,
-        List<float> actionScores)
-    {
+    private static (List<UnitAction>, List<float>) FilterWaitAction(List<UnitAction> potentialActions, List<float> actionScores) {
         if (ChainSystem.ReactionInProgress) return (potentialActions, actionScores);
         
         int waitIndex = potentialActions.FindIndex(action => action is Wait);

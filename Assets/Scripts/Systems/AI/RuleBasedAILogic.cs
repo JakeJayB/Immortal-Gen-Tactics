@@ -1,8 +1,6 @@
 using System.Linq;
-using UnityEngine;
 
-public class RuleBasedAILogic
-{
+public class RuleBasedAILogic {
     // HP-Based Rules
     public static bool CurrentHPIsAbovePercent(float percentThreshold, UnitInfo unitInfo) {
         var healthPercent = unitInfo.currentHP / (float)unitInfo.FinalHP;

@@ -1,22 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class UnitAITargeting
-{
-    public UnitAction Action { get; set; }
-    public int AggressionScore { get; set; } = -1;
-    public int SurvivalScore { get; set; } = -1;
-    public int TacticalPosScore { get; set; } = -1;
-    public int AllySynergyScore { get; set; } = -1;
-    public int ResourceManagementScore { get; set; } = -1;
-    public int ReactionAwarenessScore { get; set; } = -1;
-    public int ReactionAllocationScore { get; set; } = -1;
+public class AIUnitTargeting {
     public Unit TargetUnit { get; set; }
 
-    private int CalcPriorityScore(AIUnit unitAI, Unit potentialUnit)
-    {
+    private int CalcPriorityScore(AIUnit unitAI, Unit potentialUnit) {
         // Skip the calculation process if enemy unit is already dead
         if (potentialUnit.UnitInfo.IsDead() &&
             potentialUnit.UnitInfo.UnitAffiliation != unitAI.UnitInfo.UnitAffiliation) { return -1; }
@@ -98,53 +86,6 @@ public class UnitAITargeting
         
         return score;
     }
-
-    // Tactical Awareness Score
-    // Completed!!
-    // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
-    public int CalcSurvivalScore(AIUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
-        int score = 0;
-        int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
-        
-        score += distance * Mathf.RoundToInt(unit.AIBehavior.TacticalPositioning);
-        //Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
-        return score;
-    }
-    
-    // Tactical Awareness Score
-    // Completed!!
-    // -> Possible Improvement <Calculate and Account for Y-Distance (Vertical)>
-    public int CalcTacticalPositioningScore(AIUnit unit, Vector3Int potentialCell, Vector3Int targetCell) {
-        int score = 0;
-        int currentDistance = Pathfinder.DistanceBetweenCells(unit.UnitInfo.CellLocation, targetCell);
-        int distance = Pathfinder.DistanceBetweenCells(potentialCell, targetCell);
-
-        if (TilemapCreator.UnitLocator.TryGetValue(new Vector2Int(targetCell.x, targetCell.z), out var unitOnTile))
-        {
-            // Add to score if Potential Cell is within Unit's Striking Range
-            int projectedFutureDamage = 0;
-            foreach (var action in unit.ActionSet.GetAllActionsOfType(ActionType.Attack))
-            {
-                if (action.Range < distance) { continue; }
-                if (unit.UnitInfo.currentAP < action.APCost || unit.UnitInfo.currentMP < action.MPCost) { continue; }
-            
-                unitOnTile = TilemapCreator.UnitLocator[new Vector2Int(targetCell.x, targetCell.z)];
-                int futureDamage = 0; 
-            
-                if (distance <= action.Range && unit.UnitInfo.UnitAffiliation != unitOnTile.UnitInfo.UnitAffiliation) { 
-                    futureDamage = DamageCalculator.ProjectDamage(action,
-                        unit.UnitInfo, unitOnTile.UnitInfo) * Mathf.RoundToInt(unit.AIBehavior.Aggression); }
-            
-                if (futureDamage > projectedFutureDamage) { projectedFutureDamage = futureDamage; }
-            }
-
-            score += projectedFutureDamage;
-        }
-        
-        score += (currentDistance - distance) * Mathf.RoundToInt(unit.AIBehavior.TacticalPositioning);
-        //Debug.Log("Unit " + potentialCell + " Distance Score: " + score);
-        return score;
-    }
     
     // Ally Synergy Score
     // TODO: Check health to see how close they are to death (Debate hp ratio vs. remaining hp)
@@ -212,65 +153,20 @@ public class UnitAITargeting
         
         return score;
     }
-    
-    // Resource Management Score
-    // Completed!!
-    public int CalcResourceManagementScore(AIUnit unit) {
-        return -(unit.UnitInfo.currentMP - Action.MPCost) / unit.UnitInfo.FinalMP * Mathf.RoundToInt(unit.AIBehavior.ResourceManagement);
-    }
-
-    // Reaction Awareness Score
-    // Completed!!
-    public int CalcReactionAwarenessScore(AIUnit unit, Vector3Int potentialCell, List<Unit> enemyUnits) {
-        int score = 0;
-        int threatLevel = 0;
-        
-        foreach (var enemy in enemyUnits) {
-            int distance = Pathfinder.DistanceBetweenCells(potentialCell, enemy.UnitInfo.CellLocation);
-            if (distance <= enemy.UnitInfo.FinalSense) {
-                score -= 10;
-                threatLevel -= enemy.UnitInfo.currentLevel;
-            }
-        }
-
-        score += threatLevel;
-        score *= Mathf.RoundToInt(unit.AIBehavior.ReactionAwareness);
-        //Debug.Log("Unit " + potentialCell + " Reaction Awareness Score: " + score);
-        return score;
-    }
-    
-    // Reaction Allocation Score
-    // Completed!!
-    public int CalcReactionAllocationScore(AIUnit unit) {
-        return 20 * (unit.UnitInfo.currentAP - Action.APCost) * Mathf.RoundToInt(unit.AIBehavior.ReactionAllocation);
-    }
 
     // TODO: Implement Softmax to organically choose a unit to target (Most AI will target the same unit)
-    public UnitAITargeting EvaluateScore(AIUnit unitAI)
+    public AIUnitTargeting EvaluateScore(AIUnit unitAI)
     {
         var score = 0;
-        foreach (var potentialUnit in TilemapCreator.UnitLocator.Values)
-        {
+        foreach (var potentialUnit in TilemapCreator.UnitLocator.Values) {
             var newScore = CalcPriorityScore(unitAI, potentialUnit);
             Debug.Log(potentialUnit.GameObj.name + " target score = " + newScore);
-            //var newScore = unitAI.unitInfo.UnitAffiliation == potentialUnit.unitInfo.UnitAffiliation ? 
-                //CalcAggressionScore(unitAI, potentialUnit) : CalcAllySynergyScore(unitAI, potentialUnit);
-
-            //SurvivalScore = 0;
-            //TacticalPosScore = CalcTacticalPositioningScore(unit, potentialCell, targetCell);
-            //AllySynergyScore = CalcAllySynergyScore(unit, potentialCell, enemyUnits);
-            //ResourceManagementScore = 0;
-            //ReactionAwarenessScore = CalcReactionAwarenessScore(unit, potentialCell, enemyUnits);
-            //ReactionAllocationScore = 0;
+            
             if (newScore <= score) continue;
             score = newScore;
             TargetUnit = potentialUnit;
         }
         
-        
-        
         return this;
     }
-
-    public int TotalScore() => AggressionScore + SurvivalScore + TacticalPosScore + AllySynergyScore + ResourceManagementScore + ReactionAwarenessScore + ReactionAllocationScore;
 }

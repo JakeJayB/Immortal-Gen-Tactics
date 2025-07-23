@@ -1,17 +1,11 @@
 using UnityEngine;
 
 public class UnitInfo {
-    // Unit
     public Unit unit;
-    
-    // Unit Cell Location
     public Vector3Int CellLocation;
     public UnitDirection UnitDirection;
-    
-    // Unit Affiliation
     public UnitAffiliation UnitAffiliation;
-
-    // Unit Current Stat Values
+    
     public int currentHP { get; protected internal set; }
     public int currentMP { get; protected internal set; }
     public int currentAP { get; protected internal set; }
@@ -54,11 +48,8 @@ public class UnitInfo {
     }
     
     public void Initialize(UnitDefinitionData udd) {
-        
-        // Unit Affiliation
         UnitAffiliation = udd.UnitAffiliation;
         
-        // Set the Base Stats
         baseHP = udd.BaseStats.BaseHP;
         baseMP = udd.BaseStats.BaseMP;
         baseAP = udd.BaseStats.BaseAP;

@@ -22,7 +22,7 @@ public class AITurnHandler : MonoBehaviour {
         
         // Decide Target
         unitAI.targetedUnit = unitAI.targetedUnit == null || !unitAI.targetedUnit.GameObj
-            ? new UnitAITargeting().EvaluateScore(unitAI).TargetUnit 
+            ? new AIUnitTargeting().EvaluateScore(unitAI).TargetUnit 
             : unitAI.targetedUnit;
 
         foreach (var behavior in unitAI.AIConditions) {
