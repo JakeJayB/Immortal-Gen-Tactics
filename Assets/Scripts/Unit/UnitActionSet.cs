@@ -1,36 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
-public class UnitActionSet
-{
-    public UnitActionSet(Unit unit) { this.unit = unit; }
-    
-    public void Initialize(UnitDefinitionData unitData) {
-        foreach (var action in unit is AIUnit ? unitData.GetAIActions() : unitData.GetActions()) {
-            if (action < 0) { continue; }
-            AddAction(UnitActionLibrary.FindAction(action)); 
-        }
-    }
-
+public class UnitActionSet {
     private Unit unit;
     
-    private Dictionary<ActionType, List<UnitAction>> unitActions = new()
-    {
+    private Dictionary<ActionType, List<UnitAction>> unitActions = new() {
         { ActionType.Attack, new List<UnitAction>() { new Attack() } },
         { ActionType.React, new List<UnitAction>() {  } }
     };
     
-    public void AddAction(UnitAction action)
-    {
+    public UnitActionSet(Unit unit) { this.unit = unit; }
+    
+    public void Initialize(UnitDefinitionData unitData) {
+        var actions = unit is AIUnit ? unitData.GetAIActions() : unitData.GetActions();
+        foreach (var actionID in actions) {
+            if (actionID < 0) { continue; }
+            UnitAction action = UnitActionLibrary.FindAction(actionID);
+            if (action != null) AddAction(action); 
+        }
+    }
+    
+    public void AddAction(UnitAction action) {
         if (!unitActions.TryGetValue(action.ActionType, out List<UnitAction> actionList)) {
             actionList = new List<UnitAction>();
             unitActions[action.ActionType] = actionList;
         }
 
-        if (action.ActionType != ActionType.Item && UnitActionExistsInSet(unitActions[action.ActionType], action)) {
+        if (action.ActionType != ActionType.Item && ContainsAction(unitActions[action.ActionType], action)) {
             Debug.LogError($"ERROR: Unit already knows the action {action.Name}");
             return;
         }
@@ -40,84 +37,56 @@ public class UnitActionSet
     }
 
     public void RemoveAction(UnitAction action) {
-        var actionTypeSet = unitActions[action.ActionType];
-        
-        if (UnitActionExistsInSet(actionTypeSet, action)) {
-            actionTypeSet.Remove(actionTypeSet.First(a => a.GetType() == action.GetType()));
+        if (unitActions.TryGetValue(action.ActionType, out var actionList)) {
+            var existing = actionList.FirstOrDefault(a => a.GetType() == action.GetType());
+            if (existing != null) actionList.Remove(existing);
         }
     }
 
-    private bool UnitActionExistsInSet(List<UnitAction> actions, UnitAction action)
-    {
-        foreach (UnitAction actionInList in actions) {
-            if (actionInList.GetType() == action.GetType()) { return true; }
-        }
-        return false;
-    }
-
-    public List<UnitAction> GetAllTurnActions()
-    {
-        List<UnitAction> allActions = new List<UnitAction>();
-        
-        // Add all Turn-Based Actions
-        allActions.Add(new Move());
-        foreach (var actionList in unitActions.Values) { allActions.AddRange(actionList); }
-        allActions.Add(new Wait());
-        
-        return allActions;
+    private bool ContainsAction(List<UnitAction> actions, UnitAction action) {
+        return actions.Any(actionInList => actionInList.GetType() == action.GetType());
     }
     
-    public List<UnitAction> GetAllReactions()
-    {
-        List<UnitAction> allReactions = new List<UnitAction>();
-        
-        // Add all Reaction-Based Actions
-        allReactions.Add(new Evade());
-        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList); }
-        return allReactions;
-    }
-    
-    public List<UnitAction> GetAllUnitActions()
-    {
-        List<UnitAction> allReactions = new List<UnitAction>();
-        
-        // Add all Actions unique to the unit
-        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList); }
-        return allReactions;
+    private List<UnitAction> FlattenActions(bool distinct = false) {
+        return distinct
+            ? unitActions.Values.SelectMany(list => list).Distinct().ToList()
+            : unitActions.Values.SelectMany(list => list).ToList();
     }
 
-    public List<UnitAction> GetAllAttackActions() {
-        List<UnitAction> attackActions = new List<UnitAction>();
-        attackActions.AddRange(unitActions[ActionType.Attack]);
-        return attackActions;
+    public List<UnitAction> GetAllTurnActions() {
+        List<UnitAction> turnActions = new List<UnitAction> { new Move() };
+        turnActions.AddRange(FlattenActions());
+        turnActions.Add(new Wait());
+        return turnActions;
     }
     
     public List<UnitAction> GetAITurnActions() {
-        List<UnitAction> allActions = new List<UnitAction>();
-        
-        // Add all Turn-Based Actions
-        // Setting Move after Unique Actions to prevent bad movement
-        foreach (var actionList in unitActions.Values) { allActions.AddRange(actionList.Distinct()); }
-        allActions.Add(new Move());
-        allActions.Add(new Wait());
-        
-        return allActions;
+        List<UnitAction> turnActions = FlattenActions(true);
+        turnActions.Add(new Move());
+        turnActions.Add(new Wait());
+        return turnActions;
     }
     
-    public List<UnitAction> GetAIReactions() {
-        List<UnitAction> allReactions = new List<UnitAction>();
-        
-        // Add all Reaction-Based Actions
-        allReactions.Add(new Evade());
-        foreach (var actionList in unitActions.Values) { allReactions.AddRange(actionList.Distinct()); }
-        allReactions.Add(new DoNothing());
-        
+    public List<UnitAction> GetAllReactions() {
+        List<UnitAction> allReactions = new List<UnitAction> { new Evade() };
+        allReactions.AddRange(FlattenActions());
         return allReactions;
     }
     
-    public List<UnitAction> GetAllItems() {
-        List<UnitAction> attackActions = new List<UnitAction>();
-        attackActions.AddRange(unitActions[ActionType.Item].Distinct());
-        return attackActions;
+    public List<UnitAction> GetAIReactions() {
+        List<UnitAction> allReactions = new List<UnitAction> { new Evade() };
+        allReactions.AddRange(FlattenActions(true));
+        allReactions.Add(new DoNothing());
+        return allReactions;
+    }
+    
+    public List<UnitAction> GetAllUnitActions() {
+        return FlattenActions();
+    }
+
+    public List<UnitAction> GetAllActionsOfType(ActionType actionType) {
+        return unitActions.TryGetValue(actionType, out var list)
+            ? new List<UnitAction>(list)
+            : new List<UnitAction>();
     }
 }

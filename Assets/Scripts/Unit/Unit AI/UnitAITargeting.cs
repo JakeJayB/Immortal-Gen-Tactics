@@ -59,7 +59,7 @@ public class UnitAITargeting
         // ...otherwise, the more damage projected, the higher the score
         // Deduct MP Cost and AP Cost needed for each specific action
         int projectedFutureDamage = 0;
-        foreach (var action in unitAI.ActionSet.GetAllAttackActions())
+        foreach (var action in unitAI.ActionSet.GetAllActionsOfType(ActionType.Attack))
         {
             // Skip Actions that Heal an Enemy
             // Skip Actions that can't be Currently Used by the UnitAI
@@ -123,7 +123,7 @@ public class UnitAITargeting
         {
             // Add to score if Potential Cell is within Unit's Striking Range
             int projectedFutureDamage = 0;
-            foreach (var action in unit.ActionSet.GetAllAttackActions())
+            foreach (var action in unit.ActionSet.GetAllActionsOfType(ActionType.Attack))
             {
                 if (action.Range < distance) { continue; }
                 if (unit.UnitInfo.currentAP < action.APCost || unit.UnitInfo.currentMP < action.MPCost) { continue; }
