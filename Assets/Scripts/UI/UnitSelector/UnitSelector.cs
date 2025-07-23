@@ -159,11 +159,11 @@ public class UnitSelector : MonoBehaviour
 
                     SpriteRenderer spriteRenderer = unitSelected.GameObj.GetComponent<SpriteRenderer>();
                     UnitRenderer unitRenderer = new UnitRenderer(unitSelected, spriteRenderer);
-                    unitRenderer.PositionUnit(unit2Location);
+                    UnitTransform.PositionUnit(unitRenderer, unit2Location);
                     
                     spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
                     unitRenderer = new UnitRenderer(unit, spriteRenderer);
-                    unitRenderer.PositionUnit(tempCell);
+                    UnitTransform.PositionUnit(unitRenderer, tempCell);
 
                     // Add new locations to UnitLocator
                     TilemapCreator.UnitLocator.Add(unitSelected.UnitInfo.Vector2CellLocation(), unitSelected);
@@ -194,7 +194,7 @@ public class UnitSelector : MonoBehaviour
                 unitSelected.UnitInfo.CellLocation = newLocation;
                 SpriteRenderer spriteRenderer = unitSelected.GameObj.GetComponent<SpriteRenderer>();
                 UnitRenderer unitRenderer = new UnitRenderer(unitSelected, spriteRenderer);
-                unitRenderer.PositionUnit(newLocation);
+                UnitTransform.PositionUnit(unitRenderer, newLocation);
                 TilemapCreator.UnitLocator.Add(unitSelected.UnitInfo.Vector2CellLocation(), unitSelected);
                 SoundFXManager.PlaySoundFXClip("Select", 0.2f);
 
@@ -212,7 +212,7 @@ public class UnitSelector : MonoBehaviour
                     unit.UnitInfo.CellLocation = newLocation;
                     SpriteRenderer spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
                     UnitRenderer unitRenderer = new UnitRenderer(unit, spriteRenderer);
-                    unitRenderer.PositionUnit(newLocation);
+                    UnitTransform.PositionUnit(unitRenderer, newLocation);
                     TilemapCreator.UnitLocator.Add(unit.UnitInfo.Vector2CellLocation(), unit);
 
                     // signal to SelectorUnitIcons that the new unit is now active

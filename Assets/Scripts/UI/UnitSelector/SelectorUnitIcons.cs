@@ -60,7 +60,7 @@ public class SelectorUnitIcons : MonoBehaviour
         unitIconRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BACKGROUND_HEIGHT * 0.6f);
 
         unitImage = icon.AddComponent<Image>();
-        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.GetSprite();
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.Sprite();
     }
 
     public static void NextUnit()
@@ -79,7 +79,7 @@ public class SelectorUnitIcons : MonoBehaviour
 
         Debug.Log($"Current Idx: {currentIdx}");
 
-        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.GetSprite();
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.Sprite();
 
         if (activeUnits.ContainsKey(currentIdx))
             ShadeUnitIcon();
@@ -101,7 +101,7 @@ public class SelectorUnitIcons : MonoBehaviour
 
         Debug.Log($"Current Idx: {currentIdx}");
 
-        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.GetSprite();
+        unitImage.sprite = PartyManager.unitList[currentIdx].UnitRenderer.Sprite();
 
         if (activeUnits.ContainsKey(currentIdx))
             ShadeUnitIcon();
@@ -138,7 +138,7 @@ public class SelectorUnitIcons : MonoBehaviour
             unit.UnitInfo.CellLocation = Vector3Int.zero;
             SpriteRenderer spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
             UnitRenderer unitRenderer = new UnitRenderer(unit, spriteRenderer);
-            unitRenderer.PositionUnit(unit.UnitInfo.CellLocation);
+            UnitTransform.PositionUnit(unitRenderer, unit.UnitInfo.CellLocation);
 
             activeUnits.Remove(currentIdx);
             UnshadeUnitIcon();
@@ -157,7 +157,7 @@ public class SelectorUnitIcons : MonoBehaviour
                     unit.UnitInfo.CellLocation = Vector3Int.zero;
                     SpriteRenderer spriteRenderer = unit.GameObj.GetComponent<SpriteRenderer>();
                     UnitRenderer unitRenderer = new UnitRenderer(unit, spriteRenderer);
-                    unitRenderer.PositionUnit(unit.UnitInfo.CellLocation);
+                    UnitTransform.PositionUnit(unitRenderer, unit.UnitInfo.CellLocation);
                     break;
                 }
             }
