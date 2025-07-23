@@ -2,20 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapCursor : MonoBehaviour
-{
+public class MapCursor : MonoBehaviour {
     private static GameObject gameObj;
     private static CameraMovement cameraMovement;
     public static Vector2Int currentUnit; 
     public static Vector2Int hoverCell;
-    
-    public enum ControlState {
-        Start,
-        Active,
-        Action,
-        Inactive
-    }
-
     private static ControlState CursorControlState;
 
     private void Awake() { 
@@ -40,9 +31,7 @@ public class MapCursor : MonoBehaviour
         CursorControlState = ControlState.Inactive;
     }
 
-    public static void RegisterCleanup() =>
-    MemoryManager.AddListeners(Clear);
-
+    public static void RegisterCleanup() => MemoryManager.AddListeners(Clear);
 
     private void StartControls() {
         if (!Input.anyKeyDown) return;
