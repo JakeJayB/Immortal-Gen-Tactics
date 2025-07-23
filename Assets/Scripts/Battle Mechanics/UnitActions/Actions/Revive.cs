@@ -32,7 +32,7 @@ public class Revive : UnitAction {
                 if (!foundUnit.UnitInfo.IsDead()) { continue; }
                 
                 AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                    foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                    foundUnit.UnitInfo.CellLocation, new List<Unit>(), AIUnitScanner.FindNearbyUnits(unit));
                 
                 if (newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;
             }

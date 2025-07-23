@@ -23,7 +23,7 @@ public class Wait : UnitAction
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         
         ActionScore.EvaluateScore(this, unit, TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
-            unit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            unit.UnitInfo.CellLocation, new List<Unit>(), AIUnitScanner.FindNearbyUnits(unit));
         
         Debug.Log("Best Heuristic Score: " + ActionScore.TotalScore());
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);

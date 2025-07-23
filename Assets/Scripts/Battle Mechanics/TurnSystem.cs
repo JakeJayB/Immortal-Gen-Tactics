@@ -175,7 +175,7 @@ public class TurnSystem : MonoBehaviour {
                 MapCursor.SetGameObjInactive();
                 Vector2Int unitLocation = CurrentUnit.UnitInfo.Vector2CellLocation();
                 CameraMovement.CheckAndMove(TileLocator.SelectableTiles[unitLocation].TileObj.transform);
-                enemyUnit.AIUnitBehavior.StartTurn(enemyUnit);
+                enemyUnit.AITurnHandler.StartTurn(enemyUnit);
             }
             else {
                 MapCursor.SetGameObjActive();

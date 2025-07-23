@@ -27,7 +27,7 @@ public class Ether : Item {
         Debug.Log(Name + " Action Score Assessment ------------------------------------------------------");
         
         ActionScore.EvaluateScore(this, unit, TileLocator.SelectableTiles[unit.UnitInfo.Vector2CellLocation()].TileInfo.CellLocation,
-            unit.FindNearbyUnits()[0].UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+            AIUnitScanner.FindNearbyUnits(unit)[0].UnitInfo.CellLocation, new List<Unit>(), AIUnitScanner.FindNearbyUnits(unit));
         
         Debug.Log("Best Heuristic Score: " + (ActionScore.TotalScore() < 0 ? "N/A" : ActionScore.TotalScore()));
         Debug.Log("Decided Cell Location: " + ActionScore.PotentialCell);

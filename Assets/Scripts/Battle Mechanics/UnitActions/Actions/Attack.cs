@@ -35,7 +35,7 @@ public class Attack : UnitAction {
                     if (foundUnit.UnitInfo.IsDead()) { continue; }
                     
                     AIActionScore newScore = new AIActionScore().EvaluateScore(this, unit, tile.TileInfo.CellLocation,
-                        foundUnit.UnitInfo.CellLocation, new List<Unit>(), unit.FindNearbyUnits());
+                        foundUnit.UnitInfo.CellLocation, new List<Unit>(), AIUnitScanner.FindNearbyUnits(unit));
             
                     Debug.Log("Heuristic Score at Tile " + tile.TileInfo.CellLocation + ": " + newScore.TotalScore());
                     if (ActionScore == null || newScore.TotalScore() > ActionScore.TotalScore()) ActionScore = newScore;

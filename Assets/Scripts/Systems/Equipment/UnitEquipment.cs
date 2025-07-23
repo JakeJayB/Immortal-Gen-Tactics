@@ -150,12 +150,12 @@ public class UnitEquipment {
     
     private void AddEquipmentBonus(Equipment equipment, bool applyImmediately = false) {
         EquipmentBonus += equipment;
-        if (applyImmediately) unit.UnitInfo.ApplyEquipmentBonuses();
+        if (applyImmediately) EquipmentBonus.ApplyToUnit();
     }
     
     private void RemoveEquipmentBonus(Equipment equipment, bool applyImmediately = false) {
         EquipmentBonus -= equipment;
-        if (applyImmediately) unit.UnitInfo.ApplyEquipmentBonuses();
+        if (applyImmediately) EquipmentBonus.ApplyToUnit();
     }
 
     private void ApplyEquipmentAction(UnitAction action) {

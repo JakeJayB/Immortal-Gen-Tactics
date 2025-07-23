@@ -27,10 +27,7 @@ public class TilemapUtility {
 
         return directTiles.Distinct().ToList();
     }
-
-
-
-
+    
     public static List<Tile> GetLinearTilesInRange(Tile characterTile, int range) {
         Dictionary<Vector2Int, Tile> selectableTiles = TileLocator.SelectableTiles;
         Vector2Int startPos = new Vector2Int(characterTile.TileInfo.CellLocation.x, characterTile.TileInfo.CellLocation.z);
@@ -54,7 +51,6 @@ public class TilemapUtility {
 
         return linearTiles.Distinct().ToList();
     }
-
 
     public static List<Tile> GetSplashTilesInRange(Tile characterTile, int range) {
         var inRangeTiles = new List<Tile>();
@@ -80,8 +76,7 @@ public class TilemapUtility {
         return inRangeTiles.Distinct().ToList();
     }
     
-    public static List<Tile> GetNeighborTiles(Tile currentTile)
-    {
+    public static List<Tile> GetNeighborTiles(Tile currentTile) {
         Dictionary<Vector2Int, Tile> selectableTiles = TileLocator.SelectableTiles;
         List<Tile> neighbors = new List<Tile>();
 
@@ -124,7 +119,6 @@ public class TilemapUtility {
         // Return the found neighbors.
         return neighbors;
     }
-
 
     public static List<Tile> GetSelectableTiles()
     {

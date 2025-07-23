@@ -61,6 +61,6 @@ public class EquipmentBonus {
     }
 
     public void ApplyToUnit() {
-        UnitInfo.ApplyEquipmentBonuses();
+        UnitInfo.ApplyEquipmentBonuses(this);
     }
 }

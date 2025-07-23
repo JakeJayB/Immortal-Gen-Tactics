@@ -3,34 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AIUnitBehavior : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    public void StartTurn(AIUnit unitAI) 
-    {
+public class AITurnHandler : MonoBehaviour {
+    public void StartTurn(AIUnit unitAI) {
         CanvasUI.ShowTurnUnitInfoDisplay(unitAI.UnitInfo);
         StartCoroutine(DecideAction(unitAI)); 
     }
     
-    public IEnumerator React(AIUnit unitAI)
-    {
+    public IEnumerator React(AIUnit unitAI) {
         CanvasUI.ShowTurnUnitInfoDisplay(unitAI.UnitInfo);
         yield return StartCoroutine(DecideAction(unitAI)); 
     }
     
-    private IEnumerator DecideAction(AIUnit unitAI)
-    {
+    private IEnumerator DecideAction(AIUnit unitAI) {
         var actionDetermined = false;
         var isReacting = ChainSystem.ReactionInProgress;
         
@@ -41,8 +25,7 @@ public class AIUnitBehavior : MonoBehaviour
             ? new UnitAITargeting().EvaluateScore(unitAI).TargetUnit 
             : unitAI.targetedUnit;
 
-        foreach (var behavior in unitAI.AIConditions)
-        {
+        foreach (var behavior in unitAI.AIConditions) {
             if (!behavior.Condition()) continue;
 
             actionDetermined = true;
@@ -52,8 +35,7 @@ public class AIUnitBehavior : MonoBehaviour
             break;
         }
 
-        if (!actionDetermined)
-        {
+        if (!actionDetermined) {
             Debug.Log($"!!!!!!!!!!!!{unitAI.targetedUnit.UnitInfo.Vector2CellLocation()} is the target!!!!!!!!!!!!!!");
             var nearbyUnit = unitAI.targetedUnit.UnitInfo.Vector2CellLocation();
             
@@ -63,8 +45,8 @@ public class AIUnitBehavior : MonoBehaviour
                 : unitAI.ActionSet.GetAITurnActions();
             List<UnitAction> potentialActions = new();
             List<float> actionScores = new List<float>();
-            foreach (var action in turnActions)
-            {
+            
+            foreach (var action in turnActions) {
                 if (unitAI.UnitInfo.currentAP < action.APCost || unitAI.UnitInfo.currentMP < action.MPCost) { continue; }
 
                 /*

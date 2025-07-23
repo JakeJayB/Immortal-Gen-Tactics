@@ -95,7 +95,7 @@ public class ChainSystem
 
                 if (unit is AIUnit unitAI) {
                     ReactionInProgress = true;
-                    yield return unitAI.AIUnitBehavior.React(unitAI);
+                    yield return unitAI.AITurnHandler.React(unitAI);
                 } // If the unit is an AI Enemy, do a specific instruction
                 else {
                     yield return OfferChainReaction(unit);

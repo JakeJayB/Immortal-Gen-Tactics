@@ -72,26 +72,24 @@ public class UnitInfo {
         baseSense = udd.BaseStats.BaseSense;
     }
 
-    public void ResetCurrentStatPoints()
-    {
+    public void ResetCurrentStatPoints() {
         currentHP = FinalHP;
         currentMP = FinalMP;
         currentAP = FinalAP;
         currentCT = 0;
     }
     
-    public void ApplyEquipmentBonuses()
-    {
-        FinalHP = baseHP + unit.Equipment.bonusHP;
-        FinalMP = baseMP + unit.Equipment.bonusMP;
-        FinalAP = baseAP + unit.Equipment.bonusAP;
-        FinalAttack = baseAttack + unit.Equipment.bonusAttack;
-        FinalMagicAttack = baseMagicAttack + unit.Equipment.bonusMagicAttack;
-        FinalDefense = baseDefense + unit.Equipment.bonusDefense;
-        FinalMagicDefense = baseMagicDefense + unit.Equipment.bonusMagicDefense;
-        FinalMove = baseMove + unit.Equipment.bonusMove;
-        FinalEvade = baseEvade + unit.Equipment.bonusEvade;
-        FinalSpeed = baseSpeed + unit.Equipment.bonusSpeed;
+    public void ApplyEquipmentBonuses(EquipmentBonus bonus) {
+        FinalHP = baseHP + bonus.HP;
+        FinalMP = baseMP + bonus.MP;
+        FinalAP = baseAP + bonus.AP;
+        FinalAttack = baseAttack + bonus.Attack;
+        FinalMagicAttack = baseMagicAttack + bonus.MagicAttack;
+        FinalDefense = baseDefense + bonus.Defense;
+        FinalMagicDefense = baseMagicDefense + bonus.MagicDefense;
+        FinalMove = baseMove + bonus.Move;
+        FinalEvade = baseEvade + bonus.Evade;
+        FinalSpeed = baseSpeed + bonus.Speed;
         FinalSense = baseSense;
     }
     
@@ -99,16 +97,14 @@ public class UnitInfo {
     
     public void RefreshAP() { currentAP = FinalAP; }
 
-    public void Die()
-    {
+    public void Die() {
         if(Dead) return; 
         Dead = true;
         unit.GameObj.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.1f, 0.1f, 1);
         TurnSystem.RemoveUnit(unit);
     }
     
-    public void Revive()
-    {
+    public void Revive() {
         if(!Dead) return; 
         Dead = false;
         unit.GameObj.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
