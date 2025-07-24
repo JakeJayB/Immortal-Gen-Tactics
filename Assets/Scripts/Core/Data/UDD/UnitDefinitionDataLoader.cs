@@ -3,23 +3,22 @@ using System.IO;
 
 public class UDDLoader : MonoBehaviour {
     public string JsonFileName;
-
-    [TextArea(10, 30)]
-    public string previewJson;
-    
     public UnitDefinitionData LoadedUDD;
-    
-    [ContextMenu("Load UDD From JSON")]
-    public void LoadJson() {
-        string path = Path.Combine(Application.dataPath, "Resources/JSON/UDD", JsonFileName);
+
+    public static UnitDefinitionData ReadJSON(string jsonFileName) {
+        string path = Path.Combine(Application.dataPath, "Resources/JSON/UDD", jsonFileName);
         if (!File.Exists(path)) {
             Debug.LogError($"UDD file not found: {path}");
-            return;
+            return null;
         }
 
         string json = File.ReadAllText(path);
-        LoadedUDD = JsonUtility.FromJson<UnitDefinitionData>(json);
-        previewJson = json;
+        return JsonUtility.FromJson<UnitDefinitionData>(json);
+    }
+    
+    [ContextMenu("Load UDD From JSON")]
+    public void LoadJson() {
+        LoadedUDD = ReadJSON(JsonFileName);
         Debug.Log($"Loaded {JsonFileName} successfully.");
     }
     
@@ -33,7 +32,6 @@ public class UDDLoader : MonoBehaviour {
         string path = Path.Combine(Application.dataPath, "Resources/JSON/UDD", JsonFileName);
         string json = JsonUtility.ToJson(LoadedUDD, true);
         File.WriteAllText(path, json);
-        previewJson = json;
         Debug.Log($"Saved to {path}");
     }
 }

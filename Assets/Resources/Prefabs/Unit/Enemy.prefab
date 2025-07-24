@@ -98,20 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JsonFileName: UDD_Test.json
-  previewJson: "{\n    \"BaseStats\": {\n        \"BaseHP\": 20,\n        \"BaseMP\":
-    10,\n        \"BaseAP\": 2,\n        \"BaseAttack\": 15,\n        \"BaseDefense\":
-    10,\n        \"BaseMagicAttack\": 0,\n        \"BaseMagicDefense\": 0,\n       
-    \"BaseMove\": 3,\n        \"BaseEvade\": 1,\n        \"BaseSpeed\": 12,\n       
-    \"BaseSense\": 2\n    },\n    \"Actions\": {\n        \"Actions\": [\n           
-    3\n        ]\n    },\n    \"Items\": {\n        \"StorageAItems\": [\n           
-    100,\n            102,\n            102\n        ],\n        \"StorageBItems\":
-    []\n    },\n    \"Equipment\": {\n        \"WeaponL\": 0,\n        \"WeaponR\":
-    -1,\n        \"ArmorHead\": -1,\n        \"ArmorBody\": -1,\n        \"ArmorHands\":
-    -1,\n        \"ArmorFeet\": -1,\n        \"AccessoryA\": 202,\n        \"AccessoryB\":
-    -1\n    },\n    \"Behaviors\": {\n        \"Aggression\": 4.0,\n        \"Survival\":
-    2.0,\n        \"TacticalPositioning\": 2.0,\n        \"AllySynergy\": 2.0,\n       
-    \"ResourceManagement\": 2.0,\n        \"ReactionAwareness\": 0.0,\n        \"ReactionAllocation\":
-    2.0\n    },\n    \"UnitAffiliation\": 0\n}"
   LoadedUDD:
     BaseStats:
       BaseHP: 20

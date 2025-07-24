@@ -31,14 +31,14 @@ public class UnitEquipment {
         if (equipmentSet.Length != 8) { Debug.LogError("Equipment Set Does Not Reference All 8 Slots");}
         
         EquipmentLibrary.InitializeLibrary();
-        EquipLeftHand(EquipmentLibrary.Weapons[equipmentSet[0]]);
-        EquipRightHand(EquipmentLibrary.Weapons[equipmentSet[1]]);
-        EquipArmor(EquipmentLibrary.Armor[equipmentSet[2]]);
-        EquipArmor(EquipmentLibrary.Armor[equipmentSet[3]]);
-        EquipArmor(EquipmentLibrary.Armor[equipmentSet[4]]);
-        EquipArmor(EquipmentLibrary.Armor[equipmentSet[5]]);
-        EquipAccessoryA(EquipmentLibrary.Accessories[equipmentSet[6]], unitData.Items.StorageAItems);
-        EquipAccessoryB(EquipmentLibrary.Accessories[equipmentSet[7]], unitData.Items.StorageBItems);
+        EquipLeftHand(EquipmentLibrary.FindEquipment<Weapon>(equipmentSet[0]));
+        EquipRightHand(EquipmentLibrary.FindEquipment<Weapon>(equipmentSet[1]));
+        EquipArmor(EquipmentLibrary.FindEquipment<Armor>(equipmentSet[2]));
+        EquipArmor(EquipmentLibrary.FindEquipment<Armor>(equipmentSet[3]));
+        EquipArmor(EquipmentLibrary.FindEquipment<Armor>(equipmentSet[4]));
+        EquipArmor(EquipmentLibrary.FindEquipment<Armor>(equipmentSet[5]));
+        EquipAccessoryA(EquipmentLibrary.FindEquipment<Accessory>(equipmentSet[6]), unitData.Items.StorageAItems);
+        EquipAccessoryB(EquipmentLibrary.FindEquipment<Accessory>(equipmentSet[7]), unitData.Items.StorageBItems);
         
         EquipmentBonus.ApplyToUnit();
     }

@@ -15,9 +15,9 @@ public static class EquipmentLibrary
 {
     public const string DEFAULT_DIRECTORY = "Assets/Resources/JSON/";
     public const string FILE_NAME = "EquipmentLibrary.json";
-    public static Dictionary<int, Weapon> Weapons { get; private set; }
-    public static Dictionary<int, Armor> Armor { get; private set; }
-    public static Dictionary<int, Accessory> Accessories { get; private set; }
+    private static Dictionary<int, Weapon> Weapons;
+    private static Dictionary<int, Armor> Armor;
+    private static Dictionary<int, Accessory> Accessories;
     
     public static void Clear()
     {
@@ -32,6 +32,19 @@ public static class EquipmentLibrary
         Armor = new Dictionary<int, Armor> { {-1, null} };
         Accessories = new Dictionary<int, Accessory> { {-1, null} };
         LoadFromJSON();
+    }
+    
+    public static T FindEquipment<T>(int id) where T : Equipment {
+        if (typeof(T) == typeof(Weapon) && Weapons.TryGetValue(id, out var weapon))
+            return weapon as T;
+    
+        if (typeof(T) == typeof(Armor) && Armor.TryGetValue(id, out var armor))
+            return armor as T;
+    
+        if (typeof(T) == typeof(Accessory) && Accessories.TryGetValue(id, out var accessory))
+            return accessory as T;
+
+        return null;
     }
     
     private static void LoadFromJSON()

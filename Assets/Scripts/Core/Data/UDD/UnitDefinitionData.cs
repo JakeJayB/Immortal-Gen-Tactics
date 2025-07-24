@@ -2,8 +2,7 @@ using System;
 using System.Linq;
 
 [Serializable]
-public class UnitDefinitionData
-{
+public class UnitDefinitionData {
     public StatsDefinitionData BaseStats = new();
     public ActionDefinitionData Actions = new();
     public ItemDefinitionData Items = new();

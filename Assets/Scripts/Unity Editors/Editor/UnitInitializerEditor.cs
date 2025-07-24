@@ -36,7 +36,7 @@ public class UnitInitializerEditor : Editor {
         // Show and fix size for storage items
         if (capacity > 0) {
             storageItems.arraySize = capacity;
-            EditorGUILayout.LabelField($"{EquipmentLibrary.Accessories[accID].equipName}[{accessorySlot}] --- (Capacity: {capacity})");
+            EditorGUILayout.LabelField($"{EquipmentLibrary.FindEquipment<Accessory>(accID).equipName}[{accessorySlot}] --- (Capacity: {capacity})");
             for (int i = 0; i < capacity; i++) {
                 EditorGUILayout.PropertyField(storageItems.GetArrayElementAtIndex(i), new GUIContent($"Item {i + 1}"));
             }
