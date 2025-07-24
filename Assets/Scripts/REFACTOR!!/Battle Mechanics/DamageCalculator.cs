@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class DamageCalculator : MonoBehaviour
-{
-    public static int ProjectDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
-    {
+public class DamageCalculator : MonoBehaviour {
+    public static int ProjectDamage(UnitAction action, UnitInfo attacker, UnitInfo target) {
         int projected = 0;
-        switch (action.DamageType)
-        {
+        switch (action.DamageType) {
             case DamageType.Physical:
                 projected = attacker.FinalAttack + action.BasePower - target.FinalDefense;
                 break;
@@ -27,8 +21,7 @@ public class DamageCalculator : MonoBehaviour
         return projected > 0 ? projected : 1;
     }
     
-    public static int ProjectHealing(UnitAction action, UnitInfo attacker, UnitInfo target)
-    {
+    public static int ProjectHealing(UnitAction action, UnitInfo attacker, UnitInfo target) {
         // Dead units cannot be healed, they must be revived first
         if (target.IsDead() && action.DamageType == DamageType.Healing) { return 0; }
 
@@ -37,8 +30,7 @@ public class DamageCalculator : MonoBehaviour
         
         int healingAmount = 0;
         
-        switch (action.ActionType)
-        {
+        switch (action.ActionType) {
             case ActionType.Attack:
                 healingAmount = attacker.FinalMagicAttack + action.BasePower;
                 if (action.DamageType != DamageType.Healing) { healingAmount *= -1; }
@@ -46,21 +38,16 @@ public class DamageCalculator : MonoBehaviour
             case ActionType.Item:
                 healingAmount = action.BasePower;
                 break;
-            default:
-                //Debug.LogError("ERROR: ActionType not specified. (DamageCalculator.ProjectHealing)");
-                break;
         }
         
         return target.currentHP + healingAmount > target.FinalHP ? target.FinalHP - target.currentHP : healingAmount;
     }
     
-    public static int DealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
-    {
+    public static int DealDamage(UnitAction action, UnitInfo attacker, UnitInfo target) {
         if (target.IsDead()) { return 0; }
         
         int damage = 0;
-        switch (action.DamageType)
-        {
+        switch (action.DamageType) {
             case DamageType.Physical:
                 damage = attacker.FinalAttack + action.BasePower - target.FinalDefense;
                 break;
@@ -71,18 +58,7 @@ public class DamageCalculator : MonoBehaviour
         
         damage = ApplyDamageRoll(damage > 0 ? damage : 1);
         target.currentHP -= target.currentHP - damage < 0 ? target.currentHP : damage;
-
-
-/*        if(attacker.UnitAffiliation == UnitAffiliation.Player)
-        {
-            CanvasUI.ShowTurnUnitInfoDisplay(attacker);
-            CanvasUI.ShowTargetUnitInfoDisplay(target);
-        }
-        else
-        {
-            CanvasUI.ShowTurnUnitInfoDisplay(target);
-            CanvasUI.ShowTargetUnitInfoDisplay(attacker);
-        }*/
+        
         CanvasUI.ShowTurnUnitInfoDisplay(attacker);
         CanvasUI.ShowTargetUnitInfoDisplay(target);
 
@@ -91,8 +67,7 @@ public class DamageCalculator : MonoBehaviour
 
     }
     
-    public static int HealDamage(UnitAction action, UnitInfo attacker, UnitInfo target)
-    {
+    public static int HealDamage(UnitAction action, UnitInfo attacker, UnitInfo target) {
         if (target.IsDead()) { return 0; }
         if (target.currentHP == target.FinalHP) { return 0; }
         
@@ -104,19 +79,16 @@ public class DamageCalculator : MonoBehaviour
         CanvasUI.ShowTargetUnitInfoDisplay(target);
         
         return damage;
-
     }
 
-    public static int DamageFixedAmount(int amount, UnitInfo target)
-    {
+    public static int DamageFixedAmount(int amount, UnitInfo target) {
         target.currentHP -= amount;
         target.currentHP = target.currentHP < 0 ? 0 : target.currentHP;
         if (target.currentHP <= 0) { target.Die(); }
         return amount;
     }
     
-    public static int HealFixedAmount(int amount, UnitInfo target)
-    {
+    public static int HealFixedAmount(int amount, UnitInfo target) {
         int initialHP = target.currentHP;
         
         target.currentHP += amount;
@@ -126,8 +98,7 @@ public class DamageCalculator : MonoBehaviour
         return target.currentHP == target.FinalHP ? target.FinalHP - initialHP : amount;
     }
     
-    public static int HealFixedAmountMP(int amount, UnitInfo target)
-    {
+    public static int HealFixedAmountMP(int amount, UnitInfo target) {
         int initialMP = target.currentMP;
         
         target.currentMP += amount;
