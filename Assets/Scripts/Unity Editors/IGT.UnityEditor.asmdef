@@ -1,0 +1,15 @@
+{
+	"name": "IGT.UnityEditor",
+	"rootNamespace": "IGT.UnityEditor",
+	"references": [
+		"IGT.Core",
+		"IGT.Systems",
+		"IGT.Refactor_Temp"
+	],
+	"includePlatforms": ["Editor"],
+	"excludePlatforms": [],
+	"allowUnsafeCode": false,
+	"overrideReferences": false,
+	"precompiledReferences": [],
+	"autoReferenced": true
+}

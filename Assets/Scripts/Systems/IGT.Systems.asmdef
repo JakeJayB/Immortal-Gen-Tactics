@@ -1,0 +1,18 @@
+{
+	"name": "IGT.Systems",
+	"rootNamespace": "IGT.Systems",
+	"references": [
+		"IGT.Core",
+		"Unity.VisualScripting.Core",
+		"Unity.TextMeshPro",
+		"LeanTween",
+		"Critter",
+		"QuickOutline"
+	],
+	"includePlatforms": [],
+	"excludePlatforms": [],
+	"allowUnsafeCode": false,
+	"overrideReferences": false,
+	"precompiledReferences": [],
+	"autoReferenced": true
+}

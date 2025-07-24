@@ -1,0 +1,19 @@
+{
+	"name": "IGT.Tests",
+	"rootNamespace": "IGT.Tests",
+	"references": [
+		"IGT.Core",
+		"IGT.Systems",
+		"UnityEngine.TestRunner",
+		"UnityEditor.TestRunner"
+	],
+	"optionalUnityReferences": [],
+	"includePlatforms": [],
+	"excludePlatforms": [],
+	"allowUnsafeCode": false,
+	"overrideReferences": false,
+	"autoReferenced": true,
+	"defineConstraints": [],
+	"versionDefines": [],
+	"noEngineReferences": false
+}

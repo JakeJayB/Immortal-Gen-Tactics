@@ -71,7 +71,7 @@ public class PauseMenu : MonoBehaviour
         var img = panel.GetComponent<Image>();
         img.color = new Color(0f, 0f, 0f, 0.7f);
 
-        // 3) ÅgPausedÅh title
+        // 3) ¬ÅgPaused¬Åh title
         var title = CreateText("Title", panel.transform, "PAUSED");
         title.rectTransform.anchorMin = title.rectTransform.anchorMax = new Vector2(0.5f, 1f);
         title.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 140);
