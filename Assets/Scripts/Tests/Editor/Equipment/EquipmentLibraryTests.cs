@@ -2,7 +2,7 @@ using System.IO;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
-namespace IGT.Tests
+namespace IGT.Tests.Editor
 {
     public class EquipmentLibraryTests
     {

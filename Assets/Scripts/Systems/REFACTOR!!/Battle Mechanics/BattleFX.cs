@@ -27,7 +27,7 @@ public class BattleFX : MonoBehaviour
                 yield return UnitMovement.Move(unit, previousCell);
                 TilemapCreator.UnitLocator.Add(previousCell, unit);
                 
-                int damage = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.20 * (strength - 1))), unit.UnitInfo);
+                int damage = DamageCalculator.DealFixedHPDamage((int)(5 * (1 + 0.20 * (strength - 1))), unit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(unit, damage);
                 
@@ -42,8 +42,8 @@ public class BattleFX : MonoBehaviour
                 // Updates the location as the Unit moves
                 yield return UnitMovement.Move(unit, previousCell);
                 
-                int damageA = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.10 * (strength - 1))), unit.UnitInfo);
-                int damageB = DamageCalculator.DamageFixedAmount((int)(5 * (1 + 0.10 * (strength - 1))), targetUnit.UnitInfo);
+                int damageA = DamageCalculator.DealFixedHPDamage((int)(5 * (1 + 0.10 * (strength - 1))), unit.UnitInfo);
+                int damageB = DamageCalculator.DealFixedHPDamage((int)(5 * (1 + 0.10 * (strength - 1))), targetUnit.UnitInfo);
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(unit, damageA);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit, damageB);

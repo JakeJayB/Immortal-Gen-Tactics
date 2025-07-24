@@ -31,36 +31,36 @@ public class UnitInfo {
     # endregion
     
     // Unit Base Stat Values
-    private int baseHP;
-    private int baseMP;
-    private int baseAP;
-    private int baseAttack;
-    private int baseDefense;
-    private int baseMagicAttack;
-    private int baseMagicDefense;
-    private int baseMove;
-    private int baseEvade;
-    private int baseSpeed;
-    private int baseSense;
+    public int baseHP { get; private set; }
+    public int baseMP { get; private set; }
+    public int baseAP { get; private set; }
+    public int baseAttack { get; private set; }
+    public int baseDefense { get; private set; }
+    public int baseMagicAttack { get; private set; }
+    public int baseMagicDefense { get; private set; }
+    public int baseMove { get; private set; }
+    public int baseEvade { get; private set; }
+    public int baseSpeed { get; private set; }
+    public int baseSense { get; private set; }
 
     public UnitInfo(Unit unit) {
         this.unit = unit;
     }
     
     public void Initialize(UnitDefinitionData udd) {
+        FinalHP = baseHP = udd.BaseStats.BaseHP;
+        FinalMP = baseMP = udd.BaseStats.BaseMP;
+        FinalAP = baseAP = udd.BaseStats.BaseAP;
+        FinalAttack = baseAttack = udd.BaseStats.BaseAttack;
+        FinalDefense = baseDefense = udd.BaseStats.BaseDefense;
+        FinalMagicAttack = baseMagicAttack = udd.BaseStats.BaseMagicAttack;
+        FinalMagicDefense = baseMagicDefense = udd.BaseStats.BaseMagicDefense;
+        FinalMove = baseMove = udd.BaseStats.BaseMove;
+        FinalEvade = baseEvade = udd.BaseStats.BaseEvade;
+        FinalSpeed = baseSpeed = udd.BaseStats.BaseSpeed;
+        FinalSense = baseSense = udd.BaseStats.BaseSense;
         UnitAffiliation = udd.UnitAffiliation;
-        
-        baseHP = udd.BaseStats.BaseHP;
-        baseMP = udd.BaseStats.BaseMP;
-        baseAP = udd.BaseStats.BaseAP;
-        baseAttack = udd.BaseStats.BaseAttack;
-        baseDefense = udd.BaseStats.BaseDefense;
-        baseMagicAttack = udd.BaseStats.BaseMagicAttack;
-        baseMagicDefense = udd.BaseStats.BaseMagicDefense;
-        baseMove = udd.BaseStats.BaseMove;
-        baseEvade = udd.BaseStats.BaseEvade;
-        baseSpeed = udd.BaseStats.BaseSpeed;
-        baseSense = udd.BaseStats.BaseSense;
+        ResetCurrentStatPoints();
     }
 
     public void ResetCurrentStatPoints() {

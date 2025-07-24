@@ -64,7 +64,6 @@ public class DamageCalculator : MonoBehaviour {
 
         if (target.currentHP <= 0) { target.Die(); }
         return damage;
-
     }
     
     public static int HealDamage(UnitAction action, UnitInfo attacker, UnitInfo target) {
@@ -81,10 +80,22 @@ public class DamageCalculator : MonoBehaviour {
         return damage;
     }
 
-    public static int DamageFixedAmount(int amount, UnitInfo target) {
+    public static int DealFixedHPDamage(int amount, UnitInfo target) {
         target.currentHP -= amount;
         target.currentHP = target.currentHP < 0 ? 0 : target.currentHP;
         if (target.currentHP <= 0) { target.Die(); }
+        return amount;
+    }
+    
+    public static int DealFixedMPDamage(int amount, UnitInfo target) {
+        target.currentMP -= amount;
+        target.currentMP = target.currentMP < 0 ? 0 : target.currentMP;
+        return amount;
+    }
+    
+    public static int DealFixedAPDamage(int amount, UnitInfo target) {
+        target.currentAP -= amount;
+        target.currentAP = target.currentAP < 0 ? 0 : target.currentAP;
         return amount;
     }
     
