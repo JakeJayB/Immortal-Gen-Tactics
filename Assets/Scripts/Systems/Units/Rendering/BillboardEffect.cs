@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class BillboardEffect : MonoBehaviour
-{
+public class BillboardEffect : MonoBehaviour {
     private Camera MainCamera;
     
     // Start is called before the first frame update

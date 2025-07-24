@@ -2,15 +2,13 @@ using PixelCamera;
 using UnityEditor;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
-{
-    private const float ROTATION_ANGLE = 90f; // Degrees per key press
-    private const float ROTATION_SPEED = 0.7f; // Smoothness of rotation
-    private const float MOVE_SPEED = 0.2f; // Smoothness of movement
-    private const float ZOOM_SPEED = 0.4f; // Smoothness of zoom
-    private bool isZoomedOut = true;
-
+public class CameraMovement : MonoBehaviour {
     private static GameObject MainCamera;
+    private const float ROTATION_ANGLE = 90f;
+    private const float ROTATION_SPEED = 0.7f;
+    private const float MOVE_SPEED = 0.2f;
+    private const float ZOOM_SPEED = 0.4f;
+    private bool isZoomedOut = true;
 
     private void Awake() {
         MainCamera = gameObject;
@@ -18,28 +16,20 @@ public class CameraMovement : MonoBehaviour
 
     void Update() {
         if (MapCursor.GetState() == ControlState.Inactive) return;
-
-        if (Input.GetKeyDown(KeyCode.Q))
-            RotateCamera(ROTATION_ANGLE);
-        else if (Input.GetKeyDown(KeyCode.E))
-            RotateCamera(-ROTATION_ANGLE);
-        else if(Input.GetKeyDown(KeyCode.W))
-            ToggleZoom();
+        if (Input.GetKeyDown(KeyCode.Q)) RotateCamera(ROTATION_ANGLE);
+        else if (Input.GetKeyDown(KeyCode.E)) RotateCamera(-ROTATION_ANGLE);
+        else if(Input.GetKeyDown(KeyCode.W)) ToggleZoom();
     }
 
-    public static void Clear() { MainCamera = null; }
+    private static void Clear() { MainCamera = null; }
     public static void RegisterCleanup() { MemoryManager.AddListeners(Clear); }
     
     private void RotateCamera(float angle) {
         if (LeanTween.isTweening(gameObject)) return;
-
         Transform hoverTile = TileLocator.SelectableTiles[MapCursor.hoverCell].TileObj.transform;
         LeanTween.rotateAround(gameObject, Vector3.up, angle, ROTATION_SPEED)
                 .setEase(LeanTweenType.easeInOutQuad)
-                .setOnComplete(() =>
-                {
-                    CheckAndMove(hoverTile);
-                });
+                .setOnComplete(() => { CheckAndMove(hoverTile); });
     }
 
 

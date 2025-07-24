@@ -1,6 +1,5 @@
 using UnityEngine;
-public class Unit
-{
+public class Unit {
     public GameObject GameObj { get; set; }
     public UnitInfo UnitInfo { get; protected set; }
     public UnitEquipment Equipment { get; protected set; }

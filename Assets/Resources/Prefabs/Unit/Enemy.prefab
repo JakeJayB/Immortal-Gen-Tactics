@@ -147,5 +147,5 @@ MonoBehaviour:
       ResourceManagement: 2
       ReactionAwareness: 0
       ReactionAllocation: 2
-    UnitAffiliation: 0
-    IsUnitAIControlled: 0
+    UnitAffiliation: 1
+    IsUnitAIControlled: 1
