@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using IGT.Systems;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -80,6 +81,7 @@ namespace IGT.Tests.Editor {
             DamageCalculator.DealFixedHPDamage(5, unitInfo);
             DamageCalculator.DealFixedMPDamage(5, unitInfo);
             DamageCalculator.DealFixedAPDamage(1, unitInfo);
+            TurnCountCalculator.GiveMaxCT(unitInfo);
             
             unitInfo.ResetCurrentStatPoints();
             if (unitInfo.currentHP != unitInfo.FinalHP) failures.Add("[CurrentHP]: Mismatch");
