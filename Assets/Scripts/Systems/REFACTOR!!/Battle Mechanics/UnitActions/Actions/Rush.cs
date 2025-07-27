@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Systems;
 using UnityEngine;
 
 public class Rush : UnitAction
@@ -84,7 +85,8 @@ public class Rush : UnitAction
                 SoundFXManager.PlaySoundFXClip("SwordHit", 0.45f);
                 yield return DamageDisplay.DisplayUnitDamage(targetUnit, damage);
                 Debug.Log("Attack: unit attacked! HP: " + targetUnit.UnitInfo.currentHP + "/" + targetUnit.UnitInfo.FinalHP);
-                yield return BattleFX.InflictBlowback(targetUnit, (Range - i) / 2 < 1 ? 1 : (Range - i) / 2, direction);
+                int blowbackStrength = (Range - i) / 2 < 1 ? 1 : (Range - i) / 2;
+                yield return new BlowbackBFX(blowbackStrength, direction).Inflict(targetUnit);
                 
                 var endLocation = TilemapCreator.UnitLocator.TryGetValue(nextCell, out var stillThere)
                     ? previousCell : nextCell;
