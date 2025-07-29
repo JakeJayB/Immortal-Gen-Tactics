@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
+using IGT.Core;
 using UnityEngine;
 
 public class Pouch : Storage {
@@ -15,6 +13,7 @@ public class Pouch : Storage {
     public override int Priority { get; protected set; } = 0;
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override ActionType ActionType { get; protected set; } = ActionType.Storage;
+    public override UnitClass ClassType { get; protected set; }
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.None;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) { return new List<Tile>(); }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
 public abstract class UnitAction {
@@ -12,6 +13,7 @@ public abstract class UnitAction {
     public abstract int Priority { get; protected set; }
     public abstract DamageType DamageType { get; protected set; }
     public abstract ActionType ActionType { get; protected set; }
+    public abstract UnitClass ClassType { get; protected set; }
     public abstract TilePattern AttackTilePattern { get; protected set; }
     public abstract AIActionScore ActionScore { get; protected set; }
     public abstract List<Tile> Area(Unit unit, Vector3Int? hypoCell);

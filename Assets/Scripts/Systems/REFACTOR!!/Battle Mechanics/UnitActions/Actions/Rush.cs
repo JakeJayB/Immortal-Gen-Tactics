@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using IGT.Systems;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class Rush : UnitAction
     public override int Priority { get; protected set; } = 1;
     public override DamageType DamageType { get; protected set; } = DamageType.Physical;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override UnitClass ClassType { get; protected set; } = UnitClass.Soldier;
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Rush;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {

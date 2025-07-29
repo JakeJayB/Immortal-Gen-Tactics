@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
-public class Wait : UnitAction
-{
+public class Wait : UnitAction {
     public sealed override string Name { get; protected set; } = "Wait";
     public override int MPCost { get; protected set; } = 0;
     public override int APCost { get; protected set; } = 0;
@@ -11,6 +11,7 @@ public class Wait : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override int BasePower { get; protected set; } = 0;
     public override ActionType ActionType { get; protected set; } = ActionType.Wait;
+    public override UnitClass ClassType { get; protected set; }
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.None;
     public override int Range { get; protected set; } = 0;
     public override AIActionScore ActionScore { get; protected set; }

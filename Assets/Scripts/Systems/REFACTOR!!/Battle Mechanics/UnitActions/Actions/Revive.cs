@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
+using IGT.Core;
 using UnityEngine;
 
 public class Revive : UnitAction {
@@ -13,6 +13,7 @@ public class Revive : UnitAction {
     public override int Priority { get; protected set; } = 5;
     public override DamageType DamageType { get; protected set; } = DamageType.Revival;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override UnitClass ClassType { get; protected set; } = UnitClass.Mage;
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {

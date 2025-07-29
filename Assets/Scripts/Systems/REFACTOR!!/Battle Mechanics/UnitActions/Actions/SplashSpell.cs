@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
 public class SplashSpell : UnitAction
@@ -13,6 +14,7 @@ public class SplashSpell : UnitAction
     public override int Priority { get; protected set; } = 3;
     public override DamageType DamageType { get; protected set; } = DamageType.Magic;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override UnitClass ClassType { get; protected set; } = UnitClass.Mage;
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Splash;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {

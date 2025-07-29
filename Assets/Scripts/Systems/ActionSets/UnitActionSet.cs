@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using IGT.Core;
 using UnityEngine;
 
 public class UnitActionSet {
     private Unit unit;
     
     private Dictionary<ActionType, List<UnitAction>> unitActions = new() {
-        { ActionType.Attack, new List<UnitAction>() { new Attack() } },
-        { ActionType.React, new List<UnitAction>() {  } }
+        { ActionType.Attack, new List<UnitAction>() { new Attack() } }
     };
+
+    private Dictionary<UnitClass, List<UnitAction>> learnedActions = new();
     
     public UnitActionSet(Unit unit) { this.unit = unit; }
     
@@ -17,8 +19,23 @@ public class UnitActionSet {
         foreach (var actionID in actions) {
             if (actionID < 0) { continue; }
             UnitAction action = UnitActionLibrary.FindAction(actionID);
-            if (action != null) AddAction(action); 
+            if (action != null) LearnAction(action); 
         }
+    }
+
+    private void LearnAction(UnitAction action) {
+        if (!learnedActions.TryGetValue(action.ClassType, out List<UnitAction> actionList)) {
+            actionList = new List<UnitAction>();
+            learnedActions[action.ClassType] = actionList;
+        }
+
+        if (ContainsAction(learnedActions[action.ClassType], action)) {
+            Debug.LogError($"ERROR: Unit already knows the action {action.Name}");
+            return;
+        }
+
+        actionList.Add(action);
+        Debug.Log($"Unit has learned {action.Name}!");
     }
     
     public void AddAction(UnitAction action) {
@@ -47,10 +64,12 @@ public class UnitActionSet {
         return actions.Any(actionInList => actionInList.GetType() == action.GetType());
     }
     
+    // TODO: Have actions flattened in the following order -> Movement, Weapon, Class, Secondary, Accessory, Wait
     private List<UnitAction> FlattenActions(bool distinct = false) {
-        return distinct
-            ? unitActions.Values.SelectMany(list => list).Distinct().ToList()
-            : unitActions.Values.SelectMany(list => list).ToList();
+        return (distinct
+            ? unitActions.Values.SelectMany(list => list).Distinct()
+            : unitActions.Values.SelectMany(list => list))
+            .Concat(learnedActions[unit.UnitInfo.Class]).ToList();
     }
 
     public List<UnitAction> GetAllTurnActions() {

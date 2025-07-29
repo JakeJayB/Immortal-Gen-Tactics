@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JsonFileName: UDD_Test.json
   LoadedUDD:
+    UnitClass: 3
     BaseStats:
       BaseHP: 20
       BaseMP: 10
@@ -112,7 +113,7 @@ MonoBehaviour:
       BaseSpeed: 12
       BaseSense: 2
     Actions:
-      Actions: 03000000
+      Actions: 0000000003000000
     Items:
       StorageAItems: 640000006600000066000000
       StorageBItems: 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
 public class Move : UnitAction
@@ -13,6 +14,7 @@ public class Move : UnitAction
     public override int Priority { get; protected set; } = 0;
     public override DamageType DamageType { get; protected set; } = DamageType.None;
     public override ActionType ActionType { get; protected set; } = ActionType.Move;
+    public override UnitClass ClassType { get; protected set; }
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.None;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {

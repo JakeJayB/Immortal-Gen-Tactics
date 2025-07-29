@@ -1,8 +1,10 @@
 using System;
 using System.Linq;
+using IGT.Core;
 
 [Serializable]
 public class UnitDefinitionData {
+    public UnitClass UnitClass;
     public StatsDefinitionData BaseStats = new();
     public ActionDefinitionData Actions = new();
     public ItemDefinitionData Items = new();

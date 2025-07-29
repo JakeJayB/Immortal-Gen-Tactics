@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
 public class Back : UnitAction {
@@ -13,6 +14,7 @@ public class Back : UnitAction {
     public override int Priority { get; protected set; }
     public override DamageType DamageType { get; protected set; }
     public override ActionType ActionType { get; protected set; }
+    public override UnitClass ClassType { get; protected set; }
     public override TilePattern AttackTilePattern { get; protected set; }
     public override AIActionScore ActionScore { get; protected set; }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
 public class Ether : Item {
@@ -12,6 +13,7 @@ public class Ether : Item {
     public override int Priority { get; protected set; } = 0;
     public override DamageType DamageType { get; protected set; } = DamageType.Healing;
     public override ActionType ActionType { get; protected set; } = ActionType.Item;
+    public override UnitClass ClassType { get; protected set; }
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {

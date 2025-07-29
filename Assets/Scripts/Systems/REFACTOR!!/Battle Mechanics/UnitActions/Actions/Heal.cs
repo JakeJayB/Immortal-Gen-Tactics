@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Core;
 using UnityEngine;
 
 public class Heal : UnitAction
@@ -11,6 +12,7 @@ public class Heal : UnitAction
     public override DamageType DamageType { get; protected set; } = DamageType.Healing;
     public override int BasePower { get; protected set; } = 7;
     public override ActionType ActionType { get; protected set; } = ActionType.Attack;
+    public override UnitClass ClassType { get; protected set; } = UnitClass.Mage;
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Splash;
     public override int Range { get; protected set; } = 3;
     public override AIActionScore ActionScore { get; protected set; }

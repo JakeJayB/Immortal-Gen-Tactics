@@ -1,7 +1,9 @@
+using IGT.Core;
 using UnityEngine;
 
 public class UnitInfo {
     public Unit unit;
+    public UnitClass Class;
     public Vector3Int CellLocation;
     public UnitDirection UnitDirection;
     public UnitAffiliation UnitAffiliation;
@@ -48,6 +50,7 @@ public class UnitInfo {
     }
     
     public void Initialize(UnitDefinitionData udd) {
+        Class = udd.UnitClass;
         FinalHP = baseHP = udd.BaseStats.BaseHP;
         FinalMP = baseMP = udd.BaseStats.BaseMP;
         FinalAP = baseAP = udd.BaseStats.BaseAP;
