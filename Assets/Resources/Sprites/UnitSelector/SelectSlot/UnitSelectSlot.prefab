@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotFrame: {fileID: 2031966077289043919}
+  slotBackground: {fileID: 320699667812728646}
   slotPortrait: {fileID: 6898587398653088365}
   HighlightColor_1: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   HighlightColor_2: {r: 1, g: 0, b: 0, a: 1}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IGT.Systems;
 using UnityEngine;
 
 public class MapCursor : MonoBehaviour {
@@ -45,14 +46,18 @@ public class MapCursor : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.A)) {
             if (TileLocator.SelectableTiles[hoverCell].IsSelectable())
-                 UnitSelector.PlaceUnit(hoverCell);
+            {
+                //UnitSelector.PlaceUnit(hoverCell);
+                UnitSelect.SetGameObjActive();
+                SetGameObjInactive();
+            }
             else
                 SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
         else if (Input.GetKeyDown(KeyCode.S)) {
             UnitSelector.ResetUnitSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && UnitSelector.IsThereActiveUnit()) {
+        else if (Input.GetKeyDown(KeyCode.Escape) && FormationManager.FormationHasAtLeastOneUnit()) {
             UnitSelector.DestroyMenu();
             SelectedStartPositions();
             RemoveTileOutline();

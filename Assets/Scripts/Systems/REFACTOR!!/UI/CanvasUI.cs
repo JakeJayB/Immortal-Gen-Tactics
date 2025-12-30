@@ -20,7 +20,7 @@ public class CanvasUI : MonoBehaviour
     {
         MemoryManager.AddListeners(Clear);
         UnitMenu.RegisterCleanup();
-        UnitSelector.RegisterCleanup();
+        //UnitSelector.RegisterCleanup();
         TurnCycle.RegisterCleanup();
         PauseMenu.RegisterCleanup();
         GameOver.RegisterCleanup();
@@ -32,7 +32,7 @@ public class CanvasUI : MonoBehaviour
         Canvas = transform;
         
         UnitMenu.Initialize(this.gameObject);
-        UnitSelector.Initialize(this.gameObject);      
+        //UnitSelector.Initialize(this.gameObject);      
         TurnCycle.Initialize(this.gameObject);
         PauseMenu.Initialize(this.gameObject);
         GameOver.Initialize(this.gameObject);
