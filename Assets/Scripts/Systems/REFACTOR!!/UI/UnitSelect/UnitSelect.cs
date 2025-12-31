@@ -124,7 +124,7 @@ namespace IGT.Systems
                     slot.FlagUnitIsInactive();
                 }
 
-                slot.UpdateBackground();
+                slot.UpdateSlot();
             }
         }
 

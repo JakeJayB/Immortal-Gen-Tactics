@@ -23,6 +23,7 @@ namespace IGT.Systems
         [SerializeField] private Color ActiveBackgroundColor;
         [SerializeField] private Color HighlightColor_1 = Color.yellow;
         [SerializeField] private Color HighlightColor_2 = Color.red;
+        [SerializeField] private Material GrayscaleMat;
 
         // Start is called before the first frame update
         void Start()
@@ -46,7 +47,11 @@ namespace IGT.Systems
         // TODO: Update function to set the sprite of the slotPortrait to the unit referenced
         public void UpdatePortrait() { slotPortrait.gameObject.SetActive(true); }
 
-        public void UpdateBackground() => slotBackground.color = unitIsActive ? ActiveBackgroundColor : DefaultBackgroundColor;
+        public void UpdateSlot()
+        {
+            slotBackground.color = unitIsActive ? ActiveBackgroundColor : DefaultBackgroundColor;
+            slotPortrait.material = unitIsActive ? GrayscaleMat : null;
+        }
 
         public void ReferenceUnit(Unit unit) { referencedUnit = unit; }
 
@@ -63,7 +68,7 @@ namespace IGT.Systems
 
         public void RemoveHighlight() {
             isHighlighted = false;
-            UpdateBackground();
+            UpdateSlot();
             slotFrame.color = Color.white; 
         }
 

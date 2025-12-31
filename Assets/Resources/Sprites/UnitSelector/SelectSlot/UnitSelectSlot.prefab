@@ -133,6 +133,7 @@ MonoBehaviour:
   ActiveBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   HighlightColor_1: {r: 1, g: 0.72671384, b: 0, a: 1}
   HighlightColor_2: {r: 1, g: 0.44892484, b: 0, a: 1}
+  GrayscaleMat: {fileID: 2100000, guid: a17b73e580cd50f4fafb6356c1d3020b, type: 2}
 --- !u!1 &4778188754744777787
 GameObject:
   m_ObjectHideFlags: 0
