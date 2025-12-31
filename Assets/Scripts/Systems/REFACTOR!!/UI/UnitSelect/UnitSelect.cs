@@ -221,7 +221,7 @@ namespace IGT.Systems
                 if (UnitSelectSlots[index].ReferencedUnit() == null) { return; }
                 if (UnitSelectSlots[index].unitIsActive) { return; }
 
-                UnitSelectSlots[index].RemoveHighlight();
+                //UnitSelectSlots[index].RemoveHighlight();
                 FormationManager.PlaceUnitOnTile(UnitSelectSlots[index].ReferencedUnit());
                 //UnitSelectSlots[index].FlagUnitIsActive();
                 //UnitSelectSlots[index].UpdateBackground();

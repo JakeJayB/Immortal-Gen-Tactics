@@ -128,8 +128,11 @@ MonoBehaviour:
   slotFrame: {fileID: 2031966077289043919}
   slotBackground: {fileID: 320699667812728646}
   slotPortrait: {fileID: 6898587398653088365}
-  HighlightColor_1: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  HighlightColor_2: {r: 1, g: 0, b: 0, a: 1}
+  DefaultBackgroundColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  HighlightedBackgroundColor: {r: 0.990566, g: 0.97786784, b: 0.83637416, a: 1}
+  ActiveBackgroundColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  HighlightColor_1: {r: 1, g: 0.72671384, b: 0, a: 1}
+  HighlightColor_2: {r: 1, g: 0.44892484, b: 0, a: 1}
 --- !u!1 &4778188754744777787
 GameObject:
   m_ObjectHideFlags: 0
