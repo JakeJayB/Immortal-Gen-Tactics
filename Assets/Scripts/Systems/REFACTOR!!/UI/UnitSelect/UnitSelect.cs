@@ -101,6 +101,8 @@ namespace IGT.Systems
                     }          
                 }
             }
+
+            DisplaySlotUnitInfo();
             canInteract = true;
         }
 
@@ -161,6 +163,7 @@ namespace IGT.Systems
                     : projectedIndex;
 
                 UnitSelectSlots[index].HighlightSlot();
+                DisplaySlotUnitInfo();
             }
         }
 
@@ -176,6 +179,7 @@ namespace IGT.Systems
                     : projectedIndex;
 
                 UnitSelectSlots[index].HighlightSlot();
+                DisplaySlotUnitInfo();
             }
         }
 
@@ -192,6 +196,7 @@ namespace IGT.Systems
                     : projectedIndex;
 
                 UnitSelectSlots[index].HighlightSlot();
+                DisplaySlotUnitInfo();
             }
         }
 
@@ -208,6 +213,7 @@ namespace IGT.Systems
                     : projectedIndex;
 
                 UnitSelectSlots[index].HighlightSlot();
+                DisplaySlotUnitInfo();
             }
         }
 
@@ -234,8 +240,21 @@ namespace IGT.Systems
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
+                CanvasUI.HideTurnUnitInfoDisplay();
                 MapCursor.SetGameObjActive();
                 SetGameObjInactive();
+            }
+        }
+
+        private void DisplaySlotUnitInfo()
+        {
+            if (UnitSelectSlots[index].ReferencedUnit() != null)
+            {
+                CanvasUI.ShowTurnUnitInfoDisplay(UnitSelectSlots[index].ReferencedUnit().UnitInfo);
+            }
+            else
+            {
+                CanvasUI.HideTurnUnitInfoDisplay();
             }
         }
 

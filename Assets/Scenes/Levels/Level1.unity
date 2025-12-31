@@ -756,7 +756,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1428502538}
+      objectReference: {fileID: 1535274038}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -911,7 +911,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1415836515}
   m_CullTransparentMesh: 1
---- !u!84 &1428502538
+--- !u!84 &1535274038
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1331,12 +1331,12 @@ PrefabInstance:
     - target: {fileID: 5560715743262906618, guid: ba0d7e8aac2f8a743ac8b47b4f6ddfbf,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 164
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 5560715743262906618, guid: ba0d7e8aac2f8a743ac8b47b4f6ddfbf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: -153
       objectReference: {fileID: 0}
     - target: {fileID: 5560715743262906618, guid: ba0d7e8aac2f8a743ac8b47b4f6ddfbf,
         type: 3}

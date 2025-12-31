@@ -48,7 +48,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 164, y: -150}
+  m_AnchoredPosition: {x: 175, y: -153}
   m_SizeDelta: {x: 368, y: 94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7612201426286893129
@@ -79,6 +79,22 @@ MonoBehaviour:
   - {fileID: 2885877426533009232}
   - {fileID: 2551563108898623669}
   - {fileID: 1987451966893650645}
+  SlotPositions:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
 --- !u!1001 &91879254947388534
 PrefabInstance:
   m_ObjectHideFlags: 0
