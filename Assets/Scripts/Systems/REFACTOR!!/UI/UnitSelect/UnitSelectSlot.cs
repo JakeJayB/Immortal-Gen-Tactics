@@ -16,13 +16,14 @@ namespace IGT.Systems
         public bool unitIsActive { get; private set; } = false;
 
         // Slot Highlight Colors
+        [SerializeField] private Color DefaultBackgroundColor;
         [SerializeField] private Color HighlightColor_1 = Color.yellow;
         [SerializeField] private Color HighlightColor_2 = Color.red;
 
         // Start is called before the first frame update
         void Start()
         {
-        
+            DefaultBackgroundColor = Color.gray;
         }
 
         // Update is called once per frame
@@ -34,11 +35,13 @@ namespace IGT.Systems
         // TODO: Update function to set the sprite of the slotPortrait to the unit referenced
         public void UpdatePortrait() { slotPortrait.gameObject.SetActive(true); }
 
-        public void UpdateBackground() { slotBackground.color = HighlightColor_2; }
+        public void UpdateBackground() => slotBackground.color = unitIsActive ? HighlightColor_2 : DefaultBackgroundColor;
 
         public void ReferenceUnit(Unit unit) { referencedUnit = unit; }
 
         public void FlagUnitIsActive() => unitIsActive = true;
+
+        public void FlagUnitIsInactive() => unitIsActive = false;
 
         public Unit ReferencedUnit() => referencedUnit;
 

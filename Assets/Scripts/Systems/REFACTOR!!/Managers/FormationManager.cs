@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
 
@@ -48,6 +49,18 @@ namespace IGT.Systems
             }
         }
 
+        public static void RemoveUnitOnTile()
+        {
+            Vector2Int tileCell = MapCursor.hoverCell;
+
+            if (TilemapCreator.UnitLocator.TryGetValue(tileCell, out var unit))
+            {
+                unit.GameObj.SetActive(false);
+                TilemapCreator.UnitLocator.Remove(tileCell);
+                RemoveUnitFromFormation(unit);
+            }
+        }
+
         private static void AddUnitToFormation(Unit unit)
         {
             for (int i = 0; i < Formation.Length; i++) {
@@ -59,6 +72,20 @@ namespace IGT.Systems
             }
 
             Debug.LogError("Unit could not be added to the Formation.");
+        }
+
+        private static void RemoveUnitFromFormation(Unit unit)
+        {
+            for (int i = 0; i < Formation.Length; i++)
+            {
+                if (Formation[i] == unit)
+                {
+                    Formation[i] = null;
+                    return;
+                }
+            }
+
+            Debug.LogError("Unit does not exist in the Formation.");
         }
 
         public static bool FormationHasAtLeastOneUnit()

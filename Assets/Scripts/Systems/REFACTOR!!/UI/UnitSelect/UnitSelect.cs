@@ -35,6 +35,7 @@ namespace IGT.Systems
         {
             if (isActivated) {
                 isActivated = false;
+                HighlightActiveUnits();
                 StartCoroutine(PerformEntryTransition());
                 return;
             }
@@ -107,6 +108,23 @@ namespace IGT.Systems
         {
             foreach (UnitSelectSlot slot in UnitSelectSlots){
                 slot.GetComponent<RectTransform>().anchoredPosition += new Vector2(START_TRANSITION_OFFSET, 0);
+            }
+        }
+
+        private void HighlightActiveUnits()
+        {
+            foreach (UnitSelectSlot slot in UnitSelectSlots)
+            {
+                if (TilemapCreator.UnitLocator.ContainsValue(slot.ReferencedUnit()))
+                {
+                    slot.FlagUnitIsActive();
+                }
+                else
+                {
+                    slot.FlagUnitIsInactive();
+                }
+
+                slot.UpdateBackground();
             }
         }
 
@@ -205,8 +223,8 @@ namespace IGT.Systems
 
                 UnitSelectSlots[index].RemoveHighlight();
                 FormationManager.PlaceUnitOnTile(UnitSelectSlots[index].ReferencedUnit());
-                UnitSelectSlots[index].FlagUnitIsActive();
-                UnitSelectSlots[index].UpdateBackground();
+                //UnitSelectSlots[index].FlagUnitIsActive();
+                //UnitSelectSlots[index].UpdateBackground();
                 MapCursor.SetGameObjActive();
                 SetGameObjInactive();
             }

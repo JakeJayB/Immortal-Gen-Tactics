@@ -55,7 +55,8 @@ public class MapCursor : MonoBehaviour {
                 SoundFXManager.PlaySoundFXClip("Deselect", 0.4f);
         }
         else if (Input.GetKeyDown(KeyCode.S)) {
-            UnitSelector.ResetUnitSelected();
+            //UnitSelector.ResetUnitSelected();
+            FormationManager.RemoveUnitOnTile();
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && FormationManager.FormationHasAtLeastOneUnit()) {
             UnitSelector.DestroyMenu();
