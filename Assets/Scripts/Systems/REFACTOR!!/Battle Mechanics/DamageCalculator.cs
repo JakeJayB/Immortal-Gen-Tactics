@@ -5,9 +5,11 @@ public class DamageCalculator : MonoBehaviour {
         int projected = 0;
         switch (action.DamageType) {
             case DamageType.Physical:
+                if (target.IsDead()) return projected;
                 projected = attacker.FinalAttack + action.BasePower - target.FinalDefense;
                 break;
             case DamageType.Magic:
+                if (target.IsDead()) return projected;
                 projected = attacker.FinalMagicAttack + action.BasePower - target.FinalMagicDefense;
                 break;
             case DamageType.Healing:    // Will need revision when introducing damage dealt to undead

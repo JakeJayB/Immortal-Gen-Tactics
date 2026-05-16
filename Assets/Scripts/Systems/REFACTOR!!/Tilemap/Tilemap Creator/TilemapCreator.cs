@@ -78,9 +78,14 @@ public class TilemapCreator : MonoBehaviour
         }
     }
 
+    // TODO: Fix this so that the loading is dynamic
     private void LoadUnit(List<UnitData> units) {
+        bool switcher = false;
         foreach (UnitData unitData in units) {
-            Unit unit = UnitFactory.Create(Resources.Load<GameObject>("Prefabs/Unit/Enemy"), unitData.cellLocation, unitData.unitDirection);
+            Unit unit = switcher
+                ? UnitFactory.Create(Resources.Load<GameObject>("Prefabs/Unit/Enemy"), unitData.cellLocation, unitData.unitDirection)
+                : UnitFactory.Create(Resources.Load<GameObject>("Prefabs/Unit/EnemyMage"), unitData.cellLocation, unitData.unitDirection);
+            switcher = !switcher;
             UnitLocator.Add(new Vector2Int(unit.UnitInfo.CellLocation.x, unit.UnitInfo.CellLocation.z), unit);
         }
         StartCoroutine(turnSystem.TurnLoop());

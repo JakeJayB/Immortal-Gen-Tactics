@@ -807,6 +807,7 @@
     ],
     "units": [
         {
+            "unitType": 0,
             "cellLocation": {
                 "x": -2,
                 "y": 2,
@@ -815,6 +816,7 @@
             "unitDirection": 1
         },
         {
+            "unitType": 1,
             "cellLocation": {
                 "x": -2,
                 "y": 2,

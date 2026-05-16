@@ -72,6 +72,15 @@ public class UnitActionSet {
             .Concat(learnedActions[unit.UnitInfo.Class]).ToList();
     }
 
+    // Test this out first and then check if this works universally for both AI and Player
+    private List<UnitAction> FlattenAIActions(bool distinct = false) {
+        return (distinct
+            ? unitActions.Values.SelectMany(list => list).Distinct()
+            : unitActions.Values.SelectMany(list => list))
+            .Concat(learnedActions[unit.UnitInfo.Class])
+            .Concat(learnedActions[UnitClass.All]).ToList();
+    }
+
     public List<UnitAction> GetAllTurnActions() {
         List<UnitAction> turnActions = new List<UnitAction> { new Move() };
         turnActions.AddRange(FlattenActions());
@@ -80,7 +89,7 @@ public class UnitActionSet {
     }
     
     public List<UnitAction> GetAITurnActions() {
-        List<UnitAction> turnActions = FlattenActions(true);
+        List<UnitAction> turnActions = FlattenAIActions(true);
         turnActions.Add(new Move());
         turnActions.Add(new Wait());
         return turnActions;
@@ -94,7 +103,7 @@ public class UnitActionSet {
     
     public List<UnitAction> GetAIReactions() {
         List<UnitAction> allReactions = new List<UnitAction> { new Evade() };
-        allReactions.AddRange(FlattenActions(true));
+        allReactions.AddRange(FlattenAIActions(true));
         allReactions.Add(new DoNothing());
         return allReactions;
     }

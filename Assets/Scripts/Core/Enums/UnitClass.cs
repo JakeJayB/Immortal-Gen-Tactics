@@ -5,6 +5,7 @@ namespace IGT.Core {
         Scholar,
         Soldier,
         Summoner,
+        All,
         None
     }
 }

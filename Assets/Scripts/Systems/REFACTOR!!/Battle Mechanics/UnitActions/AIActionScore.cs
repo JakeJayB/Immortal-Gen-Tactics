@@ -247,6 +247,8 @@ public class AIActionScore
         int projectedScore = 0;     // Total Value Projected to Come From Projected Damage
         
         if (unitOnTile.UnitInfo.UnitAffiliation != unitAI.UnitInfo.UnitAffiliation) { // Calc Damage Towards Enemies
+            if (unitOnTile.UnitInfo.IsDead()) return projectedDamage;
+
             projectedDamage =
                 DamageCalculator.ProjectDamage(Action, unitAI.UnitInfo, unitOnTile.UnitInfo);
 

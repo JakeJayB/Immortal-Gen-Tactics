@@ -3,6 +3,7 @@ using UnityEngine;
 
 [Serializable]
 public class UnitData {
+    public int unitID;
     public Vector3Int cellLocation;
     public UnitDirection unitDirection;
 

@@ -13,7 +13,7 @@ public class Potion : Item {
     public override int Priority { get; protected set; } = 1;
     public override DamageType DamageType { get; protected set; } = DamageType.Healing;
     public override ActionType ActionType { get; protected set; } = ActionType.Item;
-    public override UnitClass ClassType { get; protected set; } = UnitClass.None;
+    public override UnitClass ClassType { get; protected set; } = UnitClass.All;
     public override TilePattern AttackTilePattern { get; protected set; } = TilePattern.Direct;
     public override AIActionScore ActionScore { get; protected set; }
     public override List<Tile> Area(Unit unit, Vector3Int? hypoCell) {
