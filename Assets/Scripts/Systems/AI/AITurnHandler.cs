@@ -22,7 +22,6 @@ public class AITurnHandler : MonoBehaviour {
         
         // Decide Target
         unitAI.targetedUnit = unitAI.targetedUnit == null || !unitAI.targetedUnit.GameObj
-            || (unitAI.targetedUnit.UnitInfo.IsDead() && unitAI.targetedUnit.UnitInfo.UnitAffiliation != unitAI.UnitInfo.UnitAffiliation)
             ? new AIUnitTargeting().EvaluateScore(unitAI).TargetUnit 
             : unitAI.targetedUnit;
 
