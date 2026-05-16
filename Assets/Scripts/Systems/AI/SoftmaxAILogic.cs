@@ -71,6 +71,7 @@ public static class SoftmaxAILogic {
         if (ChainSystem.ReactionInProgress) return (potentialActions, actionScores);
         
         int waitIndex = potentialActions.FindIndex(action => action is Wait);
+        if (waitIndex < 0) return (potentialActions, actionScores); // Wait was already removed by FilterNegatives
         float waitScore = actionScores[waitIndex];
 
         // If no other action has a score higher than the Wait action, return as-is

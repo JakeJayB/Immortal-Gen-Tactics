@@ -174,6 +174,10 @@ public class AIActionScore
             
             foreach (var action in unitAI.ActionSet.GetAITurnActions())
             {
+                // Update effective range before checking — some actions (e.g. Rush) have a dynamic
+                // range that is only set when Area() is called. Skipping this step would cause
+                // those actions to always be excluded from foresight scoring (Range defaults to 0).
+                action.Area(unitAI, Action.ActionType == ActionType.Move ? PotentialCell : (Vector3Int?)null);
                 if (action.Range + action.Splash < distance) { continue; }
                 if (unitAI.UnitInfo.currentAP - Action.APCost < action.APCost || unitAI.UnitInfo.currentMP - Action.MPCost < action.MPCost) { continue; }
                 
