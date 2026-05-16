@@ -98,8 +98,11 @@ public class AIUnitTargeting {
         int distance = Pathfinder.DistanceBetweenUnits(unitAI, potentialUnit);
         
         // Score Factor 1: HP Ratio
-        // The lower the ratio, the higher the score
-        score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP / (float)potentialUnit.UnitInfo.currentHP * unitAI.AIBehavior.AllySynergy);
+        // The lower the ratio, the higher the score.
+        // Guard against division by zero when the unit is dead (currentHP == 0).
+        score += potentialUnit.UnitInfo.currentHP > 0
+            ? Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP / (float)potentialUnit.UnitInfo.currentHP * unitAI.AIBehavior.AllySynergy)
+            : Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP * unitAI.AIBehavior.AllySynergy);
         
         // Score Factor 2: Healing Impact
         // If an action would knock out the targeted unit, add a large amount to the score...
@@ -114,7 +117,7 @@ public class AIUnitTargeting {
             if (action.DamageType == DamageType.Healing &&
                 potentialUnit.UnitInfo.currentHP == potentialUnit.UnitInfo.FinalHP) { continue; }
             if (unitAI.UnitInfo.currentMP < action.MPCost) { continue; }
-            if (unitAI.UnitInfo.IsDead() && action.DamageType == DamageType.Healing) { continue; }
+            if (potentialUnit.UnitInfo.IsDead() && action.DamageType == DamageType.Healing) { continue; }
             if (ChainSystem.ReactionInProgress && action.Range + action.Splash < distance) { continue; }
             
             
@@ -147,8 +150,10 @@ public class AIUnitTargeting {
         score += projectedFutureDamage;
 
         if (projectedFutureDamage > 0) {
-            score += Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP /
-                (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.AIBehavior.AllySynergy);
+            score += potentialUnit.UnitInfo.currentHP > 0
+                ? Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP /
+                    (float)potentialUnit.UnitInfo.currentHP * (int)unitAI.AIBehavior.AllySynergy)
+                : Mathf.RoundToInt(potentialUnit.UnitInfo.FinalHP * (int)unitAI.AIBehavior.AllySynergy);
         }
         
         return score;
